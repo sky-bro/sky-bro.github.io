@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Galleries on 3monks</title>
+    <link>https://3monks.org/cn/gallery/</link>
+    <description>Recent content in Galleries on 3monks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Mon, 18 Nov 2019 14:20:11 +0800</lastBuildDate>
+    
+        <atom:link href="https://3monks.org/cn/gallery/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      
+      <item>
+        <title>卡通</title>
+        <link>https://3monks.org/cn/gallery/cartoon/</link>
+        <pubDate>Mon, 18 Nov 2019 14:20:11 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <guid>https://3monks.org/cn/gallery/cartoon/</guid>
+        <description></description>
+      </item>
+      
+    
+  </channel>
+</rss>

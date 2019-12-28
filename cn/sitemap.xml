@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://3monks.org/cn/</loc>
+    <lastmod>2019-11-18T14:20:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://3monks.org/cn/categories/</loc>
+    <lastmod>2019-11-18T14:20:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://3monks.org/cn/gallery/</loc>
+    <lastmod>2019-11-18T14:20:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/gallery/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/gallery/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://3monks.org/cn/series/</loc>
+    <lastmod>2019-11-18T14:20:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/series/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://3monks.org/cn/tags/</loc>
+    <lastmod>2019-11-18T14:20:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://3monks.org/cn/gallery/cartoon/</loc>
+    <lastmod>2019-11-18T14:20:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/gallery/cartoon/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/gallery/cartoon/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://3monks.org/cn/about/</loc>
+    <lastmod>2019-11-18T09:26:27+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://3monks.org/en/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://3monks.org/cn/about/"
+                />
+  </url>
+  
+</urlset>
