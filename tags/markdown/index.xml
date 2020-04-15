@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>markdown on kyle&#39;s blog</title>
+    <title>markdown on Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/tags/markdown/</link>
-    <description>Recent content in markdown on kyle&#39;s blog</description>
+    <description>Recent content in markdown on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -64,6 +64,40 @@
               <category>syntax</category>
             
           
+        
+        
+          
+            
+              <category>Themes Guide</category>
+            
+          
+        
+      </item>
+      
+      <item>
+        <title>Emoji Support</title>
+        <link>https://sky-bro.github.io/posts/emoji-support/</link>
+        <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Mon, 16 Dec 2019 12:00:06 +0900</atom:modified>
+        <guid>https://sky-bro.github.io/posts/emoji-support/</guid>
+        <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
+        
+        <dc:creator>Kim</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>emoji</category>
+            
+          
+            
+              <category>markdown</category>
+            
+          
+        
         
         
           

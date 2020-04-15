@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>math on kyle&#39;s blog</title>
+    <title>math on Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/categories/math/</link>
-    <description>Recent content in math on kyle&#39;s blog</description>
+    <description>Recent content in math on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -51,6 +51,8 @@ $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -89,6 +91,8 @@ Inline math: $ \varphi = \dfrac{1+\sqrt5}{2}= 1.</description>
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         

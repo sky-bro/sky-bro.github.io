@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>kyle&#39;s blog</title>
+    <title>Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/</link>
-    <description>Recent content on kyle&#39;s blog</description>
+    <description>Recent content on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -71,6 +71,8 @@ java javascript  1  System.out.println(&amp;#39;Hello World!&amp;#39;);     1  c
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         
@@ -154,6 +156,12 @@ java javascript  1  System.out.println(&amp;#39;Hello World!&amp;#39;);     1  c
         
         
         
+          
+            
+              <category>Themes Guide</category>
+            
+          
+        
       </item>
       
       <item>
@@ -186,6 +194,8 @@ java javascript  1  System.out.println(&amp;#39;Hello World!&amp;#39;);     1  c
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -210,6 +220,12 @@ We need goldmark katex entension which is not yet we have:
         
         
         
+          
+            
+              <category>Themes Guide</category>
+            
+          
+        
       </item>
       
       <item>
@@ -232,23 +248,17 @@ We need goldmark katex entension which is not yet we have:
             
           
             
-              <category>gamoji</category>
-            
-          
-            
-              <category>namoji</category>
-            
-          
-            
-              <category>bamoji</category>
-            
-          
-            
-              <category>amoji</category>
+              <category>markdown</category>
             
           
         
         
+        
+          
+            
+              <category>Themes Guide</category>
+            
+          
         
       </item>
       
@@ -279,6 +289,8 @@ We need goldmark katex entension which is not yet we have:
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         
@@ -312,6 +324,8 @@ We need goldmark katex entension which is not yet we have:
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -344,6 +358,8 @@ We need goldmark katex entension which is not yet we have:
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -375,6 +391,8 @@ We need goldmark katex entension which is not yet we have:
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         
@@ -410,6 +428,8 @@ We need goldmark katex entension which is not yet we have:
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -442,6 +462,8 @@ $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         
@@ -482,6 +504,8 @@ Inline math: $ \varphi = \dfrac{1+\sqrt5}{2}= 1.</description>
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -513,6 +537,8 @@ Inline math: $ \varphi = \dfrac{1+\sqrt5}{2}= 1.</description>
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         

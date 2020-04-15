@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>diagram on kyle&#39;s blog</title>
+    <title>diagram on Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/categories/diagram/</link>
-    <description>Recent content in diagram on kyle&#39;s blog</description>
+    <description>Recent content in diagram on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -50,6 +50,8 @@
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -81,6 +83,8 @@
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         
@@ -114,6 +118,8 @@
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -145,6 +151,8 @@
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         
@@ -180,6 +188,8 @@
         
           
             
+              <category>Themes Guide</category>
+            
           
         
       </item>
@@ -211,6 +221,8 @@
         
         
           
+            
+              <category>Themes Guide</category>
             
           
         

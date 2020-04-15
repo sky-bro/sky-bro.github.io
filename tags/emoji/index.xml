@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>emoji on kyle&#39;s blog</title>
+    <title>emoji on Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/tags/emoji/</link>
-    <description>Recent content in emoji on kyle&#39;s blog</description>
+    <description>Recent content in emoji on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -42,23 +42,17 @@
             
           
             
-              <category>gamoji</category>
-            
-          
-            
-              <category>namoji</category>
-            
-          
-            
-              <category>bamoji</category>
-            
-          
-            
-              <category>amoji</category>
+              <category>markdown</category>
             
           
         
         
+        
+          
+            
+              <category>Themes Guide</category>
+            
+          
         
       </item>
       

@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>shortcodes on kyle&#39;s blog</title>
+    <title>shortcodes on Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/tags/shortcodes/</link>
-    <description>Recent content in shortcodes on kyle&#39;s blog</description>
+    <description>Recent content in shortcodes on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -47,6 +47,12 @@
           
         
         
+        
+          
+            
+              <category>Themes Guide</category>
+            
+          
         
       </item>
       

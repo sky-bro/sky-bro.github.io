@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>Tags on kyle&#39;s blog</title>
+    <title>Tags on Kyle&#39;s Blog</title>
     <link>https://sky-bro.github.io/tags/</link>
-    <description>Recent content in Tags on kyle&#39;s blog</description>
+    <description>Recent content in Tags on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -167,84 +167,12 @@
       </item>
       
       <item>
-        <title>amoji</title>
-        <link>https://sky-bro.github.io/tags/amoji/</link>
-        <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/tags/amoji/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>bamoji</title>
-        <link>https://sky-bro.github.io/tags/bamoji/</link>
-        <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/tags/bamoji/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
         <title>emoji</title>
         <link>https://sky-bro.github.io/tags/emoji/</link>
         <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/emoji/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>gamoji</title>
-        <link>https://sky-bro.github.io/tags/gamoji/</link>
-        <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/tags/gamoji/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>namoji</title>
-        <link>https://sky-bro.github.io/tags/namoji/</link>
-        <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/tags/namoji/</guid>
         <description></description>
         
         <dc:creator>Kyle</dc:creator>
