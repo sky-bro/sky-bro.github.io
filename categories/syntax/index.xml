@@ -27,7 +27,7 @@
         <link>https://sky-bro.github.io/posts/markdown-syntax/</link>
         <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Fri, 20 Dec 2019 12:00:06 +0900</atom:modified>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/markdown-syntax/</guid>
         <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
         
@@ -41,24 +41,8 @@
               <category>markdown</category>
             
           
-            
-              <category>css</category>
-            
-          
-            
-              <category>html</category>
-            
-          
-            
-              <category>themes</category>
-            
-          
         
         
-          
-            
-              <category>themes</category>
-            
           
             
               <category>syntax</category>
@@ -68,7 +52,7 @@
         
           
             
-              <category>Themes Guide</category>
+              <category>Use Hugo</category>
             
           
         

@@ -27,11 +27,11 @@
         <link>https://sky-bro.github.io/posts/emoji-support/</link>
         <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Mon, 16 Dec 2019 12:00:06 +0900</atom:modified>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/emoji-support/</guid>
         <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
         
-        <dc:creator>Kim</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         
         
         
@@ -45,12 +45,22 @@
               <category>markdown</category>
             
           
-        
+            
+              <category>hugo</category>
+            
+          
         
         
           
             
-              <category>Themes Guide</category>
+              <category>hugo</category>
+            
+          
+        
+        
+          
+            
+              <category>Use Hugo</category>
             
           
         

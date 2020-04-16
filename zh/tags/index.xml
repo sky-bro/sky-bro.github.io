@@ -41,84 +41,12 @@
       </item>
       
       <item>
-        <title>css</title>
-        <link>https://sky-bro.github.io/zh/tags/css/</link>
-        <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/tags/css/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>html</title>
-        <link>https://sky-bro.github.io/zh/tags/html/</link>
-        <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/tags/html/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
         <title>markdown</title>
         <link>https://sky-bro.github.io/zh/tags/markdown/</link>
         <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
         
         <guid>https://sky-bro.github.io/zh/tags/markdown/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>themes</title>
-        <link>https://sky-bro.github.io/zh/tags/themes/</link>
-        <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/tags/themes/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>privacy</title>
-        <link>https://sky-bro.github.io/zh/tags/privacy/</link>
-        <pubDate>Thu, 19 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/tags/privacy/</guid>
         <description></description>
         
         <dc:creator>Kyle</dc:creator>
@@ -167,6 +95,42 @@
       </item>
       
       <item>
+        <title>syntax</title>
+        <link>https://sky-bro.github.io/zh/tags/syntax/</link>
+        <pubDate>Wed, 18 Dec 2019 10:33:41 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/zh/tags/syntax/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>latex</title>
+        <link>https://sky-bro.github.io/zh/tags/latex/</link>
+        <pubDate>Tue, 17 Dec 2019 12:00:06 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/zh/tags/latex/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
         <title>emoji</title>
         <link>https://sky-bro.github.io/zh/tags/emoji/</link>
         <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
@@ -191,24 +155,6 @@
         <author>sky_io@outlook.com (Kyle)</author>
         
         <guid>https://sky-bro.github.io/zh/tags/diagram/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>index</title>
-        <link>https://sky-bro.github.io/zh/tags/index/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/tags/index/</guid>
         <description></description>
         
         <dc:creator>Kyle</dc:creator>

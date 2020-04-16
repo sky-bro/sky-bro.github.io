@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>article on sky的博客</title>
+    <title>文章 on sky的博客</title>
     <link>https://sky-bro.github.io/zh/publication/article/</link>
-    <description>Recent content in article on sky的博客</description>
+    <description>Recent content in 文章 on sky的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
@@ -27,7 +27,7 @@
         <link>https://sky-bro.github.io/zh/publication/article/article_any_folder_name_1/</link>
         <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Fri, 01 Jun 2018 00:00:00 +0000</atom:modified>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
         <guid>https://sky-bro.github.io/zh/publication/article/article_any_folder_name_1/</guid>
         <description></description>
         

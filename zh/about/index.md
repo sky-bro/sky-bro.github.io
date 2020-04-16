@@ -1,21 +1,23 @@
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+### :ocean: 关于本站
 
-Hugo makes use of a variety of open source projects including:
+使用[Hugo](https://gohugo.io/)生成，博客源码在[blog-src](https://github.com/sky-bro/blog-src), 主题fork([my fork](https://github.com/sky-bro/hugo-theme-zzo))自: [hugo-theme-zzo](https://github.com/zzossig/hugo-theme-zzo)
 
-* https://github.com/russross/blackfriday
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+### :sunrise: 我的日常
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+* 一名学生 [@哈工大](http://www.hit.edu.cn/)
+* C / C++, Python, ASM
+* Arch, VSCode
+* CTF / Binary
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+### :love_letter: 联系我
 
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
+* 邮件: [sky_io@outlook.com](mailto:sky_io@outlook.com)
+* 微信: sky_bro
+* 脸书: [Kaiyu Shi](https://www.facebook.com/profile.php?id=100005027239118)
+* 推特: [KaiyuShi](https://twitter.com/KaiyuShi)
+* GPG公钥: [Kyle.asc](/Kyle.asc) (F4CD 0E4A 3661 65D1 62E6  B6CE 7D36 AE60 55B0 60A6)
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+### :handshake: 我的朋友
 
-
-
+[TheSong](https://thesong96.github.io/) | [路人枭](http://lurenxiao1998.github.io/)

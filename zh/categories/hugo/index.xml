@@ -27,9 +27,9 @@
         <link>https://sky-bro.github.io/zh/posts/syntax-highlight/</link>
         <pubDate>Wed, 18 Dec 2019 10:33:41 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Wed, 18 Dec 2019 10:33:41 +0900</atom:modified>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
         <guid>https://sky-bro.github.io/zh/posts/syntax-highlight/</guid>
-        <description>Code Syntax Highlighting Verify the following code blocks render as code blocks and highlight properly. More about tuning syntax highlighting is the Hugo documentation. Diff 1 2 3 4 5 6 7 8 9 10 *** /path/to/original &amp;#39;&amp;#39;timestamp&amp;#39;&amp;#39; --- /path/to/new &amp;#39;&amp;#39;timestamp&amp;#39;&amp;#39; *************** *** 1 **** ! This is a line. --- 1 --- ! This is a replacement line. It is important to spell -removed line +new line *** /path/to/original</description>
+        <description>Verify the following code blocks render as code blocks and highlight properly. More about tuning syntax highlighting is the Hugo documentation. Diff 1 2 3 4 5 6 7 8 9 10 *** /path/to/original &amp;#39;&amp;#39;timestamp&amp;#39;&amp;#39; --- /path/to/new &amp;#39;&amp;#39;timestamp&amp;#39;&amp;#39; *************** *** 1 **** ! This is a line. --- 1 --- ! This is a replacement line. It is important to spell -removed line +new line *** /path/to/original &amp;#39;&amp;#39;timestamp&amp;#39;&amp;#39; --- /path/to/new</description>
         
         <dc:creator>Jeus</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature2/color-palette.png" medium="image"><media:title type="html">featured image</media:title></media:content>
@@ -41,6 +41,10 @@
               <category>hugo</category>
             
           
+            
+              <category>syntax</category>
+            
+          
         
         
           
@@ -52,7 +56,95 @@
         
           
             
-              <category>Themes Guide</category>
+              <category>Use Hugo</category>
+            
+          
+        
+      </item>
+      
+      <item>
+        <title>Math Typesetting</title>
+        <link>https://sky-bro.github.io/zh/posts/math-typesetting/</link>
+        <pubDate>Tue, 17 Dec 2019 12:00:06 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/zh/posts/math-typesetting/</guid>
+        <description>&lt;div class=&#34;box&#34;&gt;
+We need goldmark katex entension which is not yet we have: 
+[https://github.com/gohugoio/hugo/issues/6544](https://github.com/gohugoio/hugo/issues/6544)
+&lt;/div&gt;
+&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;</description>
+        
+        <dc:creator>Park</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>latex</category>
+            
+          
+            
+              <category>hugo</category>
+            
+          
+        
+        
+          
+            
+              <category>hugo</category>
+            
+          
+        
+        
+          
+            
+              <category>Use Hugo</category>
+            
+          
+        
+      </item>
+      
+      <item>
+        <title>Emoji Support</title>
+        <link>https://sky-bro.github.io/zh/posts/emoji-support/</link>
+        <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/zh/posts/emoji-support/</guid>
+        <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>emoji</category>
+            
+          
+            
+              <category>markdown</category>
+            
+          
+            
+              <category>hugo</category>
+            
+          
+        
+        
+          
+            
+              <category>hugo</category>
+            
+          
+        
+        
+          
+            
+              <category>Use Hugo</category>
             
           
         
