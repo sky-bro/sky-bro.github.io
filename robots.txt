@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: {{ "sitemap.xml" | absURL }}
+Sitemap: https://sky-bro.github.io/sitemap.xml
