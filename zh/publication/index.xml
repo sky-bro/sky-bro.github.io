@@ -11,8 +11,8 @@
     <description>Recent content in Publications on sky的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <lastBuildDate>Thu, 05 Mar 2020 14:08:48 +0000</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/zh/publication/index.xml" rel="self" type="application/rss+xml" />
@@ -25,12 +25,12 @@
         <title>文章</title>
         <link>https://sky-bro.github.io/zh/publication/article/</link>
         <pubDate>Thu, 05 Mar 2020 14:08:48 +0000</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Thu, 05 Mar 2020 14:08:48 +0000</atom:modified>
         <guid>https://sky-bro.github.io/zh/publication/article/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         
         
         
@@ -43,12 +43,12 @@
         <title>书籍</title>
         <link>https://sky-bro.github.io/zh/publication/book/</link>
         <pubDate>Thu, 05 Mar 2020 14:08:48 +0000</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Thu, 05 Mar 2020 14:08:48 +0000</atom:modified>
         <guid>https://sky-bro.github.io/zh/publication/book/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         
         
         
@@ -61,12 +61,12 @@
         <title>其它</title>
         <link>https://sky-bro.github.io/zh/publication/misc/</link>
         <pubDate>Thu, 05 Mar 2020 14:08:48 +0000</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Thu, 05 Mar 2020 14:08:48 +0000</atom:modified>
         <guid>https://sky-bro.github.io/zh/publication/misc/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         
         
         

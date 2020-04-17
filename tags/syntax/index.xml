@@ -11,8 +11,8 @@
     <description>Recent content in syntax on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <lastBuildDate>Wed, 18 Dec 2019 10:33:41 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/syntax/index.xml" rel="self" type="application/rss+xml" />
@@ -25,7 +25,7 @@
         <title>Syntax highlighting</title>
         <link>https://sky-bro.github.io/posts/syntax-highlight/</link>
         <pubDate>Wed, 18 Dec 2019 10:33:41 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Wed, 18 Dec 2019 10:33:41 +0900</atom:modified>
         <guid>https://sky-bro.github.io/posts/syntax-highlight/</guid>
         <description>Verify the following code blocks render as code blocks and highlight properly.

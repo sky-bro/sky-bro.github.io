@@ -11,8 +11,8 @@
     <description>Recent content in Galleries on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <lastBuildDate>Thu, 31 Oct 2019 10:20:16 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/gallery/index.xml" rel="self" type="application/rss+xml" />
@@ -25,12 +25,12 @@
         <title>Cartoon</title>
         <link>https://sky-bro.github.io/gallery/cartoon/</link>
         <pubDate>Thu, 31 Oct 2019 10:20:16 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Thu, 31 Oct 2019 10:20:16 +0900</atom:modified>
         <guid>https://sky-bro.github.io/gallery/cartoon/</guid>
         <description>Sample images from Pixabay</description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature2/bam.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
@@ -43,12 +43,12 @@
         <title>Photo</title>
         <link>https://sky-bro.github.io/gallery/photo/</link>
         <pubDate>Thu, 31 Oct 2019 10:20:16 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Thu, 31 Oct 2019 10:20:16 +0900</atom:modified>
         <guid>https://sky-bro.github.io/gallery/photo/</guid>
         <description>Sample images from Pixabay</description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature2/gallery.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         

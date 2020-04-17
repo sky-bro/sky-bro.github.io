@@ -11,8 +11,8 @@
     <description>Recent content in markdown on sky的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <lastBuildDate>Fri, 20 Dec 2019 12:00:06 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/zh/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
@@ -25,7 +25,7 @@
         <title>Markdown Syntax Guide</title>
         <link>https://sky-bro.github.io/zh/posts/markdown-syntax/</link>
         <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Fri, 20 Dec 2019 12:00:06 +0900</atom:modified>
         <guid>https://sky-bro.github.io/zh/posts/markdown-syntax/</guid>
         <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
@@ -61,7 +61,7 @@
         <title>Emoji Support</title>
         <link>https://sky-bro.github.io/zh/posts/emoji-support/</link>
         <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Mon, 16 Dec 2019 12:00:06 +0900</atom:modified>
         <guid>https://sky-bro.github.io/zh/posts/emoji-support/</guid>
         <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>

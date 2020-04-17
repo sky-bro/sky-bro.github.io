@@ -11,8 +11,8 @@
     <description>Recent content in C&#43;&#43; on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <lastBuildDate>Fri, 17 Apr 2020 16:07:30 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
@@ -25,13 +25,13 @@
         <title>cin &amp; cout is slow?</title>
         <link>https://sky-bro.github.io/posts/cin-cout-is-slow/</link>
         <pubDate>Fri, 17 Apr 2020 16:07:30 +0800</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Fri, 17 Apr 2020 16:07:30 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/cin-cout-is-slow/</guid>
         <description>Yes, by default I heard before that using scanf/printf is faster than using cin/cout, and it&amp;rsquo;s true from my real experience, but I really didn&amp;rsquo;t get to know the reason behind, and later in leetcode, I saw others include these lines in their code:
 1 2 3  ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);   I&amp;rsquo;m almost certain that these lines are included to speed up their code. So out of curiosity, I did some searching, here&amp;rsquo;s what I&amp;rsquo;ve found:</description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/icons/tortoise.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         

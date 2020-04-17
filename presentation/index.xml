@@ -11,8 +11,8 @@
     <description>Recent content in Presentations on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <lastBuildDate>Wed, 30 Oct 2019 20:48:10 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/presentation/index.xml" rel="self" type="application/rss+xml" />
@@ -25,12 +25,12 @@
         <title>Fourth</title>
         <link>https://sky-bro.github.io/presentation/dir/fourth/</link>
         <pubDate>Wed, 30 Oct 2019 20:48:10 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Wed, 30 Oct 2019 20:48:10 +0900</atom:modified>
         <guid>https://sky-bro.github.io/presentation/dir/fourth/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature1/number-four.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
@@ -55,12 +55,12 @@
         <title>Third</title>
         <link>https://sky-bro.github.io/presentation/third/</link>
         <pubDate>Wed, 30 Oct 2019 20:46:30 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Wed, 30 Oct 2019 20:46:30 +0900</atom:modified>
         <guid>https://sky-bro.github.io/presentation/third/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature1/number-three.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
@@ -85,12 +85,12 @@
         <title>Second</title>
         <link>https://sky-bro.github.io/presentation/second/</link>
         <pubDate>Wed, 30 Oct 2019 20:45:24 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Wed, 30 Oct 2019 20:45:24 +0900</atom:modified>
         <guid>https://sky-bro.github.io/presentation/second/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature1/number-two.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
@@ -115,12 +115,12 @@
         <title>First</title>
         <link>https://sky-bro.github.io/presentation/first/</link>
         <pubDate>Wed, 30 Oct 2019 19:45:20 +0900</pubDate>
-        <author>sky_io@outlook.com (1Kyle)</author>
+        <author>sky_io@outlook.com (Kyle)</author>
         <atom:modified>Wed, 30 Oct 2019 19:45:20 +0900</atom:modified>
         <guid>https://sky-bro.github.io/presentation/first/</guid>
         <description></description>
         
-        <dc:creator>1Kyle</dc:creator>
+        <dc:creator>Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature1/number-one.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
