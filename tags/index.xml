@@ -11,10 +11,9 @@
     <description>Recent content in Tags on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
-    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
-    <lastBuildDate>Sat, 25 Jan 2020 06:40:51 +0900</lastBuildDate>
+    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
+    <lastBuildDate>Fri, 17 Apr 2020 16:07:30 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,15 +22,33 @@
 
       
       <item>
+        <title>C&#43;&#43;</title>
+        <link>https://sky-bro.github.io/tags/c&#43;&#43;/</link>
+        <pubDate>Fri, 17 Apr 2020 16:07:30 +0800</pubDate>
+        <author>sky_io@outlook.com (1Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/tags/c&#43;&#43;/</guid>
+        <description></description>
+        
+        <dc:creator>1Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
         <title>shortcode</title>
         <link>https://sky-bro.github.io/tags/shortcode/</link>
         <pubDate>Sat, 25 Jan 2020 06:40:51 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/shortcode/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -44,12 +61,12 @@
         <title>markdown</title>
         <link>https://sky-bro.github.io/tags/markdown/</link>
         <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/markdown/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -62,12 +79,12 @@
         <title>shortcodes</title>
         <link>https://sky-bro.github.io/tags/shortcodes/</link>
         <pubDate>Thu, 19 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/shortcodes/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -80,12 +97,12 @@
         <title>hugo</title>
         <link>https://sky-bro.github.io/tags/hugo/</link>
         <pubDate>Wed, 18 Dec 2019 10:33:41 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/hugo/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -98,12 +115,12 @@
         <title>syntax</title>
         <link>https://sky-bro.github.io/tags/syntax/</link>
         <pubDate>Wed, 18 Dec 2019 10:33:41 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/syntax/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -116,12 +133,12 @@
         <title>latex</title>
         <link>https://sky-bro.github.io/tags/latex/</link>
         <pubDate>Tue, 17 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/latex/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -134,12 +151,12 @@
         <title>emoji</title>
         <link>https://sky-bro.github.io/tags/emoji/</link>
         <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/emoji/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         
@@ -152,12 +169,12 @@
         <title>diagram</title>
         <link>https://sky-bro.github.io/tags/diagram/</link>
         <pubDate>Sun, 17 Nov 2019 12:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
+        <author>sky_io@outlook.com (1Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/diagram/</guid>
         <description></description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         
         
         

@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/article/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-03-05T14:08:48+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/showcase/hugo/hugo-theme-zzo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-19T21:13:42+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -34,7 +34,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/book/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-03-05T14:08:48+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -49,7 +49,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/showcase/hugo/hugo-theme-zdoc/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-19T21:13:42+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -64,7 +64,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/misc/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-03-05T14:08:48+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -78,8 +78,83 @@
   </url>
   
   <url>
+    <loc>https://sky-bro.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2020-04-17T16:07:30+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/categories/c&#43;&#43;/</loc>
+    <lastmod>2020-04-17T16:07:30+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/categories/</loc>
+    <lastmod>2020-04-17T16:07:30+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/posts/cin-cout-is-slow/</loc>
+    <lastmod>2020-04-17T16:07:30+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/posts/</loc>
+    <lastmod>2020-04-17T16:07:30+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/posts/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/tags/</loc>
+    <lastmod>2020-04-17T16:07:30+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/</loc>
+    <lastmod>2020-04-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/"
+                />
+  </url>
+  
+  <url>
     <loc>https://sky-bro.github.io/about/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-04-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -94,7 +169,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-03-05T14:08:48+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -109,7 +184,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/series/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -124,7 +199,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/shortcode/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -139,7 +214,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/shortcodes/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -153,23 +228,8 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/tags/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/tags/"
-                />
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/series/use-hugo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -184,7 +244,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/showcase/hugo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-19T21:04:11+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -199,7 +259,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/showcase/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-01-19T15:43:38+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -213,23 +273,8 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/categories/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/categories/"
-                />
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/tags/markdown/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-20T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -244,7 +289,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/markdown-syntax/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-20T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -259,7 +304,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/categories/syntax/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-20T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -274,7 +319,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/rich-content/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-19T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -289,7 +334,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/shortcodes/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-19T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -304,7 +349,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/hugo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-18T10:33:41+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -319,7 +364,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/categories/hugo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-18T10:33:41+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -334,7 +379,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/syntax/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-18T10:33:41+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -349,7 +394,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/syntax-highlight/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-18T10:33:41+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -364,7 +409,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/latex/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-17T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -379,7 +424,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/math-typesetting/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-17T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -394,7 +439,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/emoji/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-16T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -409,7 +454,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/emoji-support/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-12-16T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -424,7 +469,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/categories/diagram/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-18T21:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -439,7 +484,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/series/themes-guide/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-18T21:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -454,7 +499,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-viz/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-18T21:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -469,7 +514,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-wavedrom/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-18T18:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -484,7 +529,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-chartjs/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-18T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -499,7 +544,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-js-sequence-diagrams/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-18T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -514,7 +559,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/diagram/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-17T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -529,7 +574,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-mermaid/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-17T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -544,7 +589,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/categories/math/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-16T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -559,7 +604,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-mathjax/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-16T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -574,7 +619,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-katex/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-15T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -589,7 +634,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/posts/test-flowchart/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-11-14T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -604,7 +649,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/gallery/cartoon/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-31T10:20:16+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -619,7 +664,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/gallery/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-31T10:20:16+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -634,7 +679,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/gallery/photo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-31T10:20:16+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -649,7 +694,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/presentation/dir/fourth/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-30T20:48:10+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -663,8 +708,23 @@
   </url>
   
   <url>
+    <loc>https://sky-bro.github.io/presentation/</loc>
+    <lastmod>2019-10-30T20:48:10+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/presentation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/presentation/"
+                />
+  </url>
+  
+  <url>
     <loc>https://sky-bro.github.io/presentation/third/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-30T20:46:30+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -679,7 +739,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/presentation/second/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-30T20:45:24+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -694,7 +754,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/presentation/first/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-30T19:45:20+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -709,7 +769,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/archive/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2019-10-19T11:44:14+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -724,7 +784,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/article/article_any_folder_name_1/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -739,7 +799,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/book/book_any_folder_name_1/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -754,7 +814,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/publication/misc/misc_any_folder_name_1/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2016-11-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -764,51 +824,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://sky-bro.github.io/publication/misc/misc_any_folder_name_1/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/posts/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/posts/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/presentation/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/presentation/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/presentation/"
                 />
   </url>
   

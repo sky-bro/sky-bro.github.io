@@ -11,9 +11,8 @@
     <description>Recent content in shortcode on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
-    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
-    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
+    <managingEditor>sky_io@outlook.com (1Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (1Kyle)</webMaster>
     <lastBuildDate>Sat, 25 Jan 2020 06:40:51 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/shortcode/index.xml" rel="self" type="application/rss+xml" />
@@ -26,13 +25,13 @@
         <title>Shortcodes</title>
         <link>https://sky-bro.github.io/posts/shortcodes/</link>
         <pubDate>Sat, 25 Jan 2020 06:40:51 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <author>sky_io@outlook.com (1Kyle)</author>
+        <atom:modified>Sat, 25 Jan 2020 06:40:51 +0900</atom:modified>
         <guid>https://sky-bro.github.io/posts/shortcodes/</guid>
         <description>Markdownify box This is boxmd shortcode Simple box This is **box** shortcode  Code tabs Make it easy to switch between different code
 java javascript  1  System.out.println(&amp;#39;Hello World!&amp;#39;);     1  console.log(&amp;#39;Hello World!&amp;#39;);       &#39;use strict&#39;; var containerId = JSON.parse(&#34;\&#34;d96f892eb0443615\&#34;&#34;); var containerElem = document.getElementById(containerId); var codetabLinks = null; var codetabContents = null; var ids = []; if (containerElem) { codetabLinks = containerElem.</description>
         
-        <dc:creator>Kyle</dc:creator>
+        <dc:creator>1Kyle</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/feature3/code-file.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
