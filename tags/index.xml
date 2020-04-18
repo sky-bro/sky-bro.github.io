@@ -13,7 +13,7 @@
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
-    <lastBuildDate>Fri, 17 Apr 2020 16:07:30 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 10:04:13 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -24,10 +24,82 @@
       <item>
         <title>C&#43;&#43;</title>
         <link>https://sky-bro.github.io/tags/c&#43;&#43;/</link>
-        <pubDate>Fri, 17 Apr 2020 16:07:30 +0800</pubDate>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
         
         <guid>https://sky-bro.github.io/tags/c&#43;&#43;/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Random</title>
+        <link>https://sky-bro.github.io/tags/random/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/tags/random/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>RNG</title>
+        <link>https://sky-bro.github.io/tags/rng/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/tags/rng/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>STL</title>
+        <link>https://sky-bro.github.io/tags/stl/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/tags/stl/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>heap</title>
+        <link>https://sky-bro.github.io/tags/heap/</link>
+        <pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/tags/heap/</guid>
         <description></description>
         
         <dc:creator>Kyle</dc:creator>

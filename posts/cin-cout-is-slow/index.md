@@ -1,11 +1,14 @@
 
 ## Yes, by default
+
 I heard before that using `scanf/printf` is faster than using `cin/cout`, and it's true from my real experience, but I really didn't get to know the reason behind, and later in leetcode, I saw others include these lines in their code:
+
 ```C++
-ios::sync_with_stdio(false); 
-cin.tie(NULL); 
+ios::sync_with_stdio(false);
+cin.tie(NULL);
 cout.tie(NULL);
 ```
+
 I'm almost certain that these lines are included to speed up their code. So out of curiosity, I did some searching, here's what I've found:
 <!-- more -->
 
@@ -30,10 +33,12 @@ As said above, by default c++ streams share c streams' buffers. This can be twee
 ### cin.tie(NULL) & cout.tie(NULL)
 
 `tie` is used to tie a stream (in/out) to some output stream, if the parameter is `NULL`, untie this stream from any tied stream (returns previous tied stream)
-if called without any argument, return the tied stream: 
+if called without any argument, return the tied stream:
+
 ```c++
 *cin.tie() << 123; // same as cout << 123; (by default, cin is tied to cout)
 ```
+
 so this is just used to untie `cin/cout` from any tied output stream (normally we just need to use `cin.tie(0)`), then the previously tied output stream won't be forced to flush.
 
 ## When should I use the "speed up"
@@ -43,6 +48,7 @@ so this is just used to untie `cin/cout` from any tied output stream (normally w
 1. If you disable the synchronization, then C++ streams are allowed to have their own independent buffers, which makes mixing C- and C++-style I/O an adventure. Also, synchronized C++ streams are thread-safe (output from different threads may interleave, but you get no data races). (refer cppref)
 
 2. If you untie `cin`, then later when you execute the lines below, you won't be guaranteed to see the prompt before the input request from `cin`.
+
 ```C++
 string name;
 cout << "Please input your name:";
