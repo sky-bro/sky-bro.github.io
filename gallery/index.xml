@@ -13,6 +13,7 @@
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
     <lastBuildDate>Thu, 31 Oct 2019 10:20:16 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/gallery/index.xml" rel="self" type="application/rss+xml" />
@@ -26,7 +27,7 @@
         <link>https://sky-bro.github.io/gallery/cartoon/</link>
         <pubDate>Thu, 31 Oct 2019 10:20:16 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Thu, 31 Oct 2019 10:20:16 +0900</atom:modified>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
         <guid>https://sky-bro.github.io/gallery/cartoon/</guid>
         <description>Sample images from Pixabay</description>
         
@@ -44,7 +45,7 @@
         <link>https://sky-bro.github.io/gallery/photo/</link>
         <pubDate>Thu, 31 Oct 2019 10:20:16 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Thu, 31 Oct 2019 10:20:16 +0900</atom:modified>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
         <guid>https://sky-bro.github.io/gallery/photo/</guid>
         <description>Sample images from Pixabay</description>
         

@@ -13,6 +13,7 @@
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
     <lastBuildDate>Sat, 18 Apr 2020 10:04:13 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/rng/index.xml" rel="self" type="application/rss+xml" />
@@ -26,7 +27,7 @@
         <link>https://sky-bro.github.io/posts/use-random-in-c&#43;&#43;/</link>
         <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sat, 18 Apr 2020 10:04:13 +0800</atom:modified>
+        <atom:modified>Sat, 18 Apr 2020 13:34:49 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/use-random-in-c&#43;&#43;/</guid>
         <description>Old way use rand(), usually pair with a random initialization of the seed:
 1 2  srand(int(time(0))); // initialize the seed rand(); // get a random int, [0, RAND_MAX]   get random int in [0,x): rand()%x

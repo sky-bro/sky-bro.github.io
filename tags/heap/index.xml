@@ -13,6 +13,7 @@
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
     <lastBuildDate>Fri, 17 Apr 2020 15:25:33 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/heap/index.xml" rel="self" type="application/rss+xml" />
@@ -26,7 +27,7 @@
         <link>https://sky-bro.github.io/posts/heap-in-c&#43;&#43;/</link>
         <pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Fri, 17 Apr 2020 15:25:33 +0800</atom:modified>
+        <atom:modified>Sat, 18 Apr 2020 13:34:49 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/heap-in-c&#43;&#43;/</guid>
         <description>let&amp;rsquo;s learn how to use heap in C++
 Related functions    func description     make_heap Make heap from range   push_heap Push element into heap range   pop_heap Pop element from heap range   sort_heap Sort elements of heap   is_heap Test if range is heap   is_heap_until Find first element not in heap order    make_heap  make heap from range</description>

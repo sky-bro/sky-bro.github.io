@@ -13,6 +13,7 @@
     <language>en</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
     <lastBuildDate>Tue, 17 Dec 2019 12:00:06 +0900</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml" />
@@ -26,7 +27,7 @@
         <link>https://sky-bro.github.io/posts/math-typesetting/</link>
         <pubDate>Tue, 17 Dec 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Tue, 17 Dec 2019 12:00:06 +0900</atom:modified>
+        <atom:modified>Sat, 18 Apr 2020 13:34:49 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/math-typesetting/</guid>
         <description>&lt;div class=&#34;box&#34;&gt;
 We need goldmark katex entension which is not yet we have: 
