@@ -1213,13 +1213,13 @@
     
 <link rel="alternate" type="text/plain" title="markdown" href="https://sky-bro.github.io/posts/segment-tree/index.md">
 
-<meta name="description" content="A segment tree is a binary tree where each node represents an interval." />
+<meta name="description" content="" />
 
 
 <meta name="keywords" content="segment tree">
 
 <meta name="created" content="2020-04-17T15:53:35&#43;0800">
-<meta name="modified" content="2020-04-19T21:00:36&#43;0800">
+<meta name="modified" content="2020-04-20T10:09:00&#43;0800">
 <meta property="article:published_time" content="2020-04-17T15:53:35&#43;0800">
 
 <meta name="author" content="&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;">
@@ -1230,7 +1230,7 @@
 <meta property="og:title" content="Segment Tree">
 <meta property="og:url" content="https://sky-bro.github.io/posts/segment-tree/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="A segment tree is a binary tree where each node represents an interval.">
+<meta property="og:description" content="">
 
   
     <meta property="og:image" content="https://sky-bro.github.io/images/icons/binarytree.png">
@@ -1238,7 +1238,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="Kyle&#39;s Blog">
     <meta property="twitter:title" content="Segment Tree">
-    <meta property="twitter:description" content="A segment tree is a binary tree where each node represents an interval.">
+    <meta property="twitter:description" content="">
   
 
 <meta name="generator" content="Hugo 0.69.0" />
@@ -1266,9 +1266,9 @@
     "@type": "WebPage",
     "headline": "Segment Tree",
     "datePublished": "2020-04-17T15:53:35+08:00",
-    "dateModified": "2020-04-19T21:00:36+08:00",
+    "dateModified": "2020-04-20T10:09:00+08:00",
     "url" : "https://sky-bro.github.io/posts/segment-tree/",
-    "description": "A segment tree is a binary tree where each node represents an interval.",
+    "description": "\u003cp\u003eA segment tree is a binary tree where each node represents an interval. Each node stores some property of its corresponding interval: like the maximum/minimum num, the …\u003c/p\u003e",
     "keywords": ["segment tree"],
     "image" : "https://sky-bro.github.io/images/icons/binarytree.png",
     "author": {
@@ -1709,7 +1709,7 @@ if (!doNotTrack) {
 <div class="single__infos">
   <time class="single__info" title="Written At">📅&nbsp;Apr 17, 2020 </time>
   
-  &nbsp;&middot;&nbsp; <time class="single__info" title="Modified At"> 📝&nbsp;Apr 19, 2020 </time>
+  &nbsp;&middot;&nbsp; <time class="single__info" title="Modified At"> 📝&nbsp;Apr 20, 2020 </time>
   
   &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;5&nbsp;min read </span>
   
@@ -1732,7 +1732,6 @@ if (!doNotTrack) {
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
       <p>A segment tree is a binary tree where each node represents an interval. Each node stores some property of its corresponding interval: like the maximum/minimum num, the sum of that interval.</p>
-<!-- more -->
 <h2 id="applicable-problems">Applicable Problems</h2>
 <p>For any array <code>a</code>, where every element belongs to some monoid $(S, \oplus)$ we can build a segment tree to answer the following queries (problems):<br />
 – <code>Get(l, r)</code> — returns $a_l \oplus a_{l+1} \oplus \dotsb a_r$<br />
@@ -2071,7 +2070,7 @@ The <code>update(i, val)</code> function modifies nums by updating the element a
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h2 id="complete-solution-for-example-problem">Complete Solution for Example Problem</h2>
+<h3 id="complete-solution-to-the-problem">Complete Solution to the Problem</h3>
 <div class="expand">
   <button type="button" class="expand__button" aria-label="Expand Button">
     <span class="expand-icon expand-icon__right">
@@ -2179,7 +2178,6 @@ The <code>update(i, val)</code> function modifies nums by updating the element a
 <li><a href="http://maratona.ic.unicamp.br/MaratonaVerao2016/material/segment_tree_lecture.pdf">Segment tree Theory and applications</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Binary_tree#Arrays">wiki: binary tree - in an array</a></li>
 </ul>
-
     </article>
     
     <script>
@@ -2264,8 +2262,8 @@ The <code>update(i, val)</code> function modifies nums by updating the element a
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        April 19, 2020
-        (<a href="https://github.com/sky-bro/blog-src/commit/045d24d5cb4c036f24371579e3d555ad91162bcf" title="add post: segment tree">add post: segment tree - 045d24d</a>)
+        April 20, 2020
+        (<a href="https://github.com/sky-bro/blog-src/commit/e30d2fdde8e13311db42d481577ebc2c20d4e90e" title="add hover effect to .summay-classic">add hover effect to .summay-classic - e30d2fd</a>)
     </span>
   </p>
   <p class="copyright-item">
@@ -2699,9 +2697,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a href="#build-the-tree">Build the Tree</a></li>
         <li><a href="#query-a-range-sum">Query a range sum</a></li>
         <li><a href="#update-an-elementelements">Update an element/elements</a></li>
+        <li><a href="#complete-solution-to-the-problem">Complete Solution to the Problem</a></li>
       </ul>
     </li>
-    <li><a href="#complete-solution-for-example-problem">Complete Solution for Example Problem</a></li>
     <li><a href="#refs">Refs</a></li>
   </ul>
 </nav>
@@ -2793,13 +2791,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha256-V8SV2MO1FUb63Bwht5Wx9x6PVHNa02gv8BgH/uH3ung=" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha256-F/Xda58SPdcUCr&#43;xhSGz9MA2zQBPb0ASEYKohl8UCHc=" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha256-90d2pnfw0r4K8CZAWPko4rpFXQsZvJhTBGYNkipDprI=" crossorigin="anonymous"></script>
 
 
 
 
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: {
+          equationNumbers: { autoNumber: "AMS" },
+          extensions: ["AMSmath.js", "AMSsymbols.js"]
+        }
+      }
+    });
+    MathJax.Hub.Queue(function () {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+
+    MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+  </script>
 
 
 
@@ -3160,7 +3184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     
-    var lib = JSON.parse("[\"katex\"]");
+    var lib = JSON.parse("[\"mathjax\"]");
 
     if (lib && lib.includes('mermaid')) {
       

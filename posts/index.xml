@@ -114,12 +114,9 @@ Modern way 1 2 3 4 5  // ... #include &amp;lt;random&amp;gt; std::random_device 
         <link>https://sky-bro.github.io/posts/segment-tree/</link>
         <pubDate>Fri, 17 Apr 2020 15:53:35 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sun, 19 Apr 2020 21:00:36 +0800</atom:modified>
+        <atom:modified>Mon, 20 Apr 2020 10:09:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/segment-tree/</guid>
-        <description>A segment tree is a binary tree where each node represents an interval. Each node stores some property of its corresponding interval: like the maximum/minimum num, the sum of that interval.
-Applicable Problems For any array a, where every element belongs to some monoid $(S, \oplus)$ we can build a segment tree to answer the following queries (problems):
-– Get(l, r) — returns $a_l \oplus a_{l+1} \oplus \dotsb a_r$
-– Change(p, x) — set $a_p = x$</description>
+        <description>&lt;p&gt;A segment tree is a binary tree where each node represents an interval. Each node stores some property of its corresponding interval: like the maximum/minimum num, the sum of that interval.&lt;/p&gt;</description>
         
         <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
         <media:content url="https://sky-bro.github.ioimages/icons/binarytree.png" medium="image"><media:title type="html">featured image</media:title></media:content>
@@ -585,7 +582,7 @@ We need goldmark katex entension which is not yet we have:
         <link>https://sky-bro.github.io/posts/test-mathjax/</link>
         <pubDate>Sat, 16 Nov 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <atom:modified>Mon, 20 Apr 2020 10:09:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/test-mathjax/</guid>
         <description>When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
 $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>

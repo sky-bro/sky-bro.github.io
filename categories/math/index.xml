@@ -27,7 +27,7 @@
         <link>https://sky-bro.github.io/posts/test-mathjax/</link>
         <pubDate>Sat, 16 Nov 2019 12:00:06 +0900</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <atom:modified>Mon, 20 Apr 2020 10:09:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/posts/test-mathjax/</guid>
         <description>When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
 $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
