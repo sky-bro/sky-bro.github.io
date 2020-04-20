@@ -30,18 +30,15 @@ The `update(i, val)` function modifies nums by updating the element at index `i`
 For this problem, the **identity element** is **0**, and the binary operation is **+** between integers.
 ~~And for simplicity we use the **identity element** to extend the length of the original array to some integer power of 2.~~
 
-![segment tree to be built](./images/segment-tree-in-array.svg)
+{{< figure src="/images/posts/segment tree/padded.svg" caption="Padded Segment Tree" alt="Padded Segment Tree" >}}
 
-if size of the array is `n`, then we only need an array of `2*n` length to store the segment tree. (property of a [Complete Binary Tree](https://en.wikipedia.org/wiki/Binary_tree#Arrays))
+if size of the array is `n`, then we only need an array of `2*n` length to store the segment tree. (only in iterative version, property of a [Complete Binary Tree](https://en.wikipedia.org/wiki/Binary_tree#Arrays))
 
-![segment tree to be built](./images/segment-tree-in-array2.svg)
+{{< figure src="/images/posts/segment tree/iterative02.svg" caption="Segment Tree Built Iteratively" alt="Segment Tree Built Iteratively" >}}
 
 ### Define the binary operation
 
 Here we will just use `+` for our operation, you can if you need define a merge function for your special operation $\oplus$.
-
-{{< codes "C++" >}}
-{{< code >}}
 
 ```C++
 inline int merge(int a, int b) {
@@ -49,15 +46,9 @@ inline int merge(int a, int b) {
 }
 ```
 
-{{< /code >}}
-{{< /codes >}}
-
 ### Build the Tree
 
-We want to construct an array like below (the original array is `{1, 2, 3, 4, 5, 6}`), the essential idea of a segment tree is that a node at index $i$ (index start from 1, you can also try starting from 0) can have two children at indexes $(2 \ast i)$ and $(2 \ast i + 1)$.
-
-{{< codes "C++" >}}
-{{< code >}}
+We want to construct an array like above (the original array is `{1, 2, 3, 4, 5, 6}`), the essential idea of a segment tree is that a node at index $i$ (index starts from 1, you can also try starting from 0, but starting from 1 is simpler) can have two children at indexes $(2 \ast i)$ and $(2 \ast i + 1)$.
 
 ```C++
 NumArray(vector<int>& nums) {
@@ -67,61 +58,35 @@ NumArray(vector<int>& nums) {
     segment_tree[i + n] = nums[i];
   }
   for (int i = n - 1; i > 0; --i) {
-    segment_tree[i] = segment_tree[i << 1] + segment_tree[i << 1 | 1];
-  }
-}
-```
-
-{{< /code >}}
-{{< /codes >}}
-
-### Query a range sum
-
-{{< codes "C++" >}}
-{{< code >}}
-
-```C++
-int sumRange(int i, int j) {
-  int sum = 0;
-  j += 1;
-  i += n; j += n;
-  while (i < j) {
-    if (i&1) {
-        sum += segment_tree[i];
-        ++i;
-    }
-    if (j&1) {
-        --j;
-        sum += segment_tree[j];
-    }
-    i >>= 1; j >>= 1;
-  }
-  return sum;
-}
-```
-
-{{< /code >}}
-{{< /codes >}}
-
-### Update an element/elements
-
-{{< codes "C++" >}}
-{{< code >}}
-
-```C++
-void update(int i, int val) {
-  i += n;
-  if (segment_tree[i] == val) return;
-  segment_tree[i] = val;
-  while (i > 1) {
-    i >>= 1;
     segment_tree[i] = segment_tree[i<<1] + segment_tree[i<<1|1];
   }
 }
 ```
 
-{{< /code >}}
-{{< /codes >}}
+### Query a range sum
+
+```C++
+int sumRange(int i, int j) { // sum range [i, j]
+    int sum = 0;
+    for (i += n, j += n+1; i < j; i >>= 1, j >>= 1) {
+        if (i&1) sum += segment_tree[i++];
+        if (j&1) sum += segment_tree[--j];
+    }
+    return sum;
+}
+```
+
+### Update an element/elements
+
+```C++
+void update(int i, int val) {
+    i += n;
+    if (segment_tree[i] == val) return;
+    for (segment_tree[i] = val; i > 1; i >>= 1) {
+        segment_tree[i>>1] = segment_tree[i] + segment_tree[i^1];
+    }
+}
+```
 
 ### Complete Solution to the Problem
 
@@ -146,26 +111,15 @@ public:
     void update(int i, int val) {
         i += n;
         if (segment_tree[i] == val) return;
-        segment_tree[i] = val;
-        while (i > 1) {
-            i >>= 1;
-            segment_tree[i] = segment_tree[i<<1] + segment_tree[i<<1|1];
+        for (segment_tree[i] = val; i > 1; i >>= 1) {
+            segment_tree[i>>1] = segment_tree[i] + segment_tree[i^1];
         }
     }
-    int sumRange(int i, int j) {
+    int sumRange(int i, int j) { // sum range [i, j]
         int sum = 0;
-        j += 1;
-        i += n; j += n;
-        while (i < j) {
-            if (i&1) {
-                sum += segment_tree[i];
-                ++i;
-            }
-            if (j&1) {
-                --j;
-                sum += segment_tree[j];
-            }
-            i >>= 1; j >>= 1;
+        for (i += n, j += n+1; i < j; i >>= 1, j >>= 1) {
+            if (i&1) sum += segment_tree[i++];
+            if (j&1) sum += segment_tree[--j];
         }
         return sum;
     }
@@ -176,6 +130,7 @@ public:
 
 ## Refs
 
-* [A Recursive approach to Segment Trees, Range Sum Queries & Lazy Propagation](https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/)
+* [youtube: Efficient Segment Tree Tutorial](https://www.youtube.com/watch?v=Oq2E2yGadnU)
+* [codeforces: Efficient and easy segment trees](https://codeforces.com/blog/entry/18051): best
 * [Segment tree Theory and applications](http://maratona.ic.unicamp.br/MaratonaVerao2016/material/segment_tree_lecture.pdf)
 * [wiki: binary tree - in an array](https://en.wikipedia.org/wiki/Binary_tree#Arrays)

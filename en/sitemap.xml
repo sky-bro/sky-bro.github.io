@@ -89,7 +89,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/categories/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -124,7 +124,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/tags/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -149,17 +149,37 @@
   
   <url>
     <loc>https://sky-bro.github.io/categories/data-structure-algorithm/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/posts/segment-tree/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sky-bro.github.io/tags/segment-tree/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/series/segment-tree/</loc>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/posts/segment-tree-iterative/</loc>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/series/</loc>
+    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/series/"
+                />
   </url>
   
   <url>
@@ -199,21 +219,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://sky-bro.github.io/publication/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/series/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/series/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/series/"
                 />
   </url>
   

@@ -110,16 +110,16 @@ Modern way 1 2 3 4 5  // ... #include &amp;lt;random&amp;gt; std::random_device 
       </item>
       
       <item>
-        <title>Segment Tree</title>
-        <link>https://sky-bro.github.io/posts/segment-tree/</link>
+        <title>Segment Tree (Iterative)</title>
+        <link>https://sky-bro.github.io/posts/segment-tree-iterative/</link>
         <pubDate>Fri, 17 Apr 2020 15:53:35 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Mon, 20 Apr 2020 10:09:00 +0800</atom:modified>
-        <guid>https://sky-bro.github.io/posts/segment-tree/</guid>
+        <atom:modified>Mon, 20 Apr 2020 17:04:24 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/posts/segment-tree-iterative/</guid>
         <description>&lt;p&gt;A segment tree is a binary tree where each node represents an interval. Each node stores some property of its corresponding interval: like the maximum/minimum num, the sum of that interval.&lt;/p&gt;</description>
         
         <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
-        <media:content url="https://sky-bro.github.ioimages/icons/binarytree.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://sky-bro.github.ioimages/posts/segment%20tree/iterative02.svg" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -138,6 +138,8 @@ Modern way 1 2 3 4 5  // ... #include &amp;lt;random&amp;gt; std::random_device 
         
         
           
+            
+              <category>segment tree</category>
             
           
         
