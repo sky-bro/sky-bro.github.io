@@ -60,6 +60,16 @@ cin >> name;
 If you do not mix use the C- and C++-style I/O, do not write multi-thread program, use `ios::sync_with_stdio(false)`.
 If you do not care about seeing some output before your input, use `tie(0)`.
 
+## Example
+
+```C++
+int main() {
+  // ...
+}
+
+static int x = []() {ios::sync_with_stdio(false); cin.tie(0); return 0; } ();
+```
+
 ## Refs
 
 * [cppref: std::ios_base::sync_with_stdio](https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio)

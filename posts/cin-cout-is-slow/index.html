@@ -1793,7 +1793,24 @@ if called without any argument, return the tied stream:</p>
 </div><h3 id="decide">Decide</h3>
 <p>If you do not mix use the C- and C++-style I/O, do not write multi-thread program, use <code>ios::sync_with_stdio(false)</code>.<br />
 If you do not care about seeing some output before your input, use <code>tie(0)</code>.</p>
-<h2 id="refs">Refs</h2>
+<h2 id="example">Example</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[]()</span> <span class="p">{</span><span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span> <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span> <span class="p">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="refs">Refs</h2>
 <ul>
 <li><a href="https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio">cppref: std::ios_base::sync_with_stdio</a></li>
 <li><a href="https://en.cppreference.com/w/cpp/io/basic_ios/tie">cppref: std::basic_ios&lt;CharT,Traits&gt;::tie</a></li>
@@ -2346,6 +2363,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a href="#decide">Decide</a></li>
       </ul>
     </li>
+    <li><a href="#example">Example</a></li>
     <li><a href="#refs">Refs</a></li>
   </ul>
 </nav>

@@ -78,18 +78,8 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2020-04-18T13:34:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/categories/c&#43;&#43;/</loc>
-    <lastmod>2020-04-18T13:34:49+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/categories/</loc>
-    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -100,6 +90,66 @@
                 hreflang="en"
                 href="https://sky-bro.github.io/categories/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/categories/data-structure-algorithm/</loc>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/posts/de-bruijn-sequence/</loc>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/tags/dfs/</loc>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/tags/math/</loc>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/categories/math/</loc>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/categories/math/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/categories/math/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/tags/</loc>
+    <lastmod>2020-05-04T11:58:48+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2020-04-18T13:34:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/categories/c&#43;&#43;/</loc>
+    <lastmod>2020-04-18T13:34:49+08:00</lastmod>
   </url>
   
   <url>
@@ -123,21 +173,6 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/tags/</loc>
-    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/tags/"
-                />
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/posts/use-random-in-c&#43;&#43;/</loc>
     <lastmod>2020-04-18T13:34:49+08:00</lastmod>
   </url>
@@ -145,11 +180,6 @@
   <url>
     <loc>https://sky-bro.github.io/posts/cin-cout-is-slow/</loc>
     <lastmod>2020-04-18T13:34:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/categories/data-structure-algorithm/</loc>
-    <lastmod>2020-04-20T17:04:24+08:00</lastmod>
   </url>
   
   <url>
@@ -609,21 +639,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://sky-bro.github.io/posts/test-mermaid/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/categories/math/</loc>
-    <lastmod>2020-04-20T10:09:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/categories/math/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/categories/math/"
                 />
   </url>
   
