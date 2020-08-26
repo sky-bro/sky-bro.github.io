@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Tags on Kyle&#39;s Blog</title>
+    <link>https://sky-bro.github.io/en/tags/</link>
+    <description>Recent content in Tags on Kyle&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright>
+    <lastBuildDate>Sun, 02 Aug 2020 12:33:40 +0800</lastBuildDate>
+    
+        <atom:link href="https://sky-bro.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>wargames</title>
+        <link>https://sky-bro.github.io/en/tags/wargames/</link>
+        <pubDate>Sun, 02 Aug 2020 12:33:40 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/wargames/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>dfs</title>
+        <link>https://sky-bro.github.io/en/tags/dfs/</link>
+        <pubDate>Mon, 04 May 2020 11:58:48 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/dfs/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>math</title>
+        <link>https://sky-bro.github.io/en/tags/math/</link>
+        <pubDate>Mon, 04 May 2020 11:58:48 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/math/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>C&#43;&#43;</title>
+        <link>https://sky-bro.github.io/en/tags/c&#43;&#43;/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/c&#43;&#43;/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Random</title>
+        <link>https://sky-bro.github.io/en/tags/random/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/random/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>RNG</title>
+        <link>https://sky-bro.github.io/en/tags/rng/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/rng/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>STL</title>
+        <link>https://sky-bro.github.io/en/tags/stl/</link>
+        <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/stl/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>segment tree</title>
+        <link>https://sky-bro.github.io/en/tags/segment-tree/</link>
+        <pubDate>Fri, 17 Apr 2020 15:53:35 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/segment-tree/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>heap</title>
+        <link>https://sky-bro.github.io/en/tags/heap/</link>
+        <pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/heap/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

@@ -13,50 +13,13 @@
     <language>zh</language>
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
-    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-ND 4.0&lt;/a&gt; .</copyright>
-    <lastBuildDate>Sat, 25 Jan 2020 06:40:51 +0900</lastBuildDate>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright>
     
         <atom:link href="https://sky-bro.github.io/zh/series/index.xml" rel="self" type="application/rss+xml" />
     
     
     
 
-      
-      <item>
-        <title>Use Hugo</title>
-        <link>https://sky-bro.github.io/zh/series/use-hugo/</link>
-        <pubDate>Sat, 25 Jan 2020 06:40:51 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/series/use-hugo/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Themes Guide</title>
-        <link>https://sky-bro.github.io/zh/series/themes-guide/</link>
-        <pubDate>Mon, 18 Nov 2019 21:00:06 +0900</pubDate>
-        <author>sky_io@outlook.com (Kyle)</author>
-        
-        <guid>https://sky-bro.github.io/zh/series/themes-guide/</guid>
-        <description></description>
-        
-        <dc:creator>Kyle</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
       
 
     

@@ -1329,7 +1329,7 @@ if (!doNotTrack) {
     
 </head>
 
-<body id="root" class="theme__dark">
+<body id="root" class="theme__light">
     <script>
         var localTheme = localStorage.getItem('theme');
         if (localTheme) {
@@ -1368,11 +1368,11 @@ if (!doNotTrack) {
       
         
         <a href="#" class="dropdown-item select-theme__item is-active">
-          dark
+          light
         </a>
         
         <a href="#" class="dropdown-item select-theme__item ">
-          light
+          dark
         </a>
         
         <a href="#" class="dropdown-item select-theme__item ">
@@ -1551,11 +1551,11 @@ if (!doNotTrack) {
       
         
         <a href="#" class="dropdown-item select-theme__item is-active">
-          dark
+          light
         </a>
         
         <a href="#" class="dropdown-item select-theme__item ">
-          light
+          dark
         </a>
         
         <a href="#" class="dropdown-item select-theme__item ">
@@ -1651,7 +1651,7 @@ if (!doNotTrack) {
             
             
 
-<main class="single__main main-main">
+<main class="single__main main">
   
     <nav class="breadcrumb hide" aria-label="breadcrumbs">
   <script>document.querySelector('.breadcrumb').classList.remove('hide')</script>
@@ -1816,7 +1816,7 @@ if (!doNotTrack) {
     </p>
   <p class="copyright-item">
     <span class="item-title">许可协议</span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
   </p>
   <hr class="hr-slash whoami-hr"/>
 </div>
@@ -2209,30 +2209,6 @@ document.addEventListener('DOMContentLoaded', function () {
 </main>
 
 
-<aside class="single__side main-side">
-  
-
-
-<section class="sidebar hide">
-  <script>document.querySelector('.sidebar').classList.remove('hide')</script>
-  <div class="toc__flexbox" data-position="fixed">
-    <h6 class="toc__title" data-ani="true">目录</h6>
-    
-      <label class="switch" data-ani="true">
-        <input id="toggle-toc" aria-label="Toggle TOC" type="checkbox" checked>
-        <span class="slider round"></span>
-      </label>
-    
-  </div>
-  <div class="toc " data-dir="ltr" data-folding="true" data-ani="true">
-    <nav id="TableOfContents"></nav>
-  </div>
-</section>
-
-
-
-</aside>
-
 <script>
   
   
@@ -2240,7 +2216,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var enableToc = JSON.parse("true");
   var toc = JSON.parse("null");
-  var tocPosition = JSON.parse("\"inner\"");
+  var tocPosition = JSON.parse("\"outer\"");
   
   var singleMainElem = document.querySelector('.single__main');
   var singleSideElem = document.querySelector('.single__side');
@@ -2681,7 +2657,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (lib && lib.includes('mermaid')) {
       
-      var themeVariant = localStorage.getItem('theme') || JSON.parse("\"dark\"");
+      var themeVariant = localStorage.getItem('theme') || JSON.parse("\"light\"");
 
       if (themeVariant === "dark" || themeVariant === "hacker") {
         mermaid.initialize({ theme: 'dark' });
@@ -2885,7 +2861,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
           
             
-              <a href="https://sky-bro.github.io/showcase/hugo/hugo-theme-zdoc/" data-lang="en" class="dropdown-item">English</a>
+              <a href="https://sky-bro.github.io/en/showcase/hugo/hugo-theme-zdoc/" data-lang="en" class="dropdown-item">English</a>
             
           
         
@@ -3055,7 +3031,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 
             <p class="caption">
                 
-                    All content is subject to the license of <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> .
+                    All content is subject to the license of <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> .
                 
             </p>
         
@@ -3075,6 +3051,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <div class="wrapper__right hide" data-pad="true" dir="ltr">
   <script>document.querySelector('.wrapper__right').classList.remove('hide')</script>
+  
+    
+      
+        <div class="toc__flexbox--outer" data-position="fixed" data-dir="ltr" data-ani="true">
+          <h6 class="toc__title toc__title--outer" data-ani="true">目录</h6>
+          
+          <label class="switch" data-ani="true">
+            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          
+        </div>
+        <div class="toc toc__outer " data-dir="ltr" data-folding="true" data-ani="true">
+          <nav id="TableOfContents"></nav>
+        </div>
+      
+    
   
 </div>
 

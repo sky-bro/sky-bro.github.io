@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Hugo on Kyle&#39;s Blog</title>
+    <link>https://sky-bro.github.io/en/showcase/hugo/</link>
+    <description>Recent content in Hugo on Kyle&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
+    <webMaster>sky_io@outlook.com (Kyle)</webMaster>
+    <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright>
+    <lastBuildDate>Sun, 19 Jan 2020 21:04:11 +0900</lastBuildDate>
+    
+        <atom:link href="https://sky-bro.github.io/en/showcase/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Hugo Zzo Theme</title>
+        <link>https://sky-bro.github.io/en/showcase/hugo/hugo-theme-zzo/</link>
+        <pubDate>Sun, 19 Jan 2020 21:13:42 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/showcase/hugo/hugo-theme-zzo/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Hugo zDoc Theme</title>
+        <link>https://sky-bro.github.io/en/showcase/hugo/hugo-theme-zdoc/</link>
+        <pubDate>Sun, 19 Jan 2020 21:13:42 +0900</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Thu, 16 Apr 2020 12:24:45 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/showcase/hugo/hugo-theme-zdoc/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
