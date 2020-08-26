@@ -26,7 +26,7 @@
         <link>https://sky-bro.github.io/zh/posts/clusterfuzz-local-setup/</link>
         <pubDate>Mon, 18 May 2020 12:59:28 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Mon, 18 May 2020 12:59:28 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/zh/posts/clusterfuzz-local-setup/</guid>
         <description>本教程展示如何搭建clusterfuzz进行本地测试，教程使用的clusterfuzz版本为v2.0.1 (推荐总是使用最新的release版</description>
         

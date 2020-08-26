@@ -27,7 +27,7 @@
         <link>https://sky-bro.github.io/en/posts/heap-in-c&#43;&#43;/</link>
         <pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sat, 18 Apr 2020 13:34:49 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/heap-in-c&#43;&#43;/</guid>
         <description>let&amp;rsquo;s learn how to use heap in C++
 Related functions    func description     make_heap Make heap from range   push_heap Push element into heap range   pop_heap Pop element from heap range   sort_heap Sort elements of heap   is_heap Test if range is heap   is_heap_until Find first element not in heap order    make_heap  make heap from range</description>

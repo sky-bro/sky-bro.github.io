@@ -47,7 +47,7 @@
         <link>https://sky-bro.github.io/en/posts/wargames-bandit/</link>
         <pubDate>Sun, 02 Aug 2020 12:33:40 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sun, 02 Aug 2020 12:33:40 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/wargames-bandit/</guid>
         <description>Basic  password for user &amp;ldquo;bandit0&amp;rdquo; is &amp;ldquo;bandit0&amp;rdquo; ssh into the next host, e.g: ssh -p2220 bandit0@bandit.labs.overthewire.org find password for next level goto step 2  Tricks  hit &amp;lt;TAB&amp;gt; for command completion ls -a to show hidden files (names started with .) find command man command (man file)  Answers  level0 (password found: bandit0) level0-&amp;gt;level1: cat ./readme (password found: boJ9jbbUNNfktd78OOpsqOltutMc3MY1) level1-&amp;gt;level2: cat ./- (password found: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9) level2-&amp;gt;level3: cat .</description>
         
@@ -83,7 +83,7 @@
         <link>https://sky-bro.github.io/en/posts/de-bruijn-sequence/</link>
         <pubDate>Mon, 04 May 2020 11:58:48 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Mon, 04 May 2020 15:55:04 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/de-bruijn-sequence/</guid>
         <description>&lt;p&gt;A de Bruijn sequence of order n on a size-k alphabet A is a cyclic sequence in which every possible length-n string on A occurs exactly once as a substring.&lt;/p&gt;
 &lt;p&gt;For a &lt;em&gt;de Bruijn sequence&lt;/em&gt; of order n on a size-k alphabet $A$, we denote it by $B(k, n)$&lt;/p&gt;</description>
@@ -122,7 +122,7 @@
         <link>https://sky-bro.github.io/en/posts/use-random-in-c&#43;&#43;/</link>
         <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sat, 18 Apr 2020 13:34:49 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/use-random-in-c&#43;&#43;/</guid>
         <description>Old way use rand(), usually pair with a random initialization of the seed:
 1 2  srand(int(time(0))); // initialize the seed rand(); // get a random int, [0, RAND_MAX]   get random int in [0,x): rand()%x
@@ -175,7 +175,7 @@ Modern way 1 2 3 4 5  // ... #include &amp;lt;random&amp;gt; std::random_device 
         <link>https://sky-bro.github.io/en/posts/cin-cout-is-slow/</link>
         <pubDate>Fri, 17 Apr 2020 16:07:30 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Mon, 04 May 2020 15:55:04 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/cin-cout-is-slow/</guid>
         <description>Yes, by default I heard before that using scanf/printf is faster than using cin/cout, and it&amp;rsquo;s true from my real experience, but I really didn&amp;rsquo;t get to know the reason behind, and later in leetcode, I saw others include these lines in their code:
 1 2 3  ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);   I&amp;rsquo;m almost certain that these lines are included to speed up their code. So out of curiosity, I did some searching, here&amp;rsquo;s what I&amp;rsquo;ve found:</description>
@@ -210,7 +210,7 @@ Modern way 1 2 3 4 5  // ... #include &amp;lt;random&amp;gt; std::random_device 
         <link>https://sky-bro.github.io/en/posts/segment-tree-iterative/</link>
         <pubDate>Fri, 17 Apr 2020 15:53:35 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Mon, 20 Apr 2020 17:04:24 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/segment-tree-iterative/</guid>
         <description>&lt;p&gt;A segment tree is a binary tree where each node represents an interval. Each node stores some property of its corresponding interval: like the maximum/minimum num, the sum of that interval.&lt;/p&gt;</description>
         
@@ -246,7 +246,7 @@ Modern way 1 2 3 4 5  // ... #include &amp;lt;random&amp;gt; std::random_device 
         <link>https://sky-bro.github.io/en/posts/heap-in-c&#43;&#43;/</link>
         <pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sat, 18 Apr 2020 13:34:49 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/heap-in-c&#43;&#43;/</guid>
         <description>let&amp;rsquo;s learn how to use heap in C++
 Related functions    func description     make_heap Make heap from range   push_heap Push element into heap range   pop_heap Pop element from heap range   sort_heap Sort elements of heap   is_heap Test if range is heap   is_heap_until Find first element not in heap order    make_heap  make heap from range</description>

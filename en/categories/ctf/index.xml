@@ -27,7 +27,7 @@
         <link>https://sky-bro.github.io/en/posts/wargames-bandit/</link>
         <pubDate>Sun, 02 Aug 2020 12:33:40 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Sun, 02 Aug 2020 12:33:40 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/wargames-bandit/</guid>
         <description>Basic  password for user &amp;ldquo;bandit0&amp;rdquo; is &amp;ldquo;bandit0&amp;rdquo; ssh into the next host, e.g: ssh -p2220 bandit0@bandit.labs.overthewire.org find password for next level goto step 2  Tricks  hit &amp;lt;TAB&amp;gt; for command completion ls -a to show hidden files (names started with .) find command man command (man file)  Answers  level0 (password found: bandit0) level0-&amp;gt;level1: cat ./readme (password found: boJ9jbbUNNfktd78OOpsqOltutMc3MY1) level1-&amp;gt;level2: cat ./- (password found: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9) level2-&amp;gt;level3: cat .</description>
         
