@@ -9,7 +9,6 @@ cout.tie(NULL);
 ```
 
 I'm almost certain that these lines are included to speed up their code. So out of curiosity, I did some searching, here's what I've found:
-<!-- more -->
 
 ## Why cin & cout is slow
 

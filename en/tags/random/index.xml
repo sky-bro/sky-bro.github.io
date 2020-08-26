@@ -27,7 +27,7 @@
         <link>https://sky-bro.github.io/en/posts/use-random-in-c&#43;&#43;/</link>
         <pubDate>Sat, 18 Apr 2020 10:04:13 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Wed, 26 Aug 2020 10:37:00 +0800</atom:modified>
+        <atom:modified>Wed, 26 Aug 2020 20:09:33 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/use-random-in-c&#43;&#43;/</guid>
         <description>Old way use rand(), usually pair with a random initialization of the seed:
 1 2  srand(int(time(0))); // initialize the seed rand(); // get a random int, [0, RAND_MAX]   get random int in [0,x): rand()%x

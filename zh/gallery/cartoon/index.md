@@ -1,2 +1,2 @@
 
-Sample images from [Pixabay](https://pixabay.com)
+<!-- Sample images from [Pixabay](https://pixabay.com) -->

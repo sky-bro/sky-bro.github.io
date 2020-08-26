@@ -1489,7 +1489,7 @@ if (!doNotTrack) {
 
       
         <li class="navbarm__menu--item ">
-          <a href="/zh/posts">博文</a>
+          <a href="/zh/posts">文章</a>
         </li>
       
       
@@ -1502,18 +1502,6 @@ if (!doNotTrack) {
       
         <li class="navbarm__menu--item active">
           <a href="/zh/showcase">作品</a>
-        </li>
-      
-      
-    
-      
-      
-      
-      
-
-      
-        <li class="navbarm__menu--item ">
-          <a href="/zh/publication">发表</a>
         </li>
       
       
@@ -1627,7 +1615,7 @@ if (!doNotTrack) {
   
   
   
-  <a href="/zh/posts" class="navbar__menu-item navbar__slide-down " dir="ltr" data-ani="true">博文</a>
+  <a href="/zh/posts" class="navbar__menu-item navbar__slide-down " dir="ltr" data-ani="true">文章</a>
   
   
   
@@ -1638,20 +1626,12 @@ if (!doNotTrack) {
   <a href="/zh/showcase" class="navbar__menu-item navbar__slide-down active" dir="ltr" data-ani="true">作品</a>
   
   
-  
-  
-  
-  
-  
-  <a href="/zh/publication" class="navbar__menu-item navbar__slide-down " dir="ltr" data-ani="true">发表</a>
-  
-  
 </div>
 </nav>
             
             
 
-<main class="single__main main">
+<main class="single__main main-main">
   
     <nav class="breadcrumb hide" aria-label="breadcrumbs">
   <script>document.querySelector('.breadcrumb').classList.remove('hide')</script>
@@ -2209,6 +2189,30 @@ document.addEventListener('DOMContentLoaded', function () {
 </main>
 
 
+<aside class="single__side main-side">
+  
+
+
+<section class="sidebar hide">
+  <script>document.querySelector('.sidebar').classList.remove('hide')</script>
+  <div class="toc__flexbox" data-position="fixed">
+    <h6 class="toc__title" data-ani="true">目录</h6>
+    
+      <label class="switch" data-ani="true">
+        <input id="toggle-toc" aria-label="Toggle TOC" type="checkbox" checked>
+        <span class="slider round"></span>
+      </label>
+    
+  </div>
+  <div class="toc " data-dir="ltr" data-folding="true" data-ani="true">
+    <nav id="TableOfContents"></nav>
+  </div>
+</section>
+
+
+
+</aside>
+
 <script>
   
   
@@ -2216,7 +2220,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var enableToc = JSON.parse("true");
   var toc = JSON.parse("null");
-  var tocPosition = JSON.parse("\"outer\"");
+  var tocPosition = JSON.parse("\"inner\"");
   
   var singleMainElem = document.querySelector('.single__main');
   var singleSideElem = document.querySelector('.single__side');
@@ -3051,23 +3055,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <div class="wrapper__right hide" data-pad="true" dir="ltr">
   <script>document.querySelector('.wrapper__right').classList.remove('hide')</script>
-  
-    
-      
-        <div class="toc__flexbox--outer" data-position="fixed" data-dir="ltr" data-ani="true">
-          <h6 class="toc__title toc__title--outer" data-ani="true">目录</h6>
-          
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
-        </div>
-        <div class="toc toc__outer " data-dir="ltr" data-folding="true" data-ani="true">
-          <nav id="TableOfContents"></nav>
-        </div>
-      
-    
   
 </div>
 

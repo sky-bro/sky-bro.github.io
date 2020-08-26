@@ -84,7 +84,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/zh/about/</loc>
-    <lastmod>2020-04-17T11:42:22+08:00</lastmod>
+    <lastmod>2020-08-26T20:09:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -144,7 +144,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/zh/gallery/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-08-26T20:09:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -159,7 +159,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/zh/gallery/cartoon/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-08-26T20:09:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -174,7 +174,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/zh/gallery/photo/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
+    <lastmod>2020-08-26T20:09:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -365,21 +365,6 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/zh/posts/</loc>
-    <lastmod>2020-04-16T12:24:45+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/en/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/posts/"
-                />
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/zh/presentation/</loc>
     <lastmod>2020-04-16T12:24:45+08:00</lastmod>
     <xhtml:link
@@ -391,6 +376,21 @@
                 rel="alternate"
                 hreflang="zh"
                 href="https://sky-bro.github.io/zh/presentation/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/zh/posts/</loc>
+    <lastmod>2020-08-26T20:09:33+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/en/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/posts/"
                 />
   </url>
   
