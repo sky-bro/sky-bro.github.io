@@ -21,7 +21,7 @@ Generated using [Hugo](https://gohugo.io/)，source code here: [blog-src](https:
 
 ## :chicken: My Friends
 
-[TheSong](https://thesong96.github.io/), [路人枭](http://lurenxiao1998.github.io/)
+[TheSong](https://thesong96.github.io/), [路人枭](http://lurenxiao1998.github.io/), [wxk](https://pullp.github.io/)
 
 ## :musical_score: Listening
 
