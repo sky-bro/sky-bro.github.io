@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: https://sky-bro.github.io/sitemap.xml

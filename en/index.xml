@@ -43,6 +43,37 @@
 
       
       <item>
+        <title>Writing Guide</title>
+        <link>https://sky-bro.github.io/en/posts/writing-guide/</link>
+        <pubDate>Thu, 10 Dec 2020 16:47:19 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Thu, 10 Dec 2020 16:47:19 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/writing-guide/</guid>
+        <description>Create new post First you need to create a file for you to write. Here&amp;rsquo;s how you can create a new post:
+1 2 3 4  hugo new posts/writing-guide.md # will create content/en/posts/writing-guide.md, &amp;#39;en&amp;#39; is set as my site&amp;#39;s default language hugo new posts/writing-guide.zh.md # content/zh/posts/writing-guide.zh.md hugo new posts/writing-guide/index.md # content/en/posts/writing-guide/index.md hugo new posts/writing-guide/index.zh.md # content/en/posts/writing-guide/index.zh.md   I prefer to create a directory for each of my writings, so I can add extra stuff like images for that specific page more easily.</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+          
+        
+        
+          
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Wargames Bandit</title>
         <link>https://sky-bro.github.io/en/posts/wargames-bandit/</link>
         <pubDate>Sun, 02 Aug 2020 12:33:40 +0800</pubDate>
