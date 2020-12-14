@@ -21,8 +21,8 @@
 
 ## :chicken: 我的朋友
 
-[TheSong](https://thesong96.github.io/), [路人枭](http://lurenxiao1998.github.io/)
+[TheSong](https://thesong96.github.io/), [路人枭](http://lurenxiao1998.github.io/), [wxk](https://pullp.github.io)
 
-## :musical_score: 正在听
+## :musical_score: 最近在听
 
 [<img src="https://spotify-readme-ky13.vercel.app/api/spotify-playing" alt="Kyle Listening" />](https://open.spotify.com/user/22sit26j5lamlvm3sgikxwuoq)

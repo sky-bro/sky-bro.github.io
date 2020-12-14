@@ -21,8 +21,8 @@ Generated using [Hugo](https://gohugo.io/)，source code here: [blog-src](https:
 
 ## :chicken: My Friends
 
-[TheSong](https://thesong96.github.io/), [路人枭](http://lurenxiao1998.github.io/)
+[TheSong](https://thesong96.github.io/), [路人枭](https://lurenxiao1998.github.io/), [wxk](https://pullp.github.io)
 
-## :musical_score: Listening
+## :musical_score: Listening recently
 
 [<img src="https://spotify-readme-ky13.vercel.app/api/spotify-playing" alt="Kyle Listening" />](https://open.spotify.com/user/22sit26j5lamlvm3sgikxwuoq)
