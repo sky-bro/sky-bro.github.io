@@ -43,11 +43,53 @@
 
       
       <item>
+        <title>Linux Hypervisor Setup</title>
+        <link>https://sky-bro.github.io/en/posts/linux-hypervisor-setup/</link>
+        <pubDate>Thu, 10 Dec 2020 17:23:37 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Tue, 15 Dec 2020 23:21:08 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/linux-hypervisor-setup/</guid>
+        <description>&lt;p&gt;setup hypervisor with qemu and kvm, the best linux based open source virtualization solution&lt;/p&gt;
+&lt;p&gt;KVM is part of linux kernel, and QEMU (Quick EMUlator) is an emulator. KVM by itself cannot provide the complete virtualization solution, it needs QEMU to provide full hypervisor functionality. QEMU can emulate cpu on its own, but with KVM, QEMU can achieve near native performance by executing the guest code directly on the host CPU.&lt;/p&gt;
+&lt;p&gt;So it&amp;rsquo;s best for them to work together.&lt;/p&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>hypervisor</category>
+            
+          
+            
+              <category>kvm</category>
+            
+          
+            
+              <category>qemu</category>
+            
+          
+        
+        
+          
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Writing Guide</title>
         <link>https://sky-bro.github.io/en/posts/writing-guide/</link>
         <pubDate>Thu, 10 Dec 2020 16:47:19 +0800</pubDate>
         <author>sky_io@outlook.com (Kyle)</author>
-        <atom:modified>Thu, 10 Dec 2020 16:47:19 +0800</atom:modified>
+        <atom:modified>Mon, 14 Dec 2020 23:02:46 +0800</atom:modified>
         <guid>https://sky-bro.github.io/en/posts/writing-guide/</guid>
         <description>Create new post First you need to create a file for you to write. Here&amp;rsquo;s how you can create a new post:
 1 2 3 4  hugo new posts/writing-guide.md # will create content/en/posts/writing-guide.md, &amp;#39;en&amp;#39; is set as my site&amp;#39;s default language hugo new posts/writing-guide.zh.md # content/zh/posts/writing-guide.zh.md hugo new posts/writing-guide/index.md # content/en/posts/writing-guide/index.md hugo new posts/writing-guide/index.zh.md # content/en/posts/writing-guide/index.zh.md   I prefer to create a directory for each of my writings, so I can add extra stuff like images for that specific page more easily.</description>
