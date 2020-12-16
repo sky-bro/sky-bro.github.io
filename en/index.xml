@@ -43,6 +43,52 @@
 
       
       <item>
+        <title>Compile and Use Your Own Glibc</title>
+        <link>https://sky-bro.github.io/en/posts/compile-and-use-your-own-glibc/</link>
+        <pubDate>Wed, 16 Dec 2020 10:59:01 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Wed, 16 Dec 2020 12:10:46 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/compile-and-use-your-own-glibc/</guid>
+        <description>&lt;p&gt;Easily compile and use multiple glibc on a single machine.&lt;/p&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>glibc</category>
+            
+          
+            
+              <category>pwng</category>
+            
+          
+            
+              <category>gcc</category>
+            
+          
+        
+        
+          
+            
+              <category>workspace setup</category>
+            
+          
+            
+              <category>pwn setup</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Tmux Basics</title>
         <link>https://sky-bro.github.io/en/posts/tmux-basics/</link>
         <pubDate>Wed, 16 Dec 2020 09:41:25 +0800</pubDate>

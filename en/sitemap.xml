@@ -79,7 +79,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/en/categories/</loc>
-    <lastmod>2020-12-16T10:37:15+08:00</lastmod>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -93,13 +93,33 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/en/tags/cheetsheet/</loc>
-    <lastmod>2020-12-16T10:37:15+08:00</lastmod>
+    <loc>https://sky-bro.github.io/en/posts/compile-and-use-your-own-glibc/</loc>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/gcc/</loc>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/glibc/</loc>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/categories/pwn-setup/</loc>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/pwng/</loc>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sky-bro.github.io/en/tags/</loc>
-    <lastmod>2020-12-16T10:37:15+08:00</lastmod>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -113,17 +133,22 @@
   </url>
   
   <url>
+    <loc>https://sky-bro.github.io/en/categories/workspace-setup/</loc>
+    <lastmod>2020-12-16T12:10:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/cheetsheet/</loc>
+    <lastmod>2020-12-16T10:37:15+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sky-bro.github.io/en/tags/tmux/</loc>
     <lastmod>2020-12-16T10:37:15+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sky-bro.github.io/en/posts/tmux-basics/</loc>
-    <lastmod>2020-12-16T10:37:15+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/en/categories/workspace-setup/</loc>
     <lastmod>2020-12-16T10:37:15+08:00</lastmod>
   </url>
   
