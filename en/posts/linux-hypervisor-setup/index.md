@@ -121,3 +121,8 @@ Also, you need to `chown` the disk to the above `user:group`: `sudo chown sky:sk
 ## clone a VM
 
 ## useful virsh commands
+
+## ref
+
+* [Linux Hypervisor Setup (libvirt/qemu/kvm)](https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/)
+* [Sharing folder with VM through libvirt, 9p, permission denied](https://askubuntu.com/questions/548208/sharing-folder-with-vm-through-libvirt-9p-permission-denied)

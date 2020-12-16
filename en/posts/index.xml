@@ -22,6 +22,44 @@
 
       
       <item>
+        <title>Tmux Basics</title>
+        <link>https://sky-bro.github.io/en/posts/tmux-basics/</link>
+        <pubDate>Wed, 16 Dec 2020 09:41:25 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Wed, 16 Dec 2020 10:37:15 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/tmux-basics/</guid>
+        <description>&lt;p&gt;portable &amp;amp; minimal tmux configuration, with cheetsheet&lt;/p&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>tmux</category>
+            
+          
+            
+              <category>cheetsheet</category>
+            
+          
+        
+        
+          
+            
+              <category>workspace setup</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Linux Hypervisor Setup</title>
         <link>https://sky-bro.github.io/en/posts/linux-hypervisor-setup/</link>
         <pubDate>Thu, 10 Dec 2020 17:23:37 +0800</pubDate>
