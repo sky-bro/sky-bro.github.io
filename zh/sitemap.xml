@@ -78,6 +78,31 @@
   </url>
   
   <url>
+    <loc>https://sky-bro.github.io/zh/posts/socksab-devlog/0-socksab-intro/</loc>
+    <lastmod>2020-12-25T15:19:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/zh/series/</loc>
+    <lastmod>2020-12-25T15:19:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/en/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/series/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/zh/series/socksab-devlog/</loc>
+    <lastmod>2020-12-25T15:19:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sky-bro.github.io/zh/posts/clusterfuzz-local-setup/</loc>
     <lastmod>2020-08-26T10:37:00+08:00</lastmod>
   </url>
@@ -333,20 +358,6 @@
                 rel="alternate"
                 hreflang="zh"
                 href="https://sky-bro.github.io/zh/categories/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/zh/series/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/en/series/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/series/"
                 />
   </url>
   
