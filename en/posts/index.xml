@@ -22,6 +22,44 @@
 
       
       <item>
+        <title>Union Find</title>
+        <link>https://sky-bro.github.io/en/posts/union-find/</link>
+        <pubDate>Sun, 10 Jan 2021 15:24:54 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Sun, 10 Jan 2021 16:28:37 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/union-find/</guid>
+        <description>&lt;p&gt;Description from wiki: a disjoint-set data structure, also called a union–find data structure or merge–find set, is a data structure that stores a collection of disjoint (non-overlapping) sets&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;you can easily solve &lt;a href=&#34;https://leetcode.com/problems/number-of-provinces/&#34;&gt;leetcode: 547. Number of Provinces&lt;/a&gt; w/ UF.&lt;br /&gt;
+get UF template at &lt;a href=&#34;https://github.com/sky-bro/AC/tree/master/Algorithms/Union%20Find&#34;&gt;github/sky-bro/AC/Algorithms/Union Find&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Union Find</category>
+            
+          
+        
+        
+          
+            
+              <category>Data Structure &amp; Algorithm</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Compile and Use Your Own Glibc</title>
         <link>https://sky-bro.github.io/en/posts/compile-and-use-your-own-glibc/</link>
         <pubDate>Wed, 16 Dec 2020 10:59:01 +0800</pubDate>
