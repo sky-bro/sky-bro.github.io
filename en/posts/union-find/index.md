@@ -10,7 +10,11 @@ Description from wiki: a disjoint-set data structure, also called a union–find
 UF datastructure is very simple, it has only two key functions: `U` and `F`.
 
 * use `U` (union) to connect two nodes, so they belong to the same set;
-* use `F` (find) to find the root of a node (or the group id of the node) -- different sets have different root/id.
+* use `F` (find) to find the root of a node (or the group id of the node)
+
+We use `ids` to store the parent of every node, `ids[i]` is the i-th node's parent. if `ids[i] == i` means `i` is the root if its group, we can say the group id is `i`.
+
+So, different root/group id means nodes are in different groups, whereas same root/group id means two nodes are in the same group.
 
 ### simle
 
