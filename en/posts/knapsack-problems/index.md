@@ -51,7 +51,11 @@ int main(int argc, char const *argv[]) {
 
 > [leetcode: 416 Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
 > time: $O(NV)$, space: $O(V)$
+<<<<<<< HEAD
+> now we need to count the number of ways to form exact $V$ total weight
+=======
 > now we need to count the number of ways to form exact $V$ total value
+>>>>>>> da94b83d997c13e8f8184ba8447703b33d796e19
 > similar as above, but initialize `dp[0]=1`, and rest as 0.
 > if we do not need to count the number of ways, but just check if there exists one valid way, use `or` operation indead of `+`.
 
