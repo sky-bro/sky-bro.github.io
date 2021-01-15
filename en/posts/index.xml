@@ -22,6 +22,48 @@
 
       
       <item>
+        <title>Ncurses Note</title>
+        <link>https://sky-bro.github.io/en/posts/ncurses-note/</link>
+        <pubDate>Thu, 14 Jan 2021 12:32:48 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Fri, 15 Jan 2021 10:42:27 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/ncurses-note/</guid>
+        <description>&lt;p&gt;The &lt;strong&gt;Curses&lt;/strong&gt; library forms a wrapper over working with raw terminal codes, and provides highly flexible and efficient API (Application Programming Interface). It provides functions to move the cursor, create windows, produce colors, play with mouse etc. The application programs need not worry about the underlying terminal capabilities&lt;/p&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>TUI</category>
+            
+          
+            
+              <category>curses</category>
+            
+          
+            
+              <category>ncurses</category>
+            
+          
+        
+        
+          
+            
+              <category>UI</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Union Find</title>
         <link>https://sky-bro.github.io/en/posts/union-find/</link>
         <pubDate>Sun, 10 Jan 2021 15:24:54 +0800</pubDate>
