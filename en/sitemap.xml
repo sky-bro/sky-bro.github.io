@@ -79,7 +79,7 @@
   
   <url>
     <loc>https://sky-bro.github.io/en/categories/</loc>
-    <lastmod>2021-01-15T10:42:27+08:00</lastmod>
+    <lastmod>2021-01-16T00:10:41+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -89,6 +89,41 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://sky-bro.github.io/en/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/categories/data-structure-algorithm/</loc>
+    <lastmod>2021-01-16T00:10:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/dp/</loc>
+    <lastmod>2021-01-16T00:10:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/knapsack/</loc>
+    <lastmod>2021-01-16T00:10:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/posts/knapsack-problems/</loc>
+    <lastmod>2021-01-16T00:10:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/</loc>
+    <lastmod>2021-01-16T00:10:41+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/en/tags/"
                 />
   </url>
   
@@ -108,21 +143,6 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/en/tags/</loc>
-    <lastmod>2021-01-15T10:42:27+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/en/tags/"
-                />
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/en/tags/tui/</loc>
     <lastmod>2021-01-15T10:42:27+08:00</lastmod>
   </url>
@@ -130,11 +150,6 @@
   <url>
     <loc>https://sky-bro.github.io/en/categories/ui/</loc>
     <lastmod>2021-01-15T10:42:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/en/categories/data-structure-algorithm/</loc>
-    <lastmod>2021-01-10T16:58:08+08:00</lastmod>
   </url>
   
   <url>

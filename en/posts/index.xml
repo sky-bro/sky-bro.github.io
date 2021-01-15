@@ -22,6 +22,44 @@
 
       
       <item>
+        <title>Knapsack Problems</title>
+        <link>https://sky-bro.github.io/en/posts/knapsack-problems/</link>
+        <pubDate>Fri, 15 Jan 2021 10:51:02 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Sat, 16 Jan 2021 00:10:41 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/knapsack-problems/</guid>
+        <description>&lt;p&gt;knapsack problem and its variations&lt;/p&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        <media:content url="https://sky-bro.github.ioimages/icons/Knapsack.svg" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>knapsack</category>
+            
+          
+            
+              <category>dp</category>
+            
+          
+        
+        
+          
+            
+              <category>Data Structure &amp; Algorithm</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Ncurses Note</title>
         <link>https://sky-bro.github.io/en/posts/ncurses-note/</link>
         <pubDate>Thu, 14 Jan 2021 12:32:48 +0800</pubDate>

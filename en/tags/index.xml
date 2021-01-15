@@ -14,13 +14,49 @@
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright>
-    <lastBuildDate>Thu, 14 Jan 2021 12:32:48 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jan 2021 10:51:02 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     
 
+      
+      <item>
+        <title>dp</title>
+        <link>https://sky-bro.github.io/en/tags/dp/</link>
+        <pubDate>Fri, 15 Jan 2021 10:51:02 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/dp/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>knapsack</title>
+        <link>https://sky-bro.github.io/en/tags/knapsack/</link>
+        <pubDate>Fri, 15 Jan 2021 10:51:02 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        
+        <guid>https://sky-bro.github.io/en/tags/knapsack/</guid>
+        <description></description>
+        
+        <dc:creator>Kyle</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
       
       <item>
         <title>curses</title>
