@@ -78,13 +78,8 @@
   </url>
   
   <url>
-    <loc>https://sky-bro.github.io/en/posts/matrix-fast-pow/</loc>
-    <lastmod>2021-01-20T14:27:54+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sky-bro.github.io/en/categories/</loc>
-    <lastmod>2021-01-16T00:41:35+08:00</lastmod>
+    <lastmod>2021-01-20T14:37:13+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -99,7 +94,37 @@
   
   <url>
     <loc>https://sky-bro.github.io/en/categories/data-structure-algorithm/</loc>
-    <lastmod>2021-01-16T00:41:35+08:00</lastmod>
+    <lastmod>2021-01-20T14:37:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/fast-pow/</loc>
+    <lastmod>2021-01-20T14:37:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/matrix/</loc>
+    <lastmod>2021-01-20T14:37:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/posts/matrix-fast-pow/</loc>
+    <lastmod>2021-01-20T14:37:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sky-bro.github.io/en/tags/</loc>
+    <lastmod>2021-01-20T14:37:13+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sky-bro.github.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sky-bro.github.io/en/tags/"
+                />
   </url>
   
   <url>
@@ -115,21 +140,6 @@
   <url>
     <loc>https://sky-bro.github.io/en/posts/knapsack-problems/</loc>
     <lastmod>2021-01-16T00:41:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sky-bro.github.io/en/tags/</loc>
-    <lastmod>2021-01-16T00:41:35+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sky-bro.github.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sky-bro.github.io/en/tags/"
-                />
   </url>
   
   <url>
