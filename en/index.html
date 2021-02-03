@@ -1337,7 +1337,7 @@
 
 
 <meta name="created" content="0001-01-01T00:00:00&#43;0000">
-<meta name="modified" content="2020-04-17T11:42:22&#43;0800">
+<meta name="modified" content="2021-02-03T15:46:27&#43;0800">
 <meta property="article:published_time" content="0001-01-01T00:00:00&#43;0000">
 
 <meta name="author" content="&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;">
@@ -1684,36 +1684,116 @@ if (!doNotTrack) {
             
 <header class="header ">
     
-          
-  
-    
-  
-    
-    <div class="site-header basicflex-column site-header__align-center" data-ani="true" style="background-image: url('/images/header/background.jpg'); background-size: cover;
-    background-repeat: no-repeat; background-position: center; width: 100%; height: calc(100vh - 50px); padding: 0px 50px;">
+        
+<script defer src="/js/swipehome.min.ceda0bd6b06208f9fda3d65566e78f53013e3182732f3325b75eb80dad8968d4.js"></script>
+
+
+  <div id="headerSwipe" class="swipe">
+    <div class="swipe-home">
+      
+      
+      
+      
       
       
         
-        <div class="site-header__title site-header__title--shadow" style="font-size: 44px; ;">
-          Always
-        </div>
+        
+          <div class="site-header__align-left" data-ani="true" style="background-image: url('/images/header/background6.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(60vh - 50px);">
+            
+                        
               
-      
-      
-        <div style="height: 16px"></div>
-      
-      
-         
-        <div class="site-header__subtitle" style="font-size: 18px; " data-cursive="true">
-          Improvise, Adapt and Overcome!
-        </div>
+              <div class="site-header__title" style="font-size: 32px; padding: 0px 50px;">
+                
+              </div>
+                    
+            
+            
+              <div style="height: 20px"></div>
+            
+            
+               
+              <div class="site-header__subtitle" style="font-size: 16px; padding: 0px 50px;">
+                
+              </div>
+              
+            
+          </div>
         
+          <div class="site-header__align-center" data-ani="true" style="background-image: url('/images/header/background7.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(60vh - 50px);">
+            
+                        
+              
+              <div class="site-header__title" style="font-size: 32px; padding: 0px 50px;">
+                
+              </div>
+                    
+            
+            
+              <div style="height: 20px"></div>
+            
+            
+               
+              <div class="site-header__subtitle" style="font-size: 16px; padding: 0px 50px;">
+                
+              </div>
+              
+            
+          </div>
+        
+          <div class="site-header__align-right" data-ani="true" style="background-image: url('/images/header/background4.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(60vh - 50px);">
+            
+                        
+              
+              <div class="site-header__title" style="font-size: 32px; padding: 0px 50px;">
+                
+              </div>
+                    
+            
+            
+              <div style="height: 20px"></div>
+            
+            
+               
+              <div class="site-header__subtitle" style="font-size: 16px; padding: 0px 50px;">
+                
+              </div>
+              
+            
+          </div>
+        
+      
       
     </div>
-    
-  
-    
-  
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      var options = null;
+      var header = JSON.parse("[{\"align\":\"center\",\"height\":200,\"paddingX\":50,\"paddingY\":0,\"spaceBetweenTitleSubtitle\":16,\"subtitle\":[\"Improvise, Adapt and Overcome!\"],\"subtitleColor\":null,\"subtitleCursive\":true,\"subtitleFontSize\":18,\"title\":[\"Always\"],\"titleColor\":null,\"titleFontSize\":44,\"titleShadow\":true,\"type\":\"text\"},{\"align\":\"center\",\"height\":\"100vh\",\"imagePosition\":\"center\",\"imageRepeat\":\"no-repeat\",\"imageSize\":\"cover\",\"imageSrc\":\"images/header/background.jpg\",\"paddingX\":50,\"paddingY\":0,\"spaceBetweenTitleSubtitle\":16,\"subtitle\":[\"Improvise, Adapt and Overcome!\"],\"subtitleColor\":null,\"subtitleCursive\":true,\"subtitleFontSize\":18,\"title\":[\"Always\"],\"titleColor\":null,\"titleFontSize\":44,\"titleShadow\":true,\"type\":\"img\"},{\"height\":\"60vh\",\"options\":{\"auto\":3500,\"autoRestart\":true,\"continuous\":true,\"disableScroll\":true,\"draggable\":true,\"startSlide\":0,\"stopPropagation\":true},\"slide\":[{\"align\":\"left\",\"imagePosition\":\"center\",\"imageRepeat\":\"no-repeat\",\"imageSize\":\"cover\",\"imageSrc\":\"images/header/background6.jpg\",\"paddingX\":50,\"paddingY\":0,\"spaceBetweenTitleSubtitle\":20,\"subtitle\":[null],\"subtitleFontSize\":16,\"title\":[null],\"titleFontSize\":32},{\"align\":\"center\",\"imagePosition\":\"center\",\"imageRepeat\":\"no-repeat\",\"imageSize\":\"cover\",\"imageSrc\":\"images/header/background7.jpg\",\"paddingX\":50,\"paddingY\":0,\"spaceBetweenTitleSubtitle\":20,\"subtitle\":[null],\"subtitleFontSize\":16,\"title\":[null],\"titleFontSize\":32},{\"align\":\"right\",\"imagePosition\":\"center\",\"imageRepeat\":\"no-repeat\",\"imageSize\":\"cover\",\"imageSrc\":\"images/header/background4.jpg\",\"paddingX\":50,\"paddingY\":0,\"spaceBetweenTitleSubtitle\":20,\"subtitle\":[null],\"subtitleFontSize\":16,\"title\":[null],\"titleFontSize\":32}],\"type\":\"slide\"}]");
+      var slide = header.filter(function(h) {
+        return h.type === 'slide';
+      });
+      
+      if (slide.length > 0) {
+        options = slide[0].options;
+      }
+      
+      var headerSwipeElem = document.getElementById('headerSwipe');
+      var headerSwipe = new Swipe(headerSwipeElem,
+        options ? 
+        options : {
+          startSlide: 0,
+          auto: 7000,
+          draggable: true,
+          autoRestart: true,
+          continuous: true,
+          disableScroll: true,
+          stopPropagation: true,
+          callback: function (index, element) { },
+          transitionEnd: function (index, element) { }
+        });
+    });
+  </script>
 
     
 </header>
