@@ -176,3 +176,4 @@ class Solution {
 ## refs
 
 * [Matrix - By DanAlex](https://codeforces.com/blog/entry/21189)
+* [Exponentiation by squaring](https://simple.wikipedia.org/wiki/Exponentiation_by_squaring)

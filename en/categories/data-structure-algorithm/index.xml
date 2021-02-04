@@ -14,13 +14,55 @@
     <managingEditor>sky_io@outlook.com (Kyle)</managingEditor>
     <webMaster>sky_io@outlook.com (Kyle)</webMaster>
     <copyright>All content is subject to the license of &lt;a rel=&#34;license noopener&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright>
-    <lastBuildDate>Wed, 20 Jan 2021 13:22:22 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Feb 2021 12:12:54 +0800</lastBuildDate>
     
         <atom:link href="https://sky-bro.github.io/en/categories/data-structure-algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     
     
 
+      
+      <item>
+        <title>Understand RSA, a Top Dwon Approach</title>
+        <link>https://sky-bro.github.io/en/posts/understand-rsa-a-top-dwon-approach/</link>
+        <pubDate>Wed, 03 Feb 2021 12:12:54 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Thu, 04 Feb 2021 10:17:26 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/understand-rsa-a-top-dwon-approach/</guid>
+        <description>&lt;p&gt;My simple note on the RSA algorithm.&lt;/p&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>RSA</category>
+            
+          
+            
+              <category>Crypto</category>
+            
+          
+        
+        
+          
+            
+              <category>Crypto</category>
+            
+          
+            
+              <category>Data Structure &amp; Algorithm</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
       
       <item>
         <title>Matrix Fast Pow</title>
