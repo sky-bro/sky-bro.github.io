@@ -1339,7 +1339,7 @@
 <meta name="keywords" content="RSA,Crypto">
 
 <meta name="created" content="2021-02-03T12:12:54&#43;0800">
-<meta name="modified" content="2021-02-04T10:17:26&#43;0800">
+<meta name="modified" content="2021-02-04T13:45:32&#43;0800">
 <meta property="article:published_time" content="2021-02-03T12:12:54&#43;0800">
 
 <meta name="author" content="&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;">
@@ -1377,7 +1377,7 @@
     "@type": "WebPage",
     "headline": "Understand RSA, a Top Dwon Approach",
     "datePublished": "2021-02-03T12:12:54+08:00",
-    "dateModified": "2021-02-04T10:17:26+08:00",
+    "dateModified": "2021-02-04T13:45:32+08:00",
     "url" : "https://sky-bro.github.io/en/posts/understand-rsa-a-top-dwon-approach/",
     "description": "\u003cp\u003eMy simple note on the RSA algorithm.\u003c/p\u003e",
     "keywords": ["RSA","Crypto"],
@@ -1764,22 +1764,22 @@ if (!doNotTrack) {
       <p>My simple note on the RSA algorithm.</p>
 <h2 id="introduction">Introduction</h2>
 <p>We know that <strong>RSA</strong> is an <strong>asymmetric encryption algorithm</strong>, meaning that the communication partners Alice and Bob hold different keys, instead of same keys as in symmetric encryption.</p>
-<p>In rsa, Alice first computes the product <code>n</code> of two different large prime numbers <code>p</code> and <code>q</code>, and uses <code>p</code> and <code>q</code> to derive two keys <code>e</code> and <code>d</code>, one for herself and one for others. Then she makes <code>(e, n)</code> public and destroies the <code>p</code> and <code>q</code>.</p>
+<p>In rsa, Alice first computes the product $n$ of two different large prime numbers $p$ and $q$, and uses $p$ and $q$ to derive two keys $e$ and $d$, one for herself and one for others. Then she makes $(e, n)$ public and destroies the $p$ and $q$.</p>
 <h2 id="encryption-and-decryption">Encryption and Decryption</h2>
 <blockquote>
-<p><code>e</code> and <code>d</code> can both be used for encryption or decryption: <code>e</code> can be used to decpryt what&rsquo;s encrypted with <code>d</code>, <code>d</code> can be used to decpryt what&rsquo;s encrypted with <code>e</code></p>
+<p>$e$ and $d$ can both be used for encryption or decryption: $e$ can be used to decpryt what&rsquo;s encrypted with $d$, $d$ can be used to decpryt what&rsquo;s encrypted with $e$</p>
 </blockquote>
 <ul>
 <li>
 <p>To Encrypt</p>
-<p>If Alice encrypts a message <code>m</code>, she need to compute $c = m^d\ (\text{mod}\ n)$</p>
+<p>If Alice encrypts a message <code>m</code>, she need to compute $m^d \equiv c\ (\text{mod}\ n)$</p>
 </li>
 <li>
 <p>To Decrypt</p>
-<p>Bob knows <code>(e, n)</code> (everyone knows, because this is public), he computes $m = c^e = m^{d\cdot e} = m\ (\text{mod}\ n)$ and gets the original message <code>m</code>.</p>
+<p>Bob knows $(e, n)$ (everyone knows, because this is public), he computes $c^e \equiv m^{de} \equiv m\ (\text{mod}\ n)$ and gets the original message <code>m</code>.</p>
 </li>
 </ul>
-<p>So the correctness of RSA lies in $m^{d\cdot e}=m\ (\text{mod}\ n)$. We&rsquo;ll understand why in the Proof of Correctness Section.</p>
+<p>So the correctness of RSA lies in $m^{de}\equiv m\ (\text{mod}\ n)$. We&rsquo;ll understand why in the Proof of Correctness Section.</p>
 <h2 id="how-to-generate-e-and-d">How to Generate e and d</h2>
 <ul>
 <li>$\phi(n)=(p-1)\times (q-1)$</li>
@@ -1801,33 +1801,38 @@ if (!doNotTrack) {
 </ul>
 <h3 id="chinese-remainder-theorem">Chinese Remainder Theorem</h3>
 <p>TODO</p>
-<h3 id="correctness-of-rsa-i-failed">Correctness of RSA (I failed&hellip;)</h3>
+<h3 id="correctness-of-rsa">Correctness of RSA</h3>
 <ul>
-<li>$d\cdot e = 1\ (\text{mod}\ \phi(n))$, that is $d\cdot e=k\phi(n)+1 = k(p-1)(q-1)+1$</li>
-<li>$m^{\phi(n)}=1\ (\text{mod}\ n)$
+<li>we know that $ed = 1\ (\text{mod}\ \lambda(pq))$, $\lambda(pq) = \text{lcm}(p-1, q-1)$.</li>
+<li>$ed = 1\ (\text{mod}\ \lambda(pq))$, that is $ed=h(p-1)+1 = k(q-1)+1$</li>
+<li>In order to prove $m^{ed}\equiv m\ (\text{mod}\ pq)$, it&rsquo;s equivalent to prove $m^{ed}\equiv m\ (\text{mod}\ p)$ and  $m^{ed}\equiv m\ (\text{mod}\ q)$ separately (using <strong>Chinese Remainder Theorem</strong>)
 <ul>
-<li>$m$ is coprime to $p$ or $q$ or both</li>
-<li>when it&rsquo;s coprime to both, meaning it&rsquo;s coprime to n, it&rsquo;s ok to apply Euler&rsquo;s totient theorem: $m^{e\cdot d} = m\times m^{k\phi(n)}=m\times 1 = m\ (\text{mod}\ n)$</li>
-<li>when it&rsquo;s coprime to one of $p$ or $q$, but not the other.
-<ul>
-<li>let $m = a\times p+b = c\times q$</li>
-<li>then ??<br />
+<li>prove $m^{ed}\equiv m\ (\text{mod}\ p)$<br />
 $$<br />
 \begin{align*}<br />
-m^{ed} &amp;= (c\times q)^{k(p-1)(q-1)+1}\ (\text{mod}\ n)<br />
+m^{ed} &amp;= m^{h(p-1)+1}\ (\text{mod}\ p)\\<br />
+&amp;= 0\ \text{(when m is multiple of p) or}\ (1)^{h}\times m\ \text{(when m and p are coprime)}\\<br />
+&amp;= m\ (\text{mod}\ p)<br />
 \end{align*}<br />
 $$</li>
-</ul>
-</li>
-<li>in modern rsa, the $\phi(n)$ is replaced with $\text{lcm}(p-1, q-1)$, the prove is still similar.</li>
+<li>prove $m^{ed}\equiv m\ (\text{mod}\ q)$<br />
+$$<br />
+\begin{align*}<br />
+m^{ed} &amp;= m^{k(q-1)+1}\ (\text{mod}\ q)\\<br />
+&amp;= 0\ \text{(when m is multiple of q) or}\ (1)^{k}\times m\ \text{(when m and q are coprime)}\\<br />
+&amp;= m\ (\text{mod}\ q)<br />
+\end{align*}<br />
+$$</li>
 </ul>
 </li>
 </ul>
 <h2 id="refs">refs</h2>
 <ul>
+<li><a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">wiki: RSA</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">wiki: Euler&rsquo;s totient function</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Euler%27s_totient_theorem">wiki: Euler&rsquo;s totient theorem</a></li>
-<li><a href="https://www.cse.cuhk.edu.hk/~taoyf/course/bmeg3120/notes/rsa-proof.pdf">slide: Correctness Proof of RSA</a>, I think the proof is wrong, (when applying Fermat’s Little Theorem).</li>
+<li><a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">wiki: Chinese remainder theorem</a></li>
+<li><a href="https://www.cse.cuhk.edu.hk/~taoyf/course/bmeg3120/notes/rsa-proof.pdf">slide: Correctness Proof of RSA</a>, I think the proof is wrong, (when applying Fermat’s Little Theorem, didn&rsquo;t consider the case when m is multiple of p).</li>
 <li><a href="https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm">wiki: Extended Euclidean algorithm</a></li>
 <li><a href="https://blog.csdn.net/LOOKQAQ/article/details/81282342">同余定理+逆元】知识点讲解</a></li>
 </ul>
@@ -2054,7 +2059,7 @@ $$</li>
     <span class="item-title">LastMod</span>
     <span class="item-content">
         February 4, 2021
-        (<a href="https://github.com/sky-bro/blog-src/commit/e466252cd0bd30900ac64060a9ade98b20bc33b1" title="add RSA, draft">add RSA, draft - e466252</a>)
+        (<a href="https://github.com/sky-bro/blog-src/commit/dffa759b156349cf4fc8a37745516331f2e60bb1" title="proof of correct">proof of correct - dffa759</a>)
     </span>
   </p>
   <p class="copyright-item">
@@ -2509,7 +2514,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <ul>
         <li><a href="#eulers-totient-theorem">Euler&rsquo;s totient theorem</a></li>
         <li><a href="#chinese-remainder-theorem">Chinese Remainder Theorem</a></li>
-        <li><a href="#correctness-of-rsa-i-failed">Correctness of RSA (I failed&hellip;)</a></li>
+        <li><a href="#correctness-of-rsa">Correctness of RSA</a></li>
       </ul>
     </li>
     <li><a href="#refs">refs</a></li>

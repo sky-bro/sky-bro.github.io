@@ -6,21 +6,21 @@ My simple note on the RSA algorithm.
 
 We know that **RSA** is an **asymmetric encryption algorithm**, meaning that the communication partners Alice and Bob hold different keys, instead of same keys as in symmetric encryption.
 
-In rsa, Alice first computes the product `n` of two different large prime numbers `p` and `q`, and uses `p` and `q` to derive two keys `e` and `d`, one for herself and one for others. Then she makes `(e, n)` public and destroies the `p` and `q`.
+In rsa, Alice first computes the product $n$ of two different large prime numbers $p$ and $q$, and uses $p$ and $q$ to derive two keys $e$ and $d$, one for herself and one for others. Then she makes $(e, n)$ public and destroies the $p$ and $q$.
 
 ## Encryption and Decryption
 
-> `e` and `d` can both be used for encryption or decryption: `e` can be used to decpryt what's encrypted with `d`, `d` can be used to decpryt what's encrypted with `e`
+> $e$ and $d$ can both be used for encryption or decryption: $e$ can be used to decpryt what's encrypted with $d$, $d$ can be used to decpryt what's encrypted with $e$
 
 * To Encrypt
 
-    If Alice encrypts a message `m`, she need to compute $c = m^d\\ (\text{mod}\\ n)$
+    If Alice encrypts a message `m`, she need to compute $m^d \equiv c\\ (\text{mod}\\ n)$
 
 * To Decrypt
 
-    Bob knows `(e, n)` (everyone knows, because this is public), he computes $m = c^e = m^{d\cdot e} = m\\ (\text{mod}\\ n)$ and gets the original message `m`.
+    Bob knows $(e, n)$ (everyone knows, because this is public), he computes $c^e \equiv m^{de} \equiv m\\ (\text{mod}\\ n)$ and gets the original message `m`.
 
-So the correctness of RSA lies in $m^{d\cdot e}=m\\ (\text{mod}\\ n)$. We'll understand why in the Proof of Correctness Section.
+So the correctness of RSA lies in $m^{de}\equiv m\\ (\text{mod}\\ n)$. We'll understand why in the Proof of Correctness Section.
 
 ## How to Generate e and d
 
@@ -52,26 +52,34 @@ There are three ways to compute modular inverse, please refer to this [post](TOD
 
 TODO
 
-### Correctness of RSA (I failed...)
+### Correctness of RSA
 
-* $d\cdot e = 1\\ (\text{mod}\\ \phi(n))$, that is $d\cdot e=k\phi(n)+1 = k(p-1)(q-1)+1$
-* $m^{\phi(n)}=1\\ (\text{mod}\\ n)$
-  * $m$ is coprime to $p$ or $q$ or both
-  * when it's coprime to both, meaning it's coprime to n, it's ok to apply Euler's totient theorem: $m^{e\cdot d} = m\times m^{k\phi(n)}=m\times 1 = m\\ (\text{mod}\\ n)$
-  * when it's coprime to one of $p$ or $q$, but not the other.
-    * let $m = a\times p+b = c\times q$
-    * then ??
+* we know that $ed = 1\\ (\text{mod}\\ \lambda(pq))$, $\lambda(pq) = \text{lcm}(p-1, q-1)$.
+* $ed = 1\\ (\text{mod}\\ \lambda(pq))$, that is $ed=h(p-1)+1 = k(q-1)+1$
+* In order to prove $m^{ed}\equiv m\\ (\text{mod}\\ pq)$, it's equivalent to prove $m^{ed}\equiv m\\ (\text{mod}\\ p)$ and  $m^{ed}\equiv m\\ (\text{mod}\\ q)$ separately (using **Chinese Remainder Theorem**)
+  * prove $m^{ed}\equiv m\\ (\text{mod}\\ p)$
     $$
     \begin{align*}
-    m^{ed} &= (c\times q)^{k(p-1)(q-1)+1}\\ (\text{mod}\\ n)
+    m^{ed} &= m^{h(p-1)+1}\\ (\text{mod}\\ p)\\\\
+    &= 0\\ \text{(when m is multiple of p) or}\\ (1)^{h}\times m\\ \text{(when m and p are coprime)}\\\\
+    &= m\\ (\text{mod}\\ p)
     \end{align*}
     $$
-  * in modern rsa, the $\phi(n)$ is replaced with $\text{lcm}(p-1, q-1)$, the prove is still similar.
+  * prove $m^{ed}\equiv m\\ (\text{mod}\\ q)$
+    $$
+    \begin{align*}
+    m^{ed} &= m^{k(q-1)+1}\\ (\text{mod}\\ q)\\\\
+    &= 0\\ \text{(when m is multiple of q) or}\\ (1)^{k}\times m\\ \text{(when m and q are coprime)}\\\\
+    &= m\\ (\text{mod}\\ q)
+    \end{align*}
+    $$
 
 ## refs
 
+* [wiki: RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
 * [wiki: Euler's totient function](https://en.wikipedia.org/wiki/Euler%27s_totient_function)
 * [wiki: Euler's totient theorem](https://en.wikipedia.org/wiki/Euler%27s_totient_theorem)
-* [slide: Correctness Proof of RSA](https://www.cse.cuhk.edu.hk/~taoyf/course/bmeg3120/notes/rsa-proof.pdf), I think the proof is wrong, (when applying Fermat’s Little Theorem).
+* [wiki: Chinese remainder theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem)
+* [slide: Correctness Proof of RSA](https://www.cse.cuhk.edu.hk/~taoyf/course/bmeg3120/notes/rsa-proof.pdf), I think the proof is wrong, (when applying Fermat’s Little Theorem, didn't consider the case when m is multiple of p).
 * [wiki: Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm)
 * [同余定理+逆元】知识点讲解](https://blog.csdn.net/LOOKQAQ/article/details/81282342)
