@@ -90,6 +90,43 @@ class Solution {
 };
 ```
 
+### get a valid path
+
+Often in 0-1 knapsack problems, we want to know exactly the what set of objects we take (maybe multiple, but we just need any one of them).
+
+To achieve this, we only need an extra array of size V (which is the volume of our knapsack). Idea is that we store at `path[i]` the object that first let us arrive volume `i`.
+
+> (haven't found a proper/simple example problem yet... to be added)
+
+If we want to get a valid set of integers (objects) in the above problem: [leetcode: 416 Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
+
+```c++
+class Solution {
+ public:
+  bool canPartition(vector<int>& nums) {
+    bitset<10001> bits(1);
+    int sum = accumulate(nums.begin(), nums.end(), 0);
+    vector<int> path((sum >> 1) + 1);
+    for (int num : nums) {
+      auto change = bits;
+      bits |= bits << num;
+      change ^= bits; // set bits that changed in this loop
+      for (int i = change._Find_first(); i <= a; i = change._Find_next(i) {
+        path[i] = num;
+      }
+    }
+    if (!(sum & 1) && bits[sum >> 1]) {
+      for (int j = sum >> 1; j; ) {
+        cout << path[j] << " ";
+        j -= path[j];
+      }
+      cout << endl;
+    }
+    return !(sum & 1) && bits[sum >> 1];
+  }
+};
+```
+
 ## unbounded knapsack problem
 
 ### description
@@ -207,7 +244,8 @@ int main(int argc, char const *argv[]) {
 * [leetcode : 698 Partition to K Equal Sum Subsets](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/)
 * [leetcode: 1723 Find Minimum Time to Finish All Jobs](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/)
 * [leetcode: 956 Tallest Billboard](https://leetcode.com/problems/tallest-billboard/)
-* todo...
+* [codeforces: round 699 div2, F. AB Tree](https://codeforces.com/contest/1481/problem/F) -- bounded knapsack, greedy
+* more as I go...
 
 ## refs
 

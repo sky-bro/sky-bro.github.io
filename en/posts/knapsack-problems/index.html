@@ -1339,7 +1339,7 @@
 <meta name="keywords" content="knapsack,dp">
 
 <meta name="created" content="2021-01-15T10:51:02&#43;0800">
-<meta name="modified" content="2021-01-16T00:41:35&#43;0800">
+<meta name="modified" content="2021-02-10T20:00:53&#43;0800">
 <meta property="article:published_time" content="2021-01-15T10:51:02&#43;0800">
 
 <meta name="author" content="&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;">
@@ -1386,7 +1386,7 @@
     "@type": "WebPage",
     "headline": "Knapsack Problems",
     "datePublished": "2021-01-15T10:51:02+08:00",
-    "dateModified": "2021-01-16T00:41:35+08:00",
+    "dateModified": "2021-02-10T20:00:53+08:00",
     "url" : "https://sky-bro.github.io/en/posts/knapsack-problems/",
     "description": "\u003cp\u003eknapsack problem and its variations\u003c/p\u003e",
     "keywords": ["knapsack","dp"],
@@ -1745,7 +1745,7 @@ if (!doNotTrack) {
 <div class="single__infos">
   <time class="single__info" title="Written At">📅&nbsp;Jan 15, 2021 </time>
   
-  &nbsp;&middot;&nbsp; <time class="single__info" title="Modified At"> 📝&nbsp;Jan 16, 2021 </time>
+  &nbsp;&middot;&nbsp; <time class="single__info" title="Modified At"> 📝&nbsp;Feb 10, 2021 </time>
   
   &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;3&nbsp;min read </span>
   
@@ -1918,6 +1918,67 @@ if we do not need to count the number of ways, but just check if there exists on
     <span class="n">bitset</span><span class="o">&lt;</span><span class="mi">10001</span><span class="o">&gt;</span> <span class="n">bits</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="n">bits</span> <span class="o">|=</span> <span class="n">bits</span> <span class="o">&lt;&lt;</span> <span class="n">num</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">sum</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">bits</span><span class="p">[</span><span class="n">sum</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="get-a-valid-path">get a valid path</h3>
+<p>Often in 0-1 knapsack problems, we want to know exactly the what set of objects we take (maybe multiple, but we just need any one of them).</p>
+<p>To achieve this, we only need an extra array of size V (which is the volume of our knapsack). Idea is that we store at <code>path[i]</code> the object that first let us arrive volume <code>i</code>.</p>
+<blockquote>
+<p>(haven&rsquo;t found a proper/simple example problem yet&hellip; to be added)</p>
+</blockquote>
+<p>If we want to get a valid set of integers (objects) in the above problem: <a href="https://leetcode.com/problems/partition-equal-subset-sum/">leetcode: 416 Partition Equal Subset Sum</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">canPartition</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">bitset</span><span class="o">&lt;</span><span class="mi">10001</span><span class="o">&gt;</span> <span class="n">bits</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">path</span><span class="p">((</span><span class="n">sum</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">change</span> <span class="o">=</span> <span class="n">bits</span><span class="p">;</span>
+      <span class="n">bits</span> <span class="o">|=</span> <span class="n">bits</span> <span class="o">&lt;&lt;</span> <span class="n">num</span><span class="p">;</span>
+      <span class="n">change</span> <span class="o">^=</span> <span class="n">bits</span><span class="p">;</span> <span class="c1">// set bits that changed in this loop
+</span><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">change</span><span class="p">.</span><span class="n">_Find_first</span><span class="p">();</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">change</span><span class="p">.</span><span class="n">_Find_next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">sum</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">bits</span><span class="p">[</span><span class="n">sum</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="p">;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">path</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+        <span class="n">j</span> <span class="o">-=</span> <span class="n">path</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+      <span class="p">}</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
     <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">sum</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">bits</span><span class="p">[</span><span class="n">sum</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">];</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -2116,7 +2177,8 @@ for type $i$ goods (M &ndash; total number), split them into groups ($ceil(log_2
 <li><a href="https://leetcode.com/problems/partition-to-k-equal-sum-subsets/">leetcode : 698 Partition to K Equal Sum Subsets</a></li>
 <li><a href="https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/">leetcode: 1723 Find Minimum Time to Finish All Jobs</a></li>
 <li><a href="https://leetcode.com/problems/tallest-billboard/">leetcode: 956 Tallest Billboard</a></li>
-<li>todo&hellip;</li>
+<li><a href="https://codeforces.com/contest/1481/problem/F">codeforces: round 699 div2, F. AB Tree</a> &ndash; bounded knapsack, greedy</li>
+<li>more as I go&hellip;</li>
 </ul>
 <h2 id="refs">refs</h2>
 <ul>
@@ -2345,8 +2407,8 @@ for type $i$ goods (M &ndash; total number), split them into groups ($ceil(log_2
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        January 16, 2021
-        (<a href="https://github.com/sky-bro/blog-src/commit/846a58ea01eb305f673bede120f1131dd683bd75" title="fix error">fix error - 846a58e</a>)
+        February 10, 2021
+        (<a href="https://github.com/sky-bro/blog-src/commit/8a7bfecb52d3e66fe385bb0001b91334ed43f470" title="get a valid path">get a valid path - 8a7bfec</a>)
     </span>
   </p>
   <p class="copyright-item">
@@ -2801,6 +2863,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a href="#description">description</a></li>
         <li><a href="#solution-to-acwing-01背包问题">solution to acwing: 01背包问题</a></li>
         <li><a href="#count-ways--check-valid-way-exists">count ways / check valid way exists</a></li>
+        <li><a href="#get-a-valid-path">get a valid path</a></li>
       </ul>
     </li>
     <li><a href="#unbounded-knapsack-problem">unbounded knapsack problem</a>
