@@ -65,6 +65,51 @@
       </item>
       
       <item>
+        <title>Binary Indexed Tree, or Fenwick Tree</title>
+        <link>https://sky-bro.github.io/en/posts/binary-indexed-tree-or-fenwick-tree/</link>
+        <pubDate>Wed, 20 Jan 2021 14:42:38 +0800</pubDate>
+        <author>sky_io@outlook.com (Kyle)</author>
+        <atom:modified>Mon, 22 Feb 2021 18:55:27 +0800</atom:modified>
+        <guid>https://sky-bro.github.io/en/posts/binary-indexed-tree-or-fenwick-tree/</guid>
+        <description>&lt;p&gt;BIT can be used to compute the prefix &lt;strong&gt;sum&lt;/strong&gt; of an array in $log(n)$ time and takes only $O(n)$ space.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/sky-bro/AC/tree/master/Algorithms/BIT&#34;&gt;source code&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+        
+        <dc:creator>&lt;a href=&#34;https://sky-bro.github.io&#34; class=&#34;theme-link&#34;&gt;Kyle&lt;/a&gt;</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>BIT</category>
+            
+          
+            
+              <category>Fenwick</category>
+            
+          
+            
+              <category>Tree</category>
+            
+          
+        
+        
+          
+            
+              <category>Data Structure &amp; Algorithm</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
+      
+      <item>
         <title>Matrix Fast Pow</title>
         <link>https://sky-bro.github.io/en/posts/matrix-fast-pow/</link>
         <pubDate>Wed, 20 Jan 2021 13:22:22 +0800</pubDate>
