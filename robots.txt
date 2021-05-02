@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://sky-bro.github.io/sitemap.xml
+Sitemap: https://k4i.top/sitemap.xml
