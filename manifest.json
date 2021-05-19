@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "sky's blog",
-  "short_name": "sky's",
+  "name": "k4i's blog",
+  "short_name": "k4i's",
   "version": "1.0.0",
   "default_locale": "en",
-  "description": "This is sky's blog",
-  "start_url": "https://sky-bro.github.io/",
+  "description": "This is k4i's blog",
+  "start_url": "https://k4i.top/",
   "icons": [
     {
       "src": "favicon/favicon-16x16.png",
