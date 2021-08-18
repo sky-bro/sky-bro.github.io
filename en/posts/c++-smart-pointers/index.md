@@ -64,6 +64,8 @@ unique_ptr is move-only (no copy constructor - deleted), because this ownership 
 
 If you really need to transfer the ownership of this resource to another pointer, `move` it.
 
+Usually the responsibility is simply 'to call delete'.
+
 ### Example usage
 
 There're two situations:
@@ -125,13 +127,71 @@ class my_unique_ptr {
 
 > Item
 
-### Implement a shared_ptr (simplified)
+### weak_ptr
+
+it allows you to locate an object if it’s still around, but doesn’t keep it around if nothing else needs it.
+
+### enable_shared_from_this
 
 ```c++
+class C: public enable_shared_from_this<C> {
+    public:
+    void print() {
+        cout << "C::print" << endl;
+    }
+    ~C() {
+        cout << "C destructed!" << endl;
+    }
+};
 
+int main(int argc, char const *argv[])
+{
+    make_shared<C>()->print();
+    cout << make_shared<C>()->shared_from_this().use_count() << endl; // 2
+    cout << "done!" << endl;
+}
 ```
 
-## weak_ptr
+### Implement a simple shared_ptr
+
+```c++
+template <typename T>
+class my_shared_ptr {
+ private:
+  T* ptr;
+  int* cnt; // reference count
+
+ public:
+  my_shared_ptr(T* p) : ptr(p), cnt(new int(1)) {}
+  my_shared_ptr(const my_shared_ptr<T>& other)
+      : ptr(other.ptr), cnt(other.cnt) {
+    ++(*cnt);
+  }
+  my_shared_ptr<T>& operator=(const my_shared_ptr<T>& other) {
+    if (ptr != other.ptr) {
+      if (--(*cnt) == 0) {
+        delete ptr;
+        delete cnt;
+      }
+      ptr = other.ptr;
+      cnt = other.cnt;
+      ++(*cnt);
+    }
+    return *this;
+  }
+  T* operator->() { return ptr; }
+  T& operator*() { return *ptr; }
+  int getcnt() { return *cnt; }
+  ~my_shared_ptr() {
+    if (--(*cnt) == 0) {
+      delete ptr;
+      ptr = nullptr;
+      delete cnt;
+      cnt = nullptr;
+    }
+  }
+};
+```
 
 ## use make_\* to create smart pointers
 
@@ -177,7 +237,62 @@ static unique_library_ptr make_library(const char * filename, int flags)
 }
 ```
 
-## enable_shared_from_this
+## inheritance
+
+shared_ptr
+
+```c++
+class A {
+  int x;
+};
+
+class A2 {
+  int x;
+};
+
+class B : public A, public A2 {};
+
+int main(int argc, char const *argv[]) {
+  shared_ptr<B> ptrB = make_shared<B>();
+  // 0x55b4e10ecf20
+  cout << ptrB.get() << endl;
+  shared_ptr<A2> ptrA = ptrB;
+  // 0x55b4e10ecf24
+  cout << ptrA.get() << endl;
+  return 0;
+}
+```
+
+unique_ptr
+
+```c++
+class A {
+  int x;
+};
+
+class A2 {
+  int x;
+};
+
+class B : public A, public A2 {};
+
+int main(int argc, char const *argv[]) {
+  unique_ptr<B> ptrB = make_unique<B>();
+  cout << ptrB.get() << endl;
+  // free(): invalid pointer
+  // unique_ptr<A2> ptrA = move(ptrB);
+  unique_ptr<A> ptrA = move(ptrB);
+  cout << ptrA.get() << endl;
+  return 0;
+}
+```
+
+## Rules of thumb
+
+* treat smart pointers just like raw pointer types
+  * pass by value
+  * return by value (of course)
+  * passing a pointer by reference is usually a code smell, same goes for smart pointers
 
 ## Refs
 

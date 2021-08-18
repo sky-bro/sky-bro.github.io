@@ -185,7 +185,7 @@ kimbie
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Jun 10, 2021 </time>
 &nbsp;&#183;&nbsp; <time class=single__info title="Modified At"> 📝&nbsp;Aug 17, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;5&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;6&nbsp;min read </span>
 &nbsp;&#183;&nbsp; <span class=single__info title="WRITTEN BY">🦂&nbsp;<a href=https://k4i.top class=theme-link>k4i</a></span>
 <span class=single__info>
 &#183; 👀<span id=busuanzi_value_page_pv>...</span> views
@@ -291,6 +291,7 @@ So there are many usage restrictions (you can only move it, cannot actually copy
 </blockquote>
 <p>unique_ptr is move-only (no copy constructor - deleted), because this ownership is unique / for only one object.</p>
 <p>If you really need to transfer the ownership of this resource to another pointer, <code>move</code> it.</p>
+<p>Usually the responsibility is simply &lsquo;to call delete&rsquo;.</p>
 <h3 id=example-usage>Example usage</h3>
 <p>There&rsquo;re two situations:</p>
 <ul>
@@ -398,17 +399,127 @@ So there are many usage restrictions (you can only move it, cannot actually copy
 <blockquote>
 <p>Item</p>
 </blockquote>
-<h3 id=implement-a-shared_ptr-simplified>Implement a shared_ptr (simplified)</h3>
+<h3 id=weak_ptr>weak_ptr</h3>
+<p>it allows you to locate an object if it’s still around, but doesn’t keep it around if nothing else needs it.</p>
+<h3 id=enable_shared_from_this>enable_shared_from_this</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++>
+<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=k>class</span> <span class=nc>C</span><span class=o>:</span> <span class=k>public</span> <span class=n>enable_shared_from_this</span><span class=o>&lt;</span><span class=n>C</span><span class=o>&gt;</span> <span class=p>{</span>
+    <span class=k>public</span><span class=o>:</span>
+    <span class=kt>void</span> <span class=n>print</span><span class=p>()</span> <span class=p>{</span>
+        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;C::print&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=o>~</span><span class=n>C</span><span class=p>()</span> <span class=p>{</span>
+        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;C destructed!&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+    <span class=p>}</span>
+<span class=p>};</span>
+
+<span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=k>const</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span>
+<span class=p>{</span>
+    <span class=n>make_shared</span><span class=o>&lt;</span><span class=n>C</span><span class=o>&gt;</span><span class=p>()</span><span class=o>-&gt;</span><span class=n>print</span><span class=p>();</span>
+    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>make_shared</span><span class=o>&lt;</span><span class=n>C</span><span class=o>&gt;</span><span class=p>()</span><span class=o>-&gt;</span><span class=n>shared_from_this</span><span class=p>().</span><span class=n>use_count</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span> <span class=c1>// 2
+</span><span class=c1></span>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;done!&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+<span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=weak_ptr>weak_ptr</h2>
-<h2 id=use-make_-to-create-smart-pointers>use make_* to create smart pointers</h2>
+</div><h3 id=implement-a-simple-shared_ptr>Implement a simple shared_ptr</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=k>template</span> <span class=o>&lt;</span><span class=k>typename</span> <span class=n>T</span><span class=o>&gt;</span>
+<span class=k>class</span> <span class=nc>my_shared_ptr</span> <span class=p>{</span>
+ <span class=k>private</span><span class=o>:</span>
+  <span class=n>T</span><span class=o>*</span> <span class=n>ptr</span><span class=p>;</span>
+  <span class=kt>int</span><span class=o>*</span> <span class=n>cnt</span><span class=p>;</span> <span class=c1>// reference count
+</span><span class=c1></span>
+ <span class=k>public</span><span class=o>:</span>
+  <span class=n>my_shared_ptr</span><span class=p>(</span><span class=n>T</span><span class=o>*</span> <span class=n>p</span><span class=p>)</span> <span class=o>:</span> <span class=n>ptr</span><span class=p>(</span><span class=n>p</span><span class=p>),</span> <span class=n>cnt</span><span class=p>(</span><span class=k>new</span> <span class=kt>int</span><span class=p>(</span><span class=mi>1</span><span class=p>))</span> <span class=p>{}</span>
+  <span class=n>my_shared_ptr</span><span class=p>(</span><span class=k>const</span> <span class=n>my_shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span> <span class=n>other</span><span class=p>)</span>
+      <span class=o>:</span> <span class=n>ptr</span><span class=p>(</span><span class=n>other</span><span class=p>.</span><span class=n>ptr</span><span class=p>),</span> <span class=n>cnt</span><span class=p>(</span><span class=n>other</span><span class=p>.</span><span class=n>cnt</span><span class=p>)</span> <span class=p>{</span>
+    <span class=o>++</span><span class=p>(</span><span class=o>*</span><span class=n>cnt</span><span class=p>);</span>
+  <span class=p>}</span>
+  <span class=n>my_shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span> <span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=k>const</span> <span class=n>my_shared_ptr</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;&amp;</span> <span class=n>other</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>ptr</span> <span class=o>!=</span> <span class=n>other</span><span class=p>.</span><span class=n>ptr</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>if</span> <span class=p>(</span><span class=o>--</span><span class=p>(</span><span class=o>*</span><span class=n>cnt</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+        <span class=k>delete</span> <span class=n>ptr</span><span class=p>;</span>
+        <span class=k>delete</span> <span class=n>cnt</span><span class=p>;</span>
+      <span class=p>}</span>
+      <span class=n>ptr</span> <span class=o>=</span> <span class=n>other</span><span class=p>.</span><span class=n>ptr</span><span class=p>;</span>
+      <span class=n>cnt</span> <span class=o>=</span> <span class=n>other</span><span class=p>.</span><span class=n>cnt</span><span class=p>;</span>
+      <span class=o>++</span><span class=p>(</span><span class=o>*</span><span class=n>cnt</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>return</span> <span class=o>*</span><span class=k>this</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=n>T</span><span class=o>*</span> <span class=k>operator</span><span class=o>-&gt;</span><span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=n>ptr</span><span class=p>;</span> <span class=p>}</span>
+  <span class=n>T</span><span class=o>&amp;</span> <span class=k>operator</span><span class=o>*</span><span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=o>*</span><span class=n>ptr</span><span class=p>;</span> <span class=p>}</span>
+  <span class=kt>int</span> <span class=nf>getcnt</span><span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=o>*</span><span class=n>cnt</span><span class=p>;</span> <span class=p>}</span>
+  <span class=o>~</span><span class=n>my_shared_ptr</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=o>--</span><span class=p>(</span><span class=o>*</span><span class=n>cnt</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>delete</span> <span class=n>ptr</span><span class=p>;</span>
+      <span class=n>ptr</span> <span class=o>=</span> <span class=k>nullptr</span><span class=p>;</span>
+      <span class=k>delete</span> <span class=n>cnt</span><span class=p>;</span>
+      <span class=n>cnt</span> <span class=o>=</span> <span class=k>nullptr</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=use-make_-to-create-smart-pointers>use make_* to create smart pointers</h2>
 <h2 id=custom-deleter>custom deleter</h2>
 <p>Smart Pointers allow you to write your own custom deleters (a function), instead of using the default deleter inside which uses <code>delete p;</code> or <code>delete [] p;</code>.</p>
 <p>Using <code>make_*</code> to create smart pointers is a good practice, but when you use custom deleters, it means that you&rsquo;ll need to create the raw pointer yourself too.</p>
@@ -471,7 +582,107 @@ So there are many usage restrictions (you can only move it, cannot actually copy
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=enable_shared_from_this>enable_shared_from_this</h2>
+</div><h2 id=inheritance>inheritance</h2>
+<p>shared_ptr</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=k>class</span> <span class=nc>A</span> <span class=p>{</span>
+  <span class=kt>int</span> <span class=n>x</span><span class=p>;</span>
+<span class=p>};</span>
+
+<span class=k>class</span> <span class=nc>A2</span> <span class=p>{</span>
+  <span class=kt>int</span> <span class=n>x</span><span class=p>;</span>
+<span class=p>};</span>
+
+<span class=k>class</span> <span class=nc>B</span> <span class=o>:</span> <span class=k>public</span> <span class=n>A</span><span class=p>,</span> <span class=k>public</span> <span class=n>A2</span> <span class=p>{};</span>
+
+<span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=k>const</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
+  <span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>B</span><span class=o>&gt;</span> <span class=n>ptrB</span> <span class=o>=</span> <span class=n>make_shared</span><span class=o>&lt;</span><span class=n>B</span><span class=o>&gt;</span><span class=p>();</span>
+  <span class=c1>// 0x55b4e10ecf20
+</span><span class=c1></span>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>ptrB</span><span class=p>.</span><span class=n>get</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+  <span class=n>shared_ptr</span><span class=o>&lt;</span><span class=n>A2</span><span class=o>&gt;</span> <span class=n>ptrA</span> <span class=o>=</span> <span class=n>ptrB</span><span class=p>;</span>
+  <span class=c1>// 0x55b4e10ecf24
+</span><span class=c1></span>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>ptrA</span><span class=p>.</span><span class=n>get</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>unique_ptr</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=k>class</span> <span class=nc>A</span> <span class=p>{</span>
+  <span class=kt>int</span> <span class=n>x</span><span class=p>;</span>
+<span class=p>};</span>
+
+<span class=k>class</span> <span class=nc>A2</span> <span class=p>{</span>
+  <span class=kt>int</span> <span class=n>x</span><span class=p>;</span>
+<span class=p>};</span>
+
+<span class=k>class</span> <span class=nc>B</span> <span class=o>:</span> <span class=k>public</span> <span class=n>A</span><span class=p>,</span> <span class=k>public</span> <span class=n>A2</span> <span class=p>{};</span>
+
+<span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=k>const</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
+  <span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>B</span><span class=o>&gt;</span> <span class=n>ptrB</span> <span class=o>=</span> <span class=n>make_unique</span><span class=o>&lt;</span><span class=n>B</span><span class=o>&gt;</span><span class=p>();</span>
+  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>ptrB</span><span class=p>.</span><span class=n>get</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+  <span class=c1>// free(): invalid pointer
+</span><span class=c1></span>  <span class=c1>// unique_ptr&lt;A2&gt; ptrA = move(ptrB);
+</span><span class=c1></span>  <span class=n>unique_ptr</span><span class=o>&lt;</span><span class=n>A</span><span class=o>&gt;</span> <span class=n>ptrA</span> <span class=o>=</span> <span class=n>move</span><span class=p>(</span><span class=n>ptrB</span><span class=p>);</span>
+  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>ptrA</span><span class=p>.</span><span class=n>get</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=rules-of-thumb>Rules of thumb</h2>
+<ul>
+<li>treat smart pointers just like raw pointer types
+<ul>
+<li>pass by value</li>
+<li>return by value (of course)</li>
+<li>passing a pointer by reference is usually a code smell, same goes for smart pointers</li>
+</ul>
+</li>
+</ul>
 <h2 id=refs>Refs</h2>
 <ul>
 <li><a href=https://codereview.stackexchange.com/questions/4679/shared-ptr-and-file-for-wrapping-cstdio-update-also-dlfcn-h>shared_ptr and FILE for wrapping cstdio (update: also dlfcn.h)</a></li>
@@ -505,7 +716,7 @@ Share on
 <span class=item-title>LastMod</span>
 <span class=item-content>
 August 17, 2021
-(<a href=https://github.com/sky-bro/blog-src/commit/b44cbc09e376c8dfa4230e3d77cccdd86095229b title="add post: Smart Pointers">add post: Smart Pointers - b44cbc0</a>)
+(<a href=https://github.com/sky-bro/blog-src/commit/47c24383de82b4cb68d8a0a12c6edd55caba7fd3 title="add post: Smart Pointers">add post: Smart Pointers - 47c2438</a>)
 </span>
 </p>
 <p class=copyright-item>
@@ -636,13 +847,15 @@ See Also
 </li>
 <li><a href=#shared_ptr>shared_ptr</a>
 <ul>
-<li><a href=#implement-a-shared_ptr-simplified>Implement a shared_ptr (simplified)</a></li>
+<li><a href=#weak_ptr>weak_ptr</a></li>
+<li><a href=#enable_shared_from_this>enable_shared_from_this</a></li>
+<li><a href=#implement-a-simple-shared_ptr>Implement a simple shared_ptr</a></li>
 </ul>
 </li>
-<li><a href=#weak_ptr>weak_ptr</a></li>
 <li><a href=#use-make_-to-create-smart-pointers>use make_* to create smart pointers</a></li>
 <li><a href=#custom-deleter>custom deleter</a></li>
-<li><a href=#enable_shared_from_this>enable_shared_from_this</a></li>
+<li><a href=#inheritance>inheritance</a></li>
+<li><a href=#rules-of-thumb>Rules of thumb</a></li>
 <li><a href=#refs>Refs</a></li>
 </ul>
 </nav>
