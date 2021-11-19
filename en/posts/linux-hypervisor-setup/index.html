@@ -26,7 +26,7 @@
 <meta property="og:url" content="https://k4i.top/en/posts/linux-hypervisor-setup/">
 <meta property="og:type" content="article">
 <meta property="og:description" content>
-<meta name=generator content="Hugo 0.87.0">
+<meta name=generator content="Hugo 0.89.4">
 <meta name=msapplication-TileColor content="#fff">
 <meta name=theme-color content="#fff">
 <meta name=msapplication-navbutton-color content="#fff">
@@ -259,7 +259,7 @@ vim ~/.config/libvirt/libvirt.conf <span class=c1># uncomment or add: uri_defaul
 </div>
 </div><p>To solve the second problem, we can add a rule to <a href=https://wiki.archlinux.org/index.php/Polkit>polkit</a> to allow our group (<code>wheel</code> &ndash; administrator group) to use virt-manager or vish without being asked for password.</p>
 <p>edit <code>/etc/polkit-1/rules.d/xxx.rules</code>, your path may be different.</p>
-<pre><code class=language-rules data-lang=rules>/* Allow users in wheel group to manage the libvirt daemon without authentication */
+<pre tabindex=0><code class=language-rules data-lang=rules>/* Allow users in wheel group to manage the libvirt daemon without authentication */
 polkit.addRule(function(action, subject) {
     if (action.id == &quot;org.libvirt.unix.manage&quot; &amp;&amp;
         subject.isInGroup(&quot;wheel&quot;)) {
