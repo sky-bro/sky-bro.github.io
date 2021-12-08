@@ -6,9 +6,9 @@ So instead of editing `.md` files under `content` folder, now I write `.org` fil
 
 ## Create new post {#create-new-post}
 
-Invoking org-capture-templates function, and choose hugo post template, as shown in Figure [1](#orgd214ac6)
+Invoking org-capture-templates function, and choose hugo post template, as shown in Figure [1](#orga45c0a9)
 
-<a id="orgd214ac6"></a>
+<a id="orga45c0a9"></a>
 
 {{< figure src="/images/posts/Writing-Guide-Org/org-capture-template-ox-hugo.gif" caption="Figure 1: creating new post with org-capture-template" >}}
 
@@ -45,9 +45,9 @@ Code block with
 
 Store all the images under `$HUGO_BASE_DIR/static/` folder (except some generated images), so just include them using relative path from the org file.
 
-You can add caption and name (for referencing purpose: as in figure [2](#orgb7789c4)) to an image.
+You can add caption and name (for referencing purpose: as in figure [2](#orgaa7cee8)) to an image.
 
-<a id="orgb7789c4"></a>
+<a id="orgaa7cee8"></a>
 
 {{< figure src="/images/icons/gopher001.png" caption="Figure 2: Gogpher" >}}
 

@@ -4,10 +4,11 @@
 
 ### Packages {#packages}
 
-every go programs is made up of packages, entry function: _func main()_
+every go program is made up of packages, and it starts from: _package main_,
+_func main()_
 
-import statements could be grouped together using parenthesis ("factored"
-import statements)
+packages could be imported, and grouped together using parenthesis
+("factored" import statements)
 
 ```go
 import "fmt"
@@ -23,8 +24,8 @@ import (
 )
 ```
 
-Capitalized names are exported, when importing a package, you can only refer
-its exported names.
+Only capitalized names are exported, therefore after importing a package, you
+can only reference its exported names.
 
 
 ### Basic Types {#basic-types}
@@ -71,20 +72,24 @@ bits on 64-bit systems.
 
 ### Variables {#variables}
 
-_var_ statement declares a list of variables, the type comes last. A _var_
-statement can be at package or function level.
+Two ways to declare a variable:
 
-A var declaration can include initializers, if an initializer is present, the
-type can be omitted.
+-   _var_
+    -   with or without initializer (implicitly initialized with zero value)
+    -   package or function scope
+-   `:=` short assignment statements
+    -   only function scope
+    -   must have initializers
 
-inside a function, the `:=` short assignment statement can be used instead of
-a `var` declaration with implicit type
+With an explicit initializer, no need to provide the type of the variable.
 
-when the right hand side of the declaration is typed, the new variable is of
-that same type.
+Apart from variables, there are constants, which:
 
-with `const` keyword, you declare constants. Constants cannot be declared
-using the `:=` syntax.
+-   can be declared in package or function level
+-   must have explicit initializers (also constants, value known at compile time)
+-   cannot be reassigned after initialization.
+
+Multiple _var_ or _const_ statements could be grouped together like _imports_.
 
 ```go
 // with initializer
@@ -203,11 +208,12 @@ u := uint(f)
 
 ### For {#for}
 
-Go only has for loop, no while loop, has three components:
+Go only has for loop, no while loop, each for loop has three basic
+components:
 
 -   init statement
 -   condition statement
--   post statement
+-   post statement (execute after each iteration)
 
 no parentheses, but curly braces `{}` are always required.
 
@@ -263,13 +269,8 @@ if i := 0; i != 0 {
 ### Switch {#switch}
 
 -   shorter way to write a sequence of `if-else` statements.
-
 -   no break or default fallthrough in switch
-
--   cases need not be constants
-
--   values need not to be integers (but types must match)
-
+-   cases do need not to be constants or integers.
 -   also support init statements like `if` and `for`.
 
 <!--listend-->
@@ -491,7 +492,26 @@ b = b[1:]              // len(b)=4, cap(b)=4
 
 appending to a slice
 
-if the backing array is to small to fit all the given values a bigger array
+```go
+func printSlice(s []int) {
+  fmt.Printf("len=%d, cap=%d, addr=%p, %v\n", len(s), cap(s), &s, s)
+}
+
+func main() {
+  var s []int
+  printSlice(s) // len=0, cap=0
+  s = append(s, 0)
+  printSlice(s) // len=1, cap=1
+  s = append(s, 1)
+  printSlice(s) // len=2, cap=2
+  s = append(s, 1)
+  printSlice(s) // len=3, cap=4
+  s = append(s, 1, 2, 3)
+  printSlice(s) // len=6, cap=8
+}
+```
+
+if the backing array is too small to fit all the given values a bigger array
 will be allocated. The returned slice will point to the newly allocated
 array.
 
@@ -866,6 +886,7 @@ value.
 -   "" (the empty string) for the strings
 -   `{<default field values>}` for structs
 -   nil for slice (len and cap of a nil slice is 0)
+-   nil for maps
 -   nil for interfaces
 -   nil for pointers
 

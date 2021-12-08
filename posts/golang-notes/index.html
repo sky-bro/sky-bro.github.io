@@ -17,7 +17,7 @@
 <meta name=description content="This is my notes on learning golang.">
 <meta name=keywords content="golang">
 <meta name=created content="2021-11-25T00:30:00+0800">
-<meta name=modified content="2021-11-25T00:39:38+0800">
+<meta name=modified content="2021-12-09T00:25:08+0800">
 <meta property="article:published_time" content="2021-11-25T00:30:00+0800">
 <meta name=author content="<a href=&#34;https://k4i.top&#34; class=&#34;theme-link&#34;>k4i</a>">
 <meta property="article:author" content="https://k4i.top/posts/golang-notes/@<a href=&#34;https://k4i.top&#34; class=&#34;theme-link&#34;>k4i</a>">
@@ -26,6 +26,12 @@
 <meta property="og:url" content="https://k4i.top/posts/golang-notes/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="This is my notes on learning golang.">
+<meta property="og:image" content="https://k4i.top/images/icons/gopher001.png">
+<meta property="og:image:url" content="https://k4i.top/images/icons/gopher001.png">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:app:name:iphone content="k4i's blog">
+<meta property="twitter:title" content="Golang Notes">
+<meta property="twitter:description" content="This is my notes on learning golang.">
 <meta name=generator content="Hugo 0.89.4">
 <meta name=msapplication-TileColor content="#fff">
 <meta name=theme-color content="#fff">
@@ -36,7 +42,7 @@
 <link rel=apple-touch-icon href=/apple-touch-icon.png>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Golang Notes","datePublished":"2021-11-25T00:30:00+08:00","dateModified":"2021-11-25T00:39:38+08:00","url":"https://k4i.top/posts/golang-notes/","description":"This is my notes on learning golang.","keywords":["golang"],"author":{"@type":"Person","name":"\u003ca href=\"https://k4i.top\" class=\"theme-link\"\u003ek4i\u003c/a\u003e"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://k4i.top"},"publisher":{"@type":"Organization","name":"k4i's blog","url":"https://k4i.top"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Golang Notes","datePublished":"2021-11-25T00:30:00+08:00","dateModified":"2021-12-09T00:25:08+08:00","url":"https://k4i.top/posts/golang-notes/","description":"This is my notes on learning golang.","keywords":["golang"],"image":"https://k4i.top/images/icons/gopher001.png","author":{"@type":"Person","name":"\u003ca href=\"https://k4i.top\" class=\"theme-link\"\u003ek4i\u003c/a\u003e"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://k4i.top"},"publisher":{"@type":"Organization","name":"k4i's blog","url":"https://k4i.top"}}</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-163569254-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 <script>var baiduAnalyticsId=JSON.parse('"ca6f8344808d4544e0b64df2d9622ec0"'),_hmt=_hmt||[];(function(){var a=document.createElement("script"),b;a.src="https://hm.baidu.com/hm.js?"+baiduAnalyticsId,b=document.getElementsByTagName("script")[0],b.parentNode.insertBefore(a,b)})()</script>
@@ -176,6 +182,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 25, 2021 </time>
+&nbsp;&#183;&nbsp; <time class=single__info title="Modified At"> 📝&nbsp;Dec 9, 2021 </time>
 &nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;21&nbsp;min read </span>
 <span class=single__info>
 &#183; 👀<span id=busuanzi_value_page_pv>...</span> views
@@ -189,9 +196,10 @@ kimbie
 <article class=single__contents data-dir=ltr data-ani=true>
 <h2 id=basics>Basics</h2>
 <h3 id=packages>Packages</h3>
-<p>every go programs is made up of packages, entry function: <em>func main()</em></p>
-<p>import statements could be grouped together using parenthesis (&ldquo;factored&rdquo;<br>
-import statements)</p>
+<p>every go program is made up of packages, and it starts from: <em>package main</em>,<br>
+<em>func main()</em></p>
+<p>packages could be imported, and grouped together using parenthesis<br>
+(&ldquo;factored&rdquo; import statements)</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -217,8 +225,8 @@ import statements)</p>
 <span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Capitalized names are exported, when importing a package, you can only refer<br>
-its exported names.</p>
+</div><p>Only capitalized names are exported, therefore after importing a package, you<br>
+can only reference its exported names.</p>
 <h3 id=basic-types>Basic Types</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -295,16 +303,29 @@ its exported names.</p>
 </div><p>the int, uint, and uintptr types are usually 32 bits on 32-bit systems and 64<br>
 bits on 64-bit systems.</p>
 <h3 id=variables>Variables</h3>
-<p><em>var</em> statement declares a list of variables, the type comes last. A <em>var</em><br>
-statement can be at package or function level.</p>
-<p>A var declaration can include initializers, if an initializer is present, the<br>
-type can be omitted.</p>
-<p>inside a function, the <code>:=</code> short assignment statement can be used instead of<br>
-a <code>var</code> declaration with implicit type</p>
-<p>when the right hand side of the declaration is typed, the new variable is of<br>
-that same type.</p>
-<p>with <code>const</code> keyword, you declare constants. Constants cannot be declared<br>
-using the <code>:=</code> syntax.</p>
+<p>Two ways to declare a variable:</p>
+<ul>
+<li><em>var</em>
+<ul>
+<li>with or without initializer (implicitly initialized with zero value)</li>
+<li>package or function scope</li>
+</ul>
+</li>
+<li><code>:=</code> short assignment statements
+<ul>
+<li>only function scope</li>
+<li>must have initializers</li>
+</ul>
+</li>
+</ul>
+<p>With an explicit initializer, no need to provide the type of the variable.</p>
+<p>Apart from variables, there are constants, which:</p>
+<ul>
+<li>can be declared in package or function level</li>
+<li>must have explicit initializers (also constants, value known at compile time)</li>
+<li>cannot be reassigned after initialization.</li>
+</ul>
+<p>Multiple <em>var</em> or <em>const</em> statements could be grouped together like <em>imports</em>.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -485,11 +506,12 @@ receivers, but not a mixture of both.</p>
 </div><p><strong><strong>no implicit conversion in go</strong></strong></p>
 <h2 id=control-flow>Control FLow</h2>
 <h3 id=for>For</h3>
-<p>Go only has for loop, no while loop, has three components:</p>
+<p>Go only has for loop, no while loop, each for loop has three basic<br>
+components:</p>
 <ul>
 <li>init statement</li>
 <li>condition statement</li>
-<li>post statement</li>
+<li>post statement (execute after each iteration)</li>
 </ul>
 <p>no parentheses, but curly braces <code>{}</code> are always required.</p>
 <div class=highlight><div class=chroma>
@@ -572,21 +594,10 @@ nothing left, semicolon can be omitted.</p>
 </div>
 </div><h3 id=switch>Switch</h3>
 <ul>
-<li>
-<p>shorter way to write a sequence of <code>if-else</code> statements.</p>
-</li>
-<li>
-<p>no break or default fallthrough in switch</p>
-</li>
-<li>
-<p>cases need not be constants</p>
-</li>
-<li>
-<p>values need not to be integers (but types must match)</p>
-</li>
-<li>
-<p>also support init statements like <code>if</code> and <code>for</code>.</p>
-</li>
+<li>shorter way to write a sequence of <code>if-else</code> statements.</li>
+<li>no break or default fallthrough in switch</li>
+<li>cases do need not to be constants or integers.</li>
+<li>also support init statements like <code>if</code> and <code>for</code>.</li>
 </ul>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -928,7 +939,45 @@ instead (<em>0</em> for low, <em>len</em> for high)</p>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>appending to a slice</p>
-<p>if the backing array is to small to fit all the given values a bigger array<br>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>printSlice</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;len=%d, cap=%d, addr=%p, %v\n&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>),</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>s</span><span class=p>),</span> <span class=o>&amp;</span><span class=nx>s</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=kd>var</span> <span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span>
+  <span class=nf>printSlice</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// len=0, cap=0
+</span><span class=c1></span>  <span class=nx>s</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+  <span class=nf>printSlice</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// len=1, cap=1
+</span><span class=c1></span>  <span class=nx>s</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+  <span class=nf>printSlice</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// len=2, cap=2
+</span><span class=c1></span>  <span class=nx>s</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+  <span class=nf>printSlice</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// len=3, cap=4
+</span><span class=c1></span>  <span class=nx>s</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>
+  <span class=nf>printSlice</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// len=6, cap=8
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>if the backing array is too small to fit all the given values a bigger array<br>
 will be allocated. The returned slice will point to the newly allocated<br>
 array.</p>
 <p>range</p>
@@ -1601,6 +1650,7 @@ value.</p>
 <li>"" (the empty string) for the strings</li>
 <li><code>{&lt;default field values>}</code> for structs</li>
 <li>nil for slice (len and cap of a nil slice is 0)</li>
+<li>nil for maps</li>
 <li>nil for interfaces</li>
 <li>nil for pointers</li>
 </ul>
@@ -2495,8 +2545,8 @@ Share on
 <p class=copyright-item>
 <span class=item-title>LastMod</span>
 <span class=item-content>
-November 25, 2021
-(<a href=https://github.com/sky-bro/blog-src/commit/847915e0f6114198def05b1bb2f39420d11bd361 title="add Post: golang notes (en)">add Post: golang notes (en) - 847915e</a>)
+December 9, 2021
+(<a href=https://github.com/sky-bro/blog-src/commit/d7cc7960a89325067473fc61c689ea61e0cb6779 title="add post: terminal & shell, use fixed reference ids">add post: terminal & shell, use fixed reference ids - d7cc796</a>)
 </span>
 </p>
 <p class=copyright-item>

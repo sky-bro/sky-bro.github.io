@@ -204,4 +204,28 @@ add this in your front matter
 #+OPTIONS: prop:t
 ```
 
+
+### fixed reference ids {#fixed-reference-ids}
+
+Org will set random ids for internal links, sometimes we want them to be fixed.
+
+There are two solutions, one is to seed the random number generater[^fn:2].
+
+```elisp
+(defun seed-random-generator (_) (random "a fixed and unchanging string"))
+(add-hook 'org-export-before-processing-hook #'seed-random-generator)
+```
+
+And another way is to override the `org-export-new-reference`[^fn:3] function:
+
+```elisp
+(defun org-export-deterministic-reference (references)
+  (let ((new (length references)))
+    (while (rassq new references) (setq new (+ new 1)))
+    new))
+(advice-add #'org-export-new-reference :override #'org-export-deterministic-reference)
+```
+
 [^fn:1]: [org mode official site](https://orgmode.org/)
+[^fn:2]: [org export: create repeatable labels](https://emacs.stackexchange.com/questions/58285/orgmode-latex-export-how-to-create-repeatable-labels)
+[^fn:3]: [Export to HTML with useful, non-random IDs and anchors](https://www.reddit.com/r/orgmode/comments/aagmfh/export%5Fto%5Fhtml%5Fwith%5Fuseful%5Fnonrandom%5Fids%5Fand/)
