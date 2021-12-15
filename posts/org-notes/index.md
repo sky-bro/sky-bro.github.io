@@ -29,6 +29,23 @@ will be rendered as:
 -   ~~strike through~~
 
 
+## Headings {#headings}
+
+```org
+* H1
+** H2
+*** H3
+**** H4
+```
+
+-   `C-RET`: new heading
+-   `M-RET`: new heading by spliting current heading
+-   `C-S-RET`: new heading, but with TODO
+-   `M-S-RET`: new heading by spliting current heading, but with TODO
+-   `M-LEFT/RIGHT`: Promote/Demote current subtree
+-   `M-UP/DOWN`: Move/swap subtree up/down
+
+
 ## Code {#code}
 
 Offers two types of source code:
