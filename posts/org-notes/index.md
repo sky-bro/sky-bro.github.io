@@ -245,4 +245,4 @@ And another way is to override the `org-export-new-reference`[^fn:3] function:
 
 [^fn:1]: [org mode official site](https://orgmode.org/)
 [^fn:2]: [org export: create repeatable labels](https://emacs.stackexchange.com/questions/58285/orgmode-latex-export-how-to-create-repeatable-labels)
-[^fn:3]: [Export to HTML with useful, non-random IDs and anchors](https://www.reddit.com/r/orgmode/comments/aagmfh/export%5Fto%5Fhtml%5Fwith%5Fuseful%5Fnonrandom%5Fids%5Fand/)
+[^fn:3]: [Export to HTML with useful, non-random IDs and anchors](https://www.reddit.com/r/orgmode/comments/aagmfh/export_to_html_with_useful_nonrandom_ids_and/)

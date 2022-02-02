@@ -17,7 +17,7 @@ CopyQ[^fn:1] is a clipboard manager with many features.
 -   Custom shortcuts in `Preferences -> Shortcuts` or in `File -> Commands/GlobalShortcuts (press F6 from main window)`
 
 
-## add commands {#add-commands}
+## Add Commands {#add-commands}
 
 You can get many useful commands from CopyQ-Commands[^fn:2], or you can create your own commands following the documentation.
 
@@ -41,7 +41,8 @@ Commands that I use:
 -   `Ctrl-Alt-s`: save as (customized)
 -   `j/k`: next/previous item
 -   `Ctrl-h`: previous tab
--   `l/Enter`: select item
+-   `l/Enter`: copy &amp; paste item
+-   `Ctrl-c`: copy item
 -   `ESC/Ctrl-[`: close window
 
 [^fn:1]: [CopyQ](https://github.com/hluk/CopyQ), a clipboard manager with advanced features.

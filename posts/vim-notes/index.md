@@ -24,7 +24,7 @@ _**C-w H/J/K/L**_
 _**C-w +/-**_
 : inc/dec height, can prepend with a number
 
-_**C-w >/<**_
+_**C-w &gt;/&lt;**_
 : inc/dec width, can prepend with a number
 
 
@@ -42,6 +42,19 @@ _**C-i**_
 -   `zc`: fold/close current tree
 -   `zo`: unfold/open current tree
 -   `za`: toggle fold
+
+
+## Search and replace {#search-and-replace}
+
+<https://vim.fandom.com/wiki/Search_and_replace>
+single buffer
+
+-   `/pattern`
+-   `?pattern`
+-   `:%s/old/new/g`
+-   `:%s/old/new/gc`
+
+multiple files
 
 
 ## References {#references}

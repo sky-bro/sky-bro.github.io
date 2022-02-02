@@ -24,7 +24,7 @@ Here I also use xcwd[^fn:2] to get my current working directory, so I can launch
 -   `d`: cut/delete
 -   `p`: paste
 -   `o`: sort
--   `.`: filter\_stack ??
+-   `.`: filter_stack ??
 -   `z`: settings
 -   `u`: undo
 -   `M`: linemode
@@ -68,7 +68,7 @@ under `~/.config/ranger/` folder, there are 4 main configuration files:
 -   `%p`: the full pathes of selected files
 
 
-## Rename, Create Files & Folders {#rename-create-files-and-folders}
+## Rename, Create Files &amp; Folders {#rename-create-files-and-folders}
 
 -   `cw`: to rename selected file or files (bulk rename, works great with `:flat`)
 -   `:mkdir`: create directory

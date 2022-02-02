@@ -16,7 +16,8 @@ So in case we break our boot partition, backup it first.
 # === On your android shell (adb shell) ===
 # cd `find /dev/block/platform -type d -name by-name` # mine is /dev/block/platform/soc/1d84000.ufshc/by-name
 # or just
-cd /dev/block/bootdevice/by-name/boot
+# cd /dev/block/by-name/
+cd /dev/block/bootdevice/by-name/
 # store the boot partition to /sdcard/boot.img file
 dd if=boot of=/sdcard/boot.img
 

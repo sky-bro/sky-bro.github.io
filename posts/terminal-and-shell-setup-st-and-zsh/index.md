@@ -109,6 +109,6 @@ Fish-like fast/unobtrusive autosuggestions for zsh.
 [^fn:2]: [Oh My Zsh](https://ohmyz.sh/) is a delightful, open source, community-driven framework for managing your Zsh configuration
 [^fn:3]: [fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder
 [^fn:4]: [Pywal](https://github.com/dylanaraps/pywal) is a tool that generates a color palette from the dominant colors in an image.
-[^fn:5]: use a bare git repository to manage [dotfiles](https://github.com/sky-bro/.dotfiles).
+[^fn:5]: use ~~a bare git repository~~ stow  to manage [my dotfiles](https://github.com/sky-bro/.dotfiles).
 [^fn:6]: [Powerlevel10k](https://github.com/romkatv/powerlevel10k) is a theme for Zsh. It emphasizes speed, flexibility and out-of-the-box experience.
 [^fn:7]: my [wal-feh](https://github.com/sky-bro/.dotfiles/blob/master/bin/wal-feh) script to set wallpaper and color scheme

@@ -6,11 +6,11 @@ So instead of editing `.md` files under `content` folder, now I write `.org` fil
 
 ## Create new post {#create-new-post}
 
-Invoking org-capture-templates function, and choose hugo post template, as shown in Figure [1](#orga45c0a9)
+Invoking org-capture-templates function, and choose hugo post template, as shown in Figure [1](#figure--fig:org-capture-template-ox-hugo)
 
-<a id="orga45c0a9"></a>
+<a id="figure--fig:org-capture-template-ox-hugo"></a>
 
-{{< figure src="/images/posts/Writing-Guide-Org/org-capture-template-ox-hugo.gif" caption="Figure 1: creating new post with org-capture-template" >}}
+{{< figure src="/images/posts/Writing-Guide-Org/org-capture-template-ox-hugo.gif" caption="<span class=\"figure-number\">Figure 1: </span>creating new post with org-capture-template" >}}
 
 
 ## Front matter {#front-matter}
@@ -45,15 +45,16 @@ Code block with
 
 Store all the images under `$HUGO_BASE_DIR/static/` folder (except some generated images), so just include them using relative path from the org file.
 
-You can add caption and name (for referencing purpose: as in figure [2](#orgaa7cee8)) to an image.
+You can add caption and name (for referencing purpose: as in figure [2](#figure--fig:gopher)) to an image.
 
-<a id="orgaa7cee8"></a>
+<a id="figure--fig:gopher"></a>
 
-{{< figure src="/images/icons/gopher001.png" caption="Figure 2: Gogpher" >}}
+{{< figure src="/images/icons/gopher001.png" caption="<span class=\"figure-number\">Figure 2: </span>Gogpher" width="30%" >}}
 
 ```org
 #+CAPTION: Gogpher
 #+NAME: fig:gopher
+#+ATTR_HTML: :width 30%
 [[../static/images/icons/gopher001.png]]
 ```
 
@@ -96,9 +97,9 @@ will be rendered as:
   \end{split}
 \end{equation}
 
-{{< alert theme="warning" >}}
+{{&lt; alert theme="warning" &gt;}}
 It seems that zzo theme does not support math equation referencing and numbering yet?
-{{< /alert >}}
+{{&lt; /alert &gt;}}
 
 
 ## Diagrams {#diagrams}
@@ -106,7 +107,13 @@ It seems that zzo theme does not support math equation referencing and numbering
 
 ### Plantuml {#plantuml}
 
-{{< figure src="/images/posts/Writing-Guide-Org/first.svg" >}}
+```plantuml
+title Authentication Sequence
+
+Alice->Bob: Authentication Request
+note right of Bob: Bob thinks about it
+Bob->Alice: Authentication Response
+```
 
 
 ## revealjs / presentation {#revealjs-presentation}
@@ -114,112 +121,139 @@ It seems that zzo theme does not support math equation referencing and numbering
 
 ## shortcodes {#shortcodes}
 
+to use shortcodes as you do in markdown, put it after `#+html:`. Like this:
+
+```org
+#+html: {{</* gallery dir="/image_dir/" /*/>}}
+```
+
 
 ### Alert {#alert}
 
 You can have alert like this:
 
 ```org
-{{</* alert theme="info" dir="ltr" */>}}
+#+html: {{</* alert theme="info" dir="ltr" */>}}
 theme could be one of: success, info, warning, danger
-{{</* /alert */>}}
+#+html: {{</* /alert */>}}
 ```
 
 {{< alert theme="success" >}}
+
 this is a success.
+
 {{< /alert >}}
 
 {{< alert theme="info" >}}
+
 this is a info.
+
 {{< /alert >}}
 
 {{< alert theme="warning" >}}
+
 this is a warning.
+
 {{< /alert >}}
 
 {{< alert theme="danger" >}}
+
 this is a danger.
+
 {{< /alert >}}
 
 
 ### Notice {#notice}
 
 ```org
-{{</* notice success "This is a success type of notice" */>}}
+#+html: {{</* notice success "This is a success type of notice" */>}}
 notice could be success, info, warning, error.
-{{</* /notice */>}}
+#+html: {{</* /notice */>}}
 ```
 
 {{< notice success "This is a success type of notice" >}}
+
 success notice.
+
 {{< /notice >}}
 
 {{< notice info "This is a info type of notice" >}}
+
 info notice.
+
 {{< /notice >}}
 
 {{< notice warning "This is a warning type of notice" >}}
+
 warning notice.
+
 {{< /notice >}}
 
 {{< notice error "This is a error type of notice" >}}
+
 error notice.
+
 {{< /notice >}}
 
 
 ### Simple box {#simple-box}
 
 ```org
-{{</* box */>}}
+#+html: {{</* box */>}}
 Plain text
-{{</* /box */>}}
+#+html: {{</* /box */>}}
 ```
 
 {{< box >}}
+
 Plain text
+
 {{< /box >}}
 
 
 ### Code in multiple language {#code-in-multiple-language}
 
 ```org
-{{</* codes java javascript */>}}
-  {{</* code */>}}
+#+html: {{</* codes java javascript */>}}
+  #+html: {{</* code */>}}
   #+begin_src java
     System.out.Println("Hello World!");
   #+end_src
-  {{</* /code */>}}
-  {{</* code */>}}
+  #+html: {{</* /code */>}}
+  #+html: {{</* code */>}}
   #+begin_src javascript
     console.log('Hello World!');
   #+end_src
-  {{</* /code */>}}
-{{</* /codes */>}}
+  #+html: {{</* /code */>}}
+#+html: {{</* /codes */>}}
 ```
 
 {{< codes java javascript >}}
-  {{< code >}}
+
+{{< code >}}
 
 ```java
 System.out.Println("Hello World!");
 ```
 
 {{< /code >}}
+
 {{< code >}}
 
 ```javascript
 console.log('Hello World!');
 ```
 
-  {{< /code >}}
+{{< /code >}}
+
 {{< /codes >}}
 
 
 ### Tab {#tab}
 
 ```org
-{{</* tabs Windows MacOS Ubuntu */>}}
-  {{</* tab */>}}
+#+html: {{</* tabs Windows MacOS Ubuntu */>}}
+  #+html: {{</* tab */>}}
 
   *** Windows section
 
@@ -227,24 +261,25 @@ console.log('Hello World!');
     console.log('Hello World!');
   #+end_src
 
-  {{</* /tab */>}}
-  {{</* tab */>}}
+  #+html: {{</* /tab */>}}
+  #+html: {{</* tab */>}}
 
   *** MacOS section
 
   Hello world!
-  {{</* /tab */>}}
-  {{</* tab */>}}
+  #+html: {{</* /tab */>}}
+  #+html: {{</* tab */>}}
 
   *** Ubuntu section
 
   Great!
-  {{</* /tab */>}}
-{{</* /tabs */>}}
+  #+html: {{</* /tab */>}}
+#+html: {{</* /tabs */>}}
 ```
 
 {{< tabs Windows MacOS Ubuntu >}}
-  {{< tab >}}
+
+{{< tab >}}
 
 
 ### Windows section {#windows-section}
@@ -254,32 +289,38 @@ console.log('Hello World!');
 ```
 
 {{< /tab >}}
+
 {{< tab >}}
 
 
 ### MacOS section {#macos-section}
 
 Hello world!
+
 {{< /tab >}}
+
 {{< tab >}}
 
 
 ### Ubuntu section {#ubuntu-section}
 
-  Great!
-  {{< /tab >}}
+Great!
+
+{{< /tab >}}
+
 {{< /tabs >}}
 
 
 ### Expand {#expand}
 
 ```org
-{{</* expand "Expand me" */>}}
+#+html: {{</* expand "Expand me" */>}}
 Some Markdown Contents
-{{</* /expand */>}}
+#+html: {{</* /expand */>}}
 ```
 
 {{< expand "Expand me" >}}
+
 Some Markdown Contents
 
 ```go
