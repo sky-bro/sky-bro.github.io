@@ -139,3 +139,16 @@ we don't have the corresponding virtio driver yet, we'll install it in the next 
 
 
 ### remove CDROMs {#remove-cdroms}
+
+-   Remove the windows installer iso after intallation.
+-   Keep the virtio iso.
+
+
+### file sharing {#file-sharing}
+
+recommend sharing files between host and windows guest with samba.
+
+
+## resources {#resources}
+
+-   [How to properly configure Virt-Manager (QEMU/KVM) with Windows guest](https://askubuntu.com/questions/1146441/how-to-properly-configure-virt-manager-qemu-kvm-with-windows-guest)

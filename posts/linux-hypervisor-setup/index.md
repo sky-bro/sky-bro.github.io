@@ -27,10 +27,10 @@ sudo pacman -Sy --needed \
 -   **kvm** (Kernel-based Virtual Machine): Kernel module that handles CPU and memory communication
 -   **qemu** (Quick EMUlator): emulates many hardware resources -- dick, network, usb...
 -   **libvirt**: an open-source API, daemon and management tool for managing platform virtualization. It can be used to manage KVM, Xen, VMware ESXi, QEMU and other virtualization technologies.
--   **virsh**: Command-line tools for communicating with libvirt
+    -   **virsh**: comes with libvirt, command-line tools for communicating with libvirt
 -   **virt-manager**: GUI alternative to virsh, albeit less capable.
--   **virt-viewer**: part of virt-manager project, create new VM guests
--   **virt-install**: part of virt-manager project, UI for interacting with VMs via VNC/SPICE
+-   **virt-install**: part of virt-manager project, create new VM guests
+-   **virt-viewer**: part of virt-manager project, UI for interacting with VMs via VNC/SPICE
 -   **dnsmasq**: light-weight DNS/DHCP server. Primarily used for allocating IPs to VMs.
 -   **ebtables**: used for setting up NAT networking the host
 
