@@ -29,6 +29,17 @@ will be rendered as:
 -   ~~strike through~~
 
 
+### Org Entities {#org-entities}
+
+for entering special characters, we can use org entities:
+
+<https://stackoverflow.com/questions/16443386/how-to-escape-double-quote/31207746#31207746>
+
+```org
+=\equal=
+```
+
+
 ## Headings {#headings}
 
 ```org

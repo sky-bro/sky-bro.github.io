@@ -4,7 +4,7 @@
 My most up to date config file is at github: [.dotfiles/.tmux.conf](https://github.com/sky-bro/.dotfiles/blob/master/.tmux.conf), and for better experience, I strongly suggest you use `Capslock` as your `Ctrl` key (I set `C-a` as my prefix instead of `C-b`).
 
 ```conf
-# chenge prefix from `C-b` to `C-a`
+# chenge prefix from =C-b= to =C-a=
 set -g prefix C-a
 unbind C-b
 bind C-a send-prefix
@@ -61,15 +61,17 @@ set -g default-terminal screen-256color
 -   list session: `tmux ls`, `prefix s`
 -   new session: `tmux new -s session_name` (attach now), `tmux new -ds session_name` (do not attach)
 -   attach session: `tmux a -t session_name`
+-   create or attach session: `tmux new -A -s session_name`
+-   detach session: `prefix d`
 -   rename session: `prefix $`
 -   kill session: `tmux kill-session -t session_name`
+-   previous/next session: `prefix (/)`
 
 
 ### windows {#windows}
 
 -   new window: `prefix c`
--   next window: `prefix n`
--   previous window: `prefix p`
+-   next/previous window: `prefix n/p`
 -   rename window: `prefix ,`
 -   kill window: `prefix &`
 
@@ -83,6 +85,9 @@ set -g default-terminal screen-256color
 -   toggle zoom: `prefix z`
 -   kill pane: `prefix x`
 -   scroll pane: use mouse wheel or `prefix [` then with vi motions
+-   toggle between pane layouts: `prefix SPACE`
+-   display panes /   show pane numbers: `prefix q` (given a number, jump to that pane)
+-   swap with previous/next pane: `prefix {/}`
 
 
 ### copy &amp; paste {#copy-and-paste}

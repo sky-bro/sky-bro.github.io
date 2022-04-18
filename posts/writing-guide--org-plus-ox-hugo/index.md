@@ -107,13 +107,7 @@ It seems that zzo theme does not support math equation referencing and numbering
 
 ### Plantuml {#plantuml}
 
-```plantuml
-title Authentication Sequence
-
-Alice->Bob: Authentication Request
-note right of Bob: Bob thinks about it
-Bob->Alice: Authentication Response
-```
+{{< figure src="/images/posts/Writing-Guide-Org/first.svg" >}}
 
 
 ## revealjs / presentation {#revealjs-presentation}

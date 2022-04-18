@@ -21,7 +21,7 @@ sudo pacman -Sy samba
 
 #### configuration file {#configuration-file}
 
-Need to create `/etc/samba/smb.conf` before starting the service `systemctl start nmb.conf`
+Need to create `/etc/samba/smb.conf` before starting the service `systemctl start smb`
 
 You can get an example configuration file from [Samba Git Repository](https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD).
 
@@ -70,6 +70,8 @@ And by default, when you access a samba server with a user, you can browser that
 
 ```shell
 systemctl start smb.service
+# if you want to access service with host names, start this service
+systemctl start nmb.service
 ```
 
 

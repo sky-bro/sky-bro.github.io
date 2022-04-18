@@ -112,7 +112,7 @@ exit 0
 After restarting this server, `/ctf` will automatically be mounted on `/home/sky/ctf`
 
 To make the user (actually kvm) writing the share folder same as the user at host (vm host):
-`sudo vim /etc/libvirt/qemu.conf`, find two lines with `user`"xxx"= and `group`"xxx"=, change them to yourself (by default, xxx should be \`root\`), then uncomment the two lines. for me, they are:
+`sudo vim /etc/libvirt/qemu.conf`, find two lines with `user=xxx` and `group=xxx`, change them to yourself (by default, xxx should be `root`), then uncomment the two lines. for me, they are:
 
 ```conf
 user = "sky"

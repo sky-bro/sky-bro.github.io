@@ -23,14 +23,10 @@ BTW, instead of writing `.md` files, I keep all my blogs in `.org` files (stored
 -   WeChat: sky_bro
 -   Facebook: [Kaiyu Shi](https://www.facebook.com/profile.php?id=100005027239118)
 -   Twitter: [KaiyuShi](https://twitter.com/KaiyuShi)
--   GPG Pub: [Kyle.asc](/Kyle.asc) (F4CD 0E4A 3661 65D1 62E6  B6CE 7D36 AE60 55B0 60A6)
+-   GPG Pub: [Kyle.asc](https://keybase.io/skybro/pgp_keys.asc) (Key ID: F4CD0E4A366165D162E6B6CE7D36AE6055B060A6)
+-   keybase: [skybro](https://keybase.io/skybro)
 
 
 ## :chicken: My Friends {#chicken-my-friends}
 
 [TheSong](https://thesong96.github.io/), [路人枭](https://lurenxiao1998.github.io/), [wxk](https://pullp.github.io)
-
-
-## :musical_score: Listening recently {#musical-score-listening-recently}
-
-<a href="https://open.spotify.com/user/22sit26j5lamlvm3sgikxwuoq"> <img src="https://spotify-readme-ky13.vercel.app/api/spotify" /> </a>

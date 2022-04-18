@@ -107,5 +107,6 @@ While it is easier to let pacman manage updating your WordPress install, this is
 ## Refs
 
 * [Setup wordpress website on Arch Linux](https://computingforgeeks.com/how-setup-wordpress-on-arch-linux/) (use apache)
+* [How to Install WordPress with Nginx on Debian and Ubuntu](https://www.tecmint.com/install-wordpress-using-nginx-in-ubuntu-debian-mint/)
 * [arch wiki: nginx](https://wiki.archlinux.org/title/Nginx)
 * [arch wiki: wordpress](https://wiki.archlinux.org/title/Wordpress)

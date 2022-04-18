@@ -74,5 +74,10 @@ under `~/.config/ranger/` folder, there are 4 main configuration files:
 -   `:mkdir`: create directory
 -   `:touch`: create file
 
+
+## <span class="org-todo todo TODO">TODO</span> drag and drop {#drag-and-drop}
+
+<https://github.com/ranger/ranger/wiki/Drag-and-Drop>
+
 [^fn:1]: [ranger official user guide](https://github.com/ranger/ranger/wiki/Official-User-Guide)
 [^fn:2]: [xcwd](https://github.com/schischi/xcwd) is a simple tool that prints the current working directory of the currently focused window.

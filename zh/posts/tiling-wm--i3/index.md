@@ -31,7 +31,9 @@
 ## container与tree {#container与tree}
 
 {{< alert theme="warning" >}}
+
 我这里并没有严格去看源码这个树到底是怎么构建的(尤其是很多特殊情况), 不过就简单理解下树和窗口之间的关系是可以的.
+
 {{< /alert >}}
 
 大多窗口管理器采用树结构来保存窗口, i3也是如此.
@@ -45,33 +47,33 @@
 
 1.  布局方式: split (分splith, splitv), tabbed 或者 stacked
 
-<a id="org9fcec13"></a>
+<a id="figure--fig:tiling-wm-ambiguous-layout"></a>
 
-{{< figure src="/images/posts/Tiling WM/tiling-wm-ambiguous-layout.svg" caption="Figure 1: tree of ambiguous layout" >}}
+{{< figure src="/images/posts/Tiling WM/tiling-wm-ambiguous-layout.svg" caption="<span class=\"figure-number\">Figure 1: </span>tree of ambiguous layout" >}}
 
-图 [1](#org9fcec13) 代表的窗口可能是图 [2](#orgfe411f8), 也可能是图 [3](#org9747f23)或者其他的, 因为我们不知道每个container内部的窗口布局方式. 所以窗口管理器会为每个节点保存布局方式, 表示内部的孩子节点应该按照什么方式放置.
+图 [1](#figure--fig:tiling-wm-ambiguous-layout) 代表的窗口可能是图 [2](#figure--fig:possible-window-status-01), 也可能是图 [3](#figure--fig:possible-window-status-02)或者其他的, 因为我们不知道每个container内部的窗口布局方式. 所以窗口管理器会为每个节点保存布局方式, 表示内部的孩子节点应该按照什么方式放置.
 
-<a id="orgfe411f8"></a>
+<a id="figure--fig:possible-window-status-01"></a>
 
-{{< figure src="/images/posts/Tiling WM/possible-window-status-01.svg" caption="Figure 2: possible window status 01" >}}
+{{< figure src="/images/posts/Tiling WM/possible-window-status-01.svg" caption="<span class=\"figure-number\">Figure 2: </span>possible window status 01" >}}
 
-<a id="org9747f23"></a>
+<a id="figure--fig:possible-window-status-02"></a>
 
-{{< figure src="/images/posts/Tiling WM/possible-window-status-02.svg" caption="Figure 3: possible window status 02" >}}
+{{< figure src="/images/posts/Tiling WM/possible-window-status-02.svg" caption="<span class=\"figure-number\">Figure 3: </span>possible window status 02" >}}
 
-所以如果想只代表图 [2](#orgfe411f8) 中的窗口, 那么应该为container增加布局方式属性, 如图 [1](#org9fcec13) 所示.
+所以如果想只代表图 [2](#figure--fig:possible-window-status-01) 中的窗口, 那么应该为container增加布局方式属性, 如图 [1](#figure--fig:tiling-wm-ambiguous-layout) 所示.
 
-<a id="org40a4e70"></a>
+<a id="figure--fig:tiling-wm-unambiguous-layout"></a>
 
-{{< figure src="/images/posts/Tiling WM/tiling-wm-unambiguous-layout.svg" caption="Figure 4: tree of unambiguous layout" >}}
+{{< figure src="/images/posts/Tiling WM/tiling-wm-unambiguous-layout.svg" caption="<span class=\"figure-number\">Figure 4: </span>tree of unambiguous layout" >}}
 
 1.  split方向对应占多少百分比
 
-因为我们通常还会控制每个窗口/容器的宽度/高度, 所以还应该为每个容器增加split方向的空间占比, 如图 [5](#orgcd99ed8) 所示.
+因为我们通常还会控制每个窗口/容器的宽度/高度, 所以还应该为每个容器增加split方向的空间占比, 如图 [5](#figure--fig:tiling-wm-percentage) 所示.
 
-<a id="orgcd99ed8"></a>
+<a id="figure--fig:tiling-wm-percentage"></a>
 
-{{< figure src="/images/posts/Tiling WM/tiling-wm-percentage.svg" caption="Figure 5: tree with container percentage" >}}
+{{< figure src="/images/posts/Tiling WM/tiling-wm-percentage.svg" caption="<span class=\"figure-number\">Figure 5: </span>tree with container percentage" >}}
 
 
 ### 练习与理解 {#练习与理解}
@@ -194,6 +196,6 @@ _**Mod-c**_
 
 ## 参考 {#参考}
 
--   [i3wm 用户手册 >> tree](https://i3wm.org/docs/userguide.html#%5Ftree)
+-   [i3wm 用户手册 &gt;&gt; tree](https://i3wm.org/docs/userguide.html#_tree)
 -   [youtube: TheAlternative.ch - LinuxDays FS16 - Linux for Experts course](https://www.youtube.com/watch?v=Api6dFMlxAA)
--   [wiki: window manager types](https://en.wikipedia.org/wiki/Window%5Fmanager#Types)
+-   [wiki: window manager types](https://en.wikipedia.org/wiki/Window_manager#Types)

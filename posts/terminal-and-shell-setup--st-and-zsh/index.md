@@ -54,7 +54,7 @@ Or you can let pywal generates and sets a colorscheme for you:
 # that this works even when a directory is passed.
 image_path="${1:-"$(< "${HOME}/.cache/wal/wal")"}"
 
-# -n tells `wal` to skip setting the wallpaper.
+# -n tells =wal= to skip setting the wallpaper.
 wal -n -i "$image_path"
 feh --no-fehbg --bg-fill "$image_path"
 ```
