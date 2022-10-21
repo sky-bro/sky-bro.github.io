@@ -107,13 +107,17 @@ It seems that zzo theme does not support math equation referencing and numbering
 
 ### Plantuml {#plantuml}
 
+use plantuml[^fn:1] to draw...
+
 {{< figure src="/images/posts/Writing-Guide-Org/first.svg" >}}
 
 
-## revealjs / presentation {#revealjs-presentation}
+## Presentation {#presentation}
 
 
-## shortcodes {#shortcodes}
+## Shortcodes {#shortcodes}
+
+> zoo-docs[^fn:2] on short codes
 
 to use shortcodes as you do in markdown, put it after `#+html:`. Like this:
 
@@ -337,6 +341,8 @@ func main() {
 
 ## References {#references}
 
--   [ox-hugo official site](https://ox-hugo.scripter.co/)
--   [plantuml official site](https://plantuml.com/)
--   [zzo-docs on shortcodes](https://zzo-docs.vercel.app/zzo/shortcodes/)
+You can refer to something in the footnote like ox-hugo[^fn:3].
+
+[^fn:1]: [plantuml official site](https://plantuml.com/)
+[^fn:2]: [zzo-docs on shortcodes](https://zzo-docs.vercel.app/zzo/shortcodes/)
+[^fn:3]: [ox-hugo official site](https://ox-hugo.scripter.co/)
