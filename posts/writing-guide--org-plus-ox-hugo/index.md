@@ -6,7 +6,7 @@ So instead of editing `.md` files under `content` folder, now I write `.org` fil
 
 ## Create new post {#create-new-post}
 
-Invoking org-capture-templates function, and choose hugo post template, as shown in Figure [1](#figure--fig:org-capture-template-ox-hugo)
+Invoking org-capture-templates (`SPC o c`) function, and choose hugo post template, as shown in Figure [1](#figure--fig:org-capture-template-ox-hugo)
 
 <a id="figure--fig:org-capture-template-ox-hugo"></a>
 
@@ -23,6 +23,46 @@ As in [ox-hugo: Custom Front-matter Parameters](https://ox-hugo.scripter.co/doc/
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :key3 value3
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :key4 value4
 :END:
+```
+
+some important front matters can be stored in your org capture template, here's my template:
+
+```emacs-lisp
+(defun org-hugo-new-subtree-post-capture-template ()
+  "Returns `org-capture' template string for new Hugo post.
+ See `org-capture-templates' for more information."
+  (let* (;; http://www.holgerschurig.de/en/emacs-blog-from-org-to-hugo/
+         (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time)))
+         (title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+         (fname (org-hugo-slug title)))
+    (mapconcat #'identity
+               `(
+                 ,(concat "\n* TODO " title "  :@cat:tag:")
+                 ":PROPERTIES:"
+                 ,(concat ":EXPORT_HUGO_BUNDLE: " fname)
+                 ":EXPORT_FILE_NAME: index"
+                 ,(concat ":EXPORT_DATE: " date) ;Enter current date and time
+                 ":EXPORT_HUGO_CUSTOM_FRONT_MATTER: :image \"/images/icons/tortoise.png\""
+                 ":EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :libraries '(mathjax)"
+                 ":EXPORT_HUGO_CUSTOM_FRONT_MATTER+: :description \"this is a description\""
+                 ":END:"
+                 "%?\n")
+               "\n")))
+(with-eval-after-load 'org-capture
+  (setq hugo-content-org-dir "~/git-repo/blog/blog-src/content-org")
+  (add-to-list 'org-capture-templates
+               `("pe"
+                 "Hugo Post (en)"
+                 entry
+                 (file ,(expand-file-name "all-posts.en.org" hugo-content-org-dir))
+                 (function org-hugo-new-subtree-post-capture-template)))
+  (add-to-list 'org-capture-templates
+               `("pz"
+                 "Hugo Post (zh)"
+                 entry
+                 (file ,(expand-file-name "all-posts.zh.org" hugo-content-org-dir))
+                 (function org-hugo-new-subtree-post-capture-template)))
+  (add-to-list 'org-capture-templates '("p" "Hugo Post")))
 ```
 
 
@@ -56,6 +96,16 @@ You can add caption and name (for referencing purpose: as in figure [2](#figure-
 #+NAME: fig:gopher
 #+ATTR_HTML: :width 30%
 [[../static/images/icons/gopher001.png]]
+```
+
+You can also paste images from clipboard with org-download[^fn:1]. I've bind `C-M-y` to paste images, and the pasted image will be stored under path `../static/images/posts/<Level-0-Header-Name>`.
+
+You can customize with the `.dir-locals.el` file:
+
+```emacs-lisp
+((org-mode . ((org-download-timestamp . "")
+              (org-download-heading-lvl . 0)
+              (org-download-image-dir . "../static/images/posts"))))
 ```
 
 
@@ -107,9 +157,11 @@ It seems that zzo theme does not support math equation referencing and numbering
 
 ### Plantuml {#plantuml}
 
-use plantuml[^fn:1] to draw...
+use plantuml[^fn:2] to draw,  then `C-c C-c` to tangle the image manually (or just org export if you don't need to customize any attributes), then you can add some attributes to the result (width, name, caption, etc.).
 
-{{< figure src="/images/posts/Writing-Guide-Org/first.svg" >}}
+<a id="figure--first-svg"></a>
+
+{{< figure src="/images/posts/Writing-Guide-Org/first.svg" caption="<span class=\"figure-number\">Figure 3: </span>this is first.svg" >}}
 
 
 ## Presentation {#presentation}
@@ -117,7 +169,7 @@ use plantuml[^fn:1] to draw...
 
 ## Shortcodes {#shortcodes}
 
-> zoo-docs[^fn:2] on short codes
+> zoo-docs[^fn:3] on short codes
 
 to use shortcodes as you do in markdown, put it after `#+html:`. Like this:
 
@@ -341,8 +393,15 @@ func main() {
 
 ## References {#references}
 
-You can refer to something in the footnote like ox-hugo[^fn:3].
+```org
+You can refer to something in the footnote like ox-hugo[fn:ox-hugo]
+* Footnotes
+[fn:ox-hugo] [[https://ox-hugo.scripter.co/][ox-hugo official site]]
+```
 
-[^fn:1]: [plantuml official site](https://plantuml.com/)
-[^fn:2]: [zzo-docs on shortcodes](https://zzo-docs.vercel.app/zzo/shortcodes/)
-[^fn:3]: [ox-hugo official site](https://ox-hugo.scripter.co/)
+You can refer to something in the footnote like ox-hugo[^fn:4]
+
+[^fn:1]: [org-download](https://github.com/abo-abo/org-download) facilitates moving images from point A to B.
+[^fn:2]: [plantuml official site](https://plantuml.com/)
+[^fn:3]: [zzo-docs on shortcodes](https://zzo-docs.vercel.app/zzo/shortcodes/)
+[^fn:4]: [ox-hugo official site](https://ox-hugo.scripter.co/)
