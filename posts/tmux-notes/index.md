@@ -10,7 +10,7 @@ unbind C-b
 bind C-a send-prefix
 
 # better window split, with "-" and "|"
-unbind '"'
+unbind '"' # "
 bind - splitw -v -c '#{pane_current_path}'
 unbind %
 bind | splitw -h -c '#{pane_current_path}'

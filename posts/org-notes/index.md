@@ -1,4 +1,11 @@
 
+## Introduction {#introduction}
+
+This notes is on how to use org-mode to write things. Org provides with many functionalities and is highly customizable and extensible. Every writing feature encompasses some handy tricks listed like below:
+
+-   `KEYS PRESSED` (function called - optional): explanation  on  what it does
+
+
 ## Basic Editing {#basic-editing}
 
 
@@ -7,16 +14,28 @@
 _**C-c ;**_
 : toggle comment of an entry
 
+<!--listend-->
+
+```org
+* COMMENT Comment an entry
+
+# comment a line
+
+#+begin_comment
+block of coment
+#+end_comment
+```
+
 
 ### Font types {#font-types}
 
 ```org
-+ /italic/
-+ *bold*
-+ _underlined_
-+ =verbatim=
-+ ~code~
-+ +strike-through+
+- /italic/
+- *bold*
+- _underlined_
+- =verbatim=
+- ~code~
+- +strike-through+
 ```
 
 will be rendered as:

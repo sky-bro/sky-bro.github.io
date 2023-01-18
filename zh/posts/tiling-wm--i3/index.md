@@ -18,14 +18,11 @@
 窗口不能拖拽, 窗口之间没有重叠, 像瓷砖一样铺满屏幕, 配合很多快捷键使用, 基本不或
 者少依赖鼠标进行控制.
 
-{{< figure src="/images/posts/Tiling WM/tiling-wm-example.jpeg" >}}
-
-
-### Tiling WM的优势 {#tiling-wm的优势}
-
 -   自动放置窗口, 不重叠, 空间利用率高
 -   多种布局方式切换, 适应各种需求 (基本所有tiling wm都不止Tiling一种布局, 比如i3wm还有Tabbed, Stacked, 还可以选择让某窗口全屏或是悬浮)
 -   基本全靠键盘控制, 快速方便
+
+{{< figure src="/images/posts/Tiling WM/tiling-wm-example.jpeg" >}}
 
 
 ## container与tree {#container与tree}
@@ -45,7 +42,10 @@
 
 每个container有两个比较重要的属性:
 
-1.  布局方式: split (分splith, splitv), tabbed 或者 stacked
+
+#### 布局方式 {#布局方式}
+
+split (分splith, splitv), tabbed 或者 stacked
 
 <a id="figure--fig:tiling-wm-ambiguous-layout"></a>
 
@@ -67,7 +67,8 @@
 
 {{< figure src="/images/posts/Tiling WM/tiling-wm-unambiguous-layout.svg" caption="<span class=\"figure-number\">Figure 4: </span>tree of unambiguous layout" >}}
 
-1.  split方向对应占多少百分比
+
+#### split方向对应占多少百分比 {#split方向对应占多少百分比}
 
 因为我们通常还会控制每个窗口/容器的宽度/高度, 所以还应该为每个容器增加split方向的空间占比, 如图 [5](#figure--fig:tiling-wm-percentage) 所示.
 
@@ -84,32 +85,30 @@
 1.  切换到一个没有任何窗口的workspace: 如 `$Mod+3`.
 2.  用 `$Mod+e` 设置默认的布局为split(水平/垂直), (一般不会设为tabbed或stacked).
 3.  `$Mod+ENTER` 打开一个terminal (我这里是st, 或者任何别的窗口也行).
-4.  `$Mod+w/s` 设置所在container布局为tabbed或stacked (这里实际上会新建一个container)
-5.  后续在这个stabbed或者stacked container下操作就可以看到标题了
+4.  `$Mod+w/s` 设置所在container布局为tabbed或stacked
+5.  `$Mod+v/V` 新建一个垂直/水平split布局的container包裹当前的st窗口
+    -   在节点(container或window)所在container只有一个窗口, 且container布局方式为水平/垂直split时, `$Mod+v/V` 只会切换split方向
+    -   当节点所在container不止一个窗口, 或者container布局方式为tabbed或者stacked时, `$Mod+v/V` 会创建一个新的垂直/水平split布局的container包裹当前节点
+6.  后续在这个stabbed或者stacked container下操作就可以看到标题了
 
-比如通过 `$Mod+v` 新建一个垂直split布局的container包裹当前的st窗口.
+当前看到标题应该为 `V[st]`, 再 `$Mod+ENTER` 之后显示为 `V[st st]`.
 
-可以看到标题显示为 `V[st]`.
+{{< alert theme="info" >}}
 
-再 `$Mod+ENTER` 之后显示为 `V[st st]`.
+Tips:
+使用 `$Mod+c` 或者 `$Mod+p` 来选择孩子或父亲节点窗口, 然后对该节点进行操作:
 
+-   创建一个兄弟节点
+-   删除/关闭节点窗口 (节点下所有窗口都会被关闭)
+-   移动节点窗口
+-   修改节点窗口大小
 
-### 操作container (一组窗口) {#操作container--一组窗口}
-
-理解树结构与窗口间的联系后, 有助于我们对窗口的操作, 尤其是对一组窗口的操作.
-
-因为很多操作实际上都是针对树的container节点, 每个节点可能对应了多个窗口.
-
-我们可以:
-
--   移动一组窗口
--   关闭一组窗口
--   灵活控制各个container的布局方式 (不同container可以用不同的布局)
+{{< /alert >}}
 
 
 ## 快捷键设置 {#快捷键设置}
 
-这里仅列出了比较重要的快捷键, 我详细的配置放在了github的[.dotfiles](https://github.com/sky-bro/.dotfiles)仓库.
+这里仅列出了比较重要的快捷键, 我详细的配置放在了github的[.dotfiles](https://github.com/sky-bro/.dotfiles/blob/master/.config/i3/config)仓库.
 
 ```sh
 # some configs from my ~/.config/i3/config
@@ -190,8 +189,6 @@ _**Mod-p**_
 
 _**Mod-c**_
 : Focus child
-
-多练习增加container与改变所在container布局的操作, 理解他们之间的区别(前者影响当前所选择的节点, 后者影响父亲节点).
 
 
 ## 参考 {#参考}
