@@ -391,6 +391,20 @@ func main() {
 {{< youtube 2liXzaIIyuE >}}
 
 
+### netease music {#netease-music}
+
+need to allow third party cookies
+
+```shell
+neteasemusic id="1455273374"
+neteasemusic id="8003580862" isList="true"
+```
+
+{{< neteasemusic id="1455273374" isList="false" >}}
+
+{{< neteasemusic id="8003580862" isList="true" >}}
+
+
 ## References {#references}
 
 ```org
