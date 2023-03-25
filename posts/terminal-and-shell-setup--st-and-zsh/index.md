@@ -31,7 +31,6 @@ dotfiles checkout ~/.zshrc
 I use powerlevel10k[^fn:6] as my zsh theme.
 
 1.  clone the repository:
-
     ```shell
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     # for chinese users, recommend:
@@ -79,13 +78,11 @@ source /usr/share/fzf/completion.zsh
 Fish-like fast/unobtrusive autosuggestions for zsh.
 
 1.  clone the repository:
-
     ```shell
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     ```
 
 2.  add the plugin to the `plugins` list inside the `~/.zshrc` file.
-
     ```shell
     plugins=(
         # other plugins...

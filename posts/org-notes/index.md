@@ -93,8 +93,8 @@ src_c++[:exports code]{ typedef long long ll; }
 src_shell[:exports code]{ echo -e "test" }
 ```
 
-` typedef long long ll; `
-` echo -e "test" `
+<span class="inline-src language-c++" data-lang="c++">` typedef long long ll; `</span>
+<span class="inline-src language-shell" data-lang="shell">` echo -e "test" `</span>
 
 
 ### code block {#code-block}

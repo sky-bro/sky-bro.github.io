@@ -88,6 +88,7 @@ We barely use `pass` command, instead we use other more user friendly front ends
 ### android {#android}
 
 -   [Android-Password-Store](https://github.com/android-password-store/Android-Password-Store)
+    -   <https://docs.passwordstore.app/docs/users/background-killing-bugs/>
 
 
 ### ios {#ios}

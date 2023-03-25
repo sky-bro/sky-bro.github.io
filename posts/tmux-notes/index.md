@@ -3,7 +3,7 @@
 
 My most up to date config file is at github: [.dotfiles/.tmux.conf](https://github.com/sky-bro/.dotfiles/blob/master/.tmux.conf), and for better experience, I strongly suggest you use `Capslock` as your `Ctrl` key (I set `C-a` as my prefix instead of `C-b`).
 
-```conf
+```cfg
 # chenge prefix from =C-b= to =C-a=
 set -g prefix C-a
 unbind C-b
