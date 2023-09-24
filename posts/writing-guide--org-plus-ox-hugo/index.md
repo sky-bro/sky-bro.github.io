@@ -159,9 +159,54 @@ It seems that zzo theme does not support math equation referencing and numbering
 
 use plantuml[^fn:2] to draw,  then `C-c C-c` to tangle the image manually (or just org export if you don't need to customize any attributes), then you can add some attributes to the result (width, name, caption, etc.).
 
+```org
+#+begin_src plantuml :file "../static/images/posts/Writing-Guide-Org/first.svg"
+  @startuml
+  title Authentication Sequence
+
+  Alice->Bob: Authentication Request
+  note right of Bob: Bob thinks about it
+  Bob->Alice: Authentication Response
+  @enduml
+#+end_src
+```
+
 <a id="figure--first-svg"></a>
 
 {{< figure src="/images/posts/Writing-Guide-Org/first.svg" caption="<span class=\"figure-number\">Figure 3: </span>this is first.svg" >}}
+
+you can export ASCII diagrams by changing file extension to `.txt` (this will export diagram to a text file) or if you want to just include the ASCII diagram itself, set `:results` to `verbatim`.
+
+```org
+#+begin_src plantuml :results verbatim
+  @startuml
+  title Authentication Sequence
+
+  Alice->Bob: Authentication Request
+  note right of Bob: Bob thinks about it
+  Bob->Alice: Authentication Response
+  @enduml
+#+end_src
+```
+
+```text
+             Authentication Sequence
+
+,-----.                   ,---.
+|Alice|                   |Bob|
+`--+--'                   `-+-'
+   |Authentication Request  |
+   |----------------------->|
+   |                        |
+   |                        | ,-------------------!.
+   |                        | |Bob thinks about it|_\
+   |                        | `---------------------'
+   |Authentication Response |
+   |<-----------------------|
+,--+--.                   ,-+-.
+|Alice|                   |Bob|
+`-----'                   `---'
+```
 
 
 ## Presentation {#presentation}
