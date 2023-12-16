@@ -6,20 +6,18 @@ You should use NFS for dedicated Linux Client to Linux Server connections.
 For mixed Windows/Linux environments use Samba.
 
 
-## Server (linux) {#server--linux}
+## Server {#server}
 
 
-### install {#install}
+### linux {#linux}
+
+**Dependency Installation**
 
 ```shell
 sudo pacman -Sy samba
 ```
 
-
-### configure {#configure}
-
-
-#### configuration file {#configuration-file}
+**configuration file**
 
 Need to create `/etc/samba/smb.conf` before starting the service `systemctl start smb`
 
@@ -49,8 +47,7 @@ Here's mine:
   printable = no
 ```
 
-
-#### user management {#user-management}
+**user management**
 
 we need to have a user to access linux files.
 
@@ -65,8 +62,7 @@ sudo smbpasswd -a sky
 
 And by default, when you access a samba server with a user, you can browser that user's home directory (if it has one).
 
-
-### start {#start}
+**start**
 
 ```shell
 systemctl start smb.service
@@ -91,19 +87,50 @@ net use /delete *.
 
 ### linux {#linux}
 
-1.  With a file manager:
+
+#### With a file manager: {#with-a-file-manager}
 
 <https://wiki.archlinux.org/title/samba#File_manager_configuration>
 
 In the location bar, input: `smb://servername/share`
 
-1.  With a command line tool: `smbclient`
 
-<!--listend-->
+#### With a command line tool: `smbclient` {#with-a-command-line-tool-smbclient}
 
 ```shell
 smbclient //xyz/public -U nobody
 smbclient //xyz/sky -U sky
+```
+
+
+#### mount at startup {#mount-at-startup}
+
+```shell
+sudo pacman -Sy cifs-utils
+
+# prepare mount entry
+sudo vim /etc/fstab
+# add smbshare like:
+# //192.168.31.248/Dev /home/sky/share/Dev cifs credentials=/home/sky/.smbcredentials,user,uid=sky,gid=sky 0 0
+# user: allow any user to mount the drive
+# noauto: the dirve is not mounted during startup, do not add this if you want to mount at startup
+
+systemctl daemon-reload # make /etc/fstab change effective
+
+# create mount credentials
+vim ~/.smbcredentials
+# username=sky
+# password=sky
+chmod 0600 ~/.smbcredentials
+
+# create the mount point
+mkdir -p ~/share/Dev
+
+# mount
+mount ~/share/Dev
+
+# umount
+umount ~/share/Dev
 ```
 
 
