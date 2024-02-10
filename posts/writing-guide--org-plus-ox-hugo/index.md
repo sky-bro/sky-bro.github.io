@@ -219,7 +219,7 @@ you can export ASCII diagrams by changing file extension to `.txt` (this will ex
 to use shortcodes as you do in markdown, put it after `#+html:`. Like this:
 
 ```org
-#+html: {{</*/* gallery dir="/image_dir/" /*/*/>}}
+#+html: {{</* gallery dir="/image_dir/" */>}}
 ```
 
 
@@ -228,9 +228,9 @@ to use shortcodes as you do in markdown, put it after `#+html:`. Like this:
 You can have alert like this:
 
 ```org
-#+html: {{</*/* alert theme="info" dir="ltr" */*/>}}
+#+html: {{</* alert theme="info" dir="ltr" */>}}
 theme could be one of: success, info, warning, danger
-#+html: {{</*/* /alert */*/>}}
+#+html: {{</* /alert */>}}
 ```
 
 {{< alert theme="success" >}}
@@ -261,9 +261,9 @@ this is a danger.
 ### Notice {#notice}
 
 ```org
-#+html: {{</*/* notice success "This is a success type of notice" */*/>}}
+#+html: {{</* notice success "This is a success type of notice" */>}}
 notice could be success, info, warning, error.
-#+html: {{</*/* /notice */*/>}}
+#+html: {{</* /notice */>}}
 ```
 
 {{< notice success "This is a success type of notice" >}}
@@ -294,9 +294,9 @@ error notice.
 ### Simple box {#simple-box}
 
 ```org
-#+html: {{</*/* box */*/>}}
+#+html: {{</* box */>}}
 Plain text
-#+html: {{</*/* /box */*/>}}
+#+html: {{</* /box */>}}
 ```
 
 {{< box >}}
@@ -309,18 +309,18 @@ Plain text
 ### Code in multiple language {#code-in-multiple-language}
 
 ```org
-#+html: {{</*/* codes java javascript */*/>}}
-  #+html: {{</*/* code */*/>}}
+#+html: {{</* codes java javascript */>}}
+  #+html: {{</* code */>}}
   #+begin_src java
     System.out.Println("Hello World!");
   #+end_src
-  #+html: {{</*/* /code */*/>}}
-  #+html: {{</*/* code */*/>}}
+  #+html: {{</* /code */>}}
+  #+html: {{</* code */>}}
   #+begin_src javascript
     console.log('Hello World!');
   #+end_src
-  #+html: {{</*/* /code */*/>}}
-#+html: {{</*/* /codes */*/>}}
+  #+html: {{</* /code */>}}
+#+html: {{</* /codes */>}}
 ```
 
 {{< codes java javascript >}}
@@ -347,8 +347,8 @@ console.log('Hello World!');
 ### Tab {#tab}
 
 ```org
-#+html: {{</*/* tabs Windows MacOS Ubuntu */*/>}}
-  #+html: {{</*/* tab */*/>}}
+#+html: {{</* tabs Windows MacOS Ubuntu */>}}
+  #+html: {{</* tab */>}}
 
   *** Windows section
 
@@ -356,20 +356,20 @@ console.log('Hello World!');
     console.log('Hello World!');
   #+end_src
 
-  #+html: {{</*/* /tab */*/>}}
-  #+html: {{</*/* tab */*/>}}
+  #+html: {{</* /tab */>}}
+  #+html: {{</* tab */>}}
 
   *** MacOS section
 
   Hello world!
-  #+html: {{</*/* /tab */*/>}}
-  #+html: {{</*/* tab */*/>}}
+  #+html: {{</* /tab */>}}
+  #+html: {{</* tab */>}}
 
   *** Ubuntu section
 
   Great!
-  #+html: {{</*/* /tab */*/>}}
-#+html: {{</*/* /tabs */*/>}}
+  #+html: {{</* /tab */>}}
+#+html: {{</* /tabs */>}}
 ```
 
 {{< tabs Windows MacOS Ubuntu >}}
@@ -409,9 +409,9 @@ Great!
 ### Expand {#expand}
 
 ```org
-#+html: {{</*/* expand "Expand me" */*/>}}
+#+html: {{</* expand "Expand me" */>}}
 Some Markdown Contents
-#+html: {{</*/* /expand */*/>}}
+#+html: {{</* /expand */>}}
 ```
 
 {{< expand "Expand me" >}}
