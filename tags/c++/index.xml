@@ -1,4 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>C++ on k4i's blog</title><link>https://k4i.top/tags/c++/</link><description>Recent content in C++ on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> .</copyright><lastBuildDate>Thu, 10 Jun 2021 00:16:54 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/c++/index.xml" rel="self" type="application/rss+xml"/><item><title>C++ Smart Pointers</title><link>https://k4i.top/posts/c++-smart-pointers/</link><pubDate>Thu, 10 Jun 2021 00:16:54 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Tue, 17 Aug 2021 23:28:27 +0800</atom:modified><guid>https://k4i.top/posts/c++-smart-pointers/</guid><description>&lt;p>Smart pointer is a practice of RAII (Resource Acquisition is Initialization), we use a smart pointer to manage memory allocated on the heap. (here the &amp;ldquo;resource&amp;rdquo; is the allocated heap memory)&lt;/p></description><dc:creator>&lt;a href="https://k4i.top" class="theme-link">k4i&lt;/a></dc:creator><category>C++</category><category>Smart Pointer</category></item><item><title>cin &amp; cout is slow?</title><link>https://k4i.top/posts/cin--cout-is-slow/</link><pubDate>Fri, 17 Apr 2020 16:07:30 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Wed, 26 Aug 2020 20:09:33 +0800</atom:modified><guid>https://k4i.top/posts/cin--cout-is-slow/</guid><description>Yes, by default I heard before that using scanf/printf is faster than using cin/cout, and it&amp;rsquo;s true from my real experience, but I really didn&amp;rsquo;t get to know the reason behind, and later in leetcode, I saw others include these lines in their code:
-1 2 3 ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL); I&amp;rsquo;m almost certain that these lines are included to speed up their code. So out of curiosity, I did some searching, here&amp;rsquo;s what I&amp;rsquo;ve found:</description><dc:creator>&lt;a href="https://sky-bro.github.io" class="theme-link">Kyle&lt;/a></dc:creator><media:content url="https://k4i.top/images/icons/tortoise.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>C++</category><category>C++</category></item><item><title>Heap in C++</title><link>https://k4i.top/posts/heap-in-c++/</link><pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Wed, 26 Aug 2020 20:09:33 +0800</atom:modified><guid>https://k4i.top/posts/heap-in-c++/</guid><description>let&amp;rsquo;s learn how to use heap in C++
-Related functions func description make_heap Make heap from range push_heap Push element into heap range pop_heap Pop element from heap range sort_heap Sort elements of heap is_heap Test if range is heap is_heap_until Find first element not in heap order make_heap make heap from range
-We need to have a heap before we operate on a heap, make_heap let&amp;rsquo;s us rearrange elements in a range.</description><dc:creator>&lt;a href="https://sky-bro.github.io" class="theme-link">Kyle&lt;/a></dc:creator><media:content url="https://k4i.top/images/icons/stack%20of%20rocks.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>C++</category><category>heap</category><category>Data Structure &amp; Algorithm</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>C++ on k4i's blog</title><link>https://k4i.top/tags/c++/</link><description>Recent content in C++ on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of &lt;a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright><lastBuildDate>Thu, 10 Jun 2021 00:16:54 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/c++/index.xml" rel="self" type="application/rss+xml"/><item><title>C++ Smart Pointers</title><link>https://k4i.top/posts/c++-smart-pointers/</link><pubDate>Thu, 10 Jun 2021 00:16:54 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Tue, 17 Aug 2021 23:28:27 +0800</atom:modified><guid>https://k4i.top/posts/c++-smart-pointers/</guid><description>&lt;p&gt;Smart pointer is a practice of RAII (Resource Acquisition is Initialization), we use a smart pointer to manage memory allocated on the heap. (here the &amp;ldquo;resource&amp;rdquo; is the allocated heap memory)&lt;/p&gt;</description><dc:creator>&lt;a href="https://k4i.top" class="theme-link"&gt;k4i&lt;/a&gt;</dc:creator><category>C++</category><category>Smart Pointer</category><category>map[categories:[map[image:&lt;nil&gt; libraries:[mathjax]]]]</category></item><item><title>cin &amp; cout is slow?</title><link>https://k4i.top/posts/cin--cout-is-slow/</link><pubDate>Fri, 17 Apr 2020 16:07:30 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Wed, 26 Aug 2020 20:09:33 +0800</atom:modified><guid>https://k4i.top/posts/cin--cout-is-slow/</guid><description>&lt;h2 id="yes-by-default"&gt;Yes, by default&lt;/h2&gt;
+&lt;p&gt;I heard before that using &lt;code&gt;scanf/printf&lt;/code&gt; is faster than using &lt;code&gt;cin/cout&lt;/code&gt;, and it&amp;rsquo;s true from my real experience, but I really didn&amp;rsquo;t get to know the reason behind, and later in leetcode, I saw others include these lines in their code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-C++" data-lang="C++"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;ios&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;sync_with_stdio&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;cin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tie&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tie&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I&amp;rsquo;m almost certain that these lines are included to speed up their code. So out of curiosity, I did some searching, here&amp;rsquo;s what I&amp;rsquo;ve found:&lt;/p&gt;</description><dc:creator>&lt;a href="https://sky-bro.github.io" class="theme-link"&gt;Kyle&lt;/a&gt;</dc:creator><category>C++</category><category>map[categories:[C++] image:images/icons/tortoise.png]</category></item><item><title>Heap in C++</title><link>https://k4i.top/posts/heap-in-c++/</link><pubDate>Fri, 17 Apr 2020 15:25:33 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Wed, 26 Aug 2020 20:09:33 +0800</atom:modified><guid>https://k4i.top/posts/heap-in-c++/</guid><description>&lt;p&gt;let&amp;rsquo;s learn how to use heap in C++&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id="related-functions"&gt;Related functions&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;func&lt;/th&gt;
+&lt;th style="text-align: left"&gt;description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;make_heap&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Make heap from range&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;push_heap&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Push element into heap range&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;pop_heap&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Pop element from heap range&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;sort_heap&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Sort elements of heap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;is_heap&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Test if range is heap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;is_heap_until&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Find first element not in heap order&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="make_heap"&gt;make_heap&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;make heap from range&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We need to have a heap before we operate on a heap, &lt;code&gt;make_heap&lt;/code&gt; let&amp;rsquo;s us rearrange elements in a range.&lt;/p&gt;</description><dc:creator>&lt;a href="https://sky-bro.github.io" class="theme-link"&gt;Kyle&lt;/a&gt;</dc:creator><category>C++</category><category>heap</category><category>map[categories:[Data Structure &amp; Algorithm] image:images/icons/stack of rocks.png]</category></item></channel></rss>

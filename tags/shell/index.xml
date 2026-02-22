@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Shell on k4i's blog</title><link>https://k4i.top/tags/shell/</link><description>Recent content in Shell on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> .</copyright><lastBuildDate>Thu, 09 Dec 2021 00:09:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Terminal &amp; Shell Setup (st &amp; zsh)</title><link>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</link><pubDate>Thu, 09 Dec 2021 00:09:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</guid><description>My terminal emulator is st (simple terminal) from LukeSmith1, and my shell is zsh (with ohmyzsh2).
-Dependencies dmenu fzf3 pywal4 ohmyzsh 1 2 # . start-proxy 1081 socks5h sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; Then config or restore5 your ~/.zshrc file.
-1 dotfiles checkout ~/.zshrc colors and themes p10k I use powerlevel10k6 as my zsh theme.
-clone the repository: 1 2 3 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k # for chinese users, recommend: # git clone --depth=1 https://gitee.</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/terminal.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>shell</category><category>terminal</category><category>notes</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Shell on k4i's blog</title><link>https://k4i.top/tags/shell/</link><description>Recent content in Shell on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of &lt;a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright><lastBuildDate>Thu, 09 Dec 2021 00:09:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Terminal &amp; Shell Setup (st &amp; zsh)</title><link>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</link><pubDate>Thu, 09 Dec 2021 00:09:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</guid><description>&lt;p&gt;My terminal emulator is st (simple terminal) from LukeSmith&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;, and my shell is zsh (with ohmyzsh&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;h2 id="dependencies"&gt;Dependencies&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;dmenu&lt;/li&gt;
+&lt;li&gt;fzf&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;pywal&lt;sup id="fnref:4"&gt;&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="ohmyzsh"&gt;ohmyzsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# . start-proxy 1081 socks5h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sh -c &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Then config or restore&lt;sup id="fnref:5"&gt;&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref"&gt;5&lt;/a&gt;&lt;/sup&gt; your &lt;code&gt;~/.zshrc&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotfiles checkout ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="colors-and-themes"&gt;colors and themes&lt;/h2&gt;
+&lt;h3 id="p10k"&gt;p10k&lt;/h3&gt;
+&lt;p&gt;I use powerlevel10k&lt;sup id="fnref:6"&gt;&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref"&gt;6&lt;/a&gt;&lt;/sup&gt; as my zsh theme.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;clone the repository:
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone --depth&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; https://github.com/romkatv/powerlevel10k.git &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ZSH_CUSTOM&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="p"&gt;/.oh-my-zsh/custom&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/themes/powerlevel10k
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# for chinese users, recommend:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;set &lt;code&gt;ZSH_THEME=&amp;quot;powerlevel10k/powerlevel10k&amp;quot;&lt;/code&gt; in &lt;code&gt;~/.zshrc&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;configure with &lt;code&gt;p10k&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="xresources-and-pywal"&gt;Xresources and pywal&lt;/h3&gt;
+&lt;p&gt;you can define your color scheme in &lt;code&gt;~/.Xresources&lt;/code&gt; file, and load it with &lt;code&gt;xrdb ~/.Xresources&lt;/code&gt;.&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/terminal.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>shell</category><category>terminal</category><category>notes</category></item></channel></rss>

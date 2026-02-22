@@ -1,6 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Org on k4i's blog</title><link>https://k4i.top/tags/org/</link><description>Recent content in Org on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> .</copyright><lastBuildDate>Mon, 06 Dec 2021 21:37:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/org/index.xml" rel="self" type="application/rss+xml"/><item><title>Org Notes</title><link>https://k4i.top/posts/org-notes/</link><pubDate>Mon, 06 Dec 2021 21:37:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/org-notes/</guid><description>Introduction This notes is on how to use org-mode to write things. Org provides with many functionalities and is highly customizable and extensible. Every writing feature encompasses some handy tricks listed like below:
-KEYS PRESSED (function called - optional): explanation on what it does Basic Editing Comments C-c ; toggle comment of an entry 1 2 3 4 5 6 7 * COMMENT Comment an entry # comment a line #+begin_comment block of coment #+end_comment Font types 1 2 3 4 5 6 - /italic/ - *bold* - _underlined_ - =verbatim= - ~code~ - +strike-through+ will be rendered as:</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/org-mode-unicorn.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>org</category><category>notes</category></item><item><title>Writing Guide (org + ox-hugo)</title><link>https://k4i.top/posts/writing-guide--org-plus-ox-hugo/</link><pubDate>Sun, 05 Dec 2021 20:58:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 10 Feb 2024 18:11:03 +0800</atom:modified><guid>https://k4i.top/posts/writing-guide--org-plus-ox-hugo/</guid><description>I&amp;rsquo;ve recently switched to org mode, now I write all my blogs in org mode (blog-src/content-org/), and export them to .md files (blog-src/content/) with ox-hugo.
-So instead of editing .md files under content folder, now I write .org files stored under content-org folder.
-Create new post Invoking org-capture-templates (SPC o c) function, and choose hugo post template, as shown in Figure 1
-Figure 1: creating new post with org-capture-template
-Front matter As in ox-hugo: Custom Front-matter Parameters, hugo front matters can be added like below:</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/org-mode-unicorn.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>hugo</category><category>org</category><category>notes</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Org on k4i's blog</title><link>https://k4i.top/tags/org/</link><description>Recent content in Org on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of &lt;a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright><lastBuildDate>Mon, 06 Dec 2021 21:37:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/org/index.xml" rel="self" type="application/rss+xml"/><item><title>Org Notes</title><link>https://k4i.top/posts/org-notes/</link><pubDate>Mon, 06 Dec 2021 21:37:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/org-notes/</guid><description>&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This notes is on how to use org-mode to write things. Org provides with many functionalities and is highly customizable and extensible. Every writing feature encompasses some handy tricks listed like below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;KEYS PRESSED&lt;/code&gt; (function called - optional): explanation on what it does&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="basic-editing"&gt;Basic Editing&lt;/h2&gt;
+&lt;h3 id="comments"&gt;Comments&lt;/h3&gt;
+&lt;dl&gt;
+&lt;dt&gt;&lt;em&gt;&lt;strong&gt;C-c ;&lt;/strong&gt;&lt;/em&gt;&lt;/dt&gt;
+&lt;dd&gt;toggle comment of an entry&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;!--listend--&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-org" data-lang="org"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gh"&gt;*&lt;/span&gt;&lt;span class="ni"&gt; COMMENT&lt;/span&gt;&lt;span class="gs"&gt; Comment an entry&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# comment a line&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;#+begin_comment
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;block of coment
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;#+end_comment&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="font-types"&gt;Font types&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-org" data-lang="org"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;- &lt;/span&gt;&lt;span class="ge"&gt;/italic/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;- &lt;/span&gt;&lt;span class="gs"&gt;*bold*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;- &lt;/span&gt;&lt;span class="gl"&gt;_underlined_&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;- &lt;/span&gt;&lt;span class="nc"&gt;=verbatim=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;- &lt;/span&gt;&lt;span class="nc"&gt;~code~&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;- &lt;/span&gt;&lt;span class="gd"&gt;+strike-through+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;will be rendered as:&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/org-mode-unicorn.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>org</category><category>notes</category></item><item><title>Writing Guide (org + ox-hugo)</title><link>https://k4i.top/posts/writing-guide--org-plus-ox-hugo/</link><pubDate>Sun, 05 Dec 2021 20:58:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 21 Feb 2026 23:14:57 +0800</atom:modified><guid>https://k4i.top/posts/writing-guide--org-plus-ox-hugo/</guid><description>&lt;p&gt;I&amp;rsquo;ve recently switched to &lt;a href="https://orgmode.org/"&gt;org mode&lt;/a&gt;, now I write all my blogs in org mode (&lt;a href="https://github.com/sky-bro/blog-src/blob/master/content-org/"&gt;blog-src/content-org/&lt;/a&gt;), and export them to &lt;code&gt;.md&lt;/code&gt; files (&lt;a href="https://github.com/sky-bro/blog-src/blob/master/content/"&gt;blog-src/content/&lt;/a&gt;) with ox-hugo.&lt;/p&gt;
+&lt;p&gt;So instead of editing &lt;code&gt;.md&lt;/code&gt; files under &lt;code&gt;content&lt;/code&gt; folder, now I write &lt;code&gt;.org&lt;/code&gt; files stored under &lt;code&gt;content-org&lt;/code&gt; folder.&lt;/p&gt;
+&lt;h2 id="create-new-post"&gt;Create new post&lt;/h2&gt;
+&lt;p&gt;Invoking org-capture-templates (&lt;code&gt;SPC o c&lt;/code&gt;) function, and choose hugo post template, as shown in Figure &lt;a href="https://k4i.top/posts/writing-guide--org-plus-ox-hugo/#figure--fig:org-capture-template-ox-hugo"&gt;1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id="figure--fig:org-capture-template-ox-hugo"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://k4i.top/images/posts/Writing-Guide-Org/org-capture-template-ox-hugo.gif"
+alt="Figure 1: creating new post with org-capture-template"&gt;&lt;figcaption&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1: &lt;/span&gt;creating new post with org-capture-template&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/org-mode-unicorn.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>hugo</category><category>org</category><category>notes</category></item></channel></rss>

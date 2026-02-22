@@ -1,5 +1,147 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Terminal on k4i's blog</title><link>https://k4i.top/tags/terminal/</link><description>Recent content in Terminal on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> .</copyright><lastBuildDate>Sat, 26 Mar 2022 19:19:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/terminal/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux Notes</title><link>https://k4i.top/posts/tmux-notes/</link><pubDate>Sat, 26 Mar 2022 19:19:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/tmux-notes/</guid><description>.tmux.conf My most up to date config file is at github: .dotfiles/.tmux.conf, and for better experience, I strongly suggest you use Capslock as your Ctrl key (I set C-a as my prefix instead of C-b).
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 # chenge prefix from =C-b= to =C-a= set -g prefix C-a unbind C-b bind C-a send-prefix # better window split, with &amp;#34;-&amp;#34; and &amp;#34;|&amp;#34; unbind &amp;#39;&amp;#34;&amp;#39; # &amp;#34; bind - splitw -v -c &amp;#39;#{pane_current_path}&amp;#39; unbind % bind | splitw -h -c &amp;#39;#{pane_current_path}&amp;#39; # enable mouse set-option -g mouse on # use hjkl to # change focus bind -r k select-pane -U bind -r j select-pane -D bind -r h select-pane -L bind -r l select-pane -R # resize pane bind -r ^k resizep -U 2 # upward (prefix Ctrl+k) bind -r ^j resizep -D 2 # downward (prefix Ctrl+j) bind -r ^h resizep -L 2 # to the left (prefix Ctrl+h) bind -r ^l resizep -R 2 # to the right (prefix Ctrl+l) # enable vi motions setw -g mode-keys vi # select, copy with v, y bind -T copy-mode-vi v send-keys -X begin-selection bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel set -g base-index 1 set -g pane-base-index 1 set -g status-interval 1 set -g status-justify left setw -g monitor-activity on # Set default term to xterm # https://github.</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/tmux-logo.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>cheatsheet</category><category>terminal</category><category>tmux</category><category>notes</category></item><item><title>Terminal &amp; Shell Setup (st &amp; zsh)</title><link>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</link><pubDate>Thu, 09 Dec 2021 00:09:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</guid><description>My terminal emulator is st (simple terminal) from LukeSmith1, and my shell is zsh (with ohmyzsh2).
-Dependencies dmenu fzf3 pywal4 ohmyzsh 1 2 # . start-proxy 1081 socks5h sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; Then config or restore5 your ~/.zshrc file.
-1 dotfiles checkout ~/.zshrc colors and themes p10k I use powerlevel10k6 as my zsh theme.
-clone the repository: 1 2 3 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k # for chinese users, recommend: # git clone --depth=1 https://gitee.</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/terminal.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>shell</category><category>terminal</category><category>notes</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Terminal on k4i's blog</title><link>https://k4i.top/tags/terminal/</link><description>Recent content in Terminal on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of &lt;a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright><lastBuildDate>Sat, 26 Mar 2022 19:19:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/terminal/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux Notes</title><link>https://k4i.top/posts/tmux-notes/</link><pubDate>Sat, 26 Mar 2022 19:19:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/tmux-notes/</guid><description>&lt;h2 id="dot-tmux-dot-conf"&gt;.tmux.conf&lt;/h2&gt;
+&lt;p&gt;My most up to date config file is at github: &lt;a href="https://github.com/sky-bro/.dotfiles/blob/master/.tmux.conf"&gt;.dotfiles/.tmux.conf&lt;/a&gt;, and for better experience, I strongly suggest you use &lt;code&gt;Capslock&lt;/code&gt; as your &lt;code&gt;Ctrl&lt;/code&gt; key (I set &lt;code&gt;C-a&lt;/code&gt; as my prefix instead of &lt;code&gt;C-b&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cfg" data-lang="cfg"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# chenge prefix from =C-b= to =C-a=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set -g prefix C-a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;unbind C-b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind C-a send-prefix&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# better window split, with &amp;#34;-&amp;#34; and &amp;#34;|&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;unbind &amp;#39;&amp;#34;&amp;#39; # &amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind - splitw -v -c &amp;#39;#{pane_current_path}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;unbind %&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind | splitw -h -c &amp;#39;#{pane_current_path}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# enable mouse&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set-option -g mouse on&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# use hjkl to&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# change focus&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r k select-pane -U&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r j select-pane -D&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r h select-pane -L&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r l select-pane -R&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# resize pane&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r ^k resizep -U 2 # upward (prefix Ctrl+k)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r ^j resizep -D 2 # downward (prefix Ctrl+j)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r ^h resizep -L 2 # to the left (prefix Ctrl+h)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -r ^l resizep -R 2 # to the right (prefix Ctrl+l)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# enable vi motions&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;setw -g mode-keys vi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# select, copy with v, y&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -T copy-mode-vi v send-keys -X begin-selection&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set -g base-index 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set -g pane-base-index 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set -g status-interval 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set -g status-justify left&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;setw -g monitor-activity on&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Set default term to xterm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# https://github.com/zsh-users/zsh-autosuggestions/issues/229&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# https://stackoverflow.com/questions/18600188/home-end-keys-do-not-work-in-tmux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;set -g default-terminal screen-256color&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="key-bindings"&gt;Key Bindings&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;prefix&lt;/code&gt; means &lt;code&gt;C-b&lt;/code&gt; by default, or &lt;code&gt;C-a&lt;/code&gt; for me.&lt;br /&gt;
+list all shortcust: &lt;code&gt;prefix ?&lt;/code&gt;&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/tmux-logo.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>cheatsheet</category><category>terminal</category><category>tmux</category><category>notes</category></item><item><title>Terminal &amp; Shell Setup (st &amp; zsh)</title><link>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</link><pubDate>Thu, 09 Dec 2021 00:09:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Sat, 25 Mar 2023 23:17:59 +0800</atom:modified><guid>https://k4i.top/posts/terminal-and-shell-setup--st-and-zsh/</guid><description>&lt;p&gt;My terminal emulator is st (simple terminal) from LukeSmith&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;, and my shell is zsh (with ohmyzsh&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;h2 id="dependencies"&gt;Dependencies&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;dmenu&lt;/li&gt;
+&lt;li&gt;fzf&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;pywal&lt;sup id="fnref:4"&gt;&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="ohmyzsh"&gt;ohmyzsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# . start-proxy 1081 socks5h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sh -c &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Then config or restore&lt;sup id="fnref:5"&gt;&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref"&gt;5&lt;/a&gt;&lt;/sup&gt; your &lt;code&gt;~/.zshrc&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotfiles checkout ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="colors-and-themes"&gt;colors and themes&lt;/h2&gt;
+&lt;h3 id="p10k"&gt;p10k&lt;/h3&gt;
+&lt;p&gt;I use powerlevel10k&lt;sup id="fnref:6"&gt;&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref"&gt;6&lt;/a&gt;&lt;/sup&gt; as my zsh theme.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;clone the repository:
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone --depth&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; https://github.com/romkatv/powerlevel10k.git &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ZSH_CUSTOM&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="p"&gt;/.oh-my-zsh/custom&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/themes/powerlevel10k
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# for chinese users, recommend:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;set &lt;code&gt;ZSH_THEME=&amp;quot;powerlevel10k/powerlevel10k&amp;quot;&lt;/code&gt; in &lt;code&gt;~/.zshrc&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;configure with &lt;code&gt;p10k&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="xresources-and-pywal"&gt;Xresources and pywal&lt;/h3&gt;
+&lt;p&gt;you can define your color scheme in &lt;code&gt;~/.Xresources&lt;/code&gt; file, and load it with &lt;code&gt;xrdb ~/.Xresources&lt;/code&gt;.&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/terminal.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>shell</category><category>terminal</category><category>notes</category></item></channel></rss>
