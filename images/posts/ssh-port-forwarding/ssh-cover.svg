@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1b2a"/>
+      <stop offset="100%" style="stop-color:#1b2838"/>
+    </linearGradient>
+    <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00bcd4;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#4caf50;stop-opacity:0.8"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Terminal Window -->
+  <g filter="url(#shadow)">
+    <rect x="350" y="180" width="500" height="280" rx="10" fill="#1e1e2e" stroke="#44475a" stroke-width="2"/>
+    <!-- Terminal title bar -->
+    <rect x="350" y="180" width="500" height="30" rx="10" fill="#44475a"/>
+    <rect x="350" y="195" width="500" height="15" fill="#44475a"/>
+    <circle cx="375" cy="195" r="5" fill="#ff5f56"/>
+    <circle cx="395" cy="195" r="5" fill="#ffbd2e"/>
+    <circle cx="415" cy="195" r="5" fill="#27c93f"/>
+    <!-- Terminal content -->
+    <text x="380" y="250" font-family="monospace" font-size="22" fill="#50fa7b">$ ssh -R 8080:localhost:3000</text>
+    <text x="380" y="285" font-family="monospace" font-size="22" fill="#50fa7b">$ ssh -L 5432:db.internal:5432</text>
+    <text x="380" y="320" font-family="monospace" font-size="22" fill="#8be9fd">Established connection...</text>
+    <text x="380" y="355" font-family="monospace" font-size="22" fill="#f1fa8c">Forwarding active</text>
+    <!-- Blinking cursor -->
+    <text x="380" y="390" font-family="monospace" font-size="22" fill="#50fa7b">$</text>
+    <rect x="398" y="374" width="12" height="20" fill="#50fa7b" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0;0.8" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Network flow lines -->
+  <g filter="url(#glow)">
+    <path d="M 100 315 Q 225 200 350 280" stroke="#00bcd4" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+    <path d="M 100 340 Q 225 400 350 340" stroke="#4caf50" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+    <path d="M 850 280 Q 975 200 1100 315" stroke="#00bcd4" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+    <path d="M 850 340 Q 975 400 1100 340" stroke="#4caf50" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+  </g>
+
+  <!-- Port labels -->
+  <g font-family="monospace" font-size="16" fill="#00bcd4" text-anchor="middle">
+    <text x="150" y="290">:3000</text>
+    <text x="150" y="355">:8080</text>
+    <text x="1050" y="290">:5432</text>
+    <text x="1050" y="355">:6379</text>
+  </g>
+
+  <!-- SSH Shield icon -->
+  <g transform="translate(600, 80)" filter="url(#glow)">
+    <path d="M 0 -40 L 35 -20 L 35 15 C 35 40 0 60 0 60 C 0 60 -35 40 -35 15 L -35 -20 Z" fill="none" stroke="#4caf50" stroke-width="2.5"/>
+    <text x="0" y="10" font-family="monospace" font-size="24" fill="#4caf50" text-anchor="middle" font-weight="bold">SSH</text>
+  </g>
+
+  <!-- Small port indicators -->
+  <g font-family="monospace" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.3">
+    <text x="200" y="150">22</text>
+    <text x="1000" y="150">22</text>
+  </g>
+</svg>

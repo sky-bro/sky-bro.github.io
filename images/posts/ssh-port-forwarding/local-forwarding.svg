@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa"/>
+      <stop offset="100%" style="stop-color:#e9ecef"/>
+    </linearGradient>
+    <linearGradient id="ssh-tunnel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4caf50"/>
+      <stop offset="100%" style="stop-color:#8bc34a"/>
+    </linearGradient>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4caf50"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff9800"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="400" rx="8" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="18" fill="#333" text-anchor="middle" font-weight="bold">SSH Local Port Forwarding (-L)</text>
+
+  <!-- Local Machine Box -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="100" width="220" height="200" rx="10" fill="#ffffff" stroke="#2196f3" stroke-width="2"/>
+    <rect x="50" y="100" width="220" height="35" rx="10" fill="#2196f3"/>
+    <rect x="50" y="120" width="220" height="15" fill="#2196f3"/>
+    <!-- Laptop icon -->
+    <rect x="70" y="108" width="20" height="14" rx="2" fill="white" opacity="0.9"/>
+    <rect x="65" y="122" width="30" height="3" rx="1" fill="white" opacity="0.9"/>
+    <text x="100" y="120" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">Local Machine</text>
+  </g>
+
+  <!-- SSH Server Box -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="100" width="220" height="200" rx="10" fill="#ffffff" stroke="#4caf50" stroke-width="2"/>
+    <rect x="340" y="100" width="220" height="35" rx="10" fill="#4caf50"/>
+    <rect x="340" y="120" width="220" height="15" fill="#4caf50"/>
+    <!-- Server icon -->
+    <rect x="360" y="107" width="18" height="6" rx="1" fill="white" opacity="0.9"/>
+    <rect x="360" y="115" width="18" height="6" rx="1" fill="white" opacity="0.9"/>
+    <circle cx="364" cy="110" r="1.5" fill="#4caf50"/>
+    <circle cx="364" cy="118" r="1.5" fill="#4caf50"/>
+    <text x="388" y="120" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">SSH Server</text>
+  </g>
+
+  <!-- Remote Service Box -->
+  <g filter="url(#shadow)">
+    <rect x="630" y="100" width="220" height="200" rx="10" fill="#ffffff" stroke="#ff9800" stroke-width="2"/>
+    <rect x="630" y="100" width="220" height="35" rx="10" fill="#ff9800"/>
+    <rect x="630" y="120" width="220" height="15" fill="#ff9800"/>
+    <!-- Database icon -->
+    <ellipse cx="650" cy="110" rx="10" ry="5" fill="white" opacity="0.9"/>
+    <path d="M 640 110 L 640 118 C 640 121, 660 121, 660 118 L 660 110" fill="white" opacity="0.9"/>
+    <text x="670" y="120" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">Remote Service</text>
+  </g>
+
+  <!-- SSH Tunnel Arrow (Local -> SSH Server) -->
+  <line x1="270" y1="200" x2="340" y2="200" stroke="#4caf50" stroke-width="3" stroke-dasharray="8,4" marker-end="url(#arrow-green)"/>
+  <text x="305" y="190" font-family="monospace" font-size="12" fill="#4caf50" text-anchor="middle" font-weight="bold">SSH (port 22)</text>
+
+  <!-- Forward Arrow (SSH Server -> Remote Service) -->
+  <line x1="560" y1="200" x2="630" y2="200" stroke="#ff9800" stroke-width="3" marker-end="url(#arrow-orange)"/>
+  <text x="595" y="190" font-family="Arial, sans-serif" font-size="12" fill="#ff9800" text-anchor="middle">Forward</text>
+
+  <!-- Port labels inside boxes -->
+  <g font-family="monospace" font-size="13" text-anchor="middle">
+    <!-- Local Machine ports -->
+    <text x="160" y="170" fill="#666">User application</text>
+    <text x="160" y="195" fill="#333" font-size="15" font-weight="bold">connects to</text>
+    <rect x="100" y="210" width="120" height="30" rx="6" fill="#e3f2fd" stroke="#2196f3" stroke-width="1"/>
+    <text x="160" y="230" fill="#1565c0" font-size="14" font-weight="bold">localhost:5432</text>
+    <text x="160" y="270" fill="#999" font-size="11">(-L bind address)</text>
+
+    <!-- SSH Server -->
+    <text x="450" y="170" fill="#666">Forwards traffic to</text>
+    <rect x="390" y="210" width="120" height="30" rx="6" fill="#e8f5e9" stroke="#4caf50" stroke-width="1"/>
+    <text x="450" y="230" fill="#2e7d32" font-size="13" font-weight="bold">db.internal:5432</text>
+    <text x="450" y="270" fill="#999" font-size="11">(target destination)</text>
+
+    <!-- Remote Service -->
+    <text x="740" y="170" fill="#666">Service running</text>
+    <rect x="680" y="210" width="120" height="30" rx="6" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+    <text x="740" y="230" fill="#e65100" font-size="13" font-weight="bold">db:5432</text>
+    <text x="740" y="270" fill="#999" font-size="11">(e.g. PostgreSQL)</text>
+  </g>
+
+  <!-- Flow direction indicator at bottom -->
+  <g transform="translate(100, 340)">
+    <rect x="0" y="0" width="700" height="40" rx="8" fill="#fff" stroke="#ddd" stroke-width="1"/>
+    <text x="350" y="25" font-family="Arial, sans-serif" font-size="13" fill="#555" text-anchor="middle">
+      <tspan fill="#2196f3" font-weight="bold">localhost:5432</tspan>
+      <tspan fill="#999"> --[user connects]--> </tspan>
+      <tspan fill="#4caf50" font-weight="bold">SSH Tunnel</tspan>
+      <tspan fill="#999"> --[forwarded]--> </tspan>
+      <tspan fill="#ff9800" font-weight="bold">db-server.internal:5432</tspan>
+    </text>
+  </g>
+
+  <!-- Command example -->
+  <g transform="translate(100, 325)">
+    <text x="350" y="0" font-family="monospace" font-size="11" fill="#666" text-anchor="middle">
+      ssh -L 5432:db-server.internal:5432 user@jump_host
+    </text>
+  </g>
+</svg>
