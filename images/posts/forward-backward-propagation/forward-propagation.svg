@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 200" font-family="monospace" font-size="13">
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="425" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">Forward Propagation</text>
+
+  <!-- Input -->
+  <rect x="10" y="50" width="100" height="110" rx="6" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="60" y="80" text-anchor="middle" font-weight="bold" fill="#0369a1">Input</text>
+  <text x="60" y="105" text-anchor="middle" fill="#333">a⁽¹⁾ = x</text>
+  <text x="60" y="130" text-anchor="middle" fill="#666" font-size="11">[x₁,x₂,x₃]ᵀ</text>
+
+  <!-- Arrow -->
+  <line x1="110" y1="105" x2="175" y2="105" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="142" y="50" text-anchor="middle" fill="#2563eb" font-size="11">W⁽²⁾, b⁽²⁾</text>
+
+  <!-- Layer 2 -->
+  <rect x="175" y="50" width="180" height="110" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="265" y="80" text-anchor="middle" font-weight="bold" fill="#6d28d9">Layer 2</text>
+  <text x="265" y="108" text-anchor="middle" fill="#333">z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾</text>
+  <text x="265" y="133" text-anchor="middle" fill="#333">a⁽²⁾ = σ(z⁽²⁾)</text>
+
+  <!-- Arrow -->
+  <line x1="355" y1="105" x2="420" y2="105" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="387" y="50" text-anchor="middle" fill="#2563eb" font-size="11">W⁽³⁾, b⁽³⁾</text>
+
+  <!-- Layer 3 -->
+  <rect x="420" y="50" width="180" height="110" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="510" y="80" text-anchor="middle" font-weight="bold" fill="#6d28d9">Layer 3</text>
+  <text x="510" y="108" text-anchor="middle" fill="#333">z⁽³⁾ = W⁽³⁾a⁽²⁾ + b⁽³⁾</text>
+  <text x="510" y="133" text-anchor="middle" fill="#333">a⁽³⁾ = σ(z⁽³⁾)</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="105" x2="635" y2="105" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="617" y="50" text-anchor="middle" fill="#2563eb" font-size="11">ŷ</text>
+
+  <!-- Output -->
+  <rect x="635" y="50" width="115" height="110" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="692" y="80" text-anchor="middle" font-weight="bold" fill="#15803d">Output</text>
+  <text x="692" y="108" text-anchor="middle" fill="#333">ŷ = a⁽ᴸ⁾</text>
+  <text x="692" y="133" text-anchor="middle" fill="#333">C = ½‖ŷ-y‖²</text>
+
+  <!-- Arrow to Loss -->
+  <line x1="750" y1="105" x2="770" y2="105" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Loss -->
+  <rect x="770" y="65" width="70" height="80" rx="6" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="805" y="95" text-anchor="middle" font-weight="bold" fill="#b91c1c">Loss</text>
+  <text x="805" y="120" text-anchor="middle" fill="#333" font-size="12">C(θ)</text>
+</svg>

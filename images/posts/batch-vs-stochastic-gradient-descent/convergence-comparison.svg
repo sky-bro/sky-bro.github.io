@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" font-family="monospace" font-size="12">
+  <!-- Title -->
+  <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Convergence: BGD vs SGD vs Mini-Batch</text>
+
+  <!-- Axes -->
+  <line x1="80" y1="60" x2="80" y2="340" stroke="#333" stroke-width="1.5"/>
+  <line x1="80" y1="340" x2="660" y2="340" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Y-axis labels -->
+  <text x="70" y="65" text-anchor="end" fill="#666" font-size="10">Loss</text>
+  <text x="75" y="70" text-anchor="end" fill="#999" font-size="9">high</text>
+  <text x="75" y="344" text-anchor="end" fill="#999" font-size="9">low</text>
+
+  <!-- X-axis label -->
+  <text x="370" y="380" text-anchor="middle" fill="#666" font-size="10">Iterations →</text>
+
+  <!-- Grid lines -->
+  <line x1="80" y1="130" x2="660" y2="130" stroke="#e5e5e5" stroke-width="0.5"/>
+  <line x1="80" y1="200" x2="660" y2="200" stroke="#e5e5e5" stroke-width="0.5"/>
+  <line x1="80" y1="270" x2="660" y2="270" stroke="#e5e5e5" stroke-width="0.5"/>
+
+  <!-- BGD: smooth exponential decay -->
+  <path d="M 80 75 C 120 75, 160 90, 200 120 C 250 160, 300 200, 360 240 C 420 280, 480 305, 550 320 C 600 330, 640 335, 660 337"
+        fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- SGD: noisy descent with oscillations -->
+  <path d="M 80 75 L 100 110 L 115 65 L 135 130 L 150 95 L 170 155 L 185 120 L 205 180 L 220 140 L 240 200 L 255 165 L 275 225 L 290 190 L 310 250 L 325 215 L 345 265 L 360 240 L 380 280 L 395 255 L 415 295 L 430 270 L 450 305 L 465 285 L 485 315 L 500 295 L 520 320 L 535 305 L 555 325 L 570 315 L 590 330 L 605 322 L 625 335 L 640 328 L 660 335"
+        fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Mini-Batch: moderately noisy, converges faster -->
+  <path d="M 80 75 C 120 78, 155 100, 190 135 L 200 110 L 215 145 L 230 125 L 250 160 L 265 140 L 285 180 L 300 165 L 320 200 L 335 185 L 355 220 L 370 210 L 390 240 L 405 230 L 425 255 L 440 248 L 460 270 L 475 262 L 495 280 L 510 275 L 530 290 L 545 285 L 565 298 L 580 293 L 600 305 L 620 300 L 640 310 L 660 312"
+        fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Legend -->
+  <rect x="450" y="60" width="200" height="80" rx="4" fill="#fafafa" stroke="#ddd" stroke-width="1"/>
+  <line x1="460" y1="80" x2="490" y2="80" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="495" y="84" fill="#333">Batch Gradient Descent</text>
+  <line x1="460" y1="100" x2="490" y2="100" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="495" y="104" fill="#333">Stochastic Gradient Descent</text>
+  <line x1="460" y1="120" x2="490" y2="120" stroke="#16a34a" stroke-width="2"/>
+  <text x="495" y="124" fill="#333">Mini-Batch Gradient Descent</text>
+</svg>
