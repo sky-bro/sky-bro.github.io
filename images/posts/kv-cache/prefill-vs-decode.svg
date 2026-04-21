@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="monospace" font-size="14">
+  <text x="400" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Prefill vs Decode: Two Phases of LLM Inference</text>
+
+  <!-- ====== PREFILL ====== -->
+  <text x="200" y="70" text-anchor="middle" font-size="14" font-weight="bold" fill="#2980b9">Phase 1: Prefill (Prompt Processing)</text>
+
+  <!-- prompt tokens -->
+  <text x="30" y="100" font-size="12" font-weight="bold">Prompt:</text>
+  <rect x="95" y="88" width="50" height="24" rx="3" fill="#3498db" opacity="0.4"/>
+  <text x="120" y="104" text-anchor="middle" font-size="11">token₁</text>
+  <rect x="150" y="88" width="50" height="24" rx="3" fill="#3498db" opacity="0.4"/>
+  <text x="175" y="104" text-anchor="middle" font-size="11">token₂</text>
+  <rect x="205" y="88" width="50" height="24" rx="3" fill="#3498db" opacity="0.4"/>
+  <text x="230" y="104" text-anchor="middle" font-size="11">token₃</text>
+  <text x="275" y="104" font-size="11" fill="#666">…</text>
+  <rect x="300" y="88" width="50" height="24" rx="3" fill="#3498db" opacity="0.4"/>
+  <text x="325" y="104" text-anchor="middle" font-size="11">tokenₙ</text>
+
+  <!-- parallel arrow -->
+  <line x1="220" y1="115" x2="220" y2="145" stroke="#2980b9" stroke-width="2" marker-end="url(#arrowhead2)"/>
+  <text x="235" y="135" font-size="11" fill="#2980b9" font-weight="bold">parallel</text>
+
+  <!-- KV cache -->
+  <text x="30" y="170" font-size="12" font-weight="bold">KV Cache:</text>
+  <rect x="95" y="158" width="50" height="24" rx="3" fill="#27ae60" opacity="0.3"/>
+  <text x="120" y="174" text-anchor="middle" font-size="10">k₁,v₁</text>
+  <rect x="150" y="158" width="50" height="24" rx="3" fill="#27ae60" opacity="0.3"/>
+  <text x="175" y="174" text-anchor="middle" font-size="10">k₂,v₂</text>
+  <rect x="205" y="158" width="50" height="24" rx="3" fill="#27ae60" opacity="0.3"/>
+  <text x="230" y="174" text-anchor="middle" font-size="10">k₃,v₃</text>
+  <text x="275" y="174" font-size="11" fill="#666">…</text>
+  <rect x="300" y="158" width="50" height="24" rx="3" fill="#27ae60" opacity="0.3"/>
+  <text x="325" y="174" text-anchor="middle" font-size="10">kₙ,vₙ</text>
+
+  <text x="380" y="174" font-size="11" fill="#27ae60" font-weight="bold">← all prompt KV pairs built in one pass</text>
+
+  <text x="200" y="210" text-anchor="middle" font-size="11" fill="#666">compute-bound: all prompt tokens processed simultaneously</text>
+
+  <!-- ====== DIVIDER ====== -->
+  <line x1="50" y1="235" x2="750" y2="235" stroke="#ccc" stroke-width="1" stroke-dasharray="5,5"/>
+
+  <!-- ====== DECODE ====== -->
+  <text x="200" y="270" text-anchor="middle" font-size="14" font-weight="bold" fill="#e67e22">Phase 2: Decode (Token Generation)</text>
+
+  <!-- decode step t -->
+  <text x="30" y="300" font-size="12" font-weight="bold">Step t:</text>
+
+  <!-- existing cache -->
+  <rect x="95" y="288" width="200" height="24" rx="3" fill="#3498db" opacity="0.2"/>
+  <text x="195" y="304" text-anchor="middle" font-size="10">KV cache: k₁,v₁ … kₜ₋₁,vₜ₋₁</text>
+
+  <!-- new token -->
+  <rect x="300" y="288" width="55" height="24" rx="3" fill="#e67e22" opacity="0.4"/>
+  <text x="327" y="304" text-anchor="middle" font-size="10">tokenₜ</text>
+
+  <!-- arrows -->
+  <line x1="200" y1="315" x2="340" y2="330" stroke="#2980b9" stroke-width="1.5" marker-end="url(#arrowhead2)"/>
+  <text x="210" y="330" font-size="10" fill="#2980b9">read cache</text>
+  <line x1="327" y1="315" x2="340" y2="330" stroke="#e67e22" stroke-width="1.5" marker-end="url(#arrowhead2)"/>
+  <text x="340" y="330" font-size="10" fill="#e67e22">compute qₜ,kₜ,vₜ</text>
+
+  <!-- attention -->
+  <rect x="395" y="320" width="110" height="24" rx="3" fill="#9b59b6" opacity="0.3"/>
+  <text x="450" y="336" text-anchor="middle" font-size="10">attention → tokenₜ₊₁</text>
+
+  <!-- append -->
+  <line x1="510" y1="332" x2="560" y2="332" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arrowhead2)"/>
+  <text x="520" y="326" font-size="10" fill="#27ae60">append</text>
+
+  <!-- updated cache -->
+  <rect x="565" y="320" width="160" height="24" rx="3" fill="#27ae60" opacity="0.3"/>
+  <text x="645" y="336" text-anchor="middle" font-size="10">k₁,v₁ … kₜ₋₁,vₜ₋₁, kₜ,vₜ</text>
+
+  <text x="400" y="375" text-anchor="middle" font-size="11" fill="#666">memory-bandwidth-bound: each step reads the entire growing cache, computes one new token</text>
+
+  <!-- legend -->
+  <rect x="620" y="288" width="16" height="16" rx="3" fill="#3498db" opacity="0.2"/>
+  <text x="645" y="301" font-size="11" fill="#333">cached KV (read)</text>
+  <rect x="620" y="313" width="16" height="16" rx="3" fill="#e67e22" opacity="0.4"/>
+  <text x="645" y="326" font-size="11" fill="#333">new token (compute)</text>
+  <rect x="620" y="338" width="16" height="16" rx="3" fill="#27ae60" opacity="0.3"/>
+  <text x="645" y="351" font-size="11" fill="#333">cache (append)</text>
+
+  <defs>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+</svg>
