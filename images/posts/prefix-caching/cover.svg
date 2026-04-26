@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#021208"/>
+      <stop offset="100%" stop-color="#041a0c"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="nodeglow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Tree edges — drawn before nodes so nodes appear on top -->
+
+  <!-- Root → L1-left -->
+  <line x1="256" y1="88" x2="144" y2="200" stroke="#20c060" stroke-width="4" filter="url(#glow)" stroke-linecap="round"/>
+  <!-- Root → L1-right -->
+  <line x1="256" y1="88" x2="368" y2="200" stroke="#20c060" stroke-width="4" filter="url(#glow)" stroke-linecap="round"/>
+
+  <!-- L1-left → L2-left-left -->
+  <line x1="144" y1="200" x2="80"  y2="320" stroke="#18a050" stroke-width="3.5" filter="url(#glow)" stroke-linecap="round"/>
+  <!-- L1-left → L2-left-right (shared, brighter) -->
+  <line x1="144" y1="200" x2="208" y2="320" stroke="#30e080" stroke-width="4.5" filter="url(#glow)" stroke-linecap="round"/>
+
+  <!-- L1-right → L2-right-left (shared, brighter) -->
+  <line x1="368" y1="200" x2="304" y2="320" stroke="#30e080" stroke-width="4.5" filter="url(#glow)" stroke-linecap="round"/>
+  <!-- L1-right → L2-right-right -->
+  <line x1="368" y1="200" x2="432" y2="320" stroke="#18a050" stroke-width="3.5" filter="url(#glow)" stroke-linecap="round"/>
+
+  <!-- L2-left-right → L3 leaf -->
+  <line x1="208" y1="320" x2="176" y2="424" stroke="#20c060" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+  <line x1="208" y1="320" x2="240" y2="424" stroke="#20c060" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+
+  <!-- L2-right-left → L3 leaf -->
+  <line x1="304" y1="320" x2="288" y2="424" stroke="#20c060" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+  <line x1="304" y1="320" x2="320" y2="424" stroke="#20c060" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+
+  <!-- Root node -->
+  <circle cx="256" cy="80" r="28" fill="#0a3d1a" stroke="#30e080" stroke-width="3.5" filter="url(#nodeglow)"/>
+  <circle cx="256" cy="80" r="16" fill="#20c060"/>
+
+  <!-- L1 nodes -->
+  <circle cx="144" cy="200" r="24" fill="#0a3d1a" stroke="#30e080" stroke-width="3" filter="url(#nodeglow)"/>
+  <circle cx="144" cy="200" r="13" fill="#1ab050"/>
+
+  <circle cx="368" cy="200" r="24" fill="#0a3d1a" stroke="#30e080" stroke-width="3" filter="url(#nodeglow)"/>
+  <circle cx="368" cy="200" r="13" fill="#1ab050"/>
+
+  <!-- L2 nodes -->
+  <!-- dim nodes (unique paths) -->
+  <circle cx="80"  cy="320" r="19" fill="#062010" stroke="#14803a" stroke-width="2.5"/>
+  <circle cx="80"  cy="320" r="10" fill="#14803a"/>
+
+  <circle cx="432" cy="320" r="19" fill="#062010" stroke="#14803a" stroke-width="2.5"/>
+  <circle cx="432" cy="320" r="10" fill="#14803a"/>
+
+  <!-- bright nodes (shared paths — cache hits) -->
+  <circle cx="208" cy="320" r="22" fill="#0a3d1a" stroke="#40f090" stroke-width="3.5" filter="url(#nodeglow)"/>
+  <circle cx="208" cy="320" r="12" fill="#30e080"/>
+
+  <circle cx="304" cy="320" r="22" fill="#0a3d1a" stroke="#40f090" stroke-width="3.5" filter="url(#nodeglow)"/>
+  <circle cx="304" cy="320" r="12" fill="#30e080"/>
+
+  <!-- L3 leaf nodes -->
+  <circle cx="176" cy="424" r="15" fill="#041810" stroke="#18a050" stroke-width="2"/>
+  <circle cx="240" cy="424" r="15" fill="#041810" stroke="#18a050" stroke-width="2"/>
+  <circle cx="288" cy="424" r="15" fill="#041810" stroke="#18a050" stroke-width="2"/>
+  <circle cx="320" cy="424" r="15" fill="#041810" stroke="#18a050" stroke-width="2"/>
+
+  <!-- "cache hit" glow accent on shared nodes -->
+  <circle cx="208" cy="320" r="30" fill="none" stroke="#40f090" stroke-width="1.5" opacity="0.35" filter="url(#glow)"/>
+  <circle cx="304" cy="320" r="30" fill="none" stroke="#40f090" stroke-width="1.5" opacity="0.35" filter="url(#glow)"/>
+</svg>

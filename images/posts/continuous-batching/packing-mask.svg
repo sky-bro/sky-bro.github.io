@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="900" height="360" font-family="'JetBrains Mono',monospace" font-size="12">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="360" fill="url(#bg)" rx="10"/>
+
+  <text x="450" y="26" fill="#8b949e" text-anchor="middle" font-size="13" font-weight="bold">Packing + Block-Diagonal Causal Mask</text>
+  <text x="450" y="44" fill="#6e7681" text-anchor="middle" font-size="11">A (3-token prefill) + B (1-token decode) + C (2-token prefill) → packed into one sequence of length 6</text>
+
+  <!-- ═══ LEFT: Packed sequence ═══ -->
+  <text x="170" y="70" fill="#6e7681" text-anchor="middle" font-size="11" font-weight="bold">packed input X ∈ ℝ^(6×d)</text>
+
+  <!-- tokens as colored boxes -->
+  <!-- A: teal -->
+  <rect x="50"  y="80" width="70" height="40" rx="5" fill="#0a2a3a" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="85"  y="96"  fill="#1ea8d8" text-anchor="middle" font-size="10" font-weight="bold">t₁ᴬ</text>
+  <text x="85"  y="110" fill="#4a8aaa" text-anchor="middle" font-size="9">pos 0</text>
+  <rect x="124" y="80" width="70" height="40" rx="5" fill="#0a2a3a" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="159" y="96"  fill="#1ea8d8" text-anchor="middle" font-size="10" font-weight="bold">t₂ᴬ</text>
+  <text x="159" y="110" fill="#4a8aaa" text-anchor="middle" font-size="9">pos 1</text>
+  <rect x="198" y="80" width="70" height="40" rx="5" fill="#0a2a3a" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="233" y="96"  fill="#1ea8d8" text-anchor="middle" font-size="10" font-weight="bold">t₃ᴬ</text>
+  <text x="233" y="110" fill="#4a8aaa" text-anchor="middle" font-size="9">pos 2</text>
+  <!-- req label -->
+  <text x="144" y="136" fill="#1ea8d8" text-anchor="middle" font-size="10">Req A (prefill)</text>
+  <line x1="50" y1="120" x2="268" y2="120" stroke="#1ea8d8" stroke-width="1" opacity="0.5"/>
+  <line x1="50" y1="120" x2="50" y2="128" stroke="#1ea8d8" stroke-width="1" opacity="0.5"/>
+  <line x1="268" y1="120" x2="268" y2="128" stroke="#1ea8d8" stroke-width="1" opacity="0.5"/>
+
+  <!-- B: green -->
+  <rect x="272" y="80" width="70" height="40" rx="5" fill="#0a2a0a" stroke="#2ea82e" stroke-width="2"/>
+  <text x="307" y="96"  fill="#2ea82e" text-anchor="middle" font-size="10" font-weight="bold">tₜᴮ</text>
+  <text x="307" y="110" fill="#4a8a4a" text-anchor="middle" font-size="9">pos 3</text>
+  <text x="307" y="136" fill="#2ea82e" text-anchor="middle" font-size="10">Req B (decode)</text>
+  <line x1="272" y1="120" x2="342" y2="120" stroke="#2ea82e" stroke-width="1" opacity="0.5"/>
+  <line x1="272" y1="120" x2="272" y2="128" stroke="#2ea82e" stroke-width="1" opacity="0.5"/>
+  <line x1="342" y1="120" x2="342" y2="128" stroke="#2ea82e" stroke-width="1" opacity="0.5"/>
+
+  <!-- C: orange -->
+  <rect x="346" y="80" width="70" height="40" rx="5" fill="#2a1008" stroke="#e08040" stroke-width="2"/>
+  <text x="381" y="96"  fill="#e08040" text-anchor="middle" font-size="10" font-weight="bold">t₁ᶜ</text>
+  <text x="381" y="110" fill="#8a4a30" text-anchor="middle" font-size="9">pos 4</text>
+  <rect x="420" y="80" width="70" height="40" rx="5" fill="#2a1008" stroke="#e08040" stroke-width="2"/>
+  <text x="455" y="96"  fill="#e08040" text-anchor="middle" font-size="10" font-weight="bold">t₂ᶜ</text>
+  <text x="455" y="110" fill="#8a4a30" text-anchor="middle" font-size="9">pos 5</text>
+  <text x="418" y="136" fill="#e08040" text-anchor="middle" font-size="10">Req C (prefill)</text>
+  <line x1="346" y1="120" x2="490" y2="120" stroke="#e08040" stroke-width="1" opacity="0.5"/>
+  <line x1="346" y1="120" x2="346" y2="128" stroke="#e08040" stroke-width="1" opacity="0.5"/>
+  <line x1="490" y1="120" x2="490" y2="128" stroke="#e08040" stroke-width="1" opacity="0.5"/>
+
+  <!-- ═══ RIGHT: 6×6 mask ═══ -->
+  <text x="720" y="70" fill="#6e7681" text-anchor="middle" font-size="11" font-weight="bold">Block-diagonal causal mask M</text>
+  <text x="720" y="86" fill="#4a5a6a" text-anchor="middle" font-size="10">0 = attend   −∞ = blocked</text>
+
+  <!-- cell size 44×34, start at (530, 95) -->
+  <!-- Row/col headers -->
+  <text x="534" y="112" fill="#4a5a6a" text-anchor="middle" font-size="9">0</text>
+  <text x="578" y="112" fill="#4a5a6a" text-anchor="middle" font-size="9">1</text>
+  <text x="622" y="112" fill="#4a5a6a" text-anchor="middle" font-size="9">2</text>
+  <text x="666" y="112" fill="#4a5a6a" text-anchor="middle" font-size="9">3</text>
+  <text x="710" y="112" fill="#4a5a6a" text-anchor="middle" font-size="9">4</text>
+  <text x="754" y="112" fill="#4a5a6a" text-anchor="middle" font-size="9">5</text>
+
+  <!-- row 0 (pos 0, Req A) -->
+  <text x="515" y="134" fill="#1ea8d8" text-anchor="middle" font-size="9">0</text>
+  <rect x="512" y="118" width="44" height="28" rx="2" fill="#0a2a3a" stroke="#1a4a6a" stroke-width="0.8"/>
+  <text x="534" y="136" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="556" y="118" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="578" y="136" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="600" y="118" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="622" y="136" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="644" y="118" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="666" y="136" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="688" y="118" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="710" y="136" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="732" y="118" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="754" y="136" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+
+  <!-- row 1 -->
+  <text x="515" y="162" fill="#1ea8d8" text-anchor="middle" font-size="9">1</text>
+  <rect x="512" y="146" width="44" height="28" rx="2" fill="#0a2a3a" stroke="#1a4a6a" stroke-width="0.8"/>
+  <text x="534" y="164" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="556" y="146" width="44" height="28" rx="2" fill="#0a2a3a" stroke="#1a4a6a" stroke-width="0.8"/>
+  <text x="578" y="164" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="600" y="146" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="622" y="164" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="644" y="146" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="666" y="164" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="688" y="146" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="710" y="164" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="732" y="146" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="754" y="164" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+
+  <!-- row 2 -->
+  <text x="515" y="190" fill="#1ea8d8" text-anchor="middle" font-size="9">2</text>
+  <rect x="512" y="174" width="44" height="28" rx="2" fill="#0a2a3a" stroke="#1a4a6a" stroke-width="0.8"/>
+  <text x="534" y="192" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="556" y="174" width="44" height="28" rx="2" fill="#0a2a3a" stroke="#1a4a6a" stroke-width="0.8"/>
+  <text x="578" y="192" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="600" y="174" width="44" height="28" rx="2" fill="#0a2a3a" stroke="#1a4a6a" stroke-width="0.8"/>
+  <text x="622" y="192" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="644" y="174" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="666" y="192" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="688" y="174" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="710" y="192" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="732" y="174" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="754" y="192" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+
+  <!-- row 3 (Req B, green) -->
+  <text x="515" y="218" fill="#2ea82e" text-anchor="middle" font-size="9">3</text>
+  <rect x="512" y="202" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="534" y="220" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="556" y="202" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="578" y="220" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="600" y="202" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="622" y="220" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="644" y="202" width="44" height="28" rx="2" fill="#0a2a0a" stroke="#1a4a1a" stroke-width="0.8"/>
+  <text x="666" y="220" fill="#2ea82e" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="688" y="202" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="710" y="220" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="732" y="202" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="754" y="220" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+
+  <!-- row 4 (Req C, orange) -->
+  <text x="515" y="246" fill="#e08040" text-anchor="middle" font-size="9">4</text>
+  <rect x="512" y="230" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="534" y="248" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="556" y="230" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="578" y="248" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="600" y="230" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="622" y="248" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="644" y="230" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="666" y="248" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="688" y="230" width="44" height="28" rx="2" fill="#2a1008" stroke="#4a2a18" stroke-width="0.8"/>
+  <text x="710" y="248" fill="#e08040" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="732" y="230" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="754" y="248" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+
+  <!-- row 5 -->
+  <text x="515" y="274" fill="#e08040" text-anchor="middle" font-size="9">5</text>
+  <rect x="512" y="258" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="534" y="276" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="556" y="258" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="578" y="276" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="600" y="258" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="622" y="276" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="644" y="258" width="44" height="28" rx="2" fill="#0d1117" stroke="#1e2e3e" stroke-width="0.8"/>
+  <text x="666" y="276" fill="#3a3a4a" text-anchor="middle" font-size="11">−∞</text>
+  <rect x="688" y="258" width="44" height="28" rx="2" fill="#2a1008" stroke="#4a2a18" stroke-width="0.8"/>
+  <text x="710" y="276" fill="#e08040" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+  <rect x="732" y="258" width="44" height="28" rx="2" fill="#2a1008" stroke="#4a2a18" stroke-width="0.8"/>
+  <text x="754" y="276" fill="#e08040" text-anchor="middle" font-size="11" font-weight="bold">0</text>
+
+  <!-- Bracket annotations for blocks -->
+  <rect x="510" y="116" width="136" height="172" rx="3" fill="none" stroke="#1ea8d8" stroke-width="1.5" opacity="0.4"/>
+  <rect x="642" y="200" width="46"  height="30" rx="3" fill="none" stroke="#2ea82e" stroke-width="1.5" opacity="0.4"/>
+  <rect x="686" y="228" width="92"  height="60" rx="3" fill="none" stroke="#e08040" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Block labels -->
+  <text x="578" y="304" fill="#1ea8d8" text-anchor="middle" font-size="10">A-block (3×3)</text>
+  <text x="665" y="304" fill="#2ea82e" text-anchor="middle" font-size="10">B-block (1×1)</text>
+  <text x="732" y="304" fill="#e08040" text-anchor="middle" font-size="10">C-block (2×2)</text>
+
+  <!-- bottom note -->
+  <rect x="50" y="322" width="810" height="28" rx="5" fill="#0a1a10" stroke="#1a3a20" stroke-width="1"/>
+  <text x="455" y="341" fill="#4aaa6a" text-anchor="middle" font-size="11">after softmax: −∞ → 0, so cross-request attention is exactly zero — mathematically equivalent to separate runs</text>
+</svg>

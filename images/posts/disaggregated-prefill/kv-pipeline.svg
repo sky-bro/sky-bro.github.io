@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="'JetBrains Mono',monospace" font-size="12">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+    <linearGradient id="prefillrow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#101850"/>
+      <stop offset="100%" stop-color="#182060"/>
+    </linearGradient>
+    <linearGradient id="xferrow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a0828"/>
+      <stop offset="100%" stop-color="#280c3a"/>
+    </linearGradient>
+    <linearGradient id="decoderow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#100818"/>
+      <stop offset="100%" stop-color="#180c24"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="380" fill="url(#bg)" rx="10"/>
+
+  <text x="450" y="26" fill="#8b949e" text-anchor="middle" font-size="13" font-weight="bold">KV Transfer: Naive vs. Layer-by-Layer Pipelining</text>
+
+  <!-- column x positions: layer cols start at 160, width 70, gap 4 -->
+  <!-- L0=160, L1=234, L2=308, L3=382, L4=456, L5=530, ... let's do 7 layers -->
+
+  <!-- ═══ TOP: Naive (wait for all layers before transfer) ═══ -->
+  <text x="24" y="56" fill="#e05050" font-size="11" font-weight="bold">Naive (all-at-once transfer)</text>
+
+  <!-- row labels -->
+  <text x="70" y="92"  fill="#4080ff" text-anchor="end" font-size="11">Prefill GPU:</text>
+  <text x="70" y="140" fill="#c080ff" text-anchor="end" font-size="11">Transfer:</text>
+  <text x="70" y="188" fill="#ff8020" text-anchor="end" font-size="11">Decode GPU:</text>
+
+  <!-- Prefill: compute all 7 layers sequentially -->
+  <rect x="80"  y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="110" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L0</text>
+  <rect x="144" y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="174" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L1</text>
+  <rect x="208" y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="238" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L2</text>
+  <rect x="272" y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="302" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L3</text>
+  <rect x="336" y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="366" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L4</text>
+  <rect x="400" y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="430" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L5</text>
+  <rect x="464" y="76" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="494" y="95" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L6</text>
+
+  <!-- Transfer: big block covering all after prefill -->
+  <rect x="530" y="124" width="200" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5"/>
+  <text x="630" y="143" fill="#c060ff" text-anchor="middle" font-size="10" font-weight="bold">transfer all KV  (~2.5 GB for 8K prompt)</text>
+
+  <!-- Decode: waits till after transfer -->
+  <rect x="736" y="172" width="60" height="28" rx="4" fill="#301030" stroke="#a040c0" stroke-width="1.5"/>
+  <text x="766" y="191" fill="#d070f0" text-anchor="middle" font-size="10">step 1</text>
+  <rect x="800" y="172" width="60" height="28" rx="4" fill="#301030" stroke="#a040c0" stroke-width="1.5"/>
+  <text x="830" y="191" fill="#d070f0" text-anchor="middle" font-size="10">step 2</text>
+
+  <!-- TTFT annotation -->
+  <line x1="80" y1="210" x2="734" y2="210" stroke="#e05050" stroke-width="1.2"/>
+  <line x1="80" y1="206" x2="80" y2="214" stroke="#e05050" stroke-width="1.2"/>
+  <line x1="734" y1="206" x2="734" y2="214" stroke="#e05050" stroke-width="1.2"/>
+  <text x="407" y="226" fill="#e05050" text-anchor="middle" font-size="11" font-weight="bold">TTFT = T_prefill + T_transfer  (sequential — long!)</text>
+
+  <!-- ═══ BOTTOM: Pipelined ═══ -->
+  <text x="24" y="256" fill="#30c060" font-size="11" font-weight="bold">Pipelined (layer-by-layer transfer)</text>
+
+  <text x="70" y="292" fill="#4080ff" text-anchor="end" font-size="11">Prefill GPU:</text>
+  <text x="70" y="324" fill="#c080ff" text-anchor="end" font-size="11">Transfer:</text>
+  <text x="70" y="356" fill="#ff8020" text-anchor="end" font-size="11">Decode GPU:</text>
+
+  <!-- Prefill layers: each 60px wide -->
+  <rect x="80"  y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="110" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L0</text>
+  <rect x="144" y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="174" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L1</text>
+  <rect x="208" y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="238" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L2</text>
+  <rect x="272" y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="302" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L3</text>
+  <rect x="336" y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="366" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L4</text>
+  <rect x="400" y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="430" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L5</text>
+  <rect x="464" y="276" width="60" height="28" rx="4" fill="#1020a0" stroke="#4060e0" stroke-width="1.5"/>
+  <text x="494" y="295" fill="#8090ff" text-anchor="middle" font-size="10" font-weight="bold">L6</text>
+
+  <!-- Transfer: overlapping with later prefill layers -->
+  <rect x="144" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="174" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L0</text>
+  <rect x="208" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="238" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L1</text>
+  <rect x="272" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="302" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L2</text>
+  <rect x="336" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="366" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L3</text>
+  <rect x="400" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="430" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L4</text>
+  <rect x="464" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="494" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L5</text>
+  <rect x="528" y="308" width="60" height="28" rx="4" fill="#2a0850" stroke="#8030c0" stroke-width="1.5" opacity="0.9"/>
+  <text x="558" y="327" fill="#c060ff" text-anchor="middle" font-size="9">KV_L6</text>
+
+  <!-- Decode: starts earlier (just after enough KV arrives) -->
+  <rect x="596" y="340" width="60" height="28" rx="4" fill="#301030" stroke="#a040c0" stroke-width="1.5"/>
+  <text x="626" y="359" fill="#d070f0" text-anchor="middle" font-size="10">step 1</text>
+  <rect x="660" y="340" width="60" height="28" rx="4" fill="#301030" stroke="#a040c0" stroke-width="1.5"/>
+  <text x="690" y="359" fill="#d070f0" text-anchor="middle" font-size="10">step 2</text>
+
+  <!-- TTFT pipelined annotation -->
+  <line x1="80" y1="376" x2="594" y2="376" stroke="#30c060" stroke-width="1.2"/>
+  <line x1="80" y1="372" x2="80" y2="380" stroke="#30c060" stroke-width="1.2"/>
+  <line x1="594" y1="372" x2="594" y2="380" stroke="#30c060" stroke-width="1.2"/>
+  <text x="337" y="393" fill="#30c060" text-anchor="middle" font-size="11" font-weight="bold">TTFT ≈ T_prefill  (transfer overlaps — much shorter!)</text>
+
+  <!-- overlap highlight band -->
+  <rect x="144" y="270" width="396" height="76" rx="4" fill="#40a060" fill-opacity="0.05" stroke="#30c060" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="342" y="268" fill="#30c060" text-anchor="middle" font-size="9">overlap zone</text>
+</svg>

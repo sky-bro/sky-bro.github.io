@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" width="920" height="400" font-family="'JetBrains Mono',monospace" font-size="13">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="920" height="400" fill="url(#bg)" rx="10"/>
+
+  <!-- divider -->
+  <line x1="460" y1="20" x2="460" y2="380" stroke="#2a3a4a" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- ═══════ LEFT: NAIVE ═══════ -->
+  <text x="195" y="38" fill="#8b949e" text-anchor="middle" font-size="14" font-weight="bold">Naive: Contiguous Allocation</text>
+  <text x="195" y="56" fill="#6e7681" text-anchor="middle" font-size="11">GPU utilization: 20–38%</text>
+
+  <!-- Request A: 3/8 used -->
+  <text x="42" y="90" fill="#8b949e" font-size="12">Req A</text>
+  <rect x="90" y="74" width="72" height="28" rx="3" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <rect x="162" y="74" width="48" height="28" rx="3" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <rect x="210" y="74" width="24" height="28" rx="3" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <!-- wasted -->
+  <rect x="234" y="74" width="126" height="28" rx="3" fill="#1f1008" stroke="#5a2a00" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="297" y="93" fill="#6e4020" text-anchor="middle" font-size="11">wasted (max reserved)</text>
+
+  <!-- Request B: 5/8 used -->
+  <text x="42" y="134" fill="#8b949e" font-size="12">Req B</text>
+  <rect x="90" y="118" width="60" height="28" rx="3" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <rect x="150" y="118" width="60" height="28" rx="3" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <rect x="210" y="118" width="60" height="28" rx="3" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <rect x="270" y="118" width="90" height="28" rx="3" fill="#0c1f0c" stroke="#2a4a2a" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="315" y="137" fill="#2e5a2e" text-anchor="middle" font-size="11">wasted</text>
+
+  <!-- Request C: finished, freed -->
+  <text x="42" y="178" fill="#8b949e" font-size="12">Req C</text>
+  <text x="190" y="178" fill="#6e7681" text-anchor="middle" font-size="11">(finished — freed)</text>
+  <rect x="90" y="162" width="270" height="28" rx="3" fill="#161616" stroke="#303030" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="225" y="181" fill="#3a3a3a" text-anchor="middle" font-size="11">fragmented free space</text>
+
+  <!-- New request D: needs 200px -->
+  <text x="42" y="222" fill="#e06060" font-size="12">Req D</text>
+  <rect x="90" y="206" width="200" height="28" rx="3" fill="#300808" stroke="#903030" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="190" y="225" fill="#e06060" text-anchor="middle" font-size="11">needs 200px — can't fit!</text>
+  <!-- crossed out -->
+  <line x1="90" y1="206" x2="290" y2="234" stroke="#e06060" stroke-width="1.5" opacity="0.5"/>
+  <line x1="290" y1="206" x2="90" y2="234" stroke="#e06060" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- external fragmentation annotation -->
+  <line x1="90" y1="280" x2="360" y2="280" stroke="#6e4020" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="225" y="297" fill="#8b5a30" text-anchor="middle" font-size="11">total free = enough, but no contiguous block</text>
+  <line x1="90" y1="275" x2="90" y2="284" stroke="#6e4020" stroke-width="1"/>
+  <line x1="360" y1="275" x2="360" y2="284" stroke="#6e4020" stroke-width="1"/>
+
+  <!-- Legend left -->
+  <rect x="90" y="318" width="16" height="12" rx="2" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1"/>
+  <text x="112" y="329" fill="#8b949e" font-size="11">used KV</text>
+  <rect x="175" y="318" width="16" height="12" rx="2" fill="#1f1008" stroke="#5a2a00" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="197" y="329" fill="#8b949e" font-size="11">wasted reservation</text>
+
+  <!-- ═══════ RIGHT: PAGED ═══════ -->
+  <text x="690" y="38" fill="#8b949e" text-anchor="middle" font-size="14" font-weight="bold">Paged Attention</text>
+  <text x="690" y="56" fill="#6e7681" text-anchor="middle" font-size="11">GPU utilization: ~96%</text>
+
+  <!-- Block pool grid: 6 cols × 5 rows of 48×44 blocks -->
+  <!-- Row labels -->
+  <text x="478" y="88" fill="#6e7681" font-size="11">Physical Block Pool:</text>
+
+  <!-- block colors: A=teal, B=green, C=purple, free=dark -->
+  <!-- Row 0: B0=A, B1=A, B2=free, B3=B, B4=B, B5=free -->
+  <rect x="480" y="94"  width="46" height="38" rx="5" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <text x="503" y="118" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">A</text>
+  <rect x="530" y="94"  width="46" height="38" rx="5" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <text x="553" y="118" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">A</text>
+  <rect x="580" y="94"  width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="603" y="118" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="630" y="94"  width="46" height="38" rx="5" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <text x="653" y="118" fill="#2ea82e" text-anchor="middle" font-size="11" font-weight="bold">B</text>
+  <rect x="680" y="94"  width="46" height="38" rx="5" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <text x="703" y="118" fill="#2ea82e" text-anchor="middle" font-size="11" font-weight="bold">B</text>
+  <rect x="730" y="94"  width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="753" y="118" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="780" y="94"  width="46" height="38" rx="5" fill="#3a1a5a" stroke="#8040c0" stroke-width="1.5"/>
+  <text x="803" y="118" fill="#a060e0" text-anchor="middle" font-size="11" font-weight="bold">C</text>
+  <rect x="830" y="94"  width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="853" y="118" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+
+  <!-- Row 1 -->
+  <rect x="480" y="136" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="503" y="160" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="530" y="136" width="46" height="38" rx="5" fill="#3a1a5a" stroke="#8040c0" stroke-width="1.5"/>
+  <text x="553" y="160" fill="#a060e0" text-anchor="middle" font-size="11" font-weight="bold">C</text>
+  <rect x="580" y="136" width="46" height="38" rx="5" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <text x="603" y="160" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">A</text>
+  <rect x="630" y="136" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="653" y="160" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="680" y="136" width="46" height="38" rx="5" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <text x="703" y="160" fill="#2ea82e" text-anchor="middle" font-size="11" font-weight="bold">B</text>
+  <rect x="730" y="136" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="753" y="160" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="780" y="136" width="46" height="38" rx="5" fill="#3a1a5a" stroke="#8040c0" stroke-width="1.5"/>
+  <text x="803" y="160" fill="#a060e0" text-anchor="middle" font-size="11" font-weight="bold">C</text>
+  <rect x="830" y="136" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="853" y="160" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+
+  <!-- Row 2 -->
+  <rect x="480" y="178" width="46" height="38" rx="5" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <text x="503" y="202" fill="#2ea82e" text-anchor="middle" font-size="11" font-weight="bold">B</text>
+  <rect x="530" y="178" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="553" y="202" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="580" y="178" width="46" height="38" rx="5" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.5"/>
+  <text x="603" y="202" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">A</text>
+  <rect x="630" y="178" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="653" y="202" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="680" y="178" width="46" height="38" rx="5" fill="#3a1a5a" stroke="#8040c0" stroke-width="1.5"/>
+  <text x="703" y="202" fill="#a060e0" text-anchor="middle" font-size="11" font-weight="bold">C</text>
+  <rect x="730" y="178" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="753" y="202" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="780" y="178" width="46" height="38" rx="5" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="803" y="202" fill="#3a4a5a" text-anchor="middle" font-size="11">free</text>
+  <rect x="830" y="178" width="46" height="38" rx="5" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.5"/>
+  <text x="853" y="202" fill="#2ea82e" text-anchor="middle" font-size="11" font-weight="bold">B</text>
+
+  <!-- Block ID labels -->
+  <text x="503" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B0</text>
+  <text x="553" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B1</text>
+  <text x="603" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B2</text>
+  <text x="653" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B3</text>
+  <text x="703" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B4</text>
+  <text x="753" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B5</text>
+  <text x="803" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B6</text>
+  <text x="853" y="234" fill="#3a4a5a" text-anchor="middle" font-size="9">B7</text>
+
+  <!-- Key insight annotation -->
+  <rect x="480" y="248" width="396" height="46" rx="6" fill="#0a1a10" stroke="#1a4a2a" stroke-width="1.2"/>
+  <text x="678" y="265" fill="#4aaa6a" text-anchor="middle" font-size="11">blocks are non-contiguous — scattered freely in the pool</text>
+  <text x="678" y="283" fill="#4aaa6a" text-anchor="middle" font-size="11">only last block per request has partial waste (avg: block_size/2)</text>
+
+  <!-- Legend right -->
+  <rect x="480" y="318" width="14" height="12" rx="2" fill="#0e4d6a" stroke="#1ea8d8" stroke-width="1.2"/>
+  <text x="500" y="329" fill="#8b949e" font-size="11">Req A</text>
+  <rect x="555" y="318" width="14" height="12" rx="2" fill="#1a5c1a" stroke="#2ea82e" stroke-width="1.2"/>
+  <text x="575" y="329" fill="#8b949e" font-size="11">Req B</text>
+  <rect x="630" y="318" width="14" height="12" rx="2" fill="#3a1a5a" stroke="#8040c0" stroke-width="1.2"/>
+  <text x="650" y="329" fill="#8b949e" font-size="11">Req C</text>
+  <rect x="705" y="318" width="14" height="12" rx="2" fill="#101418" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="725" y="329" fill="#8b949e" font-size="11">free</text>
+</svg>

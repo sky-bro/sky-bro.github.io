@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 340" width="860" height="340" font-family="'JetBrains Mono',monospace" font-size="13">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1ea8d8"/>
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#6e7681"/>
+    </marker>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="860" height="340" fill="url(#bg)" rx="10"/>
+
+  <!-- ── Title ── -->
+  <text x="430" y="30" fill="#8b949e" text-anchor="middle" font-size="14" font-weight="bold">Block Table: Logical → Physical Mapping</text>
+  <text x="430" y="48" fill="#6e7681" text-anchor="middle" font-size="11">Request A has 38 tokens, block_size = 16  →  3 logical blocks</text>
+
+  <!-- ── Logical blocks (top row) ── -->
+  <text x="36" y="90" fill="#6e7681" font-size="11">Logical</text>
+  <text x="36" y="105" fill="#6e7681" font-size="11">view</text>
+
+  <!-- logical block 0 -->
+  <rect x="130" y="72" width="120" height="50" rx="7" fill="#0a2a3a" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="190" y="91" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">logical block 0</text>
+  <text x="190" y="108" fill="#8b949e" text-anchor="middle" font-size="11">tokens 0–15 (full)</text>
+
+  <!-- logical block 1 -->
+  <rect x="310" y="72" width="120" height="50" rx="7" fill="#0a2a3a" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="370" y="91" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">logical block 1</text>
+  <text x="370" y="108" fill="#8b949e" text-anchor="middle" font-size="11">tokens 16–31 (full)</text>
+
+  <!-- logical block 2 -->
+  <rect x="490" y="72" width="120" height="50" rx="7" fill="#0a2a3a" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="550" y="91" fill="#1ea8d8" text-anchor="middle" font-size="11" font-weight="bold">logical block 2</text>
+  <text x="550" y="108" fill="#4aa8c8" text-anchor="middle" font-size="11">tokens 32–37 (6/16)</text>
+
+  <!-- ── Block table (middle) ── -->
+  <rect x="655" y="60" width="175" height="78" rx="7" fill="#101828" stroke="#2a4060" stroke-width="1.5"/>
+  <text x="742" y="78" fill="#6e7681" text-anchor="middle" font-size="11" font-weight="bold">Block Table (Req A)</text>
+  <line x1="655" y1="84" x2="830" y2="84" stroke="#2a4060" stroke-width="1"/>
+  <text x="672" y="99"  fill="#8b949e" font-size="11">logical 0</text>
+  <text x="790" y="99"  fill="#1ea8d8" font-size="11" font-weight="bold">→ phys 3</text>
+  <line x1="655" y1="104" x2="830" y2="104" stroke="#1a2a3a" stroke-width="0.8"/>
+  <text x="672" y="118" fill="#8b949e" font-size="11">logical 1</text>
+  <text x="790" y="118" fill="#1ea8d8" font-size="11" font-weight="bold">→ phys 7</text>
+  <line x1="655" y1="123" x2="830" y2="123" stroke="#1a2a3a" stroke-width="0.8"/>
+  <text x="672" y="137" fill="#8b949e" font-size="11">logical 2</text>
+  <text x="790" y="137" fill="#4aa8c8" font-size="11" font-weight="bold">→ phys 1</text>
+
+  <!-- ── Physical pool (bottom row) ── -->
+  <text x="36" y="196" fill="#6e7681" font-size="11">Physical</text>
+  <text x="36" y="211" fill="#6e7681" font-size="11">pool</text>
+
+  <!-- phys 0: other -->
+  <rect x="100" y="178" width="62" height="50" rx="5" fill="#101820" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="131" y="199" fill="#4a5a6a" text-anchor="middle" font-size="10">phys 0</text>
+  <text x="131" y="214" fill="#4a5a6a" text-anchor="middle" font-size="10">other</text>
+
+  <!-- phys 1: Req A, logical 2 (partial) -->
+  <rect x="172" y="178" width="62" height="50" rx="5" fill="#0c3040" stroke="#4aa8c8" stroke-width="2" filter="url(#glow)"/>
+  <text x="203" y="199" fill="#4aa8c8" text-anchor="middle" font-size="10">phys 1</text>
+  <text x="203" y="214" fill="#4aa8c8" text-anchor="middle" font-size="10">A·log2</text>
+
+  <!-- phys 2: free -->
+  <rect x="244" y="178" width="62" height="50" rx="5" fill="#0d1117" stroke="#1e2e3e" stroke-width="1"/>
+  <text x="275" y="199" fill="#2a3a4a" text-anchor="middle" font-size="10">phys 2</text>
+  <text x="275" y="214" fill="#2a3a4a" text-anchor="middle" font-size="10">free</text>
+
+  <!-- phys 3: Req A, logical 0 -->
+  <rect x="316" y="178" width="62" height="50" rx="5" fill="#0e3f5e" stroke="#1ea8d8" stroke-width="2" filter="url(#glow)"/>
+  <text x="347" y="199" fill="#1ea8d8" text-anchor="middle" font-size="10">phys 3</text>
+  <text x="347" y="214" fill="#1ea8d8" text-anchor="middle" font-size="10">A·log0</text>
+
+  <!-- phys 4: other -->
+  <rect x="388" y="178" width="62" height="50" rx="5" fill="#101820" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="419" y="199" fill="#4a5a6a" text-anchor="middle" font-size="10">phys 4</text>
+  <text x="419" y="214" fill="#4a5a6a" text-anchor="middle" font-size="10">other</text>
+
+  <!-- phys 5: free -->
+  <rect x="460" y="178" width="62" height="50" rx="5" fill="#0d1117" stroke="#1e2e3e" stroke-width="1"/>
+  <text x="491" y="199" fill="#2a3a4a" text-anchor="middle" font-size="10">phys 5</text>
+  <text x="491" y="214" fill="#2a3a4a" text-anchor="middle" font-size="10">free</text>
+
+  <!-- phys 6: other -->
+  <rect x="532" y="178" width="62" height="50" rx="5" fill="#101820" stroke="#2a3a4a" stroke-width="1"/>
+  <text x="563" y="199" fill="#4a5a6a" text-anchor="middle" font-size="10">phys 6</text>
+  <text x="563" y="214" fill="#4a5a6a" text-anchor="middle" font-size="10">other</text>
+
+  <!-- phys 7: Req A, logical 1 -->
+  <rect x="604" y="178" width="62" height="50" rx="5" fill="#0e3f5e" stroke="#1ea8d8" stroke-width="2" filter="url(#glow)"/>
+  <text x="635" y="199" fill="#1ea8d8" text-anchor="middle" font-size="10">phys 7</text>
+  <text x="635" y="214" fill="#1ea8d8" text-anchor="middle" font-size="10">A·log1</text>
+
+  <!-- phys 8: free -->
+  <rect x="676" y="178" width="62" height="50" rx="5" fill="#0d1117" stroke="#1e2e3e" stroke-width="1"/>
+  <text x="707" y="199" fill="#2a3a4a" text-anchor="middle" font-size="10">phys 8</text>
+  <text x="707" y="214" fill="#2a3a4a" text-anchor="middle" font-size="10">free</text>
+
+  <text x="756" y="203" fill="#3a4a5a" font-size="14">···</text>
+
+  <!-- ── Mapping arrows ── -->
+  <!-- log 0 → phys 3 -->
+  <path d="M 190 122 C 190 155, 347 155, 347 178" stroke="#1ea8d8" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="5,3"/>
+  <!-- log 1 → phys 7 -->
+  <path d="M 370 122 C 370 155, 635 155, 635 178" stroke="#1ea8d8" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="5,3"/>
+  <!-- log 2 → phys 1 -->
+  <path d="M 550 122 C 550 155, 203 155, 203 178" stroke="#4aa8c8" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="5,3"/>
+
+  <!-- ── Access formula ── -->
+  <rect x="100" y="248" width="620" height="52" rx="7" fill="#0a1a10" stroke="#1a4a2a" stroke-width="1.2"/>
+  <text x="410" y="268" fill="#4aaa6a" text-anchor="middle" font-size="12" font-weight="bold">Token access formula (CUDA kernel):</text>
+  <text x="410" y="290" fill="#8b949e" text-anchor="middle" font-size="11">physical_block = block_table[ token_idx // block_size ]    offset = token_idx % block_size</text>
+</svg>

@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="'JetBrains Mono',monospace" font-size="12">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#8b949e"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#30c060"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#e08040"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="380" fill="url(#bg)" rx="10"/>
+
+  <text x="450" y="26" fill="#8b949e" text-anchor="middle" font-size="13" font-weight="bold">Chained Block Hash Lookup: Cache Hit vs. Miss</text>
+
+  <!-- ═══ Prompt blocks (top row) ═══ -->
+  <text x="28" y="58" fill="#6e7681" font-size="11">New request prompt:</text>
+
+  <!-- Block 0: system prompt p0 -->
+  <rect x="28"  y="64" width="130" height="48" rx="6" fill="#0a1e30" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="93"  y="83" fill="#1ea8d8" text-anchor="middle" font-size="10" font-weight="bold">Block 0 (tokens 0–15)</text>
+  <text x="93"  y="99" fill="#6e7681" text-anchor="middle" font-size="9">system prompt part 1</text>
+
+  <!-- Block 1: system prompt p1 -->
+  <rect x="170" y="64" width="130" height="48" rx="6" fill="#0a1e30" stroke="#1ea8d8" stroke-width="2"/>
+  <text x="235" y="83" fill="#1ea8d8" text-anchor="middle" font-size="10" font-weight="bold">Block 1 (tokens 16–31)</text>
+  <text x="235" y="99" fill="#6e7681" text-anchor="middle" font-size="9">system prompt part 2</text>
+
+  <!-- Block 2: user query (unique) -->
+  <rect x="312" y="64" width="130" height="48" rx="6" fill="#1a1a08" stroke="#e0b040" stroke-width="2"/>
+  <text x="377" y="83" fill="#e0b040" text-anchor="middle" font-size="10" font-weight="bold">Block 2 (tokens 32–47)</text>
+  <text x="377" y="99" fill="#8a7040" text-anchor="middle" font-size="9">user query (unique)</text>
+
+  <!-- ═══ Hash computation ═══ -->
+  <!-- arrows down to hash boxes -->
+  <line x1="93"  y1="112" x2="93"  y2="140" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="235" y1="112" x2="235" y2="140" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="377" y1="112" x2="377" y2="140" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- hash formula labels -->
+  <rect x="28"  y="140" width="130" height="32" rx="4" fill="#101018" stroke="#2a2a3a" stroke-width="1"/>
+  <text x="93"  y="152" fill="#8a8aaa" text-anchor="middle" font-size="9">key₀ = hash(tokens[0:16])</text>
+  <text x="93"  y="166" fill="#8a8aaa" text-anchor="middle" font-size="9">= 0xABCD1234</text>
+
+  <rect x="170" y="140" width="130" height="32" rx="4" fill="#101018" stroke="#2a2a3a" stroke-width="1"/>
+  <text x="235" y="152" fill="#8a8aaa" text-anchor="middle" font-size="9">key₁ = hash(key₀ ‖ tokens[16:32])</text>
+  <text x="235" y="166" fill="#8a8aaa" text-anchor="middle" font-size="9">= 0x5678EF90</text>
+
+  <rect x="312" y="140" width="130" height="32" rx="4" fill="#101018" stroke="#2a2a3a" stroke-width="1"/>
+  <text x="377" y="152" fill="#8a8aaa" text-anchor="middle" font-size="9">key₂ = hash(key₁ ‖ tokens[32:48])</text>
+  <text x="377" y="166" fill="#8a8aaa" text-anchor="middle" font-size="9">= 0x9A3BC01E</text>
+
+  <!-- ═══ Cache lookup ═══ -->
+  <text x="93"  y="196" fill="#6e7681" text-anchor="middle" font-size="10">lookup 0xABCD1234</text>
+  <text x="235" y="196" fill="#6e7681" text-anchor="middle" font-size="10">lookup 0x5678EF90</text>
+  <text x="377" y="196" fill="#6e7681" text-anchor="middle" font-size="10">lookup 0x9A3BC01E</text>
+
+  <!-- Cache: HIT for block 0, 1 -->
+  <rect x="28"  y="204" width="130" height="40" rx="5" fill="#082010" stroke="#20a050" stroke-width="2" filter="url(#glow)"/>
+  <text x="93"  y="220" fill="#30c060" text-anchor="middle" font-size="11" font-weight="bold">✓ CACHE HIT</text>
+  <text x="93"  y="236" fill="#4aaa6a" text-anchor="middle" font-size="9">reuse phys block #3</text>
+
+  <rect x="170" y="204" width="130" height="40" rx="5" fill="#082010" stroke="#20a050" stroke-width="2" filter="url(#glow)"/>
+  <text x="235" y="220" fill="#30c060" text-anchor="middle" font-size="11" font-weight="bold">✓ CACHE HIT</text>
+  <text x="235" y="236" fill="#4aaa6a" text-anchor="middle" font-size="9">reuse phys block #7</text>
+
+  <!-- MISS for block 2 -->
+  <rect x="312" y="204" width="130" height="40" rx="5" fill="#1a0808" stroke="#a04020" stroke-width="2"/>
+  <text x="377" y="220" fill="#e05050" text-anchor="middle" font-size="11" font-weight="bold">✗ MISS</text>
+  <text x="377" y="236" fill="#a04020" text-anchor="middle" font-size="9">allocate new block, run prefill</text>
+
+  <!-- ═══ Outcome ═══ -->
+  <line x1="93"  y1="244" x2="93"  y2="272" stroke="#30c060" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="235" y1="244" x2="235" y2="272" stroke="#30c060" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="377" y1="244" x2="377" y2="272" stroke="#e08040" stroke-width="1.5" marker-end="url(#arr-orange)"/>
+
+  <rect x="28"  y="272" width="130" height="36" rx="5" fill="#061208" stroke="#1a4a20" stroke-width="1"/>
+  <text x="93"  y="288" fill="#4aaa6a" text-anchor="middle" font-size="10">skip prefill</text>
+  <text x="93"  y="302" fill="#4aaa6a" text-anchor="middle" font-size="10">ref_count++ → 2</text>
+
+  <rect x="170" y="272" width="130" height="36" rx="5" fill="#061208" stroke="#1a4a20" stroke-width="1"/>
+  <text x="235" y="288" fill="#4aaa6a" text-anchor="middle" font-size="10">skip prefill</text>
+  <text x="235" y="302" fill="#4aaa6a" text-anchor="middle" font-size="10">ref_count++ → 2</text>
+
+  <rect x="312" y="272" width="130" height="36" rx="5" fill="#120808" stroke="#4a1a10" stroke-width="1"/>
+  <text x="377" y="288" fill="#e08040" text-anchor="middle" font-size="10">compute KV for</text>
+  <text x="377" y="302" fill="#e08040" text-anchor="middle" font-size="10">these 16 tokens only</text>
+
+  <!-- ═══ Block table result ═══ -->
+  <rect x="540" y="64" width="340" height="214" rx="8" fill="#0a1020" stroke="#2a3a50" stroke-width="1.5"/>
+  <text x="710" y="84" fill="#8b949e" text-anchor="middle" font-size="12" font-weight="bold">Resulting Block Table (Req B)</text>
+  <line x1="540" y1="90" x2="880" y2="90" stroke="#2a3a50" stroke-width="1"/>
+
+  <text x="558" y="110" fill="#6e7681" font-size="11">logical block 0</text>
+  <text x="718" y="110" fill="#30c060" font-size="11" font-weight="bold">→ phys block #3  ← shared (from cache)</text>
+  <line x1="540" y1="118" x2="880" y2="118" stroke="#1a2a30" stroke-width="0.8"/>
+
+  <text x="558" y="138" fill="#6e7681" font-size="11">logical block 1</text>
+  <text x="718" y="138" fill="#30c060" font-size="11" font-weight="bold">→ phys block #7  ← shared (from cache)</text>
+  <line x1="540" y1="146" x2="880" y2="146" stroke="#1a2a30" stroke-width="0.8"/>
+
+  <text x="558" y="166" fill="#6e7681" font-size="11">logical block 2</text>
+  <text x="718" y="166" fill="#e08040" font-size="11" font-weight="bold">→ phys block #12  ← newly computed</text>
+  <line x1="540" y1="174" x2="880" y2="174" stroke="#1a2a30" stroke-width="0.8"/>
+
+  <rect x="558" y="182" width="304" height="42" rx="5" fill="#040c10" stroke="#1a3a40" stroke-width="1"/>
+  <text x="710" y="198" fill="#1ea8d8" text-anchor="middle" font-size="10">prefill work: 16 tokens instead of 48</text>
+  <text x="710" y="214" fill="#1ea8d8" text-anchor="middle" font-size="10">TTFT reduced by ~67% for this request</text>
+
+  <!-- ═══ Key point ═══ -->
+  <rect x="28" y="322" width="854" height="44" rx="7" fill="#0a1a10" stroke="#1a3a20" stroke-width="1.2"/>
+  <text x="455" y="340" fill="#4aaa6a" text-anchor="middle" font-size="11" font-weight="bold">chained hash is essential:</text>
+  <text x="455" y="358" fill="#6e8a70" text-anchor="middle" font-size="11">two sequences with identical block 2 but different block 0/1 will have different key₂ — no collision</text>
+</svg>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="100%" stop-color="#080816"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="arrowglow">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Blue (prefill) chip gradient -->
+    <linearGradient id="chipblue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1040a0"/>
+      <stop offset="100%" stop-color="#0828c0"/>
+    </linearGradient>
+    <!-- Orange (decode) chip gradient -->
+    <linearGradient id="chiporange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b04000"/>
+      <stop offset="100%" stop-color="#c86000"/>
+    </linearGradient>
+    <!-- Arrow gradient -->
+    <linearGradient id="arrowgrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4080ff"/>
+      <stop offset="50%" stop-color="#c0a0ff"/>
+      <stop offset="100%" stop-color="#ff8020"/>
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff8020"/>
+    </marker>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- LEFT cluster label area -->
+  <rect x="22" y="70" width="180" height="380" rx="18" fill="#08144a" stroke="#204090" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- RIGHT cluster label area -->
+  <rect x="310" y="70" width="180" height="380" rx="18" fill="#3a1400" stroke="#904020" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Prefill GPU chips (2x2) — blue -->
+  <rect x="40"  y="110" width="68" height="68" rx="10" fill="url(#chipblue)" stroke="#4080ff" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="120" y="110" width="68" height="68" rx="10" fill="url(#chipblue)" stroke="#4080ff" stroke-width="2"/>
+  <rect x="40"  y="196" width="68" height="68" rx="10" fill="url(#chipblue)" stroke="#4080ff" stroke-width="2"/>
+  <rect x="120" y="196" width="68" height="68" rx="10" fill="url(#chipblue)" stroke="#4080ff" stroke-width="2.5" filter="url(#glow)"/>
+
+  <!-- chip detail lines on blue GPUs -->
+  <line x1="52" y1="132" x2="96" y2="132" stroke="#6090ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="52" y1="144" x2="96" y2="144" stroke="#6090ff" stroke-width="1.5" opacity="0.4"/>
+  <line x1="52" y1="156" x2="80"  y2="156" stroke="#6090ff" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Prefill label bar -->
+  <rect x="36" y="296" width="160" height="32" rx="6" fill="#0a1a60" stroke="#3060d0" stroke-width="1.5"/>
+  <!-- dots representing "GEMM" computation -->
+  <circle cx="72"  cy="312" r="5" fill="#4080ff"/>
+  <circle cx="96"  cy="312" r="5" fill="#4080ff" opacity="0.8"/>
+  <circle cx="120" cy="312" r="5" fill="#4080ff" opacity="0.6"/>
+  <circle cx="144" cy="312" r="5" fill="#4080ff" opacity="0.4"/>
+  <circle cx="168" cy="312" r="5" fill="#4080ff" opacity="0.3"/>
+
+  <!-- Prefill activity indicator — bright pulsing circle on active chip -->
+  <circle cx="74" cy="144" r="8" fill="#60a0ff" filter="url(#glow)"/>
+  <circle cx="154" cy="230" r="8" fill="#60a0ff" filter="url(#glow)"/>
+
+  <!-- Decode GPU chips (2x2) — orange -->
+  <rect x="328" y="110" width="68" height="68" rx="10" fill="url(#chiporange)" stroke="#ff8020" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="408" y="110" width="68" height="68" rx="10" fill="url(#chiporange)" stroke="#ff8020" stroke-width="2"/>
+  <rect x="328" y="196" width="68" height="68" rx="10" fill="url(#chiporange)" stroke="#ff8020" stroke-width="2"/>
+  <rect x="408" y="196" width="68" height="68" rx="10" fill="url(#chiporange)" stroke="#ff8020" stroke-width="2.5" filter="url(#glow)"/>
+
+  <!-- chip detail lines on orange GPUs -->
+  <line x1="340" y1="132" x2="384" y2="132" stroke="#ffa050" stroke-width="1.5" opacity="0.6"/>
+  <line x1="340" y1="144" x2="384" y2="144" stroke="#ffa050" stroke-width="1.5" opacity="0.4"/>
+  <line x1="340" y1="156" x2="368"  y2="156" stroke="#ffa050" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Decode label bar -->
+  <rect x="316" y="296" width="160" height="32" rx="6" fill="#401800" stroke="#c06020" stroke-width="1.5"/>
+  <!-- streaming output dots -->
+  <circle cx="352" cy="312" r="5" fill="#ff8020"/>
+  <circle cx="376" cy="312" r="5" fill="#ff8020" opacity="0.85"/>
+  <circle cx="400" cy="312" r="5" fill="#ff8020" opacity="0.7"/>
+  <circle cx="424" cy="312" r="5" fill="#ff8020" opacity="0.55"/>
+  <circle cx="448" cy="312" r="5" fill="#ff8020" opacity="0.35"/>
+
+  <!-- Decode activity indicators -->
+  <circle cx="362" cy="144" r="8" fill="#ffa040" filter="url(#glow)"/>
+  <circle cx="442" cy="230" r="8" fill="#ffa040" filter="url(#glow)"/>
+
+  <!-- Central KV transfer arrow -->
+  <line x1="205" y1="256" x2="307" y2="256" stroke="url(#arrowgrad)" stroke-width="7" stroke-linecap="round" marker-end="url(#arrowhead)" filter="url(#arrowglow)"/>
+
+  <!-- KV transfer particles along arrow -->
+  <circle cx="228" cy="256" r="5" fill="#c0a0ff" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="252" cy="256" r="5" fill="#c0a0ff" filter="url(#glow)" opacity="0.75"/>
+  <circle cx="276" cy="256" r="5" fill="#c0a0ff" filter="url(#glow)" opacity="0.6"/>
+
+  <!-- "KV" text in transfer stream area (bold visual only) -->
+  <rect x="222" y="230" width="68" height="20" rx="4" fill="#180830" stroke="#8050c0" stroke-width="1.2" opacity="0.8"/>
+  <line x1="234" y1="240" x2="278" y2="240" stroke="#a070e0" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- cluster connector bars (top/bottom of clusters) -->
+  <line x1="40"  y1="360" x2="200" y2="360" stroke="#2040a0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="312" y1="360" x2="472" y2="360" stroke="#904020" stroke-width="1.5" opacity="0.4"/>
+</svg>

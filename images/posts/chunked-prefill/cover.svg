@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0818"/>
+      <stop offset="100%" stop-color="#130a22"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="chunk1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9b30d0"/>
+      <stop offset="100%" stop-color="#6b18a0"/>
+    </linearGradient>
+    <linearGradient id="chunk2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b050e8"/>
+      <stop offset="100%" stop-color="#7820b8"/>
+    </linearGradient>
+    <linearGradient id="chunk3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a040d8"/>
+      <stop offset="100%" stop-color="#7020aa"/>
+    </linearGradient>
+    <linearGradient id="chunk4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c060f0"/>
+      <stop offset="100%" stop-color="#8030c0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Top: the original long bar (full prefill) -->
+  <rect x="48" y="110" width="416" height="58" rx="10" fill="#3a1060" stroke="#7820b8" stroke-width="2"/>
+  <!-- label arrow showing "full" -->
+  <line x1="256" y1="172" x2="256" y2="195" stroke="#7820b8" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- Cut indicators on top bar (faint) -->
+  <line x1="152" y1="110" x2="152" y2="168" stroke="#c060f0" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.4"/>
+  <line x1="256" y1="110" x2="256" y2="168" stroke="#c060f0" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.4"/>
+  <line x1="360" y1="110" x2="360" y2="168" stroke="#c060f0" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.4"/>
+
+  <!-- Cut lines (bright, glowing) — the "slice" -->
+  <line x1="152" y1="222" x2="152" y2="338" stroke="#e080ff" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+  <line x1="256" y1="222" x2="256" y2="338" stroke="#e080ff" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+  <line x1="360" y1="222" x2="360" y2="338" stroke="#e080ff" stroke-width="3" filter="url(#glow)" stroke-linecap="round"/>
+
+  <!-- Bottom: 4 separated chunks -->
+  <!-- chunk 1 -->
+  <rect x="52"  y="222" width="92" height="116" rx="10" fill="url(#chunk1)" filter="url(#softglow)"/>
+  <!-- chunk 2 -->
+  <rect x="156" y="222" width="92" height="116" rx="10" fill="url(#chunk2)" filter="url(#softglow)"/>
+  <!-- chunk 3 -->
+  <rect x="260" y="222" width="92" height="116" rx="10" fill="url(#chunk3)" filter="url(#softglow)"/>
+  <!-- chunk 4 -->
+  <rect x="364" y="222" width="92" height="116" rx="10" fill="url(#chunk4)" filter="url(#softglow)"/>
+
+  <!-- Gaps between chunks (emphasize separation) -->
+  <!-- chunk borders -->
+  <rect x="52"  y="222" width="92" height="116" rx="10" fill="none" stroke="#c060f0" stroke-width="2"/>
+  <rect x="156" y="222" width="92" height="116" rx="10" fill="none" stroke="#c060f0" stroke-width="2"/>
+  <rect x="260" y="222" width="92" height="116" rx="10" fill="none" stroke="#c060f0" stroke-width="2"/>
+  <rect x="364" y="222" width="92" height="116" rx="10" fill="none" stroke="#c060f0" stroke-width="2"/>
+
+  <!-- small decode token bars below each chunk (interleaved decode) -->
+  <rect x="52"  y="354" width="92" height="22" rx="5" fill="#2a1040" stroke="#6040a0" stroke-width="1.5"/>
+  <rect x="156" y="354" width="92" height="22" rx="5" fill="#2a1040" stroke="#6040a0" stroke-width="1.5"/>
+  <rect x="260" y="354" width="92" height="22" rx="5" fill="#2a1040" stroke="#6040a0" stroke-width="1.5"/>
+  <rect x="364" y="354" width="92" height="22" rx="5" fill="#2a1040" stroke="#6040a0" stroke-width="1.5"/>
+  <!-- decode dots -->
+  <circle cx="98"  cy="365" r="5" fill="#a060d0" opacity="0.8"/>
+  <circle cx="202" cy="365" r="5" fill="#a060d0" opacity="0.8"/>
+  <circle cx="306" cy="365" r="5" fill="#a060d0" opacity="0.8"/>
+  <circle cx="410" cy="365" r="5" fill="#a060d0" opacity="0.8"/>
+</svg>

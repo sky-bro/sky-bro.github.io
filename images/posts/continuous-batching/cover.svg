@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#120900"/>
+      <stop offset="100%" stop-color="#1a0e00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- orange bar gradient -->
+    <linearGradient id="bar1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c45a00"/>
+      <stop offset="100%" stop-color="#ff8c00"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a03d00"/>
+      <stop offset="100%" stop-color="#e06a00"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d46800"/>
+      <stop offset="100%" stop-color="#ffa020"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7a2d00"/>
+      <stop offset="100%" stop-color="#c05000"/>
+    </linearGradient>
+    <linearGradient id="bar5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e07000"/>
+      <stop offset="100%" stop-color="#ffb040"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- horizontal timeline guide lines (subtle) -->
+  <line x1="56" y1="112" x2="56" y2="430" stroke="#3a1800" stroke-width="1.5"/>
+  <line x1="56" y1="430" x2="480" y2="430" stroke="#3a1800" stroke-width="1.5"/>
+
+  <!-- "enter" arrow indicators -->
+  <polygon points="38,112 56,122 38,132" fill="#ff8c00" opacity="0.7"/>
+  <polygon points="38,192 56,202 38,212" fill="#ff8c00" opacity="0.5"/>
+  <polygon points="38,272 56,282 38,292" fill="#ffa020" opacity="0.7"/>
+  <polygon points="38,352 56,362 38,372" fill="#ffb040" opacity="0.5"/>
+
+  <!-- Row 0: long bar — still running -->
+  <rect x="56" y="100" width="340" height="44" rx="7" fill="url(#bar1)"/>
+  <!-- running indicator dot -->
+  <circle cx="408" cy="122" r="8" fill="#ffcc60" filter="url(#glow)"/>
+
+  <!-- Row 1: medium bar — done, shorter -->
+  <rect x="56" y="180" width="210" height="44" rx="7" fill="url(#bar2)"/>
+  <!-- done marker -->
+  <circle cx="266" cy="202" r="7" fill="#ff6a00" opacity="0.9"/>
+  <!-- new bar sliding in after done -->
+  <rect x="280" y="180" width="130" height="44" rx="7" fill="url(#bar5)" opacity="0.85"/>
+  <circle cx="422" cy="202" r="8" fill="#ffcc60" filter="url(#glow)"/>
+
+  <!-- Row 2: short bar — done very quickly -->
+  <rect x="56" y="260" width="130" height="44" rx="7" fill="url(#bar4)"/>
+  <circle cx="186" cy="282" r="7" fill="#ff6a00" opacity="0.9"/>
+  <!-- two new bars sliding in -->
+  <rect x="200" y="260" width="180" height="44" rx="7" fill="url(#bar3)" opacity="0.85"/>
+  <circle cx="392" cy="282" r="8" fill="#ffcc60" filter="url(#glow)"/>
+
+  <!-- Row 3: newest — just inserted -->
+  <rect x="56" y="340" width="90" height="44" rx="7" fill="url(#bar5)" opacity="0.7"/>
+  <circle cx="158" cy="362" r="8" fill="#ffcc60" filter="url(#glow)"/>
+
+  <!-- "iteration" tick marks on bottom -->
+  <line x1="56"  y1="428" x2="56"  y2="416" stroke="#ff8c00" stroke-width="2"/>
+  <line x1="140" y1="428" x2="140" y2="416" stroke="#ff8c00" stroke-width="2"/>
+  <line x1="224" y1="428" x2="224" y2="416" stroke="#ff8c00" stroke-width="2"/>
+  <line x1="308" y1="428" x2="308" y2="416" stroke="#ff8c00" stroke-width="2"/>
+  <line x1="392" y1="428" x2="392" y2="416" stroke="#ff8c00" stroke-width="2"/>
+  <line x1="476" y1="428" x2="476" y2="416" stroke="#ff8c00" stroke-width="2"/>
+</svg>

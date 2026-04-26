@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 350" width="920" height="350" font-family="'JetBrains Mono',monospace" font-size="12">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+    <linearGradient id="prefillbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5020a0"/>
+      <stop offset="100%" stop-color="#8040d0"/>
+    </linearGradient>
+    <linearGradient id="chunkbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#401880"/>
+      <stop offset="100%" stop-color="#6030b0"/>
+    </linearGradient>
+    <linearGradient id="decodebar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#104060"/>
+      <stop offset="100%" stop-color="#1860a0"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="920" height="350" fill="url(#bg)" rx="10"/>
+
+  <!-- divider -->
+  <line x1="460" y1="18" x2="460" y2="335" stroke="#2a3a4a" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- ═══ LEFT: Without chunked prefill ═══ -->
+  <text x="230" y="32" fill="#8b949e" text-anchor="middle" font-size="13" font-weight="bold">Without Chunked Prefill</text>
+  <text x="230" y="48" fill="#e05050" text-anchor="middle" font-size="11">decode blocked for entire prefill duration</text>
+
+  <!-- time axis -->
+  <line x1="80" y1="298" x2="445" y2="298" stroke="#2a3a4a" stroke-width="1.5"/>
+  <text x="448" y="302" fill="#4a5a6a" font-size="10">time →</text>
+
+  <!-- Req A (new, long prompt): big prefill block -->
+  <text x="50" y="88" fill="#a060e0" text-anchor="end" font-size="11">Req A</text>
+  <rect x="80" y="74" width="260" height="28" rx="4" fill="url(#prefillbar)" stroke="#a060e0" stroke-width="1.5"/>
+  <text x="210" y="93" fill="#e0c0ff" text-anchor="middle" font-size="11" font-weight="bold">prefill 2048 tokens  (~200 ms)</text>
+  <!-- then decode -->
+  <rect x="340" y="74" width="90" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="385" y="93" fill="#80c0ff" text-anchor="middle" font-size="10">decode</text>
+
+  <!-- Req B (decode): blocked during prefill, resumes after -->
+  <text x="50" y="130" fill="#1ea8d8" text-anchor="end" font-size="11">Req B</text>
+  <rect x="80" y="116" width="260" height="28" rx="4" fill="#100808" stroke="#503030" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="210" y="135" fill="#804040" text-anchor="middle" font-size="11">⛔ blocked  (200 ms stall)</text>
+  <rect x="340" y="116" width="90" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="385" y="135" fill="#80c0ff" text-anchor="middle" font-size="10">decode</text>
+
+  <!-- Req C (decode): same blocking -->
+  <text x="50" y="172" fill="#2ea82e" text-anchor="end" font-size="11">Req C</text>
+  <rect x="80" y="158" width="260" height="28" rx="4" fill="#100808" stroke="#503030" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="210" y="177" fill="#804040" text-anchor="middle" font-size="11">⛔ blocked  (200 ms stall)</text>
+  <rect x="340" y="158" width="90" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="385" y="177" fill="#80c0ff" text-anchor="middle" font-size="10">decode</text>
+
+  <!-- blocking brace -->
+  <line x1="80" y1="208" x2="340" y2="208" stroke="#e05050" stroke-width="1.5"/>
+  <line x1="80" y1="204" x2="80" y2="212" stroke="#e05050" stroke-width="1.5"/>
+  <line x1="340" y1="204" x2="340" y2="212" stroke="#e05050" stroke-width="1.5"/>
+  <text x="210" y="226" fill="#e05050" text-anchor="middle" font-size="11" font-weight="bold">TPOT: 5 ms → 205 ms  (41× spike!)</text>
+
+  <!-- iteration ticks: one decode iter after prefill -->
+  <line x1="340" y1="294" x2="340" y2="302" stroke="#4a5a6a" stroke-width="1.2"/>
+  <line x1="358" y1="294" x2="358" y2="302" stroke="#4a5a6a" stroke-width="1.2"/>
+  <line x1="376" y1="294" x2="376" y2="302" stroke="#4a5a6a" stroke-width="1.2"/>
+  <line x1="394" y1="294" x2="394" y2="302" stroke="#4a5a6a" stroke-width="1.2"/>
+  <line x1="412" y1="294" x2="412" y2="302" stroke="#4a5a6a" stroke-width="1.2"/>
+  <text x="388" y="316" fill="#4a5a6a" text-anchor="middle" font-size="9">normal decode iters</text>
+
+  <!-- ═══ RIGHT: With chunked prefill ═══ -->
+  <text x="690" y="32" fill="#8b949e" text-anchor="middle" font-size="13" font-weight="bold">With Chunked Prefill  (C = 512)</text>
+  <text x="690" y="48" fill="#30c060" text-anchor="middle" font-size="11">decode runs every iteration, unblocked</text>
+
+  <!-- time axis -->
+  <line x1="476" y1="298" x2="905" y2="298" stroke="#2a3a4a" stroke-width="1.5"/>
+  <text x="908" y="302" fill="#4a5a6a" font-size="10">time →</text>
+
+  <!-- iter width = 60px (including chunk + decode iters) -->
+  <!-- 4 chunk iters + decode iters -->
+
+  <!-- Req A: 4 chunks -->
+  <text x="465" y="88" fill="#a060e0" text-anchor="end" font-size="11">Req A</text>
+  <rect x="476" y="74" width="58" height="28" rx="4" fill="url(#chunkbar)" stroke="#a060e0" stroke-width="1.5"/>
+  <text x="505" y="91" fill="#d0a0ff" text-anchor="middle" font-size="9">chunk 1</text>
+  <rect x="538" y="74" width="58" height="28" rx="4" fill="url(#chunkbar)" stroke="#a060e0" stroke-width="1.5"/>
+  <text x="567" y="91" fill="#d0a0ff" text-anchor="middle" font-size="9">chunk 2</text>
+  <rect x="600" y="74" width="58" height="28" rx="4" fill="url(#chunkbar)" stroke="#a060e0" stroke-width="1.5"/>
+  <text x="629" y="91" fill="#d0a0ff" text-anchor="middle" font-size="9">chunk 3</text>
+  <rect x="662" y="74" width="58" height="28" rx="4" fill="url(#chunkbar)" stroke="#a060e0" stroke-width="1.5"/>
+  <text x="691" y="91" fill="#d0a0ff" text-anchor="middle" font-size="9">chunk 4</text>
+  <!-- A decode -->
+  <rect x="724" y="74" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="744" y="91" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="768" y="74" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="788" y="91" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+
+  <!-- Req B: decode every iter, no blocking -->
+  <text x="465" y="130" fill="#1ea8d8" text-anchor="end" font-size="11">Req B</text>
+  <rect x="476" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="496" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="520" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="540" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="564" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="584" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="608" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="628" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="652" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="672" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="696" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="716" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="740" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="760" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="784" y="116" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="804" y="133" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+
+  <!-- Req C: same -->
+  <text x="465" y="172" fill="#2ea82e" text-anchor="end" font-size="11">Req C</text>
+  <rect x="476" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="496" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="520" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="540" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="564" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="584" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="608" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="628" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="652" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="672" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="696" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="716" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="740" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="760" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+  <rect x="784" y="158" width="40" height="28" rx="4" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1.2"/>
+  <text x="804" y="175" fill="#80c0ff" text-anchor="middle" font-size="9">dec</text>
+
+  <!-- per-iter label -->
+  <text x="496" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 1</text>
+  <text x="540" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 2</text>
+  <text x="584" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 3</text>
+  <text x="628" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 4</text>
+  <text x="672" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 5</text>
+  <text x="716" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 6</text>
+  <text x="760" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 7</text>
+  <text x="804" y="212" fill="#4a5a6a" text-anchor="middle" font-size="9">iter 8</text>
+
+  <!-- TPOT annotation -->
+  <rect x="476" y="228" width="368" height="18" rx="3" fill="#081a08" stroke="#1a4a1a" stroke-width="1"/>
+  <text x="660" y="241" fill="#30c060" text-anchor="middle" font-size="10">TPOT stable: ~5–7 ms/iter  (each iter = chunk + decode, no full stall)</text>
+
+  <!-- legend -->
+  <rect x="476" y="260" width="14" height="10" rx="2" fill="url(#chunkbar)" stroke="#a060e0" stroke-width="1"/>
+  <text x="496" y="270" fill="#8b949e" font-size="10">prefill chunk</text>
+  <rect x="578" y="260" width="14" height="10" rx="2" fill="url(#decodebar)" stroke="#4080c0" stroke-width="1"/>
+  <text x="598" y="270" fill="#8b949e" font-size="10">decode step</text>
+</svg>
