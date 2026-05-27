@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">LLM compute and memory estimation icon</title>
+  <desc id="desc">A bold GPU chip with compute paths and memory blocks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="64" y1="56" x2="448" y2="456" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#172554"/>
+      <stop offset="0.55" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="142" y1="128" x2="370" y2="384" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="88" fill="url(#bg)"/>
+
+  <g opacity="0.22" stroke="#e0f2fe" stroke-width="18" stroke-linecap="round" fill="none">
+    <path d="M82 141c73 13 116 48 153 113s89 102 196 112"/>
+    <path d="M96 366c86-11 133-48 169-112s76-98 150-108"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="136" y="136" width="240" height="240" rx="34" fill="url(#chip)"/>
+    <rect x="178" y="178" width="156" height="156" rx="24" fill="#0f172a"/>
+
+    <g fill="#67e8f9">
+      <rect x="198" y="205" width="116" height="24" rx="8"/>
+      <rect x="198" y="244" width="82" height="24" rx="8"/>
+      <rect x="198" y="283" width="116" height="24" rx="8"/>
+    </g>
+
+    <g stroke="#e2e8f0" stroke-width="18" stroke-linecap="round">
+      <path d="M136 188H98"/>
+      <path d="M136 256H98"/>
+      <path d="M136 324H98"/>
+      <path d="M414 188h-38"/>
+      <path d="M414 256h-38"/>
+      <path d="M414 324h-38"/>
+      <path d="M188 136V98"/>
+      <path d="M256 136V98"/>
+      <path d="M324 136V98"/>
+      <path d="M188 414v-38"/>
+      <path d="M256 414v-38"/>
+      <path d="M324 414v-38"/>
+    </g>
+  </g>
+
+  <g fill="#fde68a">
+    <circle cx="110" cy="110" r="20"/>
+    <circle cx="402" cy="116" r="16"/>
+    <circle cx="410" cy="402" r="22"/>
+    <circle cx="100" cy="402" r="14"/>
+  </g>
+</svg>
