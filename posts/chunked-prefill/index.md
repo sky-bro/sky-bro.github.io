@@ -54,21 +54,23 @@ with chunked prefill (C = 512):
 
 each iteration processes a fixed **token budget** \\(T\\):
 
-\begin{equation}
+$$
 T = C\_{\text{prefill}} + N\_{\text{decode}}
-\end{equation}
+$$
 
 where \\(C_{\text{prefill}}\\) is the number of prefill tokens processed this iteration and \\(N_{\text{decode}}\\) is the number of running decode requests. the scheduler enforces \\(C_{\text{prefill}} + N_{\text{decode}} \leq T\\).
 
 decode requests continue running at every iteration. their TPOT becomes roughly:
 
-\begin{equation}
+$$
 \text{TPOT} \approx \frac{\text{compute}(C\_{\text{prefill}} + N\_{\text{decode}})}{\text{compute}(N\_{\text{decode}})} \times \Delta t\_{\text{decode}}
-\end{equation}
+$$
 
 with \\(C = 512\\) and \\(N_{\text{decode}} = 32\\), the TPOT overhead from a prefill chunk is small: 512 tokens of GEMM adds far less than a full 2048-token prefill would.
 
-## why chunked prefill is mathematically exact {#correctness}
+## correctness and cost model {#correctness-and-cost}
+
+### why chunked prefill is mathematically exact {#correctness}
 
 **does slicing the prefill change the result?** no — it is *exactly* equivalent to running the full prefill at once. here is why.
 
@@ -82,34 +84,36 @@ for any token \\(t_i\\) in chunk \\(s\\):
 
 so the attention for \\(t_i\\) splits into two parts:
 
-\begin{align}
+$$
+\begin{aligned}
 \text{attn}\_{i} = \text{softmax\_merge}\Bigl(
   &\underbrace{\frac{q\_i \cdot K\_{\text{cache}}^T}{\sqrt{d\_k}}}\_{\text{attend to prior chunks}},\;
   \underbrace{\frac{q\_i \cdot K\_{\text{chunk}}^T}{\sqrt{d\_k}}}\_{\text{attend within current chunk}}
 \Bigr) \cdot \begin{bmatrix} V\_{\text{cache}} \\ V\_{\text{chunk}} \end{bmatrix}
-\end{align}
+\end{aligned}
+$$
 
 where `softmax_merge` is the online softmax merge (same trick as [paged attention's]({{< relref "paged-attention" >}}) block-level aggregation). FlashAttention's `flash_attn_varlen_func` handles this natively — the `cu_seqlens` parameter tells it each token's effective context length (cache history + current chunk).
 
 after each chunk, the newly computed \\(k, v\\) vectors are written to the KV cache:
 
-\begin{equation}
+$$
 K\_{\text{cache}} \mathrel{+}= [k\_{(s-1)C+1}, \ldots, k\_{sC}]
-\end{equation}
+$$
 
 the next chunk sees this extended cache. by induction, after all \\(\lceil L/C \rceil\\) chunks, the KV cache contains exactly what a full-prompt prefill would have produced — the final decode step is indistinguishable from the non-chunked case.
 
-## TTFT/TPOT tradeoff and chunk size selection {#tradeoff}
+### TTFT/TPOT tradeoff and chunk size selection {#tradeoff}
 
 chunk size \\(C\\) is the key tuning knob:
 
-\begin{equation}
+$$
 \text{TTFT} \approx \left\lceil \frac{L\_{\text{prompt}}}{C} \right\rceil \times \Delta t\_{\text{iter}}
-\end{equation}
+$$
 
-\begin{equation}
+$$
 \text{TPOT jitter} \propto \frac{C}{N\_{\text{decode}}} \times \frac{\text{FLOP}\_{\text{GEMM}}}{\text{FLOP}\_{\text{GEMV}}}
-\end{equation}
+$$
 
 - **larger \\(C\\)**: fewer iterations to complete prefill → lower TTFT. but each prefill chunk is larger → more decode interference per iteration → higher TPOT jitter.
 - **smaller \\(C\\)**: decode runs with minimal interference → stable TPOT. but prefill needs more iterations → higher TTFT.
@@ -124,53 +128,57 @@ the sweet spot depends on the ratio of active decode requests to prefill tokens.
 
 with \\(C = 512\\) and a 2048-token prompt: 4 iterations to complete prefill, each adding just 512 tokens of GEMM overhead to the decode step. total TTFT increase versus full-prefill: \\(3 \times 5\text{ ms} = 15\text{ ms}\\) — negligible for most use cases.
 
-## FLOPs analysis: no overhead from chunking {#flops}
+### FLOPs analysis: no overhead from chunking {#flops}
 
 an important sanity check: does chunking *add* FLOPs? the answer is no.
 
-for a single transformer layer, attention FLOPs processing \\(L\\) tokens is:
+for a single transformer layer, causal attention touches \\(L(L+1)/2\\) query-key pairs. counting both \\(QK^T\\) and \\(\text{attn} \cdot V\\), attention FLOPs are:
 
-\begin{equation}
-\text{FLOP}\_{\text{attn}}(L) = 4L^2 d + 4Ld^2
-\end{equation}
+$$
+\text{FLOP}\_{\text{attn}}(L) \approx 4d \cdot \frac{L(L+1)}{2} + 4Ld^2
+$$
 
-the \\(4L^2 d\\) term comes from \\(QK^T\\) and \\(\text{attn} \cdot V\\); \\(4Ld^2\\) from the four projection matrices.
+the first term comes from causal attention pairs; \\(4Ld^2\\) comes from the four projection matrices.
 
 **without chunking**: one call with \\(L\\) tokens.
 
-**with chunking**: \\(\lceil L/C \rceil\\) calls, each processing \\(C\\) prompt tokens against an expanding KV cache. the total attention FLOPs across all chunks:
+**with chunking**: \\(\lceil L/C \rceil\\) calls, each processing new prompt tokens against an expanding KV cache. the total attention FLOPs across all chunks:
 
-\begin{align}
-\text{FLOP}\_{\text{chunk-attn}} &= 4d^2 \sum\_{s=1}^{L/C} C + 4d \sum\_{s=1}^{L/C} C \cdot (sC) \\\\
-&= 4Ld^2 + 4d \cdot C^2 \cdot \frac{(L/C)(L/C + 1)}{2} \\\\
-&\approx 4Ld^2 + 4d \cdot \frac{L^2}{2} = 4L^2 d + 4Ld^2
-\end{align}
+$$
+\begin{aligned}
+\text{FLOP}\_{\text{chunk-attn}}
+&= 4Ld^2 + 4d \sum\_{i=1}^{L} i \\\\
+&= 4Ld^2 + 4d \cdot \frac{L(L+1)}{2}
+\end{aligned}
+$$
 
 exactly the same as the non-chunked case. **chunking distributes the same FLOPs across more iterations — it does not add computation.**
 
-## IO overhead: negligible in practice {#io-overhead}
+### IO overhead: negligible in practice {#io-overhead}
 
 the one real cost is writing new KV vectors to HBM at the end of each chunk. for chunk size \\(C\\), model with \\(n_h\\) KV heads, head dim \\(d_h\\), \\(L_{\text{layers}}\\) layers, and BF16:
 
-\begin{equation}
+$$
 \text{write per chunk} = C \times 2 \times L\_{\text{layers}} \times n\_h \times d\_h \times 2 \text{ bytes}
-\end{equation}
+$$
 
 for LLaMA-3 8B (\\(L = 32, n_h = 8, d_h = 128\\)) and \\(C = 512\\):
 
-\begin{equation}
+$$
 512 \times 2 \times 32 \times 8 \times 128 \times 2 = 67{,}108{,}864 \text{ bytes} \approx 64 \text{ MB}
-\end{equation}
+$$
 
 at A100's HBM bandwidth of ~2 TB/s:
 
-\begin{equation}
+$$
 \frac{64 \times 10^6}{2 \times 10^{12}} = 32 \text{ μs}
-\end{equation}
+$$
 
 32 microseconds, compared to an iteration time of ~5 ms. the IO overhead is **<1% of iteration cost** — genuinely negligible.
 
-## interaction with prefix caching {#prefix-cache-interaction}
+## how it composes with the serving stack {#serving-stack}
+
+### interaction with prefix caching {#prefix-cache-interaction}
 
 chunked prefill and [prefix caching]({{< relref "prefix-caching" >}}) compose nicely. if the first \\(k\\) blocks of a prompt are already in the cache, those blocks are skipped entirely:
 
@@ -186,7 +194,7 @@ with prefix cache + chunked prefill (C = 512):
 
 the effective prefill length after a cache hit is only the *uncached suffix*. TTFT drops further, and fewer iterations are consumed for prefill.
 
-## scheduler implementation {#implementation}
+### scheduler implementation {#implementation}
 
 the scheduling logic in SGLang looks roughly like:
 
@@ -211,7 +219,7 @@ def schedule(self):
 
 the key property: `prefill_this_iter` can be less than `remaining_prefill`, capturing the "partial" prefill. the next iteration the scheduler picks up where it left off.
 
-## comparison with disaggregated prefill {#vs-disaggregated}
+### comparison with disaggregated prefill {#vs-disaggregated}
 
 chunked prefill is the **in-place** solution to prefill-decode interference: both still share the same GPU, just interleaved more carefully.
 
@@ -238,4 +246,4 @@ chunked prefill is arguably the best-value optimization in LLM serving:
 - **significant TPOT improvement** — decode requests no longer stall for long prefills
 - **composable** — works naturally with prefix caching (skip cached chunks), paged attention (KV written block by block), and continuous batching (same iteration-level loop)
 
-the only cost is a modest increase in TTFT proportional to \\(C_{\text{chunk}} \times \lceil L/C \rceil\\), which in practice is well within acceptable bounds.
+the only cost is a modest increase in TTFT proportional to the extra scheduling iterations, roughly \\((\lceil L/C \rceil - 1) \times \Delta t\_{\text{iter}}\\), which in practice is well within acceptable bounds.

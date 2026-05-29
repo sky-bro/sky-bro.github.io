@@ -1,5 +1,7 @@
 
-## the fragmentation problem {#fragmentation}
+## the memory-management problem {#memory-management-problem}
+
+### the fragmentation problem {#fragmentation}
 
 the [previous post]({{< relref "kv-cache" >}}) in this series explained *why* we cache key and value vectors during autoregressive decoding. by the end of that post, the KV cache was saving us enormous amounts of recomputation — but it quietly introduced a new problem: **where do you put all that memory?**
 
@@ -27,7 +29,7 @@ GPU memory (naive allocation):
 
 the vLLM paper (Kwon et al., 2023) measured that naive implementations achieve only **20–38%** GPU memory utilization. the rest is wasted on fragmentation.
 
-## borrowing from the OS {#os-analogy}
+### borrowing from the OS {#os-analogy}
 
 operating systems solved exactly this problem decades ago for process memory. the solution: **paging**.
 
@@ -44,7 +46,7 @@ paged attention applies this idea to KV cache management:
 
 instead of allocating one large contiguous region per request, we carve the entire available GPU memory into a pool of fixed-size KV blocks (typically holding 16 tokens each). requests are granted blocks one at a time as they need them — and those blocks can come from anywhere in the pool.
 
-## data structures {#data-structures}
+## how paged attention represents KV cache {#data-structures}
 
 ### the KV block
 
@@ -127,7 +129,9 @@ class BlockManager:
                 self.free_blocks.append(bid)
 ```
 
-## attention over non-contiguous blocks {#paged-attention-kernel}
+## attention and sharing over pages {#attention-and-sharing}
+
+### attention over non-contiguous blocks {#paged-attention-kernel}
 
 standard attention assumes \\(K\\) and \\(V\\) are contiguous tensors. paged attention modifies this assumption: KV pairs live in scattered blocks, and the attention kernel must gather them.
 
@@ -159,13 +163,11 @@ this online softmax formulation lets each block be fetched independently. there 
 
 mathematically, this produces exactly the same result as standard attention over a concatenated sequence. the key identity is:
 
-\begin{equation}
-\text{softmax}([a_0, a_1, \ldots]) \cdot [V_0; V_1; \ldots] = \text{OnlineSoftmax}(\{(a_j, V_j)\}_j)
-\end{equation}
+$$\text{softmax}([a_0, a_1, \ldots]) \cdot [V_0; V_1; \ldots] = \text{OnlineSoftmax}(\{(a_j, V_j)\}_j)$$
 
 where `OnlineSoftmax` denotes the incremental merge above.
 
-## copy-on-write for parallel sampling {#cow}
+### copy-on-write for parallel sampling {#cow}
 
 parallel sampling generates multiple independent outputs from the same prompt (e.g., beam search, or sampling with \\(n > 1\\)). without paged attention, each candidate would need its own full copy of the prompt's KV cache — wasting memory proportional to the number of candidates.
 
@@ -194,7 +196,7 @@ when a candidate needs to *write* to a shared block (because the new token falls
 
 this is exactly how Linux handles copy-on-write after `fork()`.
 
-## prefix caching falls out naturally {#prefix-caching}
+### prefix caching falls out naturally {#prefix-caching}
 
 a beautiful property of block-level KV management is that *cross-request sharing* becomes straightforward. if two requests share the same prefix (e.g., the same system prompt), their blocks for that prefix will contain identical content — so they can literally share the same physical blocks.
 
@@ -219,7 +221,9 @@ def allocate_with_prefix_cache(self, seq):
 
 cached blocks skip prefill entirely — the attention kernel reads their KV pairs just like any other block, but no forward pass was needed to fill them. for a 4096-token system prompt with `block_size = 16`, that's 256 blocks that can be reused across all requests sharing that prompt. [a full post on prefix caching]({{< relref "prefix-caching" >}}) covers the eviction policies and radix-tree structure that make this practical at scale.
 
-## memory utilization: 30% → 96% {#memory-utilization}
+## why this matters for serving {#serving-impact}
+
+### memory utilization: 30% → 96% {#memory-utilization}
 
 | implementation | GPU utilization | reason for waste |
 |---|---|---|
@@ -230,7 +234,7 @@ the worst case internal fragmentation with paged attention is \\(\text{block\_si
 
 this improvement is not just an efficiency win: it directly translates to **higher concurrency**. if GPU memory utilization goes from 30% to 96%, roughly **3× more requests** can be in flight simultaneously on the same hardware.
 
-## connection to continuous batching {#continuous-batching-connection}
+### connection to continuous batching {#continuous-batching-connection}
 
 paged attention doesn't exist in isolation. it pairs naturally with [continuous batching]({{< relref "continuous-batching" >}}), which schedules new requests at every decoding iteration rather than waiting for an entire batch to finish.
 

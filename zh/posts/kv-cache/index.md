@@ -5,25 +5,21 @@
 
 **KV cache**（键值缓存）正是利用这一冗余的技术。通过保存之前解码步骤中的 key 和 value 向量，我们避免了对它们的重复计算，将每步 \\(O(n^2)\\) 的开销降为 \\(O(n)\\)——代价是额外的显存占用。
 
-## Transformer 注意力回顾 {#attention-recap}
+## KV cache 为什么成立 {#why-kv-cache-works}
+
+### Transformer 注意力回顾 {#attention-recap}
 
 在 Transformer decoder 中，自注意力机制如下。对每个 token，将其嵌入投影为三个向量：
 
-\begin{align}
-q_i &= W_q x_i \quad & \text{(query)} \\\\
-k_i &= W_k x_i \quad & \text{(key)} \\\\
-v_i &= W_v x_i \quad & \text{(value)}
-\end{align}
+$$\begin{aligned}q_i &= W_q x_i \quad & \text{(query)} \\\\ k_i &= W_k x_i \quad & \text{(key)} \\\\ v_i &= W_v x_i \quad & \text{(value)}\end{aligned}$$
 
 token \\(i\\) 的注意力输出为：
 
-\begin{equation}
-\text{Attention}(q_i, K, V) = \text{softmax}\left(\frac{q_i K^T}{\sqrt{d_k}}\right) V
-\end{equation}
+$$\text{Attention}(q_i, K, V) = \text{softmax}\left(\frac{q_i K^T}{\sqrt{d_k}}\right) V$$
 
 其中 \\(K\\) 和 \\(V\\) 是**当前序列中所有 token** 的 key 和 value 的堆叠。causal masking 保证 token \\(i\\) 只能关注 \\(j \leq i\\) 的 token。
 
-## 问题：冗余计算 {#redundant-computation}
+### 问题：冗余计算 {#redundant-computation}
 
 考虑生成长度为 \\(n\\) 的序列。在第 \\(t\\) 步，模型需要对 token \\(1, \ldots, t\\) 计算注意力：
 
@@ -41,13 +37,11 @@ token \\(i\\) 的注意力输出为：
 
 所有步的总计算量为：
 
-\begin{equation}
-\sum_{t=1}^{n} t = \frac{n(n+1)}{2} = O(n^2)
-\end{equation}
+$$\sum_{t=1}^{n} t = \frac{n(n+1)}{2} = O(n^2)$$
 
 每个之前 token 的 key 和 value 被重复计算了 \\(n - j\\) 次。这是浪费的，因为 \\(k_j\\) 和 \\(v_j\\) 是输入 token \\(x_j\\) 和固定权重 \\(W_k, W_v\\) 的**确定性函数**。
 
-## 解决方案：KV 缓存 {#solution}
+### 解决方案：KV 缓存 {#solution}
 
 洞察很简单：**\\(k_j\\) 和 \\(v_j\\) 一旦计算出来就不会改变**。它们只依赖于 token 嵌入和模型权重，这两者在解码过程中都不变。
 
@@ -71,25 +65,19 @@ token \\(i\\) 的注意力输出为：
 
 **① 只计算新 token 的投影**——唯一新增的 KV 计算：
 
-\begin{equation}
-Q_{t+1} = h_{t+1} W_Q, \quad K_{t+1} = h_{t+1} W_K, \quad V_{t+1} = h_{t+1} W_V
-\end{equation}
+$$Q_{t+1} = h_{t+1} W_Q, \quad K_{t+1} = h_{t+1} W_K, \quad V_{t+1} = h_{t+1} W_V$$
 
 **② 与缓存拼接**：
 
-\begin{equation}
-K_{1:t+1} = \text{concat}(K_{1:t}^{\text{cache}}, K_{t+1}), \quad V_{1:t+1} = \text{concat}(V_{1:t}^{\text{cache}}, V_{t+1})
-\end{equation}
+$$K_{1:t+1} = \text{concat}(K_{1:t}^{\text{cache}}, K_{t+1}), \quad V_{1:t+1} = \text{concat}(V_{1:t}^{\text{cache}}, V_{t+1})$$
 
 **③ 计算注意力**——query 是单行向量，attention 退化为 \\(1 \times (t+1)\\) 的点积：
 
-\begin{equation}
-\text{Output}\_{t+1} = \text{softmax}\left(\frac{Q_{t+1} K_{1:t+1}^T}{\sqrt{d_k}}\right) V_{1:t+1}
-\end{equation}
+$$\text{Output}\_{t+1} = \text{softmax}\left(\frac{Q_{t+1} K_{1:t+1}^T}{\sqrt{d_k}}\right) V_{1:t+1}$$
 
 **④ 更新缓存**：将 \\(K_{t+1}, V_{t+1}\\) 追加到缓存供下一步使用。
 
-## 为什么缓存 K 和 V，而不缓存 Q？ {#why-not-queries}
+### 为什么缓存 K 和 V，而不缓存 Q？ {#why-not-queries}
 
 为什么缓存 \\(K\\) 和 \\(V\\) 而不缓存 \\(Q\\)？
 
@@ -97,7 +85,9 @@ K_{1:t+1} = \text{concat}(K_{1:t}^{\text{cache}}, K_{t+1}), \quad V_{1:t+1} = \t
 
 相反，每个之前 token 的 **key** 都用于计算注意力分数，每个之前 token 的 **value** 都用于加权求和。所以我们需要缓存它们。
 
-## KV 缓存的显存开销 {#memory-cost}
+## 显存账本与架构优化 {#memory-and-architecture}
+
+### KV 缓存的显存开销 {#memory-cost}
 
 KV cache 并非免费。对于以下参数的模型：
 
@@ -108,15 +98,11 @@ KV cache 并非免费。对于以下参数的模型：
 
 总缓存大小为：
 
-\begin{equation}
-\text{KV cache 大小} = 2 \times L \times b \times n \times d \times \text{bytes}
-\end{equation}
+$$\text{KV cache 大小} = 2 \times L \times b \times n \times d \times \text{bytes}$$
 
 乘以 2 是因为同时存 key 和 value。以 7B 模型为例，\\(L = 32\\)，\\(d = 4096\\)，batch size \\(b = 1\\)，序列长度 \\(n = 2048\\)：
 
-\begin{equation}
-2 \times 32 \times 1 \times 2048 \times 4096 \times 2 \approx 1\,\text{GB}
-\end{equation}
+$$2 \times 32 \times 1 \times 2048 \times 4096 \times 2 \approx 1 \text{ GB}$$
 
 （FP16，每元素 2 字节）。这随 batch size 和序列长度线性增长。对于 \\(b = 64\\)，\\(n = 8192\\)，缓存约 \\(32\\) GB——可能超过模型权重本身的显存。
 
@@ -126,21 +112,17 @@ KV cache 并非免费。对于以下参数的模型：
 
 {{< /alert >}}
 
-## 缩减缓存：MQA 与 GQA {#mqa-gqa}
+### 缩减缓存：MQA 与 GQA {#mqa-gqa}
 
 上述公式假设标准的**多头注意力（MHA）**，每个 head 有独立的 K 和 V。两种架构变体可以显著减小缓存：
 
 **多查询注意力（MQA）** 让所有 query head 共享同一组 K、V，缓存缩小至 \\(1/n_\text{heads}\\)：
 
-\begin{equation}
-\text{Memory}_\text{MQA} = B \times S \times L \times 2 \times d_k \times \text{sizeof(dtype)}
-\end{equation}
+$$\text{Memory}_{\text{MQA}} = B \times S \times L \times 2 \times d_k \times \text{sizeof(dtype)}$$
 
 **分组查询注意力（GQA）** 是 MHA 与 MQA 的折中：\\(G\\) 组 K、V，每组被 \\(n_\text{heads}/G\\) 个 query head 共享：
 
-\begin{equation}
-\text{Memory}_\text{GQA} = B \times S \times L \times 2 \times d_k \times G \times \text{sizeof(dtype)}
-\end{equation}
+$$\text{Memory}_{\text{GQA}} = B \times S \times L \times 2 \times d_k \times G \times \text{sizeof(dtype)}$$
 
 ```text
 MHA: Q [H1][H2]...[H64]   K [H1][H2]...[H64]   ← 64 个 KV head
@@ -156,7 +138,7 @@ MQA: Q [H1][H2]...[H64]   K [  共享   ]         ← 1 个 KV head
 
 LLaMA-3-70B 使用 GQA，\\(H = 64\\) 个 query head，\\(G = 8\\) 个 KV head，实际缓存仅为等效 MHA 的 \\(1/8\\)。目前大多数主流 LLM（Mistral、Gemma、LLaMA-3）均已默认采用 GQA。
 
-## 计算与显存的权衡 {#tradeoff}
+### 计算与显存的权衡 {#tradeoff}
 
 KV cache 是经典的计算-显存权衡：
 
@@ -169,7 +151,9 @@ KV cache 是经典的计算-显存权衡：
 
 实际上，自回归解码是**显存带宽受限**而非计算受限的。KV cache 减少了 FLOPs 但_增加了_显存流量，因为每步必须读取不断增长的缓存。这就是为什么 vLLM 等服务框架高度关注 KV cache 显存管理——瓶颈从重新计算转移到了缓存显存分配和带宽。
 
-## LLM 推理的两个阶段 {#two-phases}
+## 推理流程与系统优化 {#serving-flow-and-systems}
+
+### LLM 推理的两个阶段 {#two-phases}
 
 理解 KV cache 也有助于理解 LLM 推理的两个不同阶段：
 
@@ -181,7 +165,7 @@ KV cache 是经典的计算-显存权衡：
 
 <span class="figure-number">Figure 2: </span>Prefill 并行处理所有 prompt token 并构建初始 KV cache；Decode 每步生成一个 token，读取缓存并追加新的 KV 对。
 
-## KV cache 之上的优化 {#optimizations}
+### KV cache 之上的优化 {#optimizations}
 
 多种技术在基本 KV cache 之上进一步优化：
 
