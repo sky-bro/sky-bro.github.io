@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 560" role="img" aria-labelledby="title desc">
+  <title id="title">LLM quantization method principles map</title>
+  <desc id="desc">A visual map showing how LLM.int8, SmoothQuant, GPTQ, AWQ, and KV cache quantization relate to matrix multiplication and attention cache tensors.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="1038" height="558" rx="24" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="40" y="54" font-family="sans-serif" font-size="28" font-weight="700" fill="#0f172a">Where each method controls quantization error</text>
+
+  <rect x="72" y="126" width="190" height="150" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="154" y="190" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="700" fill="#1e3a8a">X</text>
+  <text x="154" y="224" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1e3a8a">activation</text>
+
+  <text x="302" y="210" text-anchor="middle" font-family="sans-serif" font-size="42" font-weight="700" fill="#334155">x</text>
+
+  <rect x="342" y="126" width="190" height="150" rx="12" fill="#ffedd5" stroke="#f97316" stroke-width="3"/>
+  <text x="437" y="190" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="700" fill="#9a3412">W</text>
+  <text x="437" y="224" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#9a3412">weights</text>
+
+  <text x="570" y="210" text-anchor="middle" font-family="sans-serif" font-size="42" font-weight="700" fill="#334155">=</text>
+
+  <rect x="622" y="126" width="190" height="150" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="717" y="190" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="700" fill="#166534">Y</text>
+  <text x="717" y="224" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#166534">layer output</text>
+
+  <rect x="76" y="322" width="204" height="74" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="178" y="350" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#0f172a">LLM.int8()</text>
+  <text x="178" y="376" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">split outlier X columns</text>
+  <path d="M176 322 C154 292, 146 280, 140 252" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="304" y="322" width="250" height="74" rx="12" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="429" y="350" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#0f172a">SmoothQuant</text>
+  <text x="429" y="376" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">move scale between X and W</text>
+  <path d="M386 322 C326 294, 276 270, 232 248" fill="none" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M464 322 C470 294, 456 274, 442 252" fill="none" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="580" y="322" width="186" height="74" rx="12" fill="#ffffff" stroke="#f97316" stroke-width="2"/>
+  <text x="673" y="350" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#0f172a">GPTQ</text>
+  <text x="673" y="376" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">minimize output error</text>
+  <path d="M644 322 C598 292, 552 272, 508 246" fill="none" stroke="#f97316" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M704 322 C710 294, 714 276, 716 252" fill="none" stroke="#f97316" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="790" y="322" width="202" height="84" rx="12" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+  <text x="891" y="350" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#0f172a">AWQ</text>
+  <text x="891" y="374" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">protect salient</text>
+  <text x="891" y="394" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">W channels</text>
+  <path d="M842 322 C760 282, 636 262, 520 236" fill="none" stroke="#ea580c" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="74" y="450" width="138" height="54" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="143" y="483" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#075985">Q</text>
+  <rect x="244" y="450" width="138" height="54" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="313" y="483" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#92400e">K cache</text>
+  <rect x="414" y="450" width="138" height="54" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="483" y="483" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#92400e">V cache</text>
+  <path d="M212 477 L244 477" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M382 477 L414 477" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="608" y="430" width="356" height="94" rx="12" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <text x="786" y="462" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#0f172a">KV cache quantization</text>
+  <text x="786" y="488" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">compress historical K/V</text>
+  <text x="786" y="508" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#475569">for long context serving</text>
+  <path d="M552 477 L608 477" stroke="#d97706" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>

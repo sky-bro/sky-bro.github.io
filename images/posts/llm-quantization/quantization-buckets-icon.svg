@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Quantization buckets icon</title>
+  <desc id="desc">A square icon showing smooth floating point values mapped into discrete quantization buckets.</desc>
+  <rect width="512" height="512" rx="72" fill="#111827"/>
+  <path d="M72 332c58-116 110-166 158-150 52 18 70 112 126 126 30 7 58-11 84-48" fill="none" stroke="#67e8f9" stroke-width="22" stroke-linecap="round"/>
+  <g fill="#f8fafc">
+    <rect x="76" y="344" width="48" height="88" rx="10"/>
+    <rect x="148" y="300" width="48" height="132" rx="10"/>
+    <rect x="220" y="228" width="48" height="204" rx="10"/>
+    <rect x="292" y="276" width="48" height="156" rx="10"/>
+    <rect x="364" y="248" width="48" height="184" rx="10"/>
+  </g>
+  <g fill="#f59e0b">
+    <circle cx="100" cy="332" r="14"/>
+    <circle cx="172" cy="288" r="14"/>
+    <circle cx="244" cy="216" r="14"/>
+    <circle cx="316" cy="264" r="14"/>
+    <circle cx="388" cy="236" r="14"/>
+  </g>
+  <path d="M76 432h360" stroke="#94a3b8" stroke-width="10" stroke-linecap="round"/>
+</svg>

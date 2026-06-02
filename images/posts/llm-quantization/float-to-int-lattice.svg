@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 360" role="img" aria-labelledby="title desc">
+  <title id="title">Float values mapped to an integer lattice</title>
+  <desc id="desc">Floating point values are clipped, scaled, rounded to integer grid points, then dequantized back to approximate floating point values.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="918" height="358" rx="22" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="52" y="60" font-family="sans-serif" font-size="24" font-weight="700" fill="#0f172a">1. float weights</text>
+  <text x="342" y="60" font-family="sans-serif" font-size="24" font-weight="700" fill="#0f172a">2. integer buckets</text>
+  <text x="652" y="60" font-family="sans-serif" font-size="24" font-weight="700" fill="#0f172a">3. dequantized value</text>
+
+  <line x1="64" y1="220" x2="264" y2="220" stroke="#334155" stroke-width="3"/>
+  <line x1="164" y1="96" x2="164" y2="276" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M72 218 C112 122, 178 120, 254 178" fill="none" stroke="#0891b2" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#f97316">
+    <circle cx="95" cy="180" r="8"/>
+    <circle cx="128" cy="145" r="8"/>
+    <circle cx="171" cy="130" r="8"/>
+    <circle cx="218" cy="156" r="8"/>
+    <circle cx="250" cy="176" r="8"/>
+  </g>
+  <text x="78" y="306" font-family="sans-serif" font-size="18" fill="#475569">continuous values</text>
+
+  <line x1="290" y1="180" x2="330" y2="180" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <line x1="374" y1="220" x2="574" y2="220" stroke="#334155" stroke-width="3"/>
+  <g stroke="#94a3b8" stroke-width="2">
+    <line x1="386" y1="196" x2="386" y2="244"/>
+    <line x1="416" y1="196" x2="416" y2="244"/>
+    <line x1="446" y1="196" x2="446" y2="244"/>
+    <line x1="476" y1="196" x2="476" y2="244"/>
+    <line x1="506" y1="196" x2="506" y2="244"/>
+    <line x1="536" y1="196" x2="536" y2="244"/>
+    <line x1="566" y1="196" x2="566" y2="244"/>
+  </g>
+  <g fill="#f97316">
+    <circle cx="416" cy="220" r="8"/>
+    <circle cx="446" cy="220" r="8"/>
+    <circle cx="446" cy="220" r="8"/>
+    <circle cx="506" cy="220" r="8"/>
+    <circle cx="536" cy="220" r="8"/>
+  </g>
+  <text x="388" y="306" font-family="sans-serif" font-size="18" fill="#475569">round(x / scale)</text>
+
+  <line x1="600" y1="180" x2="640" y2="180" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <line x1="684" y1="220" x2="884" y2="220" stroke="#334155" stroke-width="3"/>
+  <path d="M692 188 L722 158 L752 158 L782 188 L812 188 L842 174 L872 174" fill="none" stroke="#0891b2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#f97316">
+    <circle cx="722" cy="158" r="8"/>
+    <circle cx="752" cy="158" r="8"/>
+    <circle cx="782" cy="188" r="8"/>
+    <circle cx="812" cy="188" r="8"/>
+    <circle cx="842" cy="174" r="8"/>
+  </g>
+  <text x="692" y="306" font-family="sans-serif" font-size="18" fill="#475569">scale * integer</text>
+</svg>

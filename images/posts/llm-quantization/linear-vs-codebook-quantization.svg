@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Linear quantization versus codebook quantization</title>
+  <desc id="desc">Linear quantization uses uniformly spaced levels, while codebook quantization uses learned non-uniform representative values near dense regions of the distribution.</desc>
+  <rect x="1" y="1" width="958" height="418" rx="22" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="48" y="56" font-family="sans-serif" font-size="26" font-weight="700" fill="#0f172a">Linear vs codebook quantization</text>
+
+  <text x="72" y="108" font-family="sans-serif" font-size="22" font-weight="700" fill="#1e3a8a">linear quantization</text>
+  <text x="560" y="108" font-family="sans-serif" font-size="22" font-weight="700" fill="#7c2d12">codebook quantization</text>
+
+  <line x1="72" y1="258" x2="414" y2="258" stroke="#334155" stroke-width="3"/>
+  <g stroke="#2563eb" stroke-width="3">
+    <line x1="90" y1="224" x2="90" y2="292"/>
+    <line x1="132" y1="224" x2="132" y2="292"/>
+    <line x1="174" y1="224" x2="174" y2="292"/>
+    <line x1="216" y1="224" x2="216" y2="292"/>
+    <line x1="258" y1="224" x2="258" y2="292"/>
+    <line x1="300" y1="224" x2="300" y2="292"/>
+    <line x1="342" y1="224" x2="342" y2="292"/>
+    <line x1="384" y1="224" x2="384" y2="292"/>
+  </g>
+  <path d="M82 250 C132 152, 204 144, 246 210 C288 274, 342 238, 398 178" fill="none" stroke="#0ea5e9" stroke-width="7" stroke-linecap="round"/>
+  <g fill="#f97316">
+    <circle cx="132" cy="186" r="8"/>
+    <circle cx="174" cy="158" r="8"/>
+    <circle cx="216" cy="184" r="8"/>
+    <circle cx="258" cy="226" r="8"/>
+    <circle cx="342" cy="226" r="8"/>
+    <circle cx="384" cy="188" r="8"/>
+  </g>
+  <text x="244" y="335" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#475569">uniform levels: x_hat = scale * q</text>
+
+  <line x1="560" y1="258" x2="902" y2="258" stroke="#334155" stroke-width="3"/>
+  <g stroke="#ea580c" stroke-width="3">
+    <line x1="592" y1="224" x2="592" y2="292"/>
+    <line x1="628" y1="224" x2="628" y2="292"/>
+    <line x1="666" y1="224" x2="666" y2="292"/>
+    <line x1="712" y1="224" x2="712" y2="292"/>
+    <line x1="792" y1="224" x2="792" y2="292"/>
+    <line x1="862" y1="224" x2="862" y2="292"/>
+  </g>
+  <path d="M570 250 C620 152, 692 144, 734 210 C776 274, 830 238, 886 178" fill="none" stroke="#0ea5e9" stroke-width="7" stroke-linecap="round"/>
+  <g fill="#f97316">
+    <circle cx="592" cy="190" r="8"/>
+    <circle cx="628" cy="160" r="8"/>
+    <circle cx="666" cy="164" r="8"/>
+    <circle cx="712" cy="210" r="8"/>
+    <circle cx="792" cy="232" r="8"/>
+    <circle cx="862" cy="188" r="8"/>
+  </g>
+  <text x="731" y="335" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#475569">learned levels: x_hat = codebook[index]</text>
+</svg>
