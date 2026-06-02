@@ -3,9 +3,7 @@
 
 一个 7B 模型如果用 FP16 存权重，光参数就需要：
 
-$$
-7 \times 10^9 \times 2\ \text{bytes} \approx 14\ \text{GB}
-$$
+$$7 \times 10^9 \times 2\ \text{bytes} \approx 14\ \text{GB}$$
 
 这还没有算 KV cache、activation、临时 workspace、CUDA graph、batching 和运行时碎片。到了 70B，FP16 权重约 140 GB，单卡部署基本不现实。
 
@@ -56,15 +54,11 @@ flowchart TD
 
 先看最常见的 affine quantization，也就是线性量化。给定浮点数 \\(x\\)，我们用整数 \\(q\\) 表示它：
 
-$$
-q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right) + z,\ q_{\min},\ q_{\max}\right)
-$$
+$$q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right) + z,\ q_{\min},\ q_{\max}\right)$$
 
 反量化时再还原为近似浮点数：
 
-$$
-\hat{x} = s(q - z)
-$$
+$$\hat{x} = s(q - z)$$
 
 这里：
 
@@ -76,17 +70,13 @@ $$
 
 如果使用 symmetric quantization，通常令 \\(z=0\\)，只保留 scale：
 
-$$
-q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right), -Q, Q\right), \quad \hat{x} = sq
-$$
+$$q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right), -Q, Q\right), \quad \hat{x} = sq$$
 
 这更适合权重，因为许多权重分布大致以 0 为中心。activation 往往不完全对称，asymmetric quantization 有时更合适。
 
 线性量化的优势是简单。反量化只需要一次整数减法和一次乘法，矩阵乘法 kernel 也容易优化：
 
-$$
-\hat{X}\hat{W} = s_x s_w (Q_x - z_x)(Q_w - z_w)
-$$
+$$\hat{X}\hat{W} = s_x s_w (Q_x - z_x)(Q_w - z_w)$$
 
 这就是为什么主流推理硬件最先支持 INT8、FP8 这类规则格式。代价是格点等间距：如果数据分布很不均匀，很多格点会浪费在几乎没有数值的区域，而密集区域的分辨率不够。
 
@@ -94,15 +84,11 @@ $$
 
 非线性量化不要求格点等间距。它先准备一个码本：
 
-$$
-\mathcal{C} = \{c_{0}, c_{1}, \ldots, c_{K-1}\}
-$$
+$$\mathcal{C} = \\{c_{0}, c_{1}, \ldots, c_{K-1}\\}$$
 
 每个浮点数 \\(x\\) 不再存 scale 后的整数，而是存最近码字的索引：
 
-$$
-i^\* = \arg\min_i |x - c_i|^2,\quad \hat{x}=c_{i^\*}
-$$
+$$i^\* = \arg\min_i |x - c_i|^2,\quad \hat{x}=c_{i^\*}$$
 
 如果码本来自 k-means，那么这就是聚类量化：把权重分布聚成 \\(K\\) 个簇，每个权重只保存“属于哪个簇”的 index。4-bit 码本有 16 个码字，2-bit 码本有 4 个码字。
 
@@ -120,9 +106,7 @@ $$
 
 NF4 可以理解成一种特殊码本：它不是通过每层 k-means 学出任意码字，而是为近似正态分布的权重设计一组 4-bit 非均匀码字。AQLM 则更进一步，用多个码本的加和近似一个权重向量：
 
-$$
-\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]
-$$
+$$\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]$$
 
 这类方法的直觉是：当 bit 数降到 3-bit、2-bit 甚至更低时，等间距标量格点太粗，必须用更灵活的码本结构来保留信息。
 
@@ -130,23 +114,17 @@ $$
 
 最简单的 scale 来自 min-max：
 
-$$
-s = \frac{x_{\max} - x_{\min}}{q_{\max} - q_{\min}}
-$$
+$$s = \frac{x_{\max} - x_{\min}}{q_{\max} - q_{\min}}$$
 
 对于 symmetric INT8，如果浮点范围是 \\([-a,a]\\)，可以写成：
 
-$$
-s = \frac{a}{127}
-$$
+$$s = \frac{a}{127}$$
 
 这看似合理，但有一个明显问题：**一个极端 outlier 会拉大整个 scale**。scale 变大后，整数格点变粗，主体区域的大量小权重会被更粗糙地表示。
 
 举个一维例子。假设一组权重大多数在 \\([-1,1]\\)，但有一个值是 8。如果用 INT4 symmetric，整数范围是 \\([-7,7]\\)，为了覆盖 8，需要：
 
-$$
-s = \frac{8}{7} \approx 1.14
-$$
+$$s = \frac{8}{7} \approx 1.14$$
 
 这意味着 0.3、0.4、0.5 这些数可能都落到相邻甚至相同格点上。为了照顾一个 outlier，主体区域损失了很多分辨率。
 
@@ -160,21 +138,53 @@ $$
 
 量化误差主要有两类：
 
-$$
-x - \hat{x} = e_{\text{round}} + e_{\text{clip}}
-$$
+$$x - \hat{x} = e_{\text{round}} + e_{\text{clip}}$$
 
 其中：
 
-$$
-e_{\text{round}} = x - s\cdot \text{round}(x/s)
-$$
+$$e_{\text{round}} = x - s\cdot \text{round}(x/s)$$
 
 **rounding error** 来自舍入。即使没有 clip，每个值也只能落在最近格点上。均匀量化时，单个值的误差大约被限制在 \\([-s/2, s/2]\\)。
 
 **clipping error** 来自范围截断。如果某个值超过可表示范围，它会被压到边界。少量 clip 不一定坏，因为换来更密的主体格点；但关键权重或 activation outlier 被截断，可能直接破坏某些 head 或 channel。
 
 这解释了为什么量化不是单纯选择 bit 数，而是选择一个误差分配策略：我们要把有限格点花在哪里。
+
+### 更高层视角：量化、剪枝和置零都是受约束扰动 {#constrained-perturbation}
+
+量化看起来是在“换一种数字格式”，剪枝看起来是在“删掉一些连接”，但从 loss 的角度看，它们有同一个数学骨架：**把原参数 \\(w\\) 改成受约束的新参数 \\(\hat{w}\\)，并希望 loss 增加尽量小**。
+
+令扰动为：
+
+$$\Delta w = \hat{w} - w$$
+
+训练好的模型通常在一个局部低损失区域附近，梯度项 \\(\nabla L(w)^T\Delta w\\) 较小。于是 loss 变化可以用二阶近似理解：
+
+$$L(w+\Delta w)-L(w) \approx \frac{1}{2}\Delta w^T H \Delta w$$
+
+这里 \\(H\\) 是 Hessian，它描述 loss 对不同参数方向的敏感度。这个式子给出一个很重要的直觉：**不是所有同样大小的误差都一样伤模型**。如果扰动落在低曲率、不敏感的方向上，loss 增加可能很小；如果扰动落在高曲率方向上，即使数值误差不大，也可能破坏输出。
+
+剪枝或权重置 0 是这个视角下的特例。把第 \\(i\\) 个权重删掉，相当于：
+
+$$\hat{w}_i=0,\quad \Delta w_i=-w_i$$
+
+如果忽略参数间耦合，loss 增量近似为：
+
+$$\Delta L \approx \frac{1}{2}H_{ii}w_i^2$$
+
+所以“能不能剪掉一个权重”不只看 \\(|w_i|\\) 小不小，还要看 \\(H_{ii}\\) 小不小。小权重如果位于高敏感方向，也可能不能随便删；稍大的权重如果位于低敏感方向，反而可能可以安全剪掉。
+
+量化只是把约束集合换成了离散格点：
+
+$$\hat{w}^{(i)} \in \\{s(q-z): q\in[q^{\mathrm{lo}},q^{\mathrm{hi}}]\\}$$
+
+RTN 选择最近格点，相当于只让 \\(|\Delta w_i|\\) 尽量小；GPTQ 这类方法进一步问：这个 \\(\Delta w\\) 经过 \\(H\\) 或 \\(X^TX\\) 加权后，会不会明显增加层输出误差？这就是为什么低 bit 量化不能只看 rounding error，还要看误差落在哪些方向上。
+
+可以把几类压缩统一成一个约束优化问题：
+
+$$\min_{\hat{w}\in\mathcal{C}} L(\hat{w})$$
+
+剪枝的 \\(\mathcal{C}\\) 是稀疏参数集合，量化的 \\(\mathcal{C}\\) 是离散格点集合，码本量化的 \\(\mathcal{C}\\) 是 codebook 可表示的集合。它们真正共享的问题是：**模型函数有冗余，但冗余不是均匀分布的；好方法要找到模型不敏感的方向来安排误差。**
 
 ### 粒度：per-tensor、per-channel 与 group-wise {#granularity}
 
@@ -188,9 +198,7 @@ scale 可以服务一个大 tensor，也可以服务更小的切片。粒度越�
 
 对线性层：
 
-$$
-Y = XW
-$$
+$$Y = XW$$
 
 如果 \\(W \in \mathbb{R}^{d_\text{in} \times d_\text{out}}\\)，per-channel quantization 通常给每个输出 channel 一个 scale。直觉是：不同输出 channel 的权重分布可能很不一样，强行共用一个 scale 会让小范围 channel 被大范围 channel 牺牲。
 
@@ -222,6 +230,12 @@ RTN（round-to-nearest）就是按 scale 直接舍入到最近整数。它属于
 
 INT8 RTN 往往已经不错，因为格点足够密；INT4 RTN 则更容易掉点，因为每组只有十几个可用格点，outlier 和重要权重会更明显地相互争夺分辨率。
 
+**矩阵例子**：一个 weight group 是 \\([0.03,0.07,0.09,1.40]\\)。INT4 symmetric 覆盖最大值时 \\(s=1.40/7=0.20\\)，于是
+
+$$q=\text{round}(w/s)=[0,0,0,7],\quad \hat{w}=[0,0,0,1.40]$$
+
+前三个小权重都被压成 0。RTN 只按当前 scale 取最近格点，不知道这些小权重在真实输入里是否重要。
+
 RTN 的优点是简单、快、不依赖校准数据。缺点也很直接：它默认每个权重的误差同样重要，既不关心真实 activation 分布，也不关心误差对层输出的影响。因此 RTN 更适合作为 baseline，而不是低 bit 量化的终点。
 
 ### LLM.int8()：把 outlier 维度单独拿出来 {#llm-int8}
@@ -232,29 +246,29 @@ LLM.int8() 的核心思想是 **mixed-precision decomposition**：把矩阵乘�
 
 对线性层：
 
-$$
-Y = XW
-$$
+$$Y = XW$$
 
 把输入维度集合拆成普通维度 \\(\mathcal{N}\\) 和 outlier 维度 \\(\mathcal{O}\\)：
 
-$$
-Y =
-X_{\mathcal{N}} W_{\mathcal{N}}
-+
-X_{\mathcal{O}} W_{\mathcal{O}}
-$$
+$$Y = X_{\mathcal{N}} W_{\mathcal{N}} + X_{\mathcal{O}} W_{\mathcal{O}}$$
 
 LLM.int8() 对第一项使用 vector-wise INT8 量化，对第二项使用 FP16：
 
-$$
-Y \approx
-\text{dequant}\left(Q_8(X_{\mathcal{N}}) Q_8(W_{\mathcal{N}})\right)
-+
-X_{\mathcal{O}}^{\text{fp16}} W_{\mathcal{O}}^{\text{fp16}}
-$$
+$$Y \approx \text{dequant}\left(Q_8(X_{\mathcal{N}}) Q_8(W_{\mathcal{N}})\right) + X_{\mathcal{O}}^{\text{fp16}} W_{\mathcal{O}}^{\text{fp16}}$$
 
 这个分解的可行性来自一个关键观察：outlier feature 很重要，但数量很少。因此把少量 outlier 留在 FP16，不会毁掉整体显存和速度收益，却能避免 INT8 量化最致命的误差。
+
+**矩阵例子**：用几条校准样本的 hidden states 组成
+
+$$X_{\text{calib}}= \begin{bmatrix} 1.2 & 0.4 & 58 \\\\ -0.7 & 1.1 & 62 \\\\ 0.3 & -0.8 & 55 \end{bmatrix}$$
+
+按 feature 维度看列最大值：
+
+$$\max |X_{\text{calib}}[:,j]|=[1.2,1.1,62]$$
+
+如果阈值 \\(\tau=6\\)，第 3 列就是 outlier 维度。于是对 \\(Y=XW\\)，第 1、2 列走 INT8 matmul，第 3 列保留 FP16：
+
+$$XW=X_{[:,1:2]}W_{[1:2,:]}+X_{[:,3]}W_{[3,:]}$$
 
 ```mermaid
 flowchart LR
@@ -276,31 +290,33 @@ LLM.int8() 的路线是“发现 outlier，然后单独处理”。SmoothQuant �
 
 对线性层：
 
-$$
-Y = XW
-$$
+$$Y = XW$$
 
 插入一个按 channel 的对角缩放矩阵 \\(D\\)：
 
-$$
-Y = XW = (X D^{-1})(D W)
-$$
+$$Y = XW = (X D^{-1})(D W)$$
 
 这是一个等价变换，未量化时输出完全不变。但量化时，\\(XD^{-1}\\) 的 activation outlier 被压小，\\(DW\\) 的权重动态范围变大。SmoothQuant 的判断是：**activation 难量化，weight 相对好量化，所以把量化难度从 activation 平滑迁移到 weight。**
 
 常见写法会用一个平滑系数 alpha 控制迁移强度。简化理解是：
 
-$$
-s_j = \frac{\max |X_j|^\alpha}{\max |W_j|^{1-\alpha}}
-$$
+$$s_j = \frac{\max |X_j|^\alpha}{\max |W_j|^{1-\alpha}}$$
 
 然后对第 \\(j\\) 个 channel 做：
 
-$$
-X_{j}^{\prime} = \frac{X_{j}}{s_{j}}, \quad W_{j}^{\prime} = s_{j} W_{j}
-$$
+$$X_{j}^{\prime} = \frac{X_{j}}{s_{j}}, \quad W_{j}^{\prime} = s_{j} W_{j}$$
 
 alpha 越大，越强调压平 activation；alpha 越小，越保护 weight。这个超参体现了 SmoothQuant 的核心取舍：把 outlier 从一个张量搬到另一个张量，不是让误差凭空消失。
+
+**矩阵例子**：假设校准后发现第 2 个 activation channel 很大：
+
+$$X= \begin{bmatrix} 1 & 80 \end{bmatrix},\quad W= \begin{bmatrix} 2 \\\\ 0.25 \end{bmatrix}$$
+
+原输出是 \\(XW=1\cdot2+80\cdot0.25=22\\)。选 \\(D=\operatorname{diag}(1,10)\\) 后：
+
+$$XD^{-1}=[1,8],\quad DW= \begin{bmatrix} 2 \\\\ 2.5 \end{bmatrix}$$
+
+输出仍是 \\((XD^{-1})(DW)=22\\)，但 activation 的最大值从 80 降到 8，更容易做 W8A8。
 
 **优点**：适合 W8A8，能真正利用 INT8 GEMM，推理吞吐和显存都有收益；对超大模型有较好的通用性。
 
@@ -310,21 +326,23 @@ alpha 越大，越强调压平 activation；alpha 越小，越保护 weight。�
 
 GPTQ 也是 post-training quantization，但它不只看单个权重的误差，而是看量化后对层输出的影响。对线性层 \\(Y=XW\\)，权重误差 \\(\Delta W\\) 带来的输出误差是：
 
-$$
-\Delta Y = X \Delta W
-$$
+$$\Delta Y = X \Delta W$$
 
 如果校准数据告诉我们某些输入方向更常见、更重要，那么这些方向上的权重误差应该更小。把平方误差写出来：
 
-$$
-E = \lVert X(W-\hat{W}) \rVert^2
-$$
+$$E = \lVert X(W-\hat{W}) \rVert^2$$
 
 这里的 \\(E\\) 是层输出误差。最小化它等价于让权重误差在输入协方差 \\(X^T X\\) 加权下尽量小。GPTQ 使用近似 Hessian 信息逐列量化并补偿误差，本质是在问：**哪些权重误差对当前层输出最伤？**
 
 所以 GPTQ 常用于 weight-only INT4：它试图在极低 bit 下保住层输出，而不是只做机械舍入。
 
 一个直观类比是：RTN 把每个权重都独立四舍五入；GPTQ 每量化一列权重后，会估计这次误差如何影响后续列，并把一部分误差补偿到还没量化的权重里。这样总体输出误差更小。
+
+**矩阵例子**：校准输入
+
+$$X= \begin{bmatrix} 3 & 0 \\\\ 2 & 1 \\\\ 3 & 0 \end{bmatrix}$$
+
+则 \\(X^T X=\begin{bmatrix}22&2\\\\2&1\end{bmatrix}\\)，第一维输入远比第二维常见。若量化误差是 \\(\Delta w=[0.1,0.1]^T\\)，输出误差为 \\(X\Delta w=[0.3,0.3,0.3]^T\\)；若误差换成 \\([0,0.1]^T\\)，输出误差只有 \\([0,0.1,0]^T\\)。GPTQ 用这个 Hessian/协方差信息判断：同样大小的 weight error，落在第一维更伤。
 
 **优点**：适合 4-bit/3-bit weight-only，压缩率高，通常比 RTN 明显稳；对本地部署和单机大模型很实用。
 
@@ -340,11 +358,15 @@ AWQ 会用校准数据识别这些显著 channel，并通过缩放策略保护�
 
 数学上也可以用缩放自由度理解。对某个 channel 做：
 
-$$
-Y = XW = (X S^{-1})(S W)
-$$
+$$Y = XW = (X S^{-1})(S W)$$
 
 AWQ 选择 \\(S\\) 的目标不是让所有 activation 都适合 INT8，而是让重要权重通道在 group-wise INT4 量化中获得更好的表示。换句话说，SmoothQuant 偏向“让 activation 好量化”，AWQ 偏向“让重要 weight 不被低 bit 伤到”。
+
+**矩阵例子**：校准样本给出每个输入 channel 的平均幅度：
+
+$$\operatorname{mean}|X_{\text{calib}}[:,j]|=[0.4,7.5,0.6]$$
+
+第 2 个 channel 是 salient channel。若某行权重是 \\([0.08,0.12,0.10]\\)，朴素 group-wise INT4 可能把它们放在同一组里平均处理；AWQ 会给第 2 个 channel 一个缩放保护，让 \\(0.12\\) 在量化前被放大、量化后再缩回。这样做不是因为 \\(0.12\\) 数值最大，而是因为它乘上的 activation 经常最大。
 
 **优点**：适合 INT4 weight-only，校准成本相对可控，部署友好，常用于端侧或单机推理。
 
@@ -354,9 +376,7 @@ AWQ 选择 \\(S\\) 的目标不是让所有 activation 都适合 INT8，而是�
 
 前面的 GPTQ、AWQ 主要处理权重。但在在线推理中，KV cache 可能比权重更快成为瓶颈。KV cache 的显存随 batch size 和上下文长度线性增长：
 
-$$
-\text{KV bytes} = 2 \times L \times B \times S \times H_\text{kv} \times d_h \times \text{bytes}
-$$
+$$\text{KV bytes} = 2 \times L \times B \times S \times H_\text{kv} \times d_h \times \text{bytes}$$
 
 其中 2 表示 K 和 V，\\(L\\) 是层数，\\(B\\) 是 batch size，\\(S\\) 是序列长度，\\(H_\text{kv}\\) 是 KV head 数，\\(d_h\\) 是 head dim。
 
@@ -364,17 +384,19 @@ $$
 
 但 KV cache 量化也更敏感。K 的误差会改变 softmax 前的 attention score：
 
-$$
-\text{score}_{t,i} = \frac{q_t \cdot k_i}{\sqrt{d_h}}
-$$
+$$\text{score}_{t,i} = \frac{q_t \cdot k_i}{\sqrt{d_h}}$$
 
 V 的误差会改变最终聚合内容：
 
-$$
-o_t = \sum_i \text{softmax}(\text{score}_{t,i}) v_i
-$$
+$$o_t = \sum_i \text{softmax}(\text{score}_{t,i}) v_i$$
 
 所以 KV cache 量化的常见策略不是简单全局 INT4，而是 per-head/per-channel scale、K/V 分开量化、保留 recent tokens 高精度，或者只在长上下文场景启用。
+
+**矩阵例子**：对一个 head，当前 query 和两条历史 key 是
+
+$$q=[1,1],\quad K= \begin{bmatrix} 1 & 0 \\\\ 0.9 & 0.9 \end{bmatrix}$$
+
+score 是 \\([1,1.8]/\sqrt{2}\\)，第二个 token 更重要。如果把 K 量化得太粗，\\([0.9,0.9]\\) 可能变成 \\([1,1]\\)，score 变成 \\([1,2]/\sqrt{2}\\)；如果被压成 \\([1,0.5]\\)，score 又变成 \\([1,1.5]/\sqrt{2}\\)。KV cache 量化省的是历史 K/V 的存储，但误差会直接进入 attention 分数。
 
 **优点**：直接扩大 batch size 和上下文容量，对服务端吞吐很有价值。
 
@@ -384,17 +406,19 @@ $$
 
 聚类量化是最直观的非线性量化。以权重量化为例，先把一组权重 \\(w_1,\ldots,w_n\\) 聚成 \\(K\\) 个中心：
 
-$$
-\min_{c_1,\ldots,c_K}\sum_{i=1}^n \min_j \|w_i-c_j\|^2
-$$
+$$\min_{c_1,\ldots,c_K}\sum_{i=1}^n \min_j \|w_i-c_j\|^2$$
 
 量化后，每个权重只保存最近中心的编号：
 
-$$
-\hat{w}[i] = \mathcal{C}[\operatorname{index}(i)]
-$$
+$$\hat{w}[i] = \mathcal{C}[\operatorname{index}(i)]$$
 
 如果 \\(K=16\\)，每个 index 只需要 4 bit。和 INT4 的差别在于：INT4 的 16 个格点等间距，k-means 的 16 个中心会集中在权重分布更密集的地方。
+
+**矩阵例子**：一个小权重块是
+
+$$W= \begin{bmatrix} -0.12 & -0.08 & 0.02 & 0.09 \\\\ 0.11 & 0.95 & -0.90 & 0.04 \end{bmatrix}$$
+
+如果只用 2-bit codebook，线性格点可能是 \\([-1,-0.33,0.33,1]\\)，很多接近 0 的权重都会变成 0.33 或 -0.33。k-means 可能学到 \\([-0.9,-0.1,0.05,0.95]\\)，把码字放在真实权重密集的位置。
 
 这类方法的优点是低 bit 误差潜力更好，尤其当权重分布明显不均匀时，码本能把有限表示能力花在高概率区域。缺点是硬件不如线性量化友好：矩阵乘法前往往需要查表、解码或特殊 kernel，而且码本本身也要存储。
 
@@ -412,6 +436,12 @@ NF4（NormalFloat 4-bit）可以看成固定码本量化：它假设预训练权
 
 QLoRA 使用 NF4 存储冻结的 base model，再训练 LoRA adapter。关键点是：NF4 主要压缩的是冻结权重，不是把整个训练过程都变成 4-bit 反向传播。训练时仍然需要把量化权重反量化到计算 dtype，再参与前向/反向。
 
+**矩阵例子**：归一化后的冻结权重可能像
+
+$$[-0.08,0.03,0.11,-0.20,1.7]$$
+
+均匀 4-bit 会把 16 个码字平均铺在中心和尾部；NF4 的码字在 0 附近更密，所以前四个常见小权重能得到更细的表示，尾部的 1.7 用较稀疏的码字表示。QLoRA 保持这个 base model 冻结，只训练额外的 LoRA 矩阵。
+
 **优点**：适合参数高效微调，显存收益大；固定码本实现比每层 k-means 更规则。
 
 **缺点**：假设权重分布适合 NF4；主要服务于冻结基座 + adapter 训练，不等同于通用低 bit 推理加速。
@@ -420,11 +450,15 @@ QLoRA 使用 NF4 存储冻结的 base model，再训练 LoRA adapter。关键点
 
 单个码本的表达能力有限。AQLM（Additive Quantization of Language Models）走的是加法码本路线：不是用一个 codeword 表示一组权重，而是用多个 codeword 的和表示：
 
-$$
-\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]
-$$
+$$\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]$$
 
 如果每个码本提供少量候选，多个码本组合起来就能形成更丰富的表示空间。直觉上，这类似“用几个基础积木拼一个更精细的向量”，比单个 2-bit/3-bit 标量格点更灵活。
+
+**矩阵例子**：要近似一个 2 维权重向量 \\(w=[0.7,0.2]\\)。单个 2-bit 码本只能从 4 个向量里选一个，比如最接近的是 \\([0.5,0.0]\\)。AQLM 可以用两个码本相加：
+
+$$[0.5,0.0] + [0.2,0.2] = [0.7,0.2]$$
+
+多个小码本组合后，极低 bit 下仍能表达更细的方向。
 
 AQLM 这类方法主要面向极低 bit 权重量化。它的优势是压缩率很高，同时质量可能优于简单标量量化。缺点是编码、解码和 kernel 都更复杂，工程部署门槛高于 GPTQ/AWQ 这种更常见的 weight-only INT4 路线。
 
@@ -433,6 +467,12 @@ AQLM 这类方法主要面向极低 bit 权重量化。它的优势是压缩率�
 QAT（quantization-aware training）在训练或微调时模拟量化误差，让模型提前适应低精度表示。它通常比 PTQ（post-training quantization）成本更高，但在更激进的 bit 数、更小模型或精度要求很高的场景里更稳。
 
 可以把 PTQ 理解为“训练完再压缩”，把 QAT 理解为“训练时就知道未来要住进更小的房间”。后者更麻烦，但模型有机会调整参数分布来适应格点。
+
+**矩阵例子**：训练中某层输出是 \\(h=XW=[0.13,0.27,1.8]\\)。目标硬件只支持 INT4 activation，QAT 会在前向里插入 fake quant：
+
+$$\hat{h}=s\cdot\text{round}(h/s)$$
+
+后续层看到的是 \\(\hat{h}\\)，不是理想 FP16 的 \\(h\\)。如果 1.8 经常造成 scale 过大，训练会通过梯度调整前后层参数，让中间 activation 更适合目标格点。
 
 **优点**：在极低 bit、强精度约束或专用硬件部署中更可靠。
 
@@ -445,6 +485,12 @@ INT8/INT4 是定点量化：一个 scale 加一组整数格点。FP8 则是低 b
 定点格式的特点是：在一个 scale 范围内，格点间距均匀。它适合分布范围明确、可以分组缩放的数值。
 
 浮点格式的特点是：越靠近 0 越密，绝对值越大间距越粗。它适合动态范围更大的场景，尤其是训练或 activation 这类分布变化明显的张量。
+
+**矩阵例子**：activation 矩阵可能是
+
+$$X= \begin{bmatrix} 0.2 & -1.5 \\\\ 3.0 & 80 \end{bmatrix}$$
+
+INT8 定点量化若用同一个 scale 覆盖 80，小值 \\(0.2\\) 的分辨率会变差。FP8 有 exponent，能用更自然的方式同时表示小值和大值，所以常见于训练、prefill GEMM 和 activation 路径；但是否更快、更准仍取决于硬件格式和 kernel。
 
 | 格式 | 表示方式 | 优点 | 典型场景 |
 | --- | --- | --- | --- |
@@ -503,24 +549,17 @@ INT8/INT4 是定点量化：一个 scale 加一组整数格点。FP8 则是低 b
 
 实际会比表格略大，因为还要存 scale、zero point、group metadata，有些层也可能保持 FP16。例如 group-wise INT4，group size 为 128，每组一个 FP16 scale：
 
-$$
-\text{scale overhead} = \frac{2}{128} = 0.015625\ \text{bytes / parameter}
-$$
+$$\text{scale overhead} = \frac{2}{128} = 0.015625\ \text{bytes / parameter}$$
 
 相对 INT4 的 0.5 bytes / parameter，metadata 约增加：
 
-$$
-\frac{0.015625}{0.5} = 3.125\%
-$$
+$$\frac{0.015625}{0.5} = 3.125\\%$$
 
 所以 7B 的 INT4 权重不是精确 3.5 GB，而是大约 3.6 GB 再加上一些实现相关开销。这个数量级已经足够解释为什么 INT4 能让消费级显卡跑更大的模型。
 
 但如果服务端 batch 很大、上下文很长，权重不一定是唯一瓶颈。以 \\(L=32\\)、\\(H_\text{kv}=8\\)、\\(d_h=128\\)、\\(B=32\\)、\\(S=8192\\)、FP16 KV cache 为例：
 
-$$
-2 \times 32 \times 32 \times 8192 \times 8 \times 128 \times 2
-\approx 34.4\ \text{GB}
-$$
+$$2 \times 32 \times 32 \times 8192 \times 8 \times 128 \times 2 \approx 34.4\ \text{GB}$$
 
 这时即使权重已经 INT4，KV cache 仍可能吃掉大量显存。量化策略必须和服务形态一起看。
 

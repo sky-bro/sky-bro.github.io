@@ -3,9 +3,7 @@
 
 A 7B model stored in FP16 needs this much memory just for parameters:
 
-$$
-7 \times 10^9 \times 2\ \text{bytes} \approx 14\ \text{GB}
-$$
+$$7 \times 10^9 \times 2\ \text{bytes} \approx 14\ \text{GB}$$
 
 That does not include the KV cache, activations, temporary workspaces, CUDA graphs, batching overhead, or runtime fragmentation. For a 70B model, FP16 weights alone are about 140 GB, which is already beyond a single commodity GPU.
 
@@ -56,15 +54,11 @@ The rest of the post maps each method back to this framework.
 
 Start with affine quantization, the most common linear form. Given a floating point value \\(x\\), we store an integer \\(q\\):
 
-$$
-q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right) + z,\ q_{\min}, q_{\max}\right)
-$$
+$$q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right) + z,\ q_{\min}, q_{\max}\right)$$
 
 Dequantization maps it back to an approximate floating point value:
 
-$$
-\hat{x} = s(q - z)
-$$
+$$\hat{x} = s(q - z)$$
 
 Here:
 
@@ -76,17 +70,13 @@ Here:
 
 With symmetric quantization, we usually set \\(z=0\\) and keep only a scale:
 
-$$
-q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right), -Q, Q\right), \quad \hat{x} = sq
-$$
+$$q = \text{clip}\left(\text{round}\left(\frac{x}{s}\right), -Q, Q\right), \quad \hat{x} = sq$$
 
 This is often a good fit for weights because many weight distributions are roughly centered around zero. Activations are not always symmetric, so asymmetric quantization may be a better fit there.
 
 Linear quantization is attractive because it is simple. Dequantization needs only an integer subtraction and a multiplication, and matrix multiplication kernels are easier to optimize:
 
-$$
-\hat{X}\hat{W} = s_x s_w (Q_x - z_x)(Q_w - z_w)
-$$
+$$\hat{X}\hat{W} = s_x s_w (Q_x - z_x)(Q_w - z_w)$$
 
 That is why mainstream inference hardware first tends to support regular formats such as INT8 and FP8. The cost is uniform spacing. If the data distribution is highly non-uniform, many grid points are wasted in low-probability regions while dense regions do not get enough resolution.
 
@@ -94,15 +84,11 @@ That is why mainstream inference hardware first tends to support regular formats
 
 Nonlinear quantization does not require uniformly spaced grid points. It first defines a codebook:
 
-$$
-\mathcal{C} = \{c_{0}, c_{1}, \ldots, c_{K-1}\}
-$$
+$$\mathcal{C} = \\{c_{0}, c_{1}, \ldots, c_{K-1}\\}$$
 
 Each floating point value \\(x\\) stores the index of the nearest codeword instead of a scaled integer:
 
-$$
-i^\* = \arg\min_i |x - c_i|^2,\quad \hat{x}=c_{i^\*}
-$$
+$$i^\* = \arg\min_i |x - c_i|^2,\quad \hat{x}=c_{i^\*}$$
 
 If the codebook comes from k-means, this is clustering quantization. A group of weights is clustered into \\(K\\) centers, and each weight stores only the index of its nearest center. A 4-bit codebook has 16 codewords; a 2-bit codebook has 4 codewords.
 
@@ -120,9 +106,7 @@ The contrast looks like this:
 
 NF4 can be understood as a special codebook. It does not learn arbitrary per-layer k-means centers; it uses a fixed non-uniform 4-bit codebook designed for approximately normal weight distributions. AQLM goes further and approximates a weight vector as the sum of multiple codebook entries:
 
-$$
-\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]
-$$
+$$\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]$$
 
 The intuition is that when the bit width falls to 3 bits, 2 bits, or below, uniformly spaced scalar grid points become too coarse. More flexible codebook structures can preserve more information.
 
@@ -130,23 +114,17 @@ The intuition is that when the bit width falls to 3 bits, 2 bits, or below, unif
 
 The simplest scale comes from min-max:
 
-$$
-s = \frac{x_{\max} - x_{\min}}{q_{\max} - q_{\min}}
-$$
+$$s = \frac{x_{\max} - x_{\min}}{q_{\max} - q_{\min}}$$
 
 For symmetric INT8 over a floating point range \\([-a,a]\\), this becomes:
 
-$$
-s = \frac{a}{127}
-$$
+$$s = \frac{a}{127}$$
 
 This looks reasonable, but it has an obvious problem: **one extreme outlier can enlarge the scale for the whole tensor**. Once the scale becomes larger, integer grid points become coarser, and many small weights in the main body of the distribution are represented poorly.
 
 Consider a one-dimensional example. Most weights are in \\([-1,1]\\), but one value is 8. With symmetric INT4 over \\([-7,7]\\), covering 8 requires:
 
-$$
-s = \frac{8}{7} \approx 1.14
-$$
+$$s = \frac{8}{7} \approx 1.14$$
 
 Then values such as 0.3, 0.4, and 0.5 may land on adjacent grid points or even the same grid point. To accommodate one outlier, the main region loses a lot of resolution.
 
@@ -160,21 +138,53 @@ The core tension in quantization is dynamic range versus resolution: a larger dy
 
 Quantization error has two main sources:
 
-$$
-x - \hat{x} = e_{\text{round}} + e_{\text{clip}}
-$$
+$$x - \hat{x} = e_{\text{round}} + e_{\text{clip}}$$
 
 where:
 
-$$
-e_{\text{round}} = x - s\cdot \text{round}(x/s)
-$$
+$$e_{\text{round}} = x - s\cdot \text{round}(x/s)$$
 
 **Rounding error** comes from snapping a value to the nearest grid point. Without clipping, a single value under uniform quantization has error roughly bounded by \\([-s/2, s/2]\\).
 
 **Clipping error** comes from range truncation. If a value exceeds the representable range, it is pushed to the boundary. A small amount of clipping is not always bad because it can buy denser grid points for the main body. But clipping important weights or activation outliers can directly damage certain heads or channels.
 
 This is why quantization is not simply choosing a bit width. It is choosing an error allocation strategy: where should the finite grid points be spent?
+
+### Higher-level view: quantization, pruning, and zeroing are constrained perturbations {#constrained-perturbation}
+
+Quantization may look like "changing the number format," while pruning may look like "removing connections." From the loss perspective, they share the same mathematical skeleton: **replace the original parameters \\(w\\) with constrained parameters \\(\hat{w}\\), while keeping the increase in loss small**.
+
+Let the perturbation be:
+
+$$\Delta w = \hat{w} - w$$
+
+A trained model is usually near a local low-loss region, so the first-order term \\(\nabla L(w)^T\Delta w\\) is small. The change in loss can then be understood through a second-order approximation:
+
+$$L(w+\Delta w)-L(w) \approx \frac{1}{2}\Delta w^T H \Delta w$$
+
+Here \\(H\\) is the Hessian, which measures how sensitive the loss is to different parameter directions. This gives the key intuition: **equal-sized errors are not equally harmful**. If a perturbation falls along a low-curvature, insensitive direction, the loss may barely increase. If it falls along a high-curvature direction, even a small numerical error can damage the output.
+
+Pruning or zeroing a weight is a special case. Removing weight \\(i\\) means:
+
+$$\hat{w}_i=0,\quad \Delta w_i=-w_i$$
+
+If we ignore coupling between parameters, the loss increase is approximately:
+
+$$\Delta L \approx \frac{1}{2}H_{ii}w_i^2$$
+
+So deciding whether a weight can be pruned is not only about whether \\(|w_i|\\) is small. It also depends on whether \\(H_{ii}\\) is small. A small weight in a sensitive direction may be unsafe to remove; a larger weight in an insensitive direction may be removable.
+
+Quantization simply changes the constraint set to discrete grid points:
+
+$$\hat{w}^{(i)} \in \\{s(q-z): q\in[q^{\mathrm{lo}},q^{\mathrm{hi}}]\\}$$
+
+RTN chooses the nearest grid point, which only tries to make \\(|\Delta w_i|\\) small. Methods such as GPTQ ask a stronger question: after weighting \\(\Delta w\\) by \\(H\\) or \\(X^TX\\), will this error significantly increase the layer output error? This is why low-bit quantization cannot be understood only as rounding error; we also need to know which directions the error lands in.
+
+Many compression methods can be written as one constrained optimization problem:
+
+$$\min_{\hat{w}\in\mathcal{C}} L(\hat{w})$$
+
+For pruning, \\(\mathcal{C}\\) is a sparse parameter set. For quantization, \\(\mathcal{C}\\) is a discrete grid. For codebook quantization, \\(\mathcal{C}\\) is the set representable by codewords. The shared principle is: **model functions have redundancy, but that redundancy is not uniformly distributed; good compression methods place error in directions the model is less sensitive to.**
 
 ### Granularity: per-tensor, per-channel, and group-wise {#granularity}
 
@@ -188,9 +198,7 @@ A scale can serve one large tensor or a smaller slice. Finer granularity adapts 
 
 For a linear layer:
 
-$$
-Y = XW
-$$
+$$Y = XW$$
 
 If \\(W \in \mathbb{R}^{d_\text{in} \times d_\text{out}}\\), per-channel quantization usually gives each output channel one scale. The intuition is that different output channels may have very different weight distributions. Sharing one scale across all channels can sacrifice small-range channels to large-range channels.
 
@@ -222,6 +230,12 @@ RTN, or round-to-nearest, simply rounds values to the nearest integer grid point
 
 INT8 RTN often works well because the grid is dense enough. INT4 RTN is more fragile because each group has only a small number of usable grid points, so outliers and important weights compete more aggressively for resolution.
 
+**Toy matrix example**: a weight group is \\([0.03,0.07,0.09,1.40]\\). Symmetric INT4 sets \\(s=1.40/7=0.20\\), so:
+
+$$q=\text{round}(w/s)=[0,0,0,7],\quad \hat{w}=[0,0,0,1.40]$$
+
+The first three small weights collapse to zero. RTN only rounds to the nearest grid point under the current scale; it does not know whether those small weights matter under real activations.
+
 RTN is simple, fast, and calibration-free. Its weakness is equally direct: it treats all weight errors as equally important. It does not know the real activation distribution, nor does it know how an error affects the layer output. RTN is therefore a baseline, not usually the endpoint for low-bit LLM quantization.
 
 ### LLM.int8(): isolate outlier dimensions {#llm-int8}
@@ -232,29 +246,29 @@ The core idea of LLM.int8() is **mixed-precision decomposition**: split the matr
 
 For a linear layer:
 
-$$
-Y = XW
-$$
+$$Y = XW$$
 
 split the input dimensions into normal dimensions \\(\mathcal{N}\\) and outlier dimensions \\(\mathcal{O}\\):
 
-$$
-Y =
-X_{\mathcal{N}} W_{\mathcal{N}}
-+
-X_{\mathcal{O}} W_{\mathcal{O}}
-$$
+$$Y = X_{\mathcal{N}} W_{\mathcal{N}} + X_{\mathcal{O}} W_{\mathcal{O}}$$
 
 LLM.int8() applies vector-wise INT8 quantization to the first term and FP16 computation to the second:
 
-$$
-Y \approx
-\text{dequant}\left(Q_8(X_{\mathcal{N}}) Q_8(W_{\mathcal{N}})\right)
-+
-X_{\mathcal{O}}^{\text{fp16}} W_{\mathcal{O}}^{\text{fp16}}
-$$
+$$Y \approx \text{dequant}\left(Q_8(X_{\mathcal{N}}) Q_8(W_{\mathcal{N}})\right) + X_{\mathcal{O}}^{\text{fp16}} W_{\mathcal{O}}^{\text{fp16}}$$
 
 This works because outlier features are important but few. Keeping a small outlier path in FP16 does not erase the memory and speed benefits, while avoiding the most damaging INT8 errors.
+
+**Toy matrix example**: collect hidden states from calibration samples:
+
+$$X_{\text{calib}}= \begin{bmatrix} 1.2 & 0.4 & 58 \\\\ -0.7 & 1.1 & 62 \\\\ 0.3 & -0.8 & 55 \end{bmatrix}$$
+
+The per-feature maxima are:
+
+$$\max |X_{\text{calib}}[:,j]|=[1.2,1.1,62]$$
+
+With threshold \\(\tau=6\\), column 3 is an outlier dimension. For \\(Y=XW\\), columns 1 and 2 use INT8 matmul, while column 3 stays in FP16:
+
+$$XW=X_{[:,1:2]}W_{[1:2,:]}+X_{[:,3]}W_{[3,:]}$$
 
 ```mermaid
 flowchart LR
@@ -276,31 +290,33 @@ LLM.int8() says "detect outliers, then treat them separately." SmoothQuant takes
 
 For a linear layer:
 
-$$
-Y = XW
-$$
+$$Y = XW$$
 
 insert a per-channel diagonal scaling matrix \\(D\\):
 
-$$
-Y = XW = (X D^{-1})(D W)
-$$
+$$Y = XW = (X D^{-1})(D W)$$
 
 Without quantization, this is an exact algebraic identity. With quantization, \\(XD^{-1}\\) has smaller activation outliers, while \\(DW\\) has a larger weight dynamic range. SmoothQuant relies on the observation that **activations are harder to quantize, while weights are relatively easier**, so it migrates quantization difficulty from activations into weights.
 
 A common formulation uses a smoothing coefficient alpha to control the migration strength. In simplified form:
 
-$$
-s_j = \frac{\max |X_j|^\alpha}{\max |W_j|^{1-\alpha}}
-$$
+$$s_j = \frac{\max |X_j|^\alpha}{\max |W_j|^{1-\alpha}}$$
 
 and for channel \\(j\\):
 
-$$
-X_{j}^{\prime} = \frac{X_{j}}{s_{j}}, \quad W_{j}^{\prime} = s_{j} W_{j}
-$$
+$$X_{j}^{\prime} = \frac{X_{j}}{s_{j}}, \quad W_{j}^{\prime} = s_{j} W_{j}$$
 
 A larger alpha emphasizes smoothing activations; a smaller alpha protects weights. This hyperparameter expresses the core SmoothQuant tradeoff: outliers are moved from one tensor to another, not made to disappear.
+
+**Toy matrix example**: calibration shows that the second activation channel is large:
+
+$$X= \begin{bmatrix} 1 & 80 \end{bmatrix},\quad W= \begin{bmatrix} 2 \\\\ 0.25 \end{bmatrix}$$
+
+The original output is \\(XW=1\cdot2+80\cdot0.25=22\\). Choose \\(D=\operatorname{diag}(1,10)\\):
+
+$$XD^{-1}=[1,8],\quad DW= \begin{bmatrix} 2 \\\\ 2.5 \end{bmatrix}$$
+
+The output is still \\((XD^{-1})(DW)=22\\), but the activation maximum dropped from 80 to 8, making W8A8 easier.
 
 **Strength**: fits W8A8, can use real INT8 GEMM, and can improve both throughput and memory usage. It has worked well across very large models.
 
@@ -310,21 +326,23 @@ A larger alpha emphasizes smoothing activations; a smaller alpha protects weight
 
 GPTQ is also post-training quantization, but it does not look only at per-weight error. It asks how quantization affects the layer output. For a linear layer \\(Y=XW\\), a weight error \\(\Delta W\\) causes:
 
-$$
-\Delta Y = X \Delta W
-$$
+$$\Delta Y = X \Delta W$$
 
 If calibration data tells us that some input directions are more common or more important, weight errors along those directions should be smaller. The squared output error can be written as:
 
-$$
-E = \lVert X(W-\hat{W}) \rVert^2
-$$
+$$E = \lVert X(W-\hat{W}) \rVert^2$$
 
 Here \\(E\\) is the layer output error. Minimizing it means making weight error small under the input covariance \\(X^T X\\). GPTQ uses approximate Hessian information to quantize columns and compensate future columns. The question it asks is: **which weight errors hurt this layer output the most?**
 
 That is why GPTQ is common for weight-only INT4. It tries to preserve layer outputs under extreme bit width, instead of mechanically rounding weights.
 
 An intuition: RTN rounds each weight independently. GPTQ quantizes one column, estimates how the error affects later columns, and compensates part of that error into weights not yet quantized. This reduces total output error.
+
+**Toy matrix example**: calibration inputs are
+
+$$X= \begin{bmatrix} 3 & 0 \\\\ 2 & 1 \\\\ 3 & 0 \end{bmatrix}$$
+
+Then \\(X^T X=\begin{bmatrix}22&2\\\\2&1\end{bmatrix}\\), so input dimension 1 is much more common than dimension 2. If weight error is \\(\Delta w=[0.1,0.1]^T\\), output error is \\(X\Delta w=[0.3,0.3,0.3]^T\\). If the same-sized error is only on dimension 2, \\([0,0.1]^T\\), output error is \\([0,0.1,0]^T\\). GPTQ uses this covariance/Hessian signal to see that equal weight errors do not hurt equally.
 
 **Strength**: good fit for 4-bit/3-bit weight-only quantization; high compression; often much more stable than RTN; practical for local deployment and single-machine large models.
 
@@ -340,11 +358,15 @@ For \\(Y=XW\\), if a certain input channel often has large activation magnitude,
 
 Mathematically, we can again use scaling freedom. For a channel scale matrix \\(S\\):
 
-$$
-Y = XW = (X S^{-1})(S W)
-$$
+$$Y = XW = (X S^{-1})(S W)$$
 
 AWQ chooses \\(S\\) not to make all activations suitable for INT8, but to give important weight channels a better representation under group-wise INT4. In short, SmoothQuant leans toward "make activations quantizable"; AWQ leans toward "do not damage important weights at low bit width."
+
+**Toy matrix example**: calibration gives per-input-channel activation magnitudes:
+
+$$\operatorname{mean}|X_{\text{calib}}[:,j]|=[0.4,7.5,0.6]$$
+
+Channel 2 is salient. If one weight row is \\([0.08,0.12,0.10]\\), naive group-wise INT4 may treat the three values uniformly. AWQ rescales the second channel so \\(0.12\\) gets a better quantization position, then rescales back at runtime. The reason is not that \\(0.12\\) is the largest weight; it is that this weight is multiplied by the most active input channel.
 
 **Strength**: good fit for INT4 weight-only deployment, relatively manageable calibration cost, practical for edge or single-machine inference.
 
@@ -354,9 +376,7 @@ AWQ chooses \\(S\\) not to make all activations suitable for INT8, but to give i
 
 GPTQ and AWQ mainly handle weights. In online inference, the KV cache can become the bottleneck faster than weights. KV cache memory grows linearly with batch size and context length:
 
-$$
-\text{KV bytes} = 2 \times L \times B \times S \times H_\text{kv} \times d_h \times \text{bytes}
-$$
+$$\text{KV bytes} = 2 \times L \times B \times S \times H_\text{kv} \times d_h \times \text{bytes}$$
 
 The factor 2 is for K and V. \\(L\\) is the number of layers, \\(B\\) is batch size, \\(S\\) is sequence length, \\(H_\text{kv}\\) is the number of KV heads, and \\(d_h\\) is the head dimension.
 
@@ -364,17 +384,19 @@ Moving from FP16 to INT8 roughly halves KV cache memory; moving to INT4 roughly 
 
 KV cache quantization is also sensitive. Error in K changes attention scores before softmax:
 
-$$
-\text{score}_{t,i} = \frac{q_t \cdot k_i}{\sqrt{d_h}}
-$$
+$$\text{score}_{t,i} = \frac{q_t \cdot k_i}{\sqrt{d_h}}$$
 
 Error in V changes the final aggregated content:
 
-$$
-o_t = \sum_i \text{softmax}(\text{score}_{t,i}) v_i
-$$
+$$o_t = \sum_i \text{softmax}(\text{score}_{t,i}) v_i$$
 
 Common strategies therefore avoid naive global INT4. They may use per-head or per-channel scales, quantize K and V differently, keep recent tokens in high precision, or enable cache quantization only for long-context workloads.
+
+**Toy matrix example**: for one attention head, let
+
+$$q=[1,1],\quad K= \begin{bmatrix} 1 & 0 \\\\ 0.9 & 0.9 \end{bmatrix}$$
+
+The scores are \\([1,1.8]/\sqrt{2}\\), so the second token is more important. If coarse K quantization maps \\([0.9,0.9]\\) to \\([1,1]\\), the score becomes \\([1,2]/\sqrt{2}\\); if it maps to \\([1,0.5]\\), the score becomes \\([1,1.5]/\sqrt{2}\\). KV cache quantization saves stored historical K/V, but its error directly changes attention scores.
 
 **Strength**: directly increases batch size and context capacity, which is valuable for serving throughput.
 
@@ -384,17 +406,19 @@ Common strategies therefore avoid naive global INT4. They may use per-head or pe
 
 Clustering quantization is the most direct nonlinear method. For weight quantization, first cluster weights \\(w_1,\ldots,w_n\\) into \\(K\\) centers:
 
-$$
-\min_{c_1,\ldots,c_K}\sum_{i=1}^n \min_j \|w_i-c_j\|^2
-$$
+$$\min_{c_1,\ldots,c_K}\sum_{i=1}^n \min_j \|w_i-c_j\|^2$$
 
 After quantization, each weight stores the index of its nearest center:
 
-$$
-\hat{w}[i] = \mathcal{C}[\operatorname{index}(i)]
-$$
+$$\hat{w}[i] = \mathcal{C}[\operatorname{index}(i)]$$
 
 If \\(K=16\\), each index needs only 4 bits. The difference from INT4 is that INT4's 16 grid points are uniformly spaced, while k-means centers concentrate around dense regions of the weight distribution.
+
+**Toy matrix example**: a small weight block is
+
+$$W= \begin{bmatrix} -0.12 & -0.08 & 0.02 & 0.09 \\\\ 0.11 & 0.95 & -0.90 & 0.04 \end{bmatrix}$$
+
+With a 2-bit codebook, a linear grid might be \\([-1,-0.33,0.33,1]\\), pushing many near-zero weights to 0.33 or -0.33. K-means may learn \\([-0.9,-0.1,0.05,0.95]\\), placing codewords where the actual weights concentrate.
 
 This family can have better low-bit error behavior, especially when weight distributions are clearly non-uniform. The codebook spends finite representation capacity in high-probability regions. The downside is worse hardware friendliness: matrix multiplication often needs lookup, decoding, or special kernels, and the codebook itself must be stored.
 
@@ -412,6 +436,12 @@ The idea is close to Lloyd-Max quantization: if most values concentrate near zer
 
 QLoRA uses NF4 to store a frozen base model, then trains LoRA adapters. The key point is that NF4 mainly compresses frozen base weights. It does not turn the entire training process into 4-bit backpropagation. During training, quantized weights are still dequantized to the compute dtype before participating in forward and backward passes.
 
+**Toy matrix example**: normalized frozen weights may look like:
+
+$$[-0.08,0.03,0.11,-0.20,1.7]$$
+
+Uniform 4-bit assigns codewords evenly to the center and tails. NF4 places more codewords near zero, so the first four common small weights get finer resolution while the rare tail value 1.7 uses a coarser tail codeword. QLoRA keeps this base model frozen and trains only the extra LoRA matrices.
+
 **Strength**: strong memory savings for parameter-efficient fine-tuning; a fixed codebook is more regular than learning per-layer k-means centers.
 
 **Weakness**: depends on the weight distribution matching NF4's assumption; mainly serves frozen-base-plus-adapter training, not universal low-bit inference acceleration.
@@ -420,11 +450,15 @@ QLoRA uses NF4 to store a frozen base model, then trains LoRA adapters. The key 
 
 A single codebook has limited expressive power. AQLM, or Additive Quantization of Language Models, uses additive codebooks: instead of representing a group of weights with one codeword, it represents it as the sum of multiple codewords:
 
-$$
-\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]
-$$
+$$\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]$$
 
 If each codebook provides a small set of candidates, multiple codebooks combine into a richer representation space. Intuitively, this is like composing a more precise vector from several basic building blocks, which is more flexible than one 2-bit or 3-bit scalar grid.
+
+**Toy matrix example**: approximate a 2D weight vector \\(w=[0.7,0.2]\\). A single 2-bit codebook might only choose the closest vector \\([0.5,0.0]\\). AQLM can add entries from two codebooks:
+
+$$[0.5,0.0] + [0.2,0.2] = [0.7,0.2]$$
+
+Combining small codebooks gives finer directions even at very low bit width.
 
 AQLM-style methods mainly target extreme low-bit weight quantization. They can compress heavily and may preserve quality better than simple scalar quantization. Their drawback is engineering complexity: encoding, decoding, and kernels are all harder than common weight-only INT4 methods such as GPTQ and AWQ.
 
@@ -434,6 +468,12 @@ QAT, or quantization-aware training, simulates quantization error during trainin
 
 The key distinction is that PTQ asks "can this already-trained model tolerate quantization?" QAT asks "can the model learn to tolerate quantization during training?" The latter has a higher quality ceiling but changes the training pipeline.
 
+**Toy matrix example**: during training, one layer produces \\(h=XW=[0.13,0.27,1.8]\\). If the target hardware supports only INT4 activations, QAT inserts fake quantization in the forward pass:
+
+$$\hat{h}=s\cdot\text{round}(h/s)$$
+
+The next layer sees \\(\hat{h}\\), not the ideal FP16 \\(h\\). If 1.8 often forces a large scale, gradients can adjust neighboring layers so intermediate activations become less fragile under the target grid.
+
 ### FP8 versus INT8/INT4 {#fp8-vs-int}
 
 INT8 and INT4 are fixed-point quantization: one scale plus a set of integer grid points. FP8 is a low-bit floating point format that still has an exponent and mantissa, such as E4M3 or E5M2.
@@ -441,6 +481,12 @@ INT8 and INT4 are fixed-point quantization: one scale plus a set of integer grid
 Fixed-point formats have uniform spacing within a scale range. They fit values whose range is known and can be scaled by tensor, channel, or group.
 
 Floating point formats are denser near zero and coarser at larger magnitudes. They fit tensors with larger or more variable dynamic range, especially training tensors or activations.
+
+**Toy matrix example**: an activation matrix may be
+
+$$X= \begin{bmatrix} 0.2 & -1.5 \\\\ 3.0 & 80 \end{bmatrix}$$
+
+Fixed-point INT8 with one scale must cover 80, so the small value 0.2 loses resolution. FP8 has an exponent, so it can represent small and large values more naturally in training, prefill GEMM, and activation paths. Whether it is faster or more accurate still depends on the hardware format and kernel.
 
 | Format | Representation | Strength | Typical scenario |
 | --- | --- | --- | --- |
@@ -499,24 +545,17 @@ Assume a 7B model with \\(N=7\times 10^9\\) weights.
 
 The real value is slightly larger because scales, zero points, group metadata, and some high-precision layers also consume memory. For group-wise INT4 with group size 128 and one FP16 scale per group:
 
-$$
-\text{scale overhead} = \frac{2}{128} = 0.015625\ \text{bytes / parameter}
-$$
+$$\text{scale overhead} = \frac{2}{128} = 0.015625\ \text{bytes / parameter}$$
 
 Relative to INT4's 0.5 bytes per parameter, metadata adds:
 
-$$
-\frac{0.015625}{0.5} = 3.125\%
-$$
+$$\frac{0.015625}{0.5} = 3.125\\%$$
 
 So INT4 weights for a 7B model are not exactly 3.5 GB. They are more like 3.6 GB plus implementation-specific overhead. This order of magnitude explains why INT4 makes larger models practical on consumer GPUs.
 
 But in high-batch, long-context serving, weights may not be the only bottleneck. Consider \\(L=32\\), \\(H_\text{kv}=8\\), \\(d_h=128\\), \\(B=32\\), \\(S=8192\\), and FP16 KV cache:
 
-$$
-2 \times 32 \times 32 \times 8192 \times 8 \times 128 \times 2
-\approx 34.4\ \text{GB}
-$$
+$$2 \times 32 \times 32 \times 8192 \times 8 \times 128 \times 2 \approx 34.4\ \text{GB}$$
 
 Even with INT4 weights, the KV cache can still consume a large amount of memory. Quantization strategy must be chosen together with the serving shape.
 
