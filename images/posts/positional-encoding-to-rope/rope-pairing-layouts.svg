@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" role="img" aria-labelledby="title desc">
+  <title id="title">RoPE dimension pair layouts</title>
+  <desc id="desc">Different layouts can pair dimensions for the same two-dimensional rotations: adjacent pairs or split-half pairs.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .bg { fill: #0f172a; }
+      .panel { fill: #111827; stroke: #334155; stroke-width: 2; rx: 14; }
+      .box { fill: #1f2937; stroke: #64748b; stroke-width: 2; rx: 8; }
+      .a { fill: #0ea5e9; }
+      .b { fill: #f59e0b; }
+      .c { fill: #22c55e; }
+      .d { fill: #a78bfa; }
+      .txt { fill: #f8fafc; font-family: Inter, Arial, sans-serif; font-size: 22px; }
+      .small { fill: #cbd5e1; font-family: Inter, Arial, sans-serif; font-size: 17px; }
+      .muted { fill: #94a3b8; font-family: Inter, Arial, sans-serif; font-size: 15px; }
+      .arrow { stroke: #64748b; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .formula { fill: #e5e7eb; font-family: "Times New Roman", serif; font-size: 24px; }
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="600"/>
+  <rect class="panel" x="24" y="22" width="932" height="556"/>
+
+  <text class="txt" x="50" y="64">The same 2D rotation can use different tensor layouts</text>
+  <text class="small" x="50" y="96">Math chooses dimension pairs; kernels choose layout and cos/sin broadcasting.</text>
+
+  <g transform="translate(70 145)">
+    <text class="txt" x="0" y="0">Adjacent pairs (common paper notation)</text>
+    <g transform="translate(0 35)">
+      <rect class="a" x="0" y="0" width="70" height="52" rx="8"/><text class="txt" x="22" y="34">x0</text>
+      <rect class="a" x="78" y="0" width="70" height="52" rx="8"/><text class="txt" x="100" y="34">x1</text>
+      <rect class="b" x="170" y="0" width="70" height="52" rx="8"/><text class="txt" x="192" y="34">x2</text>
+      <rect class="b" x="248" y="0" width="70" height="52" rx="8"/><text class="txt" x="270" y="34">x3</text>
+      <rect class="c" x="340" y="0" width="70" height="52" rx="8"/><text class="txt" x="362" y="34">x4</text>
+      <rect class="c" x="418" y="0" width="70" height="52" rx="8"/><text class="txt" x="440" y="34">x5</text>
+    </g>
+    <text class="small" x="0" y="120">(x0,x1), (x2,x3), (x4,x5) rotate together</text>
+    <text class="formula" x="0" y="150">[x_even, x_odd] · [[cos, -sin], [sin, cos]]</text>
+  </g>
+
+  <g transform="translate(70 355)">
+    <text class="txt" x="0" y="0">Split-half pairs (LLaMA rotate_half style)</text>
+    <g transform="translate(0 35)">
+      <rect class="a" x="0" y="0" width="70" height="52" rx="8"/><text class="txt" x="22" y="34">x0</text>
+      <rect class="b" x="78" y="0" width="70" height="52" rx="8"/><text class="txt" x="100" y="34">x1</text>
+      <rect class="c" x="156" y="0" width="70" height="52" rx="8"/><text class="txt" x="178" y="34">x2</text>
+      <rect class="a" x="260" y="0" width="70" height="52" rx="8"/><text class="txt" x="282" y="34">x3</text>
+      <rect class="b" x="338" y="0" width="70" height="52" rx="8"/><text class="txt" x="360" y="34">x4</text>
+      <rect class="c" x="416" y="0" width="70" height="52" rx="8"/><text class="txt" x="438" y="34">x5</text>
+    </g>
+    <path class="arrow" d="M 35 94 C 90 132 245 132 295 94"/>
+    <path class="arrow" d="M 113 94 C 170 122 320 122 373 94"/>
+    <path class="arrow" d="M 191 94 C 250 112 400 112 451 94"/>
+    <text class="small" x="0" y="155">(x0,x3), (x1,x4), (x2,x5) rotate together</text>
+    <text class="muted" x="0" y="190">No explicit matrix: elementwise x*cos + rotate_half(x)*sin</text>
+  </g>
+</svg>

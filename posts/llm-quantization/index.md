@@ -46,6 +46,8 @@ flowchart TD
 
 **Third layer: can hardware realize the benefit?** Storing weights as INT4 on disk does not mean the matrix multiplication actually runs as INT4. Many weight-only methods mainly reduce HBM traffic, while W8A8 and FP8 methods are more likely to use low-precision Tensor Core paths.
 
+Here, a low-precision Tensor Core path means a GPU execution path designed for low-precision matrix multiplication. CUDA cores can also compute GEMM, but Tensor Cores use block matrix instructions to process more multiply-accumulate work per instruction. A kernel can use that path only when the input format and implementation match hardware-supported types such as INT8, FP8, FP16, or BF16. If an INT4 method stores weights as INT4 but dequantizes them to FP16 before compute, it saves weight bandwidth; it does not necessarily make the GEMM itself an INT4 Tensor Core GEMM.
+
 The rest of the post maps each method back to this framework.
 
 ## Math basics: linear quantization, codebooks, and error {#math-model}
@@ -80,6 +82,8 @@ $$\hat{X}\hat{W} = s_x s_w (Q_x - z_x)(Q_w - z_w)$$
 
 That is why mainstream inference hardware first tends to support regular formats such as INT8 and FP8. The cost is uniform spacing. If the data distribution is highly non-uniform, many grid points are wasted in low-probability regions while dense regions do not get enough resolution.
 
+INT8 and FP8 both use 8 bits, but they assume different numerical structure. INT8 is an integer lattice plus a scale that maps a floating point range to \\([-128,127]\\) or \\([0,255]\\). It works well when the range is controllable and the scale is well chosen. FP8 is an 8-bit floating point format with sign, exponent, and mantissa fields, so it has more natural dynamic range but less effective precision; common variants include E4M3 and E5M2. A useful mental model is: INT8 is a ruler with fixed spacing after scaling, while FP8 is a floating point ruler whose spacing grows with magnitude.
+
 ### Nonlinear/codebook quantization: lookup tables and clustering {#nonlinear-codebook-quantization}
 
 Nonlinear quantization does not require uniformly spaced grid points. It first defines a codebook:
@@ -109,6 +113,8 @@ NF4 can be understood as a special codebook. It does not learn arbitrary per-lay
 $$\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]$$
 
 The intuition is that when the bit width falls to 3 bits, 2 bits, or below, uniformly spaced scalar grid points become too coarse. More flexible codebook structures can preserve more information.
+
+This is why codebook methods are most attractive at lower bit widths. Linear 4-bit quantization has only 16 grid points, and 2-bit quantization has only 4. If those points must be uniformly spaced, much of the representation budget may be wasted on rarely used ranges. A codebook can concentrate codewords near common weights or error-sensitive regions, potentially preserving more information at the same bit width. The cost is more complex lookup, metadata, and kernel support.
 
 ### Choosing the scale {#scale-choice}
 
@@ -161,6 +167,18 @@ $$\Delta w = \hat{w} - w$$
 A trained model is usually near a local low-loss region, so the first-order term \\(\nabla L(w)^T\Delta w\\) is small. The change in loss can then be understood through a second-order approximation:
 
 $$L(w+\Delta w)-L(w) \approx \frac{1}{2}\Delta w^T H \Delta w$$
+
+{{< expand "Why the second-order approximation looks like this" >}}
+For a multi-parameter loss function \\(L(w)\\), Taylor expansion near the current parameter vector gives:
+
+$$L(w+\Delta w) \approx L(w) + \nabla L(w)^T\Delta w + \frac{1}{2}\Delta w^T H \Delta w$$
+
+Subtract \\(L(w)\\) from both sides:
+
+$$L(w+\Delta w)-L(w) \approx \nabla L(w)^T\Delta w + \frac{1}{2}\Delta w^T H \Delta w$$
+
+Near a trained low-loss region, \\(\nabla L(w)\\) is often small, so the second-order term becomes the main local model of perturbation sensitivity. The perturbation \\(\Delta w\\) may come from quantization, pruning, zeroing, or another compression operation.
+{{< /expand >}}
 
 Here \\(H\\) is the Hessian, which measures how sensitive the loss is to different parameter directions. This gives the key intuition: **equal-sized errors are not equally harmful**. If a perturbation falls along a low-curvature, insensitive direction, the loss may barely increase. If it falls along a high-curvature direction, even a small numerical error can damage the output.
 
@@ -224,6 +242,24 @@ With these accounts in place, common method names become easier to parse. The fi
 | nonlinear/multiple codebooks | AQLM | W | additive codebooks | extreme low-bit compression needs combinatorial expressivity |
 | runtime cache quantization | KV cache quant | KV | INT8/INT4/codebook | long-context serving has a dynamic memory bottleneck |
 
+In this table, \\(W\\) means Transformer linear-layer weights, such as \\(W_q,W_k,W_v,W_o\\) in attention and the up/gate/down projections in the MLP. It is not automatically every model parameter; LayerNorm parameters, biases, embeddings, and positional parameters are often handled separately unless an implementation explicitly quantizes them. \\(A\\) means runtime activations, namely hidden states produced by previous layers for the current tokens and batch. KV means the historical key/value cache in attention, a runtime state that grows during decoding.
+
+Another source of confusion is lifecycle: when are scales, codebooks, protected channels, or Hessian approximations obtained?
+
+```mermaid
+flowchart LR
+    A[trained FP16/BF16 model] --> B[offline calibration/search]
+    B --> C[pre-inference model packing]
+    C --> D[runtime inference]
+
+    B --> B1[collect activation ranges<br/>outlier channels<br/>salient channels]
+    B --> B2[choose scales / zero points<br/>SmoothQuant D<br/>GPTQ compensation<br/>AWQ protection<br/>codebooks]
+    C --> C1[store quantized weights<br/>scale metadata<br/>codebook / group info]
+    D --> D1[dynamic activation quantization<br/>dequant or low-precision GEMM<br/>maintain / quantize KV cache]
+```
+
+Roughly, weight-only methods prepare most extra information before inference: quantized weights, group scales, GPTQ compensation, AWQ channel scaling, and NF4/AQLM codebooks or indices. SmoothQuant's \\(D\\) is also fixed after offline calibration and is usually folded into weights or neighboring operators. What still happens at runtime is mainly activation quantization, dequantization or low-precision GEMM, and continuous KV-cache write/read, sometimes with online KV quantization.
+
 ### RTN: round-to-nearest as the baseline {#rtn}
 
 RTN, or round-to-nearest, simply rounds values to the nearest integer grid point under a chosen scale. It is the most basic **linear scalar quantization** method: each weight independently lands on a uniformly spaced grid. It needs little or no calibration data and is the simplest post-training quantization baseline.
@@ -262,6 +298,8 @@ This works because outlier features are important but few. Keeping a small outli
 
 $$X_{\text{calib}}= \begin{bmatrix} 1.2 & 0.4 & 58 \\\\ -0.7 & 1.1 & 62 \\\\ 0.3 & -0.8 & 55 \end{bmatrix}$$
 
+The subscript `calib` means calibration. It is not a new model variable; it is a set of hidden states collected by running a small representative input set through the model, used to estimate which features frequently become outliers.
+
 The per-feature maxima are:
 
 $$\max |X_{\text{calib}}[:,j]|=[1.2,1.1,62]$$
@@ -297,6 +335,10 @@ insert a per-channel diagonal scaling matrix \\(D\\):
 $$Y = XW = (X D^{-1})(D W)$$
 
 Without quantization, this is an exact algebraic identity. With quantization, \\(XD^{-1}\\) has smaller activation outliers, while \\(DW\\) has a larger weight dynamic range. SmoothQuant relies on the observation that **activations are harder to quantize, while weights are relatively easier**, so it migrates quantization difficulty from activations into weights.
+
+The matrix \\(D\\) is not learned separately for every request. It is usually determined offline from calibration activation statistics. Then \\(DW\\) can be folded into the stored weights, and \\(XD^{-1}\\) can be absorbed into adjacent operators or quantization scales. SmoothQuant needs calibration, but it does not re-tune \\(D\\) for every generation.
+
+Activations are harder to quantize for three practical reasons. First, they are input-dependent: the same layer can see very different ranges across prompts and token positions. Weights are fixed and can be searched offline. Second, LLM activations often contain a few extreme outlier channels that enlarge the scale and waste grid points for ordinary values. Third, activation quantization happens at runtime, so it must be both accurate and cheap; weight-only methods can afford more expensive offline search and compensation.
 
 A common formulation uses a smoothing coefficient alpha to control the migration strength. In simplified form:
 
@@ -391,6 +433,8 @@ Error in V changes the final aggregated content:
 $$o_t = \sum_i \text{softmax}(\text{score}_{t,i}) v_i$$
 
 Common strategies therefore avoid naive global INT4. They may use per-head or per-channel scales, quantize K and V differently, keep recent tokens in high precision, or enable cache quantization only for long-context workloads.
+
+Real systems do not always quantize the KV cache from the first token. Common choices include quantizing the whole cache when memory pressure is constant, quantizing only older cache blocks after a length threshold while keeping recent tokens in FP16/BF16, or enabling KV quantization only for requests/deployments that need long contexts or high decode concurrency. The right choice depends on memory pressure, attention sensitivity, and kernel support.
 
 **Toy matrix example**: for one attention head, let
 
@@ -607,6 +651,17 @@ So before asking "INT4 or INT8?", ask:
 - Is the workload local chat, single-request inference, batched prefill, or online concurrent decode?
 - Can I prepare representative calibration data?
 - How much quality regression is acceptable, and which tasks cannot degrade?
+
+The quick version is:
+
+| Situation | Try first |
+| --- | --- |
+| model does not fit, or weight reads dominate | weight-only INT4 such as GPTQ/AWQ |
+| stable INT8 inference is desired and activation outliers are visible | LLM.int8() or SmoothQuant |
+| long-context, high-concurrency decode makes memory grow quickly | KV cache INT8/INT4, often with recent tokens kept high precision |
+| batched prefill or large-batch GEMM is already saturated | first confirm efficient INT8/INT4 kernels; quantization may not speed it up |
+| no representative calibration data is available | conservative RTN/weight-only settings before aggressive activation/KV quantization |
+| factual, code, or math tasks are especially quality-sensitive | lower compression, keep sensitive layers/channels high precision, and evaluate task-level quality |
 
 Once these questions are clear, quantization stops being a list of format names and becomes an engineering toolbox that can be reasoned about.
 

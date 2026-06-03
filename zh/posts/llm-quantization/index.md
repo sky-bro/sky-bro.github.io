@@ -46,6 +46,8 @@ flowchart TD
 
 **第三层：硬件能否吃到收益？** 只把权重存在磁盘上的 INT4，不等于矩阵乘法真的以 INT4 跑。很多 weight-only 方法的主要收益来自减少 HBM 读取，而 W8A8/FP8 这类方法更可能触发低精度 Tensor Core 路径。
 
+这里的低精度 Tensor Core 路径，指 GPU 上专门为低精度矩阵乘法设计的硬件执行单元。普通 CUDA core 也能算矩阵乘法，但 Tensor Core 会用块状矩阵指令一次处理更多乘加操作；只有输入格式和 kernel 都匹配硬件支持的 INT8、FP8、FP16/BF16 等类型时，GEMM 才可能吃到这条高吞吐路径。反过来，如果某个 INT4 方案只是“权重以 INT4 存储，计算前反量化成 FP16”，它省的是权重带宽，不一定让 GEMM 本身变成 INT4 Tensor Core 计算。
+
 后面的所有技术都可以放回这个框架里理解。
 
 ## 数学基础：线性量化、非线性量化与误差 {#math-model}
@@ -80,6 +82,8 @@ $$\hat{X}\hat{W} = s_x s_w (Q_x - z_x)(Q_w - z_w)$$
 
 这就是为什么主流推理硬件最先支持 INT8、FP8 这类规则格式。代价是格点等间距：如果数据分布很不均匀，很多格点会浪费在几乎没有数值的区域，而密集区域的分辨率不够。
 
+INT8 和 FP8 都是 8 bit，但数值假设不同。INT8 是整数格点，通常要配一个 scale，把真实浮点范围线性映射到 \\([-128,127]\\) 或 \\([0,255]\\)。它适合范围可控、scale 选得好的 weight 或 activation。FP8 是 8 bit 浮点数，有符号位、指数位和尾数位，动态范围比 INT8 自然一些，但有效精度更少，常见格式有 E4M3、E5M2。粗略说，INT8 更像“固定间隔的尺子”，FP8 更像“间隔会随数量级变大的浮点尺子”。
+
 ### 非线性/码本量化：lookup table 与聚类 {#nonlinear-codebook-quantization}
 
 非线性量化不要求格点等间距。它先准备一个码本：
@@ -109,6 +113,8 @@ NF4 可以理解成一种特殊码本：它不是通过每层 k-means 学出任�
 $$\hat{w} = c^{(1)}[a] + c^{(2)}[b] + \cdots + c^{(M)}[m]$$
 
 这类方法的直觉是：当 bit 数降到 3-bit、2-bit 甚至更低时，等间距标量格点太粗，必须用更灵活的码本结构来保留信息。
+
+所以，码本量化的优势确实主要出现在更低 bit 的压缩区间。4-bit 线性量化已经只有 16 个格点，2-bit 只剩 4 个格点；如果这些格点还必须等间距，很多表示能力会浪费在不常出现的数值范围。码本可以把有限码字集中放在权重更常出现、或者对误差更敏感的位置，因此有机会把模型压到更低 bit，同时比朴素等间距量化保留更多信息。代价是查表、码本存储和 kernel 支持更复杂。
 
 ### scale 怎么选 {#scale-choice}
 
@@ -158,11 +164,33 @@ $$e_{\text{round}} = x - s\cdot \text{round}(x/s)$$
 
 $$\Delta w = \hat{w} - w$$
 
-训练好的模型通常在一个局部低损失区域附近，梯度项 \\(\nabla L(w)^T\Delta w\\) 较小。于是 loss 变化可以用二阶近似理解：
+训练好的模型通常在一个局部低损失区域附近，梯度项 \\(\nabla L(w)^T\Delta w\\) 较小。于是 loss 变化可以用泰勒展开的二阶近似理解：
 
 $$L(w+\Delta w)-L(w) \approx \frac{1}{2}\Delta w^T H \Delta w$$
 
-这里 \\(H\\) 是 Hessian，它描述 loss 对不同参数方向的敏感度。这个式子给出一个很重要的直觉：**不是所有同样大小的误差都一样伤模型**。如果扰动落在低曲率、不敏感的方向上，loss 增加可能很小；如果扰动落在高曲率方向上，即使数值误差不大，也可能破坏输出。
+{{< expand "二阶近似为什么长这样" >}}
+对一个多参数函数 \\(L(w)\\)，在当前参数 \\(w\\) 附近做泰勒展开：
+
+$$L(w+\Delta w) \approx L(w) + \nabla L(w)^T\Delta w + \frac{1}{2}\Delta w^T H \Delta w$$
+
+两边减去 \\(L(w)\\)，得到：
+
+$$L(w+\Delta w)-L(w) \approx \nabla L(w)^T\Delta w + \frac{1}{2}\Delta w^T H \Delta w$$
+
+如果模型已经训练到局部低损失区域，\\(\nabla L(w)\\) 通常接近 0，一阶项就比较小，于是剩下的主导项就是：
+
+$$L(w+\Delta w)-L(w) \approx \frac{1}{2}\Delta w^T H \Delta w$$
+
+这里的 \\(\Delta w\\) 可以来自量化、剪枝、置零或其他压缩操作。这个近似不是说真实 loss 一定精确等于二阶项，而是给我们一个判断扰动敏感度的局部模型。
+{{< /expand >}}
+
+这里 \\(H\\) 是 Hessian 矩阵，也就是 loss 对参数的二阶导数矩阵：
+
+$$H_{ij}=\frac{\partial^2 L}{\partial w_i \partial w_j}$$
+
+其中 \\(w_i\\) 和 \\(w_j\\) 是参数向量里的第 \\(i\\) 个和第 \\(j\\) 个参数。把整个模型的参数摊平成一个长向量后，每个权重、或者某个权重矩阵里的某个元素，都可以看成一个坐标。\\(H_{ij}\\) 描述的是：同时改变第 \\(i\\) 个和第 \\(j\\) 个参数时，loss 曲面在这两个方向上的耦合敏感度。
+
+一阶导数告诉我们“往某个方向挪一点，loss 会不会立刻变大”；二阶导数告诉我们“这个方向附近有多弯、多敏感”。在训练收敛附近，一阶梯度通常已经比较小，所以二阶项更能解释小扰动的影响。这个式子给出一个很重要的直觉：**不是所有同样大小的误差都一样伤模型**。如果扰动落在低曲率、不敏感的方向上，loss 增加可能很小；如果扰动落在高曲率方向上，即使数值误差不大，也可能破坏输出。
 
 剪枝或权重置 0 是这个视角下的特例。把第 \\(i\\) 个权重删掉，相当于：
 
@@ -224,6 +252,24 @@ INT4 常用 group-wise quantization，比如每 128 个连续权重共享一个 
 | 非线性/多码本 | AQLM | W | additive codebooks | 极低 bit 下用多个码本组合表达 |
 | 运行时缓存量化 | KV cache quant | KV | INT8/INT4/codebook | 长上下文服务的动态显存瓶颈 |
 
+表里的 \\(W\\) 指 Transformer 线性层的权重矩阵，比如 attention 里的 \\(W_q,W_k,W_v,W_o\\)，以及 MLP/FFN 里的 up/gate/down projection。它不是“所有参数”的总称，通常不包括 LayerNorm 参数、bias、embedding、位置编码等小参数或特殊参数，除非某个实现明确把它们也量化。\\(A\\) 指这些线性层运行时输入的 activation，也就是上一层算出来的 hidden states；它是推理时随 token 和 batch 动态变化的中间结果，不是模型文件里固定存储的参数。KV 指 attention 里历史 token 的 key/value cache，是 decode 过程中不断增长的运行时状态。
+
+另一个容易混淆的问题是：这些方法引入的 scale、码本、保护通道、Hessian 近似，到底什么时候得到？可以按生命周期看：
+
+```mermaid
+flowchart LR
+    A[训练后 FP16/BF16 模型] --> B[离线校准/搜索]
+    B --> C[推理前打包模型]
+    C --> D[推理时执行]
+
+    B --> B1[统计 activation 范围<br/>outlier channel<br/>salient channel]
+    B --> B2[求 scale / zero point<br/>SmoothQuant D<br/>GPTQ 二阶补偿<br/>AWQ 保护缩放<br/>码本]
+    C --> C1[保存量化权重<br/>scale metadata<br/>codebook / group info]
+    D --> D1[动态量化 activation<br/>反量化或低精度 GEMM<br/>维护/量化 KV cache]
+```
+
+粗略地说，weight-only 方法的大部分额外信息在推理前就准备好了：量化后的权重、每组 scale、GPTQ 的补偿结果、AWQ 的通道缩放、NF4/AQLM 的码本或索引。SmoothQuant 的 \\(D\\) 也是离线校准后固定下来，并尽量融合进权重或相邻算子。推理时仍会发生的，主要是 activation 的动态量化、反量化或低精度 GEMM，以及 KV cache 的持续写入、读取和可能的在线量化。
+
 ### RTN：round-to-nearest 是基线 {#rtn}
 
 RTN（round-to-nearest）就是按 scale 直接舍入到最近整数。它属于最基础的**线性标量量化**：每个权重独立落到等间距格点上。它几乎不需要校准数据，速度快，是最朴素的 post-training quantization。
@@ -262,6 +308,8 @@ $$Y \approx \text{dequant}\left(Q_8(X_{\mathcal{N}}) Q_8(W_{\mathcal{N}})\right)
 
 $$X_{\text{calib}}= \begin{bmatrix} 1.2 & 0.4 & 58 \\\\ -0.7 & 1.1 & 62 \\\\ 0.3 & -0.8 & 55 \end{bmatrix}$$
 
+下标 calib 是 calibration 的缩写，意思是“校准数据上观测到的 activation”。它不是新的模型变量，而是用一小批有代表性的输入跑一遍模型，收集到的中间 hidden states，用来估计哪些 feature 经常出现 outlier。
+
 按 feature 维度看列最大值：
 
 $$\max |X_{\text{calib}}[:,j]|=[1.2,1.1,62]$$
@@ -297,6 +345,10 @@ $$Y = XW$$
 $$Y = XW = (X D^{-1})(D W)$$
 
 这是一个等价变换，未量化时输出完全不变。但量化时，\\(XD^{-1}\\) 的 activation outlier 被压小，\\(DW\\) 的权重动态范围变大。SmoothQuant 的判断是：**activation 难量化，weight 相对好量化，所以把量化难度从 activation 平滑迁移到 weight。**
+
+这里的 \\(D\\) 不是每个请求临时学习出来的矩阵。它通常在离线校准阶段根据 activation 统计量确定下来，然后把 \\(DW\\) 融进新的权重，推理时固定使用；\\(XD^{-1}\\) 则可以等价地吸收到前后算子或量化 scale 里。换句话说，SmoothQuant 需要一次校准，但不是每次生成都重新调 \\(D\\)。
+
+activation 更难量化，主要有三个原因。第一，它随输入动态变化，同一层在不同 prompt、不同 token 位置上的范围可能差异很大；weight 是固定的，可以离线逐层、逐通道仔细选 scale。第二，LLM activation 里常有少量极大的 outlier channel，它们会把 INT8/INT4 的整体范围撑大，让大多数普通值挤在很少的格点里。第三，activation 量化发生在运行时，既要准又要快，不能像 weight-only 方法那样提前做复杂搜索和补偿。
 
 常见写法会用一个平滑系数 alpha 控制迁移强度。简化理解是：
 
@@ -391,6 +443,8 @@ V 的误差会改变最终聚合内容：
 $$o_t = \sum_i \text{softmax}(\text{score}_{t,i}) v_i$$
 
 所以 KV cache 量化的常见策略不是简单全局 INT4，而是 per-head/per-channel scale、K/V 分开量化、保留 recent tokens 高精度，或者只在长上下文场景启用。
+
+实际系统里不一定从第一个 token 就量化 KV cache。常见选择有三类：一种是全程量化，适合显存压力一直很大、质量回退可接受的服务；一种是达到长度阈值后再量化较早的 cache，把 recent tokens 保持 FP16/BF16；还有一种是按请求或部署配置启用，比如只有长上下文、高并发 decode 时打开。选择哪一种，取决于显存压力、attention 质量敏感度和 kernel 支持。
 
 **矩阵例子**：对一个 head，当前 query 和两条历史 key 是
 
@@ -611,6 +665,17 @@ $$2 \times 32 \times 32 \times 8192 \times 8 \times 128 \times 2 \approx 34.4\ \
 - 我的 workload 是单请求、本地聊天、批量 prefill，还是在线并发 decode？
 - 我能不能准备有代表性的校准数据？
 - 我能接受多少质量回退，哪些任务不能掉？
+
+可以先用下面这张表给出粗略答案：
+
+| 场景判断 | 优先尝试 |
+| --- | --- |
+| 模型放不进显存，或者权重读取占主要时间 | weight-only INT4，如 GPTQ/AWQ |
+| 想保持较稳的 INT8 推理，并且 activation outlier 明显 | LLM.int8() 或 SmoothQuant |
+| 长上下文、高并发 decode 时显存随请求快速上涨 | KV cache INT8/INT4，必要时保留 recent tokens 高精度 |
+| 批量 prefill 或大 batch GEMM 已经很满 | 先确认硬件是否有高效 INT8/INT4 kernel，否则量化未必更快 |
+| 没有代表性校准数据 | 先用 RTN/weight-only 的保守配置，避免激进 activation/KV 量化 |
+| 任务对事实性、代码、数学特别敏感 | 降低压缩率，保留关键层或关键通道高精度，并做任务级评测 |
 
 这些问题回答清楚以后，量化就不再是一组格式名，而是一套可推理的工程工具箱。
 

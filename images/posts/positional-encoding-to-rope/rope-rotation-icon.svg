@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">RoPE rotation icon</title>
+  <desc id="desc">A square icon showing two attention vectors rotating on a circular phase grid.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="55%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/>
+    </marker>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#glow)"/>
+  <g filter="url(#softShadow)">
+    <circle cx="256" cy="256" r="164" fill="#0f172a" stroke="#334155" stroke-width="8"/>
+    <circle cx="256" cy="256" r="112" fill="none" stroke="#1e293b" stroke-width="5"/>
+    <line x1="92" y1="256" x2="420" y2="256" stroke="#475569" stroke-width="5"/>
+    <line x1="256" y1="92" x2="256" y2="420" stroke="#475569" stroke-width="5"/>
+    <path d="M256 256 L340 145" stroke="url(#cyan)" stroke-width="16" stroke-linecap="round" marker-end="url(#arrowCyan)"/>
+    <path d="M256 256 L395 206" stroke="url(#amber)" stroke-width="16" stroke-linecap="round" marker-end="url(#arrowAmber)"/>
+    <path d="M342 145 A 138 138 0 0 1 395 206" fill="none" stroke="#22c55e" stroke-width="13" stroke-linecap="round" marker-end="url(#arrowGreen)"/>
+    <circle cx="256" cy="256" r="14" fill="#f8fafc"/>
+  </g>
+  <g opacity="0.92">
+    <circle cx="124" cy="118" r="13" fill="#22d3ee"/>
+    <circle cx="384" cy="390" r="13" fill="#f59e0b"/>
+    <circle cx="382" cy="108" r="9" fill="#22c55e"/>
+  </g>
+</svg>
