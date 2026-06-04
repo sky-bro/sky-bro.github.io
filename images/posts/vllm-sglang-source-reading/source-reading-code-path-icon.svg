@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">vLLM and SGLang source reading icon</title>
+  <desc id="desc">Code brackets connected to a scheduler path and cache blocks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="60" y1="52" x2="452" y2="456" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1f2937"/>
+      <stop offset="0.52" stop-color="#334155"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="13" stdDeviation="15" flood-color="#020617" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <rect x="82" y="86" width="346" height="340" rx="32" fill="#e2e8f0"/>
+    <rect x="82" y="86" width="346" height="78" rx="32" fill="#0f172a"/>
+    <circle cx="128" cy="125" r="12" fill="#fb7185"/>
+    <circle cx="166" cy="125" r="12" fill="#fbbf24"/>
+    <circle cx="204" cy="125" r="12" fill="#34d399"/>
+    <g font-family="Inter, Arial, sans-serif" font-weight="800" fill="#0f172a">
+      <text x="142" y="255" font-size="78">&lt;/&gt;</text>
+      <text x="278" y="332" font-size="38">path</text>
+    </g>
+    <path d="M138 326c55-45 111-48 167-8 21 15 42 20 63 15" fill="none" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+    <g fill="#0f172a">
+      <rect x="286" y="188" width="46" height="46" rx="10"/>
+      <rect x="344" y="188" width="46" height="46" rx="10"/>
+      <rect x="344" y="246" width="46" height="46" rx="10"/>
+    </g>
+  </g>
+  <text x="256" y="470" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" fill="#cbd5e1">vLLM / SGLang</text>
+</svg>
