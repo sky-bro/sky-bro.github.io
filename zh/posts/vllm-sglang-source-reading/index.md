@@ -5,7 +5,7 @@
 
 后续文章会按请求生命周期展开：
 
-1. 请求生命周期：OpenAI API 到一次 forward
+1. [请求生命周期：OpenAI API 到一次 forward]({{< relref "request-lifecycle-openai-to-forward-pass" >}})
 2. Scheduler loop：waiting queue、running queue、token budget 和 decode 优先
 3. vLLM Block Manager：从逻辑 block 到物理 KV block
 4. SGLang Radix Cache：为什么前缀复用要用树

@@ -5,7 +5,7 @@ This series is for source reading and engineering follow-through. The goal is no
 
 Planned posts will follow the request lifecycle:
 
-1. Request lifecycle: from OpenAI API to one forward pass
+1. [Request lifecycle: from OpenAI API to one forward pass]({{< relref "request-lifecycle-openai-to-forward-pass" >}})
 2. Scheduler loop: waiting queue, running queue, token budget, and decode priority
 3. vLLM Block Manager: from logical blocks to physical KV blocks
 4. SGLang Radix Cache: why prefix reuse wants a tree
