@@ -9,15 +9,37 @@
 
 ### Transformer 注意力回顾 {#attention-recap}
 
-在 Transformer decoder 中，自注意力机制如下。对每个 token，将其嵌入投影为三个向量：
+在 Transformer decoder 中，自注意力机制如下。先看一个**单层、单个 attention head** 的简化版本：对每个 token，将该层的隐藏状态投影为三个向量：
 
-$$\begin{aligned}q_i &= W_q x_i \quad & \text{(query)} \\\\ k_i &= W_k x_i \quad & \text{(key)} \\\\ v_i &= W_v x_i \quad & \text{(value)}\end{aligned}$$
+$$\begin{aligned}q_i &= W_q h_i \quad & \text{(query)} \\\\ k_i &= W_k h_i \quad & \text{(key)} \\\\ v_i &= W_v h_i \quad & \text{(value)}\end{aligned}$$
 
 token \\(i\\) 的注意力输出为：
 
 $$\text{Attention}(q_i, K, V) = \text{softmax}\left(\frac{q_i K^T}{\sqrt{d_k}}\right) V$$
 
 其中 \\(K\\) 和 \\(V\\) 是**当前序列中所有 token** 的 key 和 value 的堆叠。causal masking 保证 token \\(i\\) 只能关注 \\(j \leq i\\) 的 token。
+
+真实 LLM 不是只有一个这样的 attention。一个 decoder-only Transformer 会把很多个 Transformer block 串起来；每个 block 内部又有多个 attention head。KV cache 的实际结构因此不是“一个 token 只有一对 K/V 向量”，而更准确地说是：
+
+- 每一层 Transformer block 都有自己的 KV cache，因为第 \\(\ell\\) 层看到的是第 \\(\ell-1\\) 层输出后的隐藏状态；
+- 在标准 multi-head attention（MHA）中，每一层的每个 head 都有自己的 \\(K\\) 和 \\(V\\)；
+- 对某个 token，它会在**每一层、每个 KV head** 中各自产生一份 key/value 向量。
+
+也就是说，单个 token 的缓存更像是一个按层和 head 索引的表：
+
+```text
+token t
+  layer 1: head 1 -> (K, V), head 2 -> (K, V), ...
+  layer 2: head 1 -> (K, V), head 2 -> (K, V), ...
+  ...
+  layer L: head 1 -> (K, V), head 2 -> (K, V), ...
+```
+
+所以下面的公式可以理解为“某一层、某一个 head 内部发生的事情”。多头注意力会对多个 head 分别做这件事，再把各 head 的输出拼接并投影；多个 Transformer block 则按层顺序重复这个过程。KV cache 不改变模型结构，只是避免每层每个 head 反复重新计算历史 token 的 \\(K,V\\)。如果想先直观看完整 Transformer block 的数据流，可以参考 [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)。
+
+<img src="/images/posts/kv-cache/layer-head-kv-cache.svg" alt="KV cache indexed by layer and KV head" style="width:100%">
+
+<span class="figure-number">Figure 1: </span>一个 token 在真实 Transformer 中会为每一层、每个 KV head 写入对应的 K/V；KV cache 的体积因此随层数、序列长度、batch size 和 KV head 数一起增长。
 
 ### 问题：冗余计算 {#redundant-computation}
 
@@ -39,7 +61,7 @@ $$\text{Attention}(q_i, K, V) = \text{softmax}\left(\frac{q_i K^T}{\sqrt{d_k}}\r
 
 $$\sum_{t=1}^{n} t = \frac{n(n+1)}{2} = O(n^2)$$
 
-每个之前 token 的 key 和 value 被重复计算了 \\(n - j\\) 次。这是浪费的，因为 \\(k_j\\) 和 \\(v_j\\) 是输入 token \\(x_j\\) 和固定权重 \\(W_k, W_v\\) 的**确定性函数**。
+每个之前 token 的 key 和 value 被重复计算了 \\(n - j\\) 次。这是浪费的，因为在给定层和 head 内，\\(k_j\\) 和 \\(v_j\\) 是该层隐藏状态 \\(h_j\\) 和固定权重 \\(W_k, W_v\\) 的**确定性函数**。
 
 ### 解决方案：KV 缓存 {#solution}
 
@@ -57,7 +79,7 @@ $$\sum_{t=1}^{n} t = \frac{n(n+1)}{2} = O(n^2)$$
 
 <img src="/images/posts/kv-cache/kv-cache-diagram.svg" alt="KV Cache: With vs Without" style="width:100%">
 
-<span class="figure-number">Figure 1: </span>无 KV 缓存（上）每步都重新投影之前所有 token；有 KV 缓存（下）只投影新 token，之前的 KV 对从缓存读取。
+<span class="figure-number">Figure 2: </span>无 KV 缓存（上）每步都重新投影之前所有 token；有 KV 缓存（下）只投影新 token，之前的 KV 对从缓存读取。
 
 ### 每步 Decode 的具体操作 {#decode-step-detail}
 
@@ -163,7 +185,7 @@ KV cache 是经典的计算-显存权衡：
 
 <img src="/images/posts/kv-cache/prefill-vs-decode.svg" alt="Prefill vs Decode: Two Phases of LLM Inference" style="width:100%">
 
-<span class="figure-number">Figure 2: </span>Prefill 并行处理所有 prompt token 并构建初始 KV cache；Decode 每步生成一个 token，读取缓存并追加新的 KV 对。
+<span class="figure-number">Figure 3: </span>Prefill 并行处理所有 prompt token 并构建初始 KV cache；Decode 每步生成一个 token，读取缓存并追加新的 KV 对。
 
 ### KV cache 之上的优化 {#optimizations}
 

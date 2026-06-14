@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="650" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+  <title id="title">KV cache indexed by layer and KV head</title>
+  <desc id="desc">A diagram showing that a token contributes a key-value pair to every transformer layer and every KV head.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4b5563"/>
+    </marker>
+    <linearGradient id="tokenGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <linearGradient id="gridGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2ff"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 30px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .subtitle { font: 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5563; }
+      .label { font: 700 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2937; }
+      .small { font: 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5563; }
+      .tiny { font: 12px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6b7280; }
+      .cellText { font: 700 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e3a8a; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 12; }
+      .softBox { fill: url(#gridGrad); stroke: #cbd5e1; stroke-width: 2; rx: 16; }
+      .cell { fill: #dbeafe; stroke: #93c5fd; stroke-width: 1.5; rx: 8; }
+      .rowLabel { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .note { fill: #fffbeb; stroke: #fbbf24; stroke-width: 1.5; rx: 10; }
+      .arrow { stroke: #4b5563; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .dashed { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 6 6; fill: none; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1120" height="650" fill="#ffffff"/>
+  <text x="56" y="58" class="title">KV cache is indexed by layer and KV head</text>
+  <text x="56" y="88" class="subtitle">For one token, each transformer layer writes K/V vectors for each KV head.</text>
+
+  <rect x="58" y="154" width="205" height="116" class="box" fill="url(#tokenGrad)"/>
+  <text x="160" y="190" text-anchor="middle" class="label">Token t</text>
+  <text x="160" y="220" text-anchor="middle" class="small">layer input hidden state</text>
+  <text x="160" y="246" text-anchor="middle" class="small">h<tspan baseline-shift="sub" font-size="10">t</tspan></text>
+
+  <path d="M 266 212 C 320 212, 326 212, 378 212" class="arrow"/>
+
+  <rect x="382" y="126" width="678" height="412" class="softBox"/>
+  <text x="721" y="164" text-anchor="middle" class="label">KV cache for token t</text>
+  <text x="721" y="188" text-anchor="middle" class="small">stored separately for each layer and each KV head</text>
+
+  <text x="523" y="228" text-anchor="middle" class="small">KV head 1</text>
+  <text x="652" y="228" text-anchor="middle" class="small">KV head 2</text>
+  <text x="781" y="228" text-anchor="middle" class="small">...</text>
+  <text x="910" y="228" text-anchor="middle" class="small">KV head Hkv</text>
+
+  <rect x="430" y="252" width="116" height="46" class="rowLabel"/>
+  <text x="488" y="281" text-anchor="middle" class="label">Layer 1</text>
+  <rect x="560" y="252" width="104" height="46" class="cell"/>
+  <text x="612" y="281" text-anchor="middle" class="cellText">K,V</text>
+  <rect x="689" y="252" width="104" height="46" class="cell"/>
+  <text x="741" y="281" text-anchor="middle" class="cellText">K,V</text>
+  <rect x="818" y="252" width="104" height="46" class="cell"/>
+  <text x="870" y="281" text-anchor="middle" class="cellText">...</text>
+  <rect x="947" y="252" width="104" height="46" class="cell"/>
+  <text x="999" y="281" text-anchor="middle" class="cellText">K,V</text>
+
+  <rect x="430" y="326" width="116" height="46" class="rowLabel"/>
+  <text x="488" y="355" text-anchor="middle" class="label">Layer 2</text>
+  <rect x="560" y="326" width="104" height="46" class="cell"/>
+  <text x="612" y="355" text-anchor="middle" class="cellText">K,V</text>
+  <rect x="689" y="326" width="104" height="46" class="cell"/>
+  <text x="741" y="355" text-anchor="middle" class="cellText">K,V</text>
+  <rect x="818" y="326" width="104" height="46" class="cell"/>
+  <text x="870" y="355" text-anchor="middle" class="cellText">...</text>
+  <rect x="947" y="326" width="104" height="46" class="cell"/>
+  <text x="999" y="355" text-anchor="middle" class="cellText">K,V</text>
+
+  <path d="M 488 397 L 488 443" class="dashed"/>
+  <path d="M 612 397 L 612 443" class="dashed"/>
+  <path d="M 741 397 L 741 443" class="dashed"/>
+  <path d="M 870 397 L 870 443" class="dashed"/>
+  <path d="M 999 397 L 999 443" class="dashed"/>
+
+  <rect x="430" y="468" width="116" height="46" class="rowLabel"/>
+  <text x="488" y="497" text-anchor="middle" class="label">Layer L</text>
+  <rect x="560" y="468" width="104" height="46" class="cell"/>
+  <text x="612" y="497" text-anchor="middle" class="cellText">K,V</text>
+  <rect x="689" y="468" width="104" height="46" class="cell"/>
+  <text x="741" y="497" text-anchor="middle" class="cellText">K,V</text>
+  <rect x="818" y="468" width="104" height="46" class="cell"/>
+  <text x="870" y="497" text-anchor="middle" class="cellText">...</text>
+  <rect x="947" y="468" width="104" height="46" class="cell"/>
+  <text x="999" y="497" text-anchor="middle" class="cellText">K,V</text>
+
+  <rect x="58" y="356" width="300" height="136" class="note"/>
+  <text x="78" y="390" class="label">Why this matters</text>
+  <text x="78" y="420" class="small">A cache entry is not just one vector.</text>
+  <text x="78" y="446" class="small">It scales with layers, tokens,</text>
+  <text x="78" y="472" class="small">batch size, and KV heads.</text>
+
+  <rect x="382" y="566" width="678" height="50" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="10"/>
+  <text x="494" y="597" text-anchor="middle" class="small">MHA: Hkv = query heads</text>
+  <text x="721" y="597" text-anchor="middle" class="small">GQA: Hkv = groups</text>
+  <text x="948" y="597" text-anchor="middle" class="small">MQA: Hkv = 1</text>
+</svg>

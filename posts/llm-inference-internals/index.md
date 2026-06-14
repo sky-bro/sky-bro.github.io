@@ -8,15 +8,15 @@ Read the existing posts in this order:
 1. [Estimating Compute and Memory Requirements for LLM Training and Inference]({{< relref "/posts/llm-flops-memory-estimation" >}})
 2. [From Absolute Positional Encoding to RoPE: Why Position Can Be a Rotation]({{< relref "/posts/positional-encoding-to-rope" >}})
 3. [Why KV Cache Works in LLM Inference]({{< relref "/posts/kv-cache" >}})
-4. [Paged Attention: Virtual Memory for the GPU]({{< relref "/posts/paged-attention" >}})
-5. [Continuous Batching: Scheduling at Iteration Granularity]({{< relref "/posts/continuous-batching" >}})
-6. [Chunked Prefill: Slicing the Prefill to Protect Decode Latency]({{< relref "/posts/chunked-prefill" >}})
-7. [Prefix Caching: Reusing KV Cache Across Requests]({{< relref "/posts/prefix-caching" >}})
-8. [Disaggregated Prefill: Splitting Compute Across Machines]({{< relref "/posts/disaggregated-prefill" >}})
+4. [Prefill vs Decode: Why One Model Has Two Very Different Bottlenecks]({{< relref "/posts/prefill-vs-decode" >}})
+5. [Paged Attention: Virtual Memory for the GPU]({{< relref "/posts/paged-attention" >}})
+6. [Continuous Batching: Scheduling at Iteration Granularity]({{< relref "/posts/continuous-batching" >}})
+7. [Chunked Prefill: Slicing the Prefill to Protect Decode Latency]({{< relref "/posts/chunked-prefill" >}})
+8. [Prefix Caching: Reusing KV Cache Across Requests]({{< relref "/posts/prefix-caching" >}})
+9. [Disaggregated Prefill: Splitting Compute Across Machines]({{< relref "/posts/disaggregated-prefill" >}})
 
 ## Planned Posts {#planned-posts}
 
-- Prefill vs decode: why one model has two very different bottlenecks
 - The scheduler's real objective: bigger batches are not always better
 - KV cache eviction: LRU, prefix trees, reference counts, and cache pollution
 

@@ -9,15 +9,37 @@ the **KV cache** is the technique that exploits this redundancy. by storing the 
 
 ### the transformer attention recap {#attention-recap}
 
-in a transformer decoder, self-attention operates as follows. for each token, we project its embedding into three vectors:
+in a transformer decoder, self-attention operates as follows. start with a simplified **single-layer, single-head** view: for each token, the layer input hidden state is projected into three vectors:
 
-$$\begin{aligned}q_i &= W_q x_i \quad & \text{(query)} \\\\ k_i &= W_k x_i \quad & \text{(key)} \\\\ v_i &= W_v x_i \quad & \text{(value)}\end{aligned}$$
+$$\begin{aligned}q_i &= W_q h_i \quad & \text{(query)} \\\\ k_i &= W_k h_i \quad & \text{(key)} \\\\ v_i &= W_v h_i \quad & \text{(value)}\end{aligned}$$
 
 the attention output for token \\(i\\) is:
 
 $$\text{Attention}(q_i, K, V) = \text{softmax}\left(\frac{q_i K^T}{\sqrt{d_k}}\right) V$$
 
 where \\(K\\) and \\(V\\) are the stacked keys and values of **all tokens in the sequence so far**. causal masking ensures token \\(i\\) only attends to tokens \\(j \leq i\\).
+
+real LLMs contain many copies of this attention operation. a decoder-only Transformer stacks many Transformer blocks, and each block contains multiple attention heads. so the KV cache is not “one K vector and one V vector per token.” more precisely:
+
+- every Transformer block has its own KV cache, because layer \\(\ell\\) receives the hidden states produced by layer \\(\ell-1\\);
+- in standard multi-head attention (MHA), every head in every layer has its own \\(K\\) and \\(V\\);
+- for one token, the model writes a key/value pair for **each layer and each KV head**.
+
+you can think of a single token's cached state as a table indexed by layer and head:
+
+```text
+token t
+  layer 1: head 1 -> (K, V), head 2 -> (K, V), ...
+  layer 2: head 1 -> (K, V), head 2 -> (K, V), ...
+  ...
+  layer L: head 1 -> (K, V), head 2 -> (K, V), ...
+```
+
+therefore, the formula above describes what happens inside one layer and one head. multi-head attention repeats the same operation across heads, concatenates the head outputs, and projects them back; stacked Transformer blocks repeat this across layers. KV cache does not change the model architecture — it only avoids recomputing historical \\(K,V\\) values for every layer and head. for an interactive view of the full Transformer data flow, see [Transformer Explainer](https://poloclub.github.io/transformer-explainer/).
+
+<img src="/images/posts/kv-cache/layer-head-kv-cache.svg" alt="KV cache indexed by layer and KV head" style="width:100%">
+
+<span class="figure-number">Figure 1: </span>for one token, a real Transformer writes K/V vectors for each layer and each KV head; cache size therefore scales with layers, sequence length, batch size, and KV heads.
 
 ### the problem: redundant computation {#redundant-computation}
 
@@ -39,7 +61,7 @@ the total work across all steps is:
 
 $$\sum_{t=1}^{n} t = \frac{n(n+1)}{2} = O(n^2)$$
 
-each previous token's key and value is recomputed \\(n - j\\) times for token \\(j\\). this is wasteful because \\(k_j\\) and \\(v_j\\) are **deterministic functions** of the input token \\(x_j\\) and the fixed weights \\(W_k, W_v\\).
+each previous token's key and value is recomputed \\(n - j\\) times for token \\(j\\). this is wasteful because, within a given layer and head, \\(k_j\\) and \\(v_j\\) are **deterministic functions** of the layer hidden state \\(h_j\\) and the fixed weights \\(W_k, W_v\\).
 
 ### the solution: KV cache {#solution}
 
@@ -57,7 +79,7 @@ the per-step work becomes \\(O(t)\\) for the attention computation (which is una
 
 <img src="/images/posts/kv-cache/kv-cache-diagram.svg" alt="KV Cache: With vs Without" style="width:100%">
 
-<span class="figure-number">Figure 1: </span>without KV cache (top), all previous tokens are re-projected at each step; with KV cache (bottom), only the new token is projected and previous KV pairs are read from cache.
+<span class="figure-number">Figure 2: </span>without KV cache (top), all previous tokens are re-projected at each step; with KV cache (bottom), only the new token is projected and previous KV pairs are read from cache.
 
 ### what happens at each decode step {#decode-step-detail}
 
@@ -163,7 +185,7 @@ understanding KV cache also clarifies the two distinct phases of LLM inference:
 
 <img src="/images/posts/kv-cache/prefill-vs-decode.svg" alt="Prefill vs Decode: Two Phases of LLM Inference" style="width:100%">
 
-<span class="figure-number">Figure 2: </span>prefill processes all prompt tokens in parallel and builds the initial KV cache; decoding generates one token per step, reading the cache and appending the new KV pair.
+<span class="figure-number">Figure 3: </span>prefill processes all prompt tokens in parallel and builds the initial KV cache; decoding generates one token per step, reading the cache and appending the new KV pair.
 
 ### optimizations on top of KV cache {#optimizations}
 
