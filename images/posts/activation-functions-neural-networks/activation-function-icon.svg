@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Activation function icon</title>
+  <desc id="desc">A square icon showing activation function curves on a coordinate grid.</desc>
+  <rect width="512" height="512" rx="64" fill="#101827"/>
+  <rect x="64" y="64" width="384" height="384" rx="32" fill="#152235" stroke="#31425f" stroke-width="4"/>
+  <path d="M88 320 H424" stroke="#4b5f80" stroke-width="4" stroke-linecap="round"/>
+  <path d="M256 88 V424" stroke="#4b5f80" stroke-width="4" stroke-linecap="round"/>
+  <path d="M112 354 C148 352 180 348 208 338 C236 328 258 308 280 274 C305 236 332 198 400 178" fill="none" stroke="#38bdf8" stroke-width="20" stroke-linecap="round"/>
+  <path d="M116 320 H256 L402 174" fill="none" stroke="#f97316" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M116 386 H238 V244 H402" fill="none" stroke="#a78bfa" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="320" r="10" fill="#f8fafc"/>
+  <circle cx="280" cy="274" r="8" fill="#f8fafc"/>
+</svg>
