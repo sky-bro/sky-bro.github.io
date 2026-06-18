@@ -32,6 +32,16 @@ By the end, we should be able to answer two kinds of questions:
 - **Training**: What is the total compute? How long will training take? Where does memory go?
 - **Inference**: Does the model fit in memory? How much compute does each generated token need? Why do long contexts and concurrency consume so much memory?
 
+Here is the cheat sheet first, so the post is easy to revisit later:
+
+| Scenario | First-order formula | Main variables | Question answered |
+| --- | --- | --- | --- |
+| Inference compute | \\(\text{Forward FLOPs/token} \approx 2N\\) | parameter count \\(N\\) | how much compute one generated token needs |
+| Training compute | \\(\text{Training FLOPs} \approx 6ND\\) | parameter count \\(N\\), training tokens \\(D\\) | total compute for the training corpus |
+| Weight memory | \\(\text{Weight memory} = N \times \text{bytes/parameter}\\) | parameter count, data type | whether model weights fit in memory |
+| KV cache | \\(\text{KV cache} = 2LBSH_{kv}d_{head}\times\text{bytes}\\) | layers, concurrency, context, KV heads | why long contexts and high concurrency consume memory |
+| Training memory | parameters + gradients + optimizer states + activations | optimizer, precision, batch, sequence length | why training memory is much larger than inference memory |
+
 ## Units Before Estimation {#estimation-units}
 
 Before separating training from inference, we need a shared language. Compute is measured in FLOPs, and memory is measured in bytes. This section sets up the FLOPs intuition that the rest of the post builds on.
@@ -53,6 +63,16 @@ Each element of \\(C\\) needs \\(k\\) multiplications and \\(k-1\\) additions. I
 $$\text{FLOPs}(A B) \approx 2mkn$$
 
 This is the primitive underneath the whole post. Transformer linear layers, QKV projections, MLPs, and output projections are all dominated by matrix multiplication.
+
+A tiny example makes this more concrete. Suppose a linear layer maps a 3-dimensional input to a 2-dimensional output. Its weight matrix is \\(W \in \mathbb{R}^{3 \times 2}\\), and one token's hidden state is \\(x \in \mathbb{R}^{1 \times 3}\\):
+
+$$y = xW,\quad y \in \mathbb{R}^{1 \times 2}$$
+
+The output \\(y\\) has 2 elements. Each element multiplies 3 input dimensions by 3 weights and then sums them, so the cost is approximately:
+
+$$2 \times 1 \times 3 \times 2 = 12\ \text{FLOPs}$$
+
+The layer has 6 weight parameters, and each participates in one multiply-add. That is exactly \\(2 \times 6 = 12\\) FLOPs. The \\(2N\\) inference rule later in the post is this same idea scaled up to a dense Transformer: most parameter matrices are read and used in matrix multiplications for each token's forward pass.
 
 {{< alert theme="info" >}}
 
@@ -77,7 +97,14 @@ where:
 - \\(N\\): model parameter count
 - \\(D\\): number of training tokens
 
-The intuition is:
+This formula is not specific to LLMs. It also applies to many ordinary neural networks whose cost is dominated by dense matrix multiplication. The core assumption is that most trainable parameters participate in the forward pass, and backward propagation must compute both activation gradients and weight gradients.
+
+Using the tiny linear layer above, the forward pass computes \\(xW\\), which costs about \\(2N\\). Backward propagation then needs two more matrix multiplications:
+
+- input gradient: \\(\nabla_x = \nabla_y W^T\\)
+- weight gradient: \\(\nabla_W = x^T \nabla_y\\)
+
+These two operations have the same order of cost as the forward pass, so each is also approximately \\(2N\\). For one training sample, token, or position, the total becomes:
 
 | Stage | FLOPs / token | Meaning |
 | --- | ---: | --- |
@@ -162,6 +189,24 @@ $$D \approx 20N = 20 \times 7 \times 10^9 = 1.4 \times 10^{11}$$
 
 or about 140B tokens.
 
+This ratio is not arbitrary. Early Kaplan-style scaling laws leaned more toward large models with comparatively less data, while the Chinchilla result made the "balance model size and training tokens under a fixed compute budget" view much more prominent. One way to think about the choices is:
+
+```mermaid
+flowchart LR
+    A["5x<br/>35B tokens<br/>high undertraining risk"] --> B["20x<br/>140B tokens<br/>common starting point"]
+    B --> C["100x<br/>700B tokens<br/>small model, more data"]
+    C --> D["143x<br/>1T tokens<br/>push a smaller model further"]
+```
+
+| tokens / parameter | Tokens for a 7B model | Bias | Intuition |
+| ---: | ---: | --- | --- |
+| 5 | 35B | high undertraining risk | large capacity, but little data seen |
+| 20 | 140B | Chinchilla-style common scale | model size and data are more balanced |
+| 100 | 700B | smaller model, more data | train longer and absorb more data |
+| 143 | 1T | common engineering choice for overtraining smaller models | use more high-quality tokens to squeeze capability from a smaller model |
+
+Real projects are also shaped by data quality, duplication, target benchmarks, budget, and training stability. High-quality tokens are expensive and scarce, so "20 tokens per parameter" is a starting point, not a law.
+
 If the same 7B model is trained on 1T tokens, then:
 
 $$\frac{10^{12}}{7 \times 10^9} \approx 143$$
@@ -182,6 +227,17 @@ $$\text{Training memory} \approx \text{parameters} + \text{gradients} + \text{op
 
 For Adam / AdamW mixed-precision training, common states include:
 
+```mermaid
+flowchart LR
+    W[parameter W] --> FW[forward]
+    FW --> A[activation]
+    A --> BW[backward]
+    BW --> G[gradient dW]
+    G --> M[Adam first moment m]
+    G --> V[Adam second moment v]
+    W --> MW[FP32 master weight]
+```
+
 | Item | Typical precision | bytes / parameter |
 | --- | --- | ---: |
 | model parameters | BF16 / FP16 | 2 |
@@ -196,6 +252,19 @@ So parameter-related states alone for a 7B model can require:
 $$7 \times 10^9 \times 16 = 112\ \text{GB}$$
 
 before counting activations.
+
+This is also not LLM-specific. For the tiny linear layer with only 6 parameters, mixed-precision AdamW gives roughly this parameter-state memory:
+
+| State | Count | bytes / item | Tiny-layer memory |
+| --- | ---: | ---: | ---: |
+| BF16 parameters | 6 | 2 | 12 bytes |
+| BF16 gradients | 6 | 2 | 12 bytes |
+| FP32 master weights | 6 | 4 | 24 bytes |
+| Adam \\(m\\) | 6 | 4 | 24 bytes |
+| Adam \\(v\\) | 6 | 4 | 24 bytes |
+| total | - | - | 96 bytes |
+
+At inference time, this tiny layer only needs 12 bytes of BF16 weights. During training, parameter-related states alone grow to 96 bytes, exactly 16 bytes per parameter. The LLM estimate is the same accounting ledger scaled to billions of parameters.
 
 Frameworks and optimizers differ. Some implementations do not keep FP32 master weights; some optimizer states can be quantized; ZeRO/FSDP can shard parameters, gradients, and optimizer states across GPUs.
 
@@ -240,6 +309,10 @@ For a dense Transformer, most parameters are used once during the forward pass. 
 $$\text{Forward FLOPs per token} \approx 2N$$
 
 where \\(N\\) is the model parameter count.
+
+The main computation behind this sentence is matrix multiplication. For a linear layer \\(y=xW\\), each weight \\(W_{ij}\\) is multiplied by some input \\(x_i\\) and accumulated into some output \\(y_j\\). One multiply plus one add is approximately 2 FLOPs, so a dense linear layer with \\(N\\) weights costs about \\(2N\\) FLOPs for one token's forward pass.
+
+A Transformer is built from many dense projections: Q/K/V projections, the attention output projection, MLP up/down projections, and the final LM head. Those matrices make up most of the parameter count \\(N\\). The inference estimate therefore starts with \\(2N\\) as the main term, then handles long-context attention and KV cache separately.
 
 For a 7B model:
 
@@ -396,9 +469,9 @@ $$\text{Forward FLOPs/token} \approx 2 \times \text{active parameters per token}
 
 Training FLOPs are similar: use the parameters actually activated per token for the main compute cost. Total parameter count still matters for memory, communication, checkpointing, and loading.
 
-## Resource Estimation Checklist {#checklist}
+## Resource Estimation Quick Reference {#checklist}
 
-Finally, here is the estimation flow as two checklists.
+Finally, here is the estimation flow in execution order. The opening table is better for formula lookup; this section is better when doing actual capacity planning.
 
 ### Training Checklist {#training-checklist}
 
@@ -454,17 +527,6 @@ Step 5, add engineering correction terms:
 - longer contexts increase capacity requirements and can reduce decode performance
 
 ## Summary {#summary}
-
-LLM resource estimation starts with four formulas:
-
-$$\begin{aligned} \text{Forward FLOPs/token} &\approx 2N \\\\ \text{Training FLOPs} &\approx 6ND \\\\ \text{Weight memory} &= N \times \text{bytes per parameter} \\\\ \text{KV cache} &= 2 L B S H_{kv} d_{head} \times \text{bytes} \end{aligned}$$
-
-They answer:
-
-- how much compute does each generated token need?
-- how much total compute does training require?
-- how much memory do the model weights occupy?
-- why do long contexts and high concurrency consume so much memory?
 
 Real systems are more complicated. Training is affected by MFU, parallelism strategy, checkpointing, communication, and data pipelines. Inference is affected by the prefill/decode mix, KV cache management, memory bandwidth, and quantization implementation.
 

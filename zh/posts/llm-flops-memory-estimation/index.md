@@ -32,6 +32,16 @@ flowchart LR
 - **训练**：总计算量是多少？多久能训完？显存主要花在哪里？
 - **推理**：模型能不能放进显存？每个 token 要多少计算？长上下文和并发为什么吃显存？
 
+先把结论放在前面，方便以后复习时直接查：
+
+| 场景 | 一阶公式 | 主要变量 | 回答的问题 |
+| --- | --- | --- | --- |
+| 推理计算 | \\(\text{Forward FLOPs/token} \approx 2N\\) | 参数量 \\(N\\) | 每生成 1 个 token 大概要多少计算 |
+| 训练计算 | \\(\text{Training FLOPs} \approx 6ND\\) | 参数量 \\(N\\)、训练 token 数 \\(D\\) | 整个训练语料大概要多少总计算 |
+| 权重显存 | \\(\text{Weight memory} = N \times \text{bytes/parameter}\\) | 参数量、数据类型 | 模型权重本身能不能放进显存 |
+| KV cache | \\(\text{KV cache} = 2LBSH_{kv}d_{head}\times\text{bytes}\\) | 层数、并发、上下文、KV head | 长上下文和高并发为什么吃显存 |
+| 训练显存 | parameters + gradients + optimizer states + activations | 优化器、精度、batch、序列长度 | 为什么训练显存远高于推理显存 |
+
 ## 估算前的基本单位 {#estimation-units}
 
 先不要急着区分训练和推理。所有资源估算都需要先统一两个单位：计算量看 FLOPs，显存看 bytes。本节先把 FLOPs 的数量级讲清楚，后面所有公式都从这个积木往上搭。
@@ -42,23 +52,27 @@ FLOPs 是 floating point operations 的缩写，即浮点运算次数。深度�
 
 假设有两个矩阵：
 
-$$
-A \in \mathbb{R}^{m \times k}, \quad B \in \mathbb{R}^{k \times n}
-$$
+$$A \in \mathbb{R}^{m \times k}, \quad B \in \mathbb{R}^{k \times n}$$
 
 它们相乘得到：
 
-$$
-C = AB, \quad C \in \mathbb{R}^{m \times n}
-$$
+$$C = AB, \quad C \in \mathbb{R}^{m \times n}$$
 
 \\(C\\) 里每个元素都需要 \\(k\\) 次乘法和 \\(k-1\\) 次加法。工程估算里通常把一次乘法和一次加法算作 2 FLOPs，所以矩阵乘法的计算量近似为：
 
-$$
-\text{FLOPs}(A B) \approx 2mkn
-$$
+$$\text{FLOPs}(A B) \approx 2mkn$$
 
 这就是整篇文章的底层积木。Transformer 里的线性层、QKV 投影、MLP、输出投影，本质上都主要由矩阵乘法组成。
+
+用一个很小的例子看会更直观。假设一个线性层把 3 维输入映射到 2 维输出，权重矩阵是 \\(W \in \mathbb{R}^{3 \times 2}\\)，单个 token 的 hidden state 是 \\(x \in \mathbb{R}^{1 \times 3}\\)：
+
+$$y = xW,\quad y \in \mathbb{R}^{1 \times 2}$$
+
+输出 \\(y\\) 有 2 个元素，每个元素都要把 3 个输入维度和 3 个权重相乘再相加，所以计算量约为：
+
+$$2 \times 1 \times 3 \times 2 = 12\ \text{FLOPs}$$
+
+这 6 个权重参数各参与一次乘加，正好对应 \\(2 \times 6 = 12\\) FLOPs。后面推理里的 \\(2N\\)，本质上就是把这个小线性层推广到整个 dense Transformer：大部分参数矩阵都会在每个 token 的 forward 中被读出来并参与矩阵乘法。
 
 {{< alert theme="info" >}}
 
@@ -76,16 +90,21 @@ $$
 
 对 dense Transformer，训练总计算量通常用下面的公式估算：
 
-$$
-\text{Training FLOPs} \approx 6ND
-$$
+$$\text{Training FLOPs} \approx 6ND$$
 
 其中：
 
 - \\(N\\)：模型参数量
 - \\(D\\)：训练 token 数
 
-这个公式的直觉是：
+这个公式不只适用于 LLM，也适用于很多由 dense matrix multiplication 主导的普通神经网络。核心假设是：大部分可训练参数在一次 forward 中都会参与计算，backward 又需要同时计算对 activation 的梯度和对 weight 的梯度。
+
+以上面的线性层为例，forward 做一次 \\(xW\\)，成本约等于 \\(2N\\)。反向传播时还要做两类矩阵乘法：
+
+- 算输入梯度：\\(\nabla_x = \nabla_y W^T\\)
+- 算权重梯度：\\(\nabla_W = x^T \nabla_y\\)
+
+这两步的形状和 forward 同阶，所以每步也近似是 \\(2N\\)。于是一个训练样本、一个 token 或一个位置的总成本就变成：
 
 | 阶段 | FLOPs / token | 说明 |
 | --- | ---: | --- |
@@ -96,9 +115,7 @@ $$
 
 所以，训练 \\(D\\) 个 token，总计算量就是：
 
-$$
-6N \times D = 6ND
-$$
+$$6N \times D = 6ND$$
 
 ### 例子：7B 模型训练 1T tokens {#example-7b-1t}
 
@@ -113,9 +130,7 @@ $$\begin{aligned} \text{FLOPs} &\approx 6ND \\\\ &= 6 \times 7 \times 10^9 \time
 
 也就是 42 ZFLOPs，其中：
 
-$$
-1\ \text{ZFLOP} = 10^{21}\ \text{FLOPs}
-$$
+$$1\ \text{ZFLOP} = 10^{21}\ \text{FLOPs}$$
 
 这个数字本身很大，不直观。更有用的是把它换成训练时间。
 
@@ -123,11 +138,7 @@ $$
 
 训练时间可以用下面的公式估算：
 
-$$
-\text{Training time} =
-\frac{\text{Total FLOPs}}
-{\text{GPU count} \times \text{Peak FLOPs per GPU} \times \text{MFU}}
-$$
+$$\text{Training time} = \frac{\text{Total FLOPs}}{\text{GPU count} \times \text{Peak FLOPs per GPU} \times \text{MFU}}$$
 
 这里的 MFU 是 Model FLOPs Utilization，即模型实际用上的有效算力占理论峰值的比例。
 
@@ -174,17 +185,31 @@ $$\begin{aligned} \text{Time} &= \frac{4.2 \times 10^{22}}{7.68 \times 10^{15}} 
 
 一种常见的经验是：训练 token 数可以取参数量的十几到几十倍。例如 7B 模型如果按 20 tokens / parameter 的比例训练：
 
-$$
-D \approx 20N = 20 \times 7 \times 10^9 = 1.4 \times 10^{11}
-$$
+$$D \approx 20N = 20 \times 7 \times 10^9 = 1.4 \times 10^{11}$$
 
 也就是约 140B tokens。
 
+这个比例不是凭空来的。早期 Kaplan scaling laws 更偏向“大模型 + 相对少数据”，而 Chinchilla 之后的经验通常更强调“给定训练 compute 时，模型大小和训练 token 数要一起配平”。可以把不同选择看成下面这张小图：
+
+```mermaid
+flowchart LR
+    A["5x<br/>35B tokens<br/>欠训练风险高"] --> B["20x<br/>140B tokens<br/>常用起点"]
+    B --> C["100x<br/>700B tokens<br/>小模型多数据"]
+    C --> D["143x<br/>1T tokens<br/>继续榨小模型能力"]
+```
+
+| tokens / parameter | 7B 对应 token 数 | 倾向 | 直觉 |
+| ---: | ---: | --- | --- |
+| 5 | 35B | 欠训练风险高 | 模型容量大，但看过的数据少 |
+| 20 | 140B | Chinchilla 风格的常用量级 | 参数量和数据量相对平衡 |
+| 100 | 700B | 小模型多数据 | 训练更久，可能继续提升数据吸收 |
+| 143 | 1T | 过训练小模型的常见工程选择 | 用更多高质量 token 榨出较小模型能力 |
+
+真实项目里还会受数据质量、重复率、目标 benchmark、预算和训练稳定性影响。高质量 token 更贵也更稀缺，所以“20 tokens / parameter”更像一个起点，而不是必须遵守的常数。
+
 如果训练到 1T tokens，则是：
 
-$$
-\frac{10^{12}}{7 \times 10^9} \approx 143
-$$
+$$\frac{10^{12}}{7 \times 10^9} \approx 143$$
 
 也就是约 143 tokens / parameter。这可能是为了让较小模型在更多数据上继续变强，也可能是因为高质量数据、训练目标和下游需求使得最优比例不同。
 
@@ -202,6 +227,17 @@ $$\text{Training memory} \approx \text{parameters} + \text{gradients} + \text{op
 
 以 Adam / AdamW 混合精度训练为例，常见状态包括：
 
+```mermaid
+flowchart LR
+    W[parameter W] --> FW[forward]
+    FW --> A[activation]
+    A --> BW[backward]
+    BW --> G[gradient dW]
+    G --> M[Adam first moment m]
+    G --> V[Adam second moment v]
+    W --> MW[FP32 master weight]
+```
+
 | 项目 | 典型精度 | bytes / parameter |
 | --- | --- | ---: |
 | 模型参数 | BF16 / FP16 | 2 |
@@ -213,11 +249,22 @@ $$\text{Training memory} \approx \text{parameters} + \text{gradients} + \text{op
 
 所以只看参数相关状态，训练一个 7B 模型就可能需要：
 
-$$
-7 \times 10^9 \times 16 = 112\ \text{GB}
-$$
+$$7 \times 10^9 \times 16 = 112\ \text{GB}$$
 
 这还没有算 activation。
+
+这同样不是 LLM 特有现象。一个只有 6 个参数的小线性层，如果用混合精度 AdamW 训练，参数相关状态大致就是：
+
+| 状态 | 数量 | bytes / item | 小例子显存 |
+| --- | ---: | ---: | ---: |
+| BF16 参数 | 6 | 2 | 12 bytes |
+| BF16 梯度 | 6 | 2 | 12 bytes |
+| FP32 master weights | 6 | 4 | 24 bytes |
+| Adam \\(m\\) | 6 | 4 | 24 bytes |
+| Adam \\(v\\) | 6 | 4 | 24 bytes |
+| 合计 | - | - | 96 bytes |
+
+推理时这个小层只需要 12 bytes 的 BF16 参数；训练时仅参数相关状态就变成 96 bytes，正好是 16 bytes / parameter。LLM 的估算只是把同一个账本放大到几十亿参数。
 
 不同框架和优化器实现会有差异。例如有的实现不保留 FP32 master weights，有的优化器状态可以量化，有的 ZeRO/FSDP 会把参数、梯度和优化器状态切分到多张 GPU 上。
 
@@ -229,9 +276,7 @@ $$
 
 activation 显存大致随下面几个量增长：
 
-$$
-\text{Activation memory} \propto B \times S \times L \times d_{model}
-$$
+$$\text{Activation memory} \propto B \times S \times L \times d_{model}$$
 
 其中：
 
@@ -261,25 +306,23 @@ $$
 
 对于一个 dense Transformer，前向传播时大部分参数都会被用一次。每个参数通常参与一次乘加，因此可以用一个非常简单的公式估算：
 
-$$
-\text{Forward FLOPs per token} \approx 2N
-$$
+$$\text{Forward FLOPs per token} \approx 2N$$
 
 其中 \\(N\\) 是模型参数量。
 
+这句话背后的主要计算就是矩阵乘法。对线性层 \\(y=xW\\) 来说，权重矩阵里每个元素 \\(W_{ij}\\) 都会和某个输入 \\(x_i\\) 相乘，并累加到某个输出 \\(y_j\\) 上。一次乘法加一次加法约等于 2 FLOPs，所以一个有 \\(N\\) 个权重的 dense linear layer，单 token forward 就是约 \\(2N\\)。
+
+Transformer 由很多这样的 dense projection 组成：Q/K/V projection、attention output projection、MLP up/down projection、最后的 lm head。把这些矩阵里的参数加起来，就是模型参数量 \\(N\\) 的主体。因此推理估算先用 \\(2N\\) 抓主项，再单独考虑 attention 的长上下文二次项和 KV cache。
+
 例如 7B 模型：
 
-$$
-2N = 2 \times 7 \times 10^9 = 14 \times 10^9
-$$
+$$2N = 2 \times 7 \times 10^9 = 14 \times 10^9$$
 
 也就是说，7B dense 模型每生成 1 个 token，大约需要 14 GFLOPs 的前向计算。
 
 如果生成 1000 个 token：
 
-$$
-14 \times 10^9 \times 1000 = 1.4 \times 10^{13}
-$$
+$$14 \times 10^9 \times 1000 = 1.4 \times 10^{13}$$
 
 也就是约 14 TFLOPs。
 
@@ -315,9 +358,7 @@ $$\text{Inference memory} \approx \text{weights} + \text{KV cache} + \text{tempo
 
 权重显存最容易估算：
 
-$$
-\text{Weight memory} = N \times \text{bytes per parameter}
-$$
+$$\text{Weight memory} = N \times \text{bytes per parameter}$$
 
 常见数据类型：
 
@@ -342,10 +383,7 @@ $$
 
 自回归推理中，之前 token 的 key 和 value 会被缓存起来，避免每步重新计算。KV cache 的显存可以估算为：
 
-$$
-\text{KV cache} =
-2 \times L \times B \times S \times H_{kv} \times d_{head} \times \text{bytes}
-$$
+$$\text{KV cache} = 2 \times L \times B \times S \times H_{kv} \times d_{head} \times \text{bytes}$$
 
 其中：
 
@@ -374,21 +412,15 @@ $$\begin{aligned} \text{KV cache} &= 2 \times 32 \times 1 \times 4096 \times 32 
 
 如果 batch size 变成 8：
 
-$$
-2\ \text{GB} \times 8 = 16\ \text{GB}
-$$
+$$2\ \text{GB} \times 8 = 16\ \text{GB}$$
 
 如果上下文从 4K 增加到 32K：
 
-$$
-2\ \text{GB} \times 8 = 16\ \text{GB}
-$$
+$$2\ \text{GB} \times 8 = 16\ \text{GB}$$
 
 如果 batch size 也是 8、上下文也是 32K：
 
-$$
-2\ \text{GB} \times 8 \times 8 = 128\ \text{GB}
-$$
+$$2\ \text{GB} \times 8 \times 8 = 128\ \text{GB}$$
 
 这就是长上下文和高并发推理非常吃显存的根本原因：KV cache 随 \\(B\\) 和 \\(S\\) 线性增长。
 
@@ -404,15 +436,11 @@ $$
 
 对于长度为 \\(S\\) 的序列，自注意力里需要计算：
 
-$$
-QK^T
-$$
+$$QK^T$$
 
 如果忽略 batch 和 head 的细节，它的规模随：
 
-$$
-S^2 d
-$$
+$$S^2 d$$
 
 增长。
 
@@ -439,32 +467,23 @@ MoE（Mixture of Experts）模型不同。它可能有很大的总参数量，�
 
 对于 MoE，推理 FLOPs 不能简单用 \\(2 \times \text{总参数量}\\)，而应该更接近：
 
-$$
-\text{Forward FLOPs/token} \approx
-2 \times \text{active parameters per token}
-$$
+$$\text{Forward FLOPs/token} \approx 2 \times \text{active parameters per token}$$
 
 训练 FLOPs 也类似，要用每 token 实际激活的参数量估算主计算成本。但总参数量仍然影响显存、通信、checkpoint 保存和加载。
 
-## 资源估算 checklist {#checklist}
+## 资源估算速查 {#checklist}
 
-最后，把训练和推理分别整理成 checklist。
+最后，把训练和推理分别整理成执行顺序。开头的表格适合复习公式；这里更适合真正做容量规划时逐项检查。
 
 ### 训练估算 {#training-checklist}
 
 第一步，估算总计算量：
 
-$$
-\text{Training FLOPs} \approx 6ND
-$$
+$$\text{Training FLOPs} \approx 6ND$$
 
 第二步，估算训练时间：
 
-$$
-\text{Time} =
-\frac{6ND}
-{\text{GPU count} \times \text{Peak FLOPs/GPU} \times \text{MFU}}
-$$
+$$\text{Time} = \frac{6ND}{\text{GPU count} \times \text{Peak FLOPs/GPU} \times \text{MFU}}$$
 
 第三步，检查显存：
 
@@ -487,22 +506,15 @@ $$
 
 第一步，估算权重显存：
 
-$$
-\text{Weight memory} = N \times \text{bytes per parameter}
-$$
+$$\text{Weight memory} = N \times \text{bytes per parameter}$$
 
 第二步，估算每 token forward 计算：
 
-$$
-\text{Forward FLOPs/token} \approx 2N
-$$
+$$\text{Forward FLOPs/token} \approx 2N$$
 
 第三步，估算 KV cache：
 
-$$
-\text{KV cache} =
-2 \times L \times B \times S \times H_{kv} \times d_{head} \times \text{bytes}
-$$
+$$\text{KV cache} = 2 \times L \times B \times S \times H_{kv} \times d_{head} \times \text{bytes}$$
 
 第四步，区分 prefill 和 decode：
 
@@ -517,17 +529,6 @@ $$
 - 长上下文提高容量需求，也可能降低 decode 性能
 
 ## 总结 {#summary}
-
-LLM 资源估算可以先抓住四个核心公式：
-
-$$\begin{aligned} \text{Forward FLOPs/token} &\approx 2N \\\\ \text{Training FLOPs} &\approx 6ND \\\\ \text{Weight memory} &= N \times \text{bytes per parameter} \\\\ \text{KV cache} &= 2 L B S H_{kv} d_{head} \times \text{bytes} \end{aligned}$$
-
-它们分别回答：
-
-- 推理每生成一个 token 要多少计算？
-- 训练整个语料要多少总计算？
-- 模型权重本身占多少显存？
-- 长上下文和高并发为什么吃显存？
 
 真实系统当然更复杂。训练会受到 MFU、并行策略、checkpointing、通信和数据管道影响；推理会受到 prefill/decode 比例、KV cache 管理、显存带宽和量化实现影响。
 
