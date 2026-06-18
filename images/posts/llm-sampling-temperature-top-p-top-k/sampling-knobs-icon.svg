@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Sampling knobs icon</title>
+  <desc id="desc">A square icon showing probability bars and three sampling control knobs.</desc>
+  <rect width="512" height="512" rx="64" fill="#101820"/>
+  <rect x="70" y="84" width="372" height="276" rx="28" fill="#f5f1e8"/>
+  <g transform="translate(112 126)">
+    <rect x="0" y="130" width="42" height="92" rx="10" fill="#2a9d8f"/>
+    <rect x="62" y="82" width="42" height="140" rx="10" fill="#e9c46a"/>
+    <rect x="124" y="38" width="42" height="184" rx="10" fill="#f4a261"/>
+    <rect x="186" y="104" width="42" height="118" rx="10" fill="#e76f51"/>
+    <rect x="248" y="154" width="42" height="68" rx="10" fill="#457b9d"/>
+    <line x1="-10" y1="222" x2="304" y2="222" stroke="#101820" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g fill="none" stroke="#101820" stroke-width="12" stroke-linecap="round">
+    <circle cx="166" cy="400" r="34" fill="#f5f1e8"/>
+    <circle cx="256" cy="400" r="34" fill="#f5f1e8"/>
+    <circle cx="346" cy="400" r="34" fill="#f5f1e8"/>
+    <path d="M166 400l18-20"/>
+    <path d="M256 400v-26"/>
+    <path d="M346 400l-20-18"/>
+  </g>
+  <g fill="#f5f1e8" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">
+    <text x="166" y="470">T</text>
+    <text x="256" y="470">P</text>
+    <text x="346" y="470">K</text>
+  </g>
+</svg>

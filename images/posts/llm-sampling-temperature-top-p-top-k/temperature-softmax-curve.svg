@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Temperature changes softmax probability gaps</title>
+  <desc id="desc">A line chart showing that the high-logit token probability decreases as temperature increases, while the low-logit token probability increases.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L8,3 z" fill="#293241"/>
+    </marker>
+    <style>
+      .bg { fill: #fbfaf6; }
+      .axis { stroke: #293241; stroke-width: 3; stroke-linecap: round; marker-end: url(#arrow); }
+      .grid { stroke: #d6d3ca; stroke-width: 1; }
+      .title { font: 700 24px Inter, Arial, sans-serif; fill: #293241; }
+      .label { font: 600 16px Inter, Arial, sans-serif; fill: #293241; }
+      .small { font: 14px Inter, Arial, sans-serif; fill: #4b5563; }
+      .curve-high { fill: none; stroke: #e76f51; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .curve-low { fill: none; stroke: #2a9d8f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .uniform { stroke: #64748b; stroke-width: 3; stroke-dasharray: 8 8; }
+    </style>
+  </defs>
+
+  <rect width="900" height="520" fill="#f3f0e8"/>
+  <rect x="34" y="34" width="832" height="452" rx="18" class="bg" stroke="#293241" stroke-width="2"/>
+
+  <text class="title" x="78" y="74">Fixed logits [4, 3, 2, 1, 0]: softmax(logits / T)</text>
+  <text class="small" x="78" y="102">Increasing T divides every logit gap by a larger number, so the distribution moves toward uniform.</text>
+
+  <g transform="translate(0 0)">
+    <line class="grid" x1="90" y1="390" x2="790" y2="390"/>
+    <line class="grid" x1="90" y1="327" x2="790" y2="327"/>
+    <line class="grid" x1="90" y1="264" x2="790" y2="264"/>
+    <line class="grid" x1="90" y1="201" x2="790" y2="201"/>
+    <line class="grid" x1="90" y1="138" x2="790" y2="138"/>
+    <line class="uniform" x1="90" y1="326.8" x2="790" y2="326.8"/>
+
+    <line class="axis" x1="90" y1="390" x2="815" y2="390"/>
+    <line class="axis" x1="90" y1="390" x2="90" y2="94"/>
+
+    <text class="label" x="404" y="450" text-anchor="middle">temperature T</text>
+    <text class="label" x="28" y="246" transform="rotate(-90 28 246)" text-anchor="middle">probability</text>
+
+    <text class="small" x="64" y="394" text-anchor="end">0.0</text>
+    <text class="small" x="64" y="331" text-anchor="end">0.2</text>
+    <text class="small" x="64" y="268" text-anchor="end">0.4</text>
+    <text class="small" x="64" y="205" text-anchor="end">0.6</text>
+    <text class="small" x="64" y="142" text-anchor="end">0.8</text>
+
+    <text class="small" x="90" y="418" text-anchor="middle">0.4</text>
+    <text class="small" x="252" y="418" text-anchor="middle">1.0</text>
+    <text class="small" x="386" y="418" text-anchor="middle">1.5</text>
+    <text class="small" x="521" y="418" text-anchor="middle">2.0</text>
+    <text class="small" x="790" y="418" text-anchor="middle">3.0</text>
+
+    <path class="curve-high" d="M90 100.1 C120 116, 145 132, 170.8 149.7 C205 169, 228 181, 251.5 189 C288 203, 314 211, 332.3 216.8 C352 223, 370 227, 386.2 230.7 C438 242, 480 250, 520.8 254.6 C571 262, 612 266, 655.4 269.6 C706 274, 749 277, 790 279.6"/>
+    <path class="curve-low" d="M90 390 C120 389.9, 145 389.7, 170.8 389.2 C205 388.5, 228 387.3, 251.5 386.3 C288 384.6, 314 383, 332.3 382 C352 380.8, 370 379.8, 386.2 378.9 C438 376, 480 373.6, 520.8 371.7 C571 369, 612 367.2, 655.4 365.7 C706 363.7, 749 362.2, 790 360.9"/>
+
+    <circle cx="251.5" cy="189" r="6" fill="#e76f51"/>
+    <circle cx="251.5" cy="386.3" r="6" fill="#2a9d8f"/>
+    <circle cx="386.2" cy="230.7" r="6" fill="#e76f51"/>
+    <circle cx="386.2" cy="378.9" r="6" fill="#2a9d8f"/>
+
+    <rect x="574" y="130" width="226" height="94" rx="10" fill="#ffffff" stroke="#d6d3ca"/>
+    <line x1="594" y1="158" x2="638" y2="158" class="curve-high"/>
+    <text class="label" x="652" y="163">A: highest logit</text>
+    <line x1="594" y1="194" x2="638" y2="194" class="curve-low"/>
+    <text class="label" x="652" y="199">E: lowest logit</text>
+
+    <text class="small" x="604" y="314">uniform limit = 1 / vocab size</text>
+  </g>
+</svg>

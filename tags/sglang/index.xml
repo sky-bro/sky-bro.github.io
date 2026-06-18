@@ -6,6 +6,7 @@
 &lt;p&gt;Planned posts will follow the request lifecycle:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://k4i.top/posts/request-lifecycle-openai-to-forward-pass/"&gt;Request lifecycle: from OpenAI API to one forward pass&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://k4i.top/posts/llm-sampling-temperature-top-p-top-k/"&gt;Inference sampling: temperature, top-p, and top-k&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Scheduler loop: waiting queue, running queue, token budget, and decode priority&lt;/li&gt;
 &lt;li&gt;vLLM Block Manager: from logical blocks to physical KV blocks&lt;/li&gt;
 &lt;li&gt;SGLang Radix Cache: why prefix reuse wants a tree&lt;/li&gt;
