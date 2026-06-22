@@ -3,7 +3,8 @@
 
 ## 已有文章 {#existing-posts}
 
-1. [大模型量化综述：从线性量化到码本量化]({{< relref "/posts/llm-quantization" >}})
+1. [模型里的数值类型：FP32、BF16、FP8、INT8 到 INT4]({{< relref "/posts/model-numeric-types" >}})
+2. [大模型量化综述：从线性量化到码本量化]({{< relref "/posts/llm-quantization" >}})
 
 ## 后续文章 {#planned-posts}
 

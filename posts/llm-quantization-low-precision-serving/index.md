@@ -3,7 +3,8 @@ This series is for quantization and low-precision serving. It deserves its own t
 
 ## Existing Posts {#existing-posts}
 
-1. [A Survey of LLM Quantization: From Linear Quantization to Codebooks]({{< relref "/posts/llm-quantization" >}})
+1. [Numeric Types in Neural Networks: FP32, BF16, FP8, INT8, and INT4]({{< relref "/posts/model-numeric-types" >}})
+2. [A Survey of LLM Quantization: From Linear Quantization to Codebooks]({{< relref "/posts/llm-quantization" >}})
 
 ## Planned Posts {#planned-posts}
 

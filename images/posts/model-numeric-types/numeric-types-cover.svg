@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Numeric types for neural networks</title>
+  <desc id="desc">A square icon showing floating point and integer numeric formats used in neural networks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#172033"/>
+      <stop offset="55%" stop-color="#203142"/>
+      <stop offset="100%" stop-color="#163a37"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="64" fill="url(#bg)"/>
+  <circle cx="426" cy="88" r="42" fill="#f4c95d" opacity="0.9"/>
+  <circle cx="86" cy="424" r="54" fill="#60c2a4" opacity="0.75"/>
+  <g filter="url(#shadow)">
+    <rect x="72" y="92" width="368" height="88" rx="22" fill="#f7f3e8"/>
+    <rect x="72" y="212" width="368" height="88" rx="22" fill="#e9f0ff"/>
+    <rect x="72" y="332" width="368" height="88" rx="22" fill="#ecf7ef"/>
+  </g>
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-weight="800" text-anchor="middle">
+    <text x="164" y="148" font-size="38" fill="#172033">BF16</text>
+    <text x="346" y="148" font-size="38" fill="#172033">FP16</text>
+    <text x="164" y="268" font-size="38" fill="#172033">FP8</text>
+    <text x="346" y="268" font-size="38" fill="#172033">TF32</text>
+    <text x="164" y="388" font-size="38" fill="#172033">INT8</text>
+    <text x="346" y="388" font-size="38" fill="#172033">INT4</text>
+  </g>
+  <g stroke="#172033" stroke-width="5" stroke-linecap="round" opacity="0.7">
+    <line x1="256" y1="114" x2="256" y2="158"/>
+    <line x1="256" y1="234" x2="256" y2="278"/>
+    <line x1="256" y1="354" x2="256" y2="398"/>
+  </g>
+</svg>
