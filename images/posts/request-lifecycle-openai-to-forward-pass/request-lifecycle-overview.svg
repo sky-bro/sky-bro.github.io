@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">vLLM request lifecycle overview</title>
+  <desc id="desc">A source-reading map showing how an OpenAI-compatible request moves through API serving, control transport, EngineCore, Scheduler, ModelRunner, GPU forward, and streaming output.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .api { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; }
+      .transport { fill: #fef9c3; stroke: #ca8a04; stroke-width: 2; }
+      .engine { fill: #ecfdf5; stroke: #059669; stroke-width: 2; }
+      .gpu { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; }
+      .out { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; }
+      .box { rx: 10; ry: 10; }
+      .title { font: 700 20px sans-serif; fill: #0f172a; }
+      .label { font: 700 16px sans-serif; fill: #0f172a; }
+      .small { font: 13px sans-serif; fill: #334155; }
+      .tiny { font: 12px sans-serif; fill: #475569; }
+      .arrow { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #64748b; stroke-width: 2; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1120" height="560"/>
+  <text class="title" x="42" y="44">One request id aligns API state, transport, scheduling, GPU work, and streaming output</text>
+
+  <rect class="api box" x="42" y="92" width="205" height="132"/>
+  <text class="label" x="70" y="128">OpenAI API</text>
+  <text class="small" x="70" y="156">route + validation</text>
+  <text class="small" x="70" y="178">chat template</text>
+  <text class="small" x="70" y="200">sampling params</text>
+
+  <rect class="api box" x="302" y="92" width="205" height="132"/>
+  <text class="label" x="330" y="128">AsyncLLM</text>
+  <text class="small" x="330" y="156">register output stream</text>
+  <text class="small" x="330" y="178">build EngineCoreRequest</text>
+  <text class="small" x="330" y="200">send ADD message</text>
+
+  <rect class="transport box" x="562" y="72" width="220" height="86"/>
+  <text class="label" x="590" y="108">ZMQ control</text>
+  <text class="small" x="590" y="136">ADD / ABORT / UTILITY</text>
+
+  <rect class="transport box" x="562" y="190" width="220" height="86"/>
+  <text class="label" x="590" y="226">Tensor IPC</text>
+  <text class="small" x="590" y="254">large multimodal tensors</text>
+
+  <rect class="engine box" x="837" y="72" width="225" height="86"/>
+  <text class="label" x="865" y="108">EngineCore</text>
+  <text class="small" x="865" y="136">add request + step loop</text>
+
+  <rect class="engine box" x="302" y="342" width="205" height="116"/>
+  <text class="label" x="330" y="378">Scheduler</text>
+  <text class="small" x="330" y="406">token budget</text>
+  <text class="small" x="330" y="428">KV block decisions</text>
+
+  <rect class="gpu box" x="562" y="342" width="220" height="116"/>
+  <text class="label" x="590" y="378">GPUModelRunner</text>
+  <text class="small" x="590" y="406">input tensors</text>
+  <text class="small" x="590" y="428">attention metadata</text>
+
+  <rect class="gpu box" x="837" y="342" width="225" height="116"/>
+  <text class="label" x="865" y="378">GPU Forward</text>
+  <text class="small" x="865" y="406">model layers + kernels</text>
+  <text class="small" x="865" y="428">logits and sampling</text>
+
+  <rect class="out box" x="42" y="342" width="205" height="116"/>
+  <text class="label" x="70" y="378">HTTP Stream</text>
+  <text class="small" x="70" y="406">per-request collector</text>
+  <text class="small" x="70" y="428">SSE token output</text>
+
+  <path class="arrow" d="M 247 158 L 302 158"/>
+  <path class="arrow" d="M 507 134 L 562 116"/>
+  <path class="arrow" d="M 507 182 L 562 224"/>
+  <path class="arrow" d="M 782 116 L 837 116"/>
+  <path class="arrow" d="M 950 158 C 950 304 405 282 405 342"/>
+  <path class="arrow" d="M 507 400 L 562 400"/>
+  <path class="arrow" d="M 782 400 L 837 400"/>
+  <path class="dash" d="M 837 450 C 660 530 330 530 145 458"/>
+
+  <text class="tiny" x="306" y="546">Scheduler decides what runs this step; ModelRunner decides how that step runs on GPU.</text>
+  <text class="tiny" x="606" y="304">Tensor IPC is a payload side channel, not the output path.</text>
+  <text class="tiny" x="62" y="250">The same request id ties these state lines together.</text>
+</svg>

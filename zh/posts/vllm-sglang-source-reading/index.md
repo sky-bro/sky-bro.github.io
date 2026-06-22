@@ -3,16 +3,18 @@
 
 ## 阅读顺序 {#reading-order}
 
-后续文章会按请求生命周期展开：
+先按“请求路径 -> 调度决策 -> GPU 执行”的顺序读三篇核心文章：
 
 1. [请求生命周期：OpenAI API 到一次 forward]({{< relref "request-lifecycle-openai-to-forward-pass" >}})
-2. [推理采样：temperature、top-p、top-k]({{< relref "llm-sampling-temperature-top-p-top-k" >}})
-3. Scheduler loop：waiting queue、running queue、token budget 和 decode 优先
-4. vLLM Block Manager：从逻辑 block 到物理 KV block
-5. SGLang Radix Cache：为什么前缀复用要用树
-6. Prefix cache 命中一次到底省了什么
-7. Chunked prefill 的参数、调度分支和 benchmark
-8. Structured output / FSM decoding 为什么是 SGLang 的强项
+2. [vLLM Scheduler：请求队列如何变成 SchedulerOutput]({{< relref "scheduler-request-queue-to-scheduler-output" >}})
+3. [vLLM ModelRunner：SchedulerOutput 如何变成 GPU Forward]({{< relref "model-runner-scheduler-output-to-gpu-forward" >}})
+4. [推理采样：temperature、top-p、top-k]({{< relref "llm-sampling-temperature-top-p-top-k" >}})
+5. vLLM 架构导览：从通用推理引擎到 vLLM-Omni（草稿）
+6. vLLM Block Manager：从逻辑 block 到物理 KV block
+7. SGLang Radix Cache：为什么前缀复用要用树
+8. Prefix cache 命中一次到底省了什么
+9. Chunked prefill 的参数、调度分支和 benchmark
+10. Structured output / FSM decoding 为什么是 SGLang 的强项
 
 ## 每篇文章的固定格式 {#format}
 

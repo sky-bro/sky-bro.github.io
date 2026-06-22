@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Scheduler on k4i's blog</title><link>https://k4i.top/tags/scheduler/</link><description>Recent content in Scheduler on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of &lt;a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright><lastBuildDate>Tue, 23 Jun 2026 11:20:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/scheduler/index.xml" rel="self" type="application/rss+xml"/><item><title>vLLM Scheduler: How Request Queues Become SchedulerOutput</title><link>https://k4i.top/posts/scheduler-request-queue-to-scheduler-output/</link><pubDate>Tue, 23 Jun 2026 11:20:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Tue, 23 Jun 2026 11:20:00 +0800</atom:modified><guid>https://k4i.top/posts/scheduler-request-queue-to-scheduler-output/</guid><description>&lt;p&gt;In the request lifecycle, Scheduler is the easiest piece to underestimate. The HTTP server admits requests, and ModelRunner executes batches on GPU. Scheduler answers the per-step question in between: &lt;strong&gt;who runs now, how many tokens do they get, and can the KV cache hold the result?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The three lifecycle posts fit together like this:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;post&lt;/th&gt;
+&lt;th&gt;question&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://k4i.top/posts/request-lifecycle-openai-to-forward-pass/"&gt;request lifecycle&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;how a request reaches EngineCore&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Scheduler&lt;/td&gt;
+&lt;td&gt;EngineCore decides &lt;strong&gt;what to run&lt;/strong&gt; in each step&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://k4i.top/posts/model-runner-scheduler-output-to-gpu-forward/"&gt;ModelRunner&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SchedulerOutput&lt;/code&gt; becomes &lt;strong&gt;how to run on GPU&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Scheduler output is not a vague &amp;ldquo;batch.&amp;rdquo; It is a concrete &lt;code&gt;SchedulerOutput&lt;/code&gt;: which requests are new, which are already cached on workers, how many tokens each request gets, which KV blocks were allocated, which requests were preempted, and which finished requests must be cleaned up.&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/posts/vllm-sglang-source-reading/source-reading-code-path-icon.svg" medium="image"><media:title type="html">featured image</media:title></media:content><category>llm</category><category>inference</category><category>vllm</category><category>source-reading</category><category>scheduler</category><category>ai-infra</category><category>AI</category><category>vLLM and SGLang Source Reading</category></item></channel></rss>

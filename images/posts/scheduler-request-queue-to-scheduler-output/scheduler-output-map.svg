@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">vLLM SchedulerOutput construction map</title>
+  <desc id="desc">A source-reading map showing how vLLM scheduler turns waiting and running requests, token budget, KV cache allocation, preemption, and cached request data into SchedulerOutput.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .queue { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; }
+      .budget { fill: #fef9c3; stroke: #ca8a04; stroke-width: 2; }
+      .cache { fill: #ecfdf5; stroke: #059669; stroke-width: 2; }
+      .out { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; }
+      .loop { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; }
+      .box { rx: 10; ry: 10; }
+      .title { font: 700 20px sans-serif; fill: #0f172a; }
+      .label { font: 700 16px sans-serif; fill: #0f172a; }
+      .small { font: 13px sans-serif; fill: #334155; }
+      .tiny { font: 12px sans-serif; fill: #475569; }
+      .arrow { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #64748b; stroke-width: 2; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1120" height="560"/>
+  <text class="title" x="42" y="44">Scheduler decides what runs in this engine step</text>
+
+  <rect class="queue box" x="42" y="94" width="205" height="112"/>
+  <text class="label" x="70" y="130">Running Queue</text>
+  <text class="small" x="70" y="157">active requests</text>
+  <text class="small" x="70" y="178">decode or prefill chunks</text>
+  <text class="small" x="70" y="199">scheduled first</text>
+
+  <rect class="queue box" x="42" y="286" width="205" height="130"/>
+  <text class="label" x="70" y="322">Waiting Queues</text>
+  <text class="small" x="70" y="349">new requests</text>
+  <text class="small" x="70" y="370">preempted requests</text>
+  <text class="small" x="70" y="391">remote-KV / grammar waits</text>
+
+  <rect class="budget box" x="302" y="92" width="210" height="130"/>
+  <text class="label" x="330" y="128">Token Budget</text>
+  <text class="small" x="330" y="156">max scheduled tokens</text>
+  <text class="small" x="330" y="177">long prefill threshold</text>
+  <text class="small" x="330" y="198">encoder budget</text>
+
+  <rect class="cache box" x="302" y="286" width="210" height="130"/>
+  <text class="label" x="330" y="322">KV Cache</text>
+  <text class="small" x="330" y="349">prefix-cache hits</text>
+  <text class="small" x="330" y="370">allocate slots</text>
+  <text class="small" x="330" y="391">preempt if no space</text>
+
+  <rect class="loop box" x="572" y="122" width="220" height="250"/>
+  <text class="label" x="602" y="160">schedule()</text>
+  <text class="small" x="602" y="190">1. schedule running</text>
+  <text class="small" x="602" y="214">2. admit waiting</text>
+  <text class="small" x="602" y="238">3. allocate blocks</text>
+  <text class="small" x="602" y="262">4. collect deltas</text>
+  <text class="small" x="602" y="286">5. build output</text>
+
+  <rect class="out box" x="852" y="98" width="228" height="318"/>
+  <text class="label" x="880" y="134">SchedulerOutput</text>
+  <text class="small" x="880" y="164">scheduled_new_reqs</text>
+  <text class="small" x="880" y="188">scheduled_cached_reqs</text>
+  <text class="small" x="880" y="212">num_scheduled_tokens</text>
+  <text class="small" x="880" y="236">scheduled_spec_decode_tokens</text>
+  <text class="small" x="880" y="260">scheduled_encoder_inputs</text>
+  <text class="small" x="880" y="284">num_common_prefix_blocks</text>
+  <text class="small" x="880" y="308">preempted_req_ids</text>
+  <text class="small" x="880" y="332">finished_req_ids</text>
+  <text class="small" x="880" y="356">connector metadata</text>
+  <text class="small" x="880" y="380">new blocks to zero</text>
+
+  <path class="arrow" d="M 247 150 L 302 150"/>
+  <path class="arrow" d="M 247 352 L 302 352"/>
+  <path class="arrow" d="M 512 157 L 572 200"/>
+  <path class="arrow" d="M 512 352 L 572 276"/>
+  <path class="arrow" d="M 792 247 L 852 247"/>
+  <path class="dash" d="M 966 416 C 925 498 388 500 152 420"/>
+  <text class="tiny" x="590" y="415">ModelRunner consumes SchedulerOutput.</text>
+  <text class="tiny" x="626" y="444">scheduler.update_from_output() updates queues for the next step.</text>
+</svg>

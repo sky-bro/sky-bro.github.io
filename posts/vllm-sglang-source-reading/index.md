@@ -3,16 +3,18 @@ This series is for source reading and engineering follow-through. The goal is no
 
 ## Reading Order {#reading-order}
 
-Planned posts will follow the request lifecycle:
+Start with the three core posts in request path -> scheduling decision -> GPU execution order:
 
 1. [Request lifecycle: from OpenAI API to one forward pass]({{< relref "request-lifecycle-openai-to-forward-pass" >}})
-2. [Inference sampling: temperature, top-p, and top-k]({{< relref "llm-sampling-temperature-top-p-top-k" >}})
-3. Scheduler loop: waiting queue, running queue, token budget, and decode priority
-4. vLLM Block Manager: from logical blocks to physical KV blocks
-5. SGLang Radix Cache: why prefix reuse wants a tree
-6. What a prefix cache hit actually saves
-7. Chunked prefill parameters, scheduling branches, and benchmarks
-8. Why structured output / FSM decoding is a strong SGLang use case
+2. [vLLM Scheduler: How Request Queues Become SchedulerOutput]({{< relref "scheduler-request-queue-to-scheduler-output" >}})
+3. [vLLM ModelRunner: How SchedulerOutput Becomes a GPU Forward]({{< relref "model-runner-scheduler-output-to-gpu-forward" >}})
+4. [Inference sampling: temperature, top-p, and top-k]({{< relref "llm-sampling-temperature-top-p-top-k" >}})
+5. vLLM architecture map: from core serving engine to vLLM-Omni (draft)
+6. vLLM Block Manager: from logical blocks to physical KV blocks
+7. SGLang Radix Cache: why prefix reuse wants a tree
+8. What a prefix cache hit actually saves
+9. Chunked prefill parameters, scheduling branches, and benchmarks
+10. Why structured output / FSM decoding is a strong SGLang use case
 
 ## Standard Format {#format}
 
