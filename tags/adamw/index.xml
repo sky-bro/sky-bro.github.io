@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Adamw on k4i's blog</title><link>https://k4i.top/tags/adamw/</link><description>Recent content in Adamw on k4i's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sky_io@outlook.com (K4i)</managingEditor><webMaster>sky_io@outlook.com (K4i)</webMaster><copyright>All content is subject to the license of &lt;a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"&gt;CC BY-NC-SA 4.0&lt;/a&gt; .</copyright><lastBuildDate>Mon, 29 Jun 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://k4i.top/tags/adamw/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimizers: From SGD To AdamW</title><link>https://k4i.top/posts/optimizers-adamw/</link><pubDate>Mon, 29 Jun 2026 10:00:00 +0800</pubDate><author>sky_io@outlook.com (K4i)</author><atom:modified>Mon, 29 Jun 2026 10:00:00 +0800</atom:modified><guid>https://k4i.top/posts/optimizers-adamw/</guid><description>&lt;p&gt;In the previous training posts, we separated the loop into a few pieces:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;a href="https://k4i.top/posts/loss-functions-cross-entropy/"&gt;loss function&lt;/a&gt; defines what counts as wrong;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://k4i.top/posts/forward-and-backward-propagation/"&gt;forward and backward propagation&lt;/a&gt; computes gradients for each parameter;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://k4i.top/posts/batch-vs-stochastic-gradient-descent/"&gt;gradient descent&lt;/a&gt; updates parameters using those gradients.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But in real training code, we usually do not write:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;param&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;param&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;param&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;We write:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AdamW&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parameters&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;3e-4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;weight_decay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;step&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;So what does the optimizer actually do? Why is AdamW so common? Is modern neural-network training basically &amp;ldquo;just use AdamW&amp;rdquo;, or are there still meaningful alternatives?&lt;/p&gt;</description><dc:creator>K4i</dc:creator><media:content url="https://k4i.top//images/icons/gradient-descent.png" medium="image"><media:title type="html">featured image</media:title></media:content><category>deep-learning</category><category>optimizer</category><category>adamw</category><category>gradient-descent</category><category>AI</category></item></channel></rss>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+  <title id="title">Optimizer evolution map</title>
+  <desc id="desc">A visual map from SGD to Momentum, adaptive learning rates, Adam, AdamW, and specialized optimizer branches.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#3d4757"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 28px Inter, Arial, sans-serif; fill: #1f2937; }
+      .subtitle { font: 500 15px Inter, Arial, sans-serif; fill: #5b6472; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 14; filter: url(#shadow); }
+      .box-main { fill: #eef6ff; stroke: #4f8edb; }
+      .box-w { fill: #ecfdf5; stroke: #2f9e69; }
+      .box-alt { fill: #fff7ed; stroke: #f08c35; }
+      .head { font: 700 20px Inter, Arial, sans-serif; fill: #111827; }
+      .body { font: 500 14px Inter, Arial, sans-serif; fill: #4b5563; }
+      .label { font: 700 13px Inter, Arial, sans-serif; fill: #394150; }
+      .line { stroke: #3d4757; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .soft { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 7 7; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1120" height="520"/>
+  <text x="56" y="54" class="title">Optimizer evolution: each step fixes one SGD weakness</text>
+  <text x="56" y="82" class="subtitle">The main line leads to AdamW; side branches remain useful under memory, batch-size, or research constraints.</text>
+
+  <rect x="58" y="156" width="150" height="96" class="box"/>
+  <text x="86" y="190" class="head">SGD</text>
+  <text x="86" y="218" class="body">raw gradient step</text>
+  <text x="86" y="239" class="body">low memory</text>
+
+  <rect x="262" y="156" width="170" height="96" class="box"/>
+  <text x="292" y="190" class="head">Momentum</text>
+  <text x="292" y="218" class="body">smooth noisy</text>
+  <text x="292" y="239" class="body">directions</text>
+
+  <rect x="486" y="156" width="185" height="96" class="box"/>
+  <text x="516" y="190" class="head">RMSProp</text>
+  <text x="516" y="218" class="body">per-parameter</text>
+  <text x="516" y="239" class="body">step scaling</text>
+
+  <rect x="725" y="156" width="150" height="96" class="box box-main"/>
+  <text x="768" y="190" class="head">Adam</text>
+  <text x="754" y="218" class="body">momentum +</text>
+  <text x="754" y="239" class="body">adaptive scale</text>
+
+  <rect x="930" y="156" width="150" height="96" class="box box-w"/>
+  <text x="967" y="190" class="head">AdamW</text>
+  <text x="953" y="218" class="body">decoupled</text>
+  <text x="953" y="239" class="body">weight decay</text>
+
+  <path d="M208 204 H262" class="line"/>
+  <path d="M432 204 H486" class="line"/>
+  <path d="M671 204 H725" class="line"/>
+  <path d="M875 204 H930" class="line"/>
+
+  <rect x="498" y="332" width="160" height="90" class="box box-alt"/>
+  <text x="535" y="364" class="head">Adafactor</text>
+  <text x="525" y="392" class="body">reduce optimizer</text>
+  <text x="525" y="413" class="body">state memory</text>
+
+  <rect x="706" y="332" width="160" height="90" class="box box-alt"/>
+  <text x="754" y="364" class="head">LAMB</text>
+  <text x="733" y="392" class="body">large-batch</text>
+  <text x="733" y="413" class="body">scaling</text>
+
+  <rect x="914" y="332" width="160" height="90" class="box box-alt"/>
+  <text x="953" y="364" class="head">Lion / Sophia</text>
+  <text x="944" y="392" class="body">research and</text>
+  <text x="944" y="413" class="body">special recipes</text>
+
+  <path d="M800 252 C760 292 680 310 612 332" class="soft"/>
+  <path d="M1005 252 C968 292 852 310 800 332" class="soft"/>
+  <path d="M1005 252 C1038 292 1036 310 1010 332" class="soft"/>
+
+  <rect x="62" y="342" width="350" height="82" rx="14" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="86" y="374" class="head">Practical default</text>
+  <text x="86" y="400" class="body">Start with AdamW for modern deep nets;</text>
+  <text x="86" y="421" class="body">switch when the constraint is clear.</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">SGD Momentum Adam intuition</title>
+  <desc id="desc">Three panels comparing raw SGD, momentum, and Adam adaptive scaling.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="currentColor"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 18; }
+      .title { font: 700 27px Inter, Arial, sans-serif; fill: #111827; }
+      .head { font: 700 20px Inter, Arial, sans-serif; fill: #111827; }
+      .body { font: 500 14px Inter, Arial, sans-serif; fill: #4b5563; }
+      .axis { stroke: #9ca3af; stroke-width: 2; }
+      .valley { fill: none; stroke: #dbe4ef; stroke-width: 20; stroke-linecap: round; }
+      .path-sgd { fill: none; stroke: #e25555; stroke-width: 4; marker-end: url(#arrow); }
+      .path-mom { fill: none; stroke: #2f9e69; stroke-width: 4; marker-end: url(#arrow); }
+      .bar1 { fill: #4f8edb; }
+      .bar2 { fill: #f08c35; }
+      .norm { fill: #2f9e69; }
+      .small { font: 700 13px Inter, Arial, sans-serif; fill: #374151; }
+      .formula { font: 600 16px Inter, Arial, sans-serif; fill: #1f2937; }
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="560"/>
+  <text x="56" y="54" class="title">Three optimizer ideas: direction, memory, and scale</text>
+
+  <rect x="56" y="94" width="320" height="390" class="panel"/>
+  <text x="86" y="132" class="head">SGD: current gradient</text>
+  <text x="86" y="160" class="body">Every step follows the latest mini-batch.</text>
+  <path d="M118 372 C180 230 250 230 314 372" class="valley"/>
+  <line x1="102" y1="392" x2="330" y2="392" class="axis"/>
+  <line x1="118" y1="410" x2="118" y2="208" class="axis"/>
+  <path d="M126 354 L190 260 L154 342 L230 250 L196 335 L286 245" class="path-sgd"/>
+  <text x="124" y="436" class="body">large sideways oscillation</text>
+
+  <rect x="400" y="94" width="320" height="390" class="panel"/>
+  <text x="430" y="132" class="head">Momentum: average direction</text>
+  <text x="430" y="160" class="body">Flips cancel; persistent directions add.</text>
+  <path d="M462 372 C524 230 594 230 658 372" class="valley"/>
+  <line x1="446" y1="392" x2="674" y2="392" class="axis"/>
+  <line x1="462" y1="410" x2="462" y2="208" class="axis"/>
+  <path d="M470 354 C500 312 522 286 548 276 C584 262 614 256 646 244" class="path-mom"/>
+  <text x="468" y="436" class="body">smoother long-term movement</text>
+
+  <rect x="744" y="94" width="320" height="390" class="panel"/>
+  <text x="774" y="132" class="head">Adam: memory + scale</text>
+  <text x="774" y="160" class="body">Use m for direction; v for scale.</text>
+  <text x="786" y="207" class="small">raw m</text>
+  <rect x="786" y="226" width="46" height="42" class="bar1"/>
+  <rect x="858" y="186" width="46" height="82" class="bar2"/>
+  <text x="794" y="286" class="small">w1</text>
+  <text x="868" y="286" class="small">w2</text>
+  <text x="786" y="330" class="small">after divide by sqrt(v)</text>
+  <rect x="786" y="350" width="46" height="70" class="norm"/>
+  <rect x="858" y="397" width="46" height="23" class="norm"/>
+  <text x="932" y="250" class="formula">update = m / sqrt(v)</text>
+  <text x="932" y="278" class="body">large but historically</text>
+  <text x="932" y="298" class="body">noisy dimensions shrink</text>
+  <text x="932" y="318" class="body">relative to stable ones</text>
+</svg>
