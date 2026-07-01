@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Common probability distribution shapes</title>
+  <desc id="desc">Eight small charts showing Bernoulli, Binomial, Poisson, Uniform, Normal, Exponential, Gamma, and Beta distribution shapes.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #d8dee9; stroke-width: 1.5; }
+      .axis { stroke: #64748b; stroke-width: 1.5; stroke-linecap: round; }
+      .grid { stroke: #e5e7eb; stroke-width: 1; }
+      .bar { fill: #38bdf8; }
+      .bar2 { fill: #f59e0b; }
+      .curve { fill: none; stroke: #2563eb; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .curve2 { fill: none; stroke: #db2777; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .area { fill: #bfdbfe; opacity: 0.7; }
+      .label { fill: #0f172a; font-family: "Inter", "Helvetica Neue", Arial, sans-serif; font-size: 23px; font-weight: 700; }
+      .param { fill: #475569; font-family: "Inter", "Helvetica Neue", Arial, sans-serif; font-size: 15px; }
+      .small { fill: #64748b; font-family: "Inter", "Helvetica Neue", Arial, sans-serif; font-size: 13px; }
+      .section { fill: #334155; font-family: "Inter", "Helvetica Neue", Arial, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="760" rx="18"/>
+  <text class="section" x="42" y="44">Discrete counts</text>
+  <text class="section" x="42" y="402">Continuous measurements</text>
+
+  <!-- Panel layout: x = 40, 330, 620, 910; y = 70, 428; w = 250; h = 280 -->
+  <g transform="translate(40 70)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Bernoulli</text>
+    <text class="param" x="22" y="62">p = 0.65</text>
+    <line class="axis" x1="38" y1="224" x2="216" y2="224"/>
+    <line class="axis" x1="38" y1="224" x2="38" y2="88"/>
+    <rect class="bar" x="72" y="166" width="38" height="58" rx="4"/>
+    <rect class="bar2" x="158" y="116" width="38" height="108" rx="4"/>
+    <text class="small" x="84" y="244">0</text>
+    <text class="small" x="171" y="244">1</text>
+    <text class="small" x="66" y="158">1-p</text>
+    <text class="small" x="159" y="108">p</text>
+  </g>
+
+  <g transform="translate(330 70)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Binomial</text>
+    <text class="param" x="22" y="62">n = 10, p = 0.5</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <rect class="bar" x="48" y="214" width="12" height="10" rx="3"/>
+    <rect class="bar" x="64" y="202" width="12" height="22" rx="3"/>
+    <rect class="bar" x="80" y="184" width="12" height="40" rx="3"/>
+    <rect class="bar" x="96" y="158" width="12" height="66" rx="3"/>
+    <rect class="bar" x="112" y="126" width="12" height="98" rx="3"/>
+    <rect class="bar2" x="128" y="108" width="12" height="116" rx="3"/>
+    <rect class="bar" x="144" y="126" width="12" height="98" rx="3"/>
+    <rect class="bar" x="160" y="158" width="12" height="66" rx="3"/>
+    <rect class="bar" x="176" y="184" width="12" height="40" rx="3"/>
+    <rect class="bar" x="192" y="202" width="12" height="22" rx="3"/>
+    <text class="small" x="46" y="244">0</text>
+    <text class="small" x="126" y="244">5</text>
+    <text class="small" x="192" y="244">10</text>
+  </g>
+
+  <g transform="translate(620 70)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Poisson</text>
+    <text class="param" x="22" y="62">lambda = 4</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <rect class="bar" x="50" y="202" width="13" height="22" rx="3"/>
+    <rect class="bar" x="68" y="172" width="13" height="52" rx="3"/>
+    <rect class="bar" x="86" y="138" width="13" height="86" rx="3"/>
+    <rect class="bar2" x="104" y="116" width="13" height="108" rx="3"/>
+    <rect class="bar2" x="122" y="116" width="13" height="108" rx="3"/>
+    <rect class="bar" x="140" y="134" width="13" height="90" rx="3"/>
+    <rect class="bar" x="158" y="162" width="13" height="62" rx="3"/>
+    <rect class="bar" x="176" y="190" width="13" height="34" rx="3"/>
+    <rect class="bar" x="194" y="210" width="13" height="14" rx="3"/>
+    <text class="small" x="48" y="244">0</text>
+    <text class="small" x="111" y="244">4</text>
+    <text class="small" x="193" y="244">8</text>
+  </g>
+
+  <g transform="translate(910 70)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Geometric</text>
+    <text class="param" x="22" y="62">p = 0.35</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <rect class="bar2" x="54" y="106" width="15" height="118" rx="3"/>
+    <rect class="bar" x="78" y="146" width="15" height="78" rx="3"/>
+    <rect class="bar" x="102" y="172" width="15" height="52" rx="3"/>
+    <rect class="bar" x="126" y="190" width="15" height="34" rx="3"/>
+    <rect class="bar" x="150" y="202" width="15" height="22" rx="3"/>
+    <rect class="bar" x="174" y="212" width="15" height="12" rx="3"/>
+    <text class="small" x="55" y="244">1</text>
+    <text class="small" x="126" y="244">4</text>
+    <text class="small" x="177" y="244">6</text>
+  </g>
+
+  <g transform="translate(40 428)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Uniform</text>
+    <text class="param" x="22" y="62">a to b</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <path class="area" d="M66 146 L190 146 L190 224 L66 224 Z"/>
+    <path class="curve" d="M66 146 L190 146"/>
+    <line class="grid" x1="66" y1="146" x2="66" y2="224"/>
+    <line class="grid" x1="190" y1="146" x2="190" y2="224"/>
+    <text class="small" x="62" y="244">a</text>
+    <text class="small" x="186" y="244">b</text>
+  </g>
+
+  <g transform="translate(330 428)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Normal</text>
+    <text class="param" x="22" y="62">mu, sigma</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <path class="area" d="M48 224 C66 224 75 218 86 204 C104 178 108 108 127 108 C146 108 150 178 168 204 C179 218 188 224 206 224 Z"/>
+    <path class="curve" d="M48 224 C66 224 75 218 86 204 C104 178 108 108 127 108 C146 108 150 178 168 204 C179 218 188 224 206 224"/>
+    <line class="grid" x1="127" y1="108" x2="127" y2="224"/>
+    <text class="small" x="118" y="244">mu</text>
+  </g>
+
+  <g transform="translate(620 428)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Exponential</text>
+    <text class="param" x="22" y="62">lambda</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <path class="area" d="M50 104 C78 124 104 148 130 172 C154 194 178 212 212 224 L50 224 Z"/>
+    <path class="curve" d="M50 104 C78 124 104 148 130 172 C154 194 178 212 212 224"/>
+    <text class="small" x="48" y="244">0</text>
+    <text class="small" x="144" y="244">time</text>
+  </g>
+
+  <g transform="translate(910 428)">
+    <rect class="panel" width="250" height="280" rx="14"/>
+    <text class="label" x="22" y="38">Beta / Gamma</text>
+    <text class="param" x="22" y="62">bounded vs positive</text>
+    <line class="axis" x1="34" y1="224" x2="220" y2="224"/>
+    <line class="axis" x1="34" y1="224" x2="34" y2="86"/>
+    <path class="curve" d="M48 218 C70 190 82 134 102 124 C128 112 142 170 162 186 C176 198 190 196 210 178"/>
+    <path class="curve2" d="M50 224 C66 224 80 214 94 188 C112 154 127 116 146 110 C170 104 188 142 208 196"/>
+    <text class="small" x="54" y="244">0</text>
+    <text class="small" x="198" y="244">1 / x</text>
+    <text class="small" x="58" y="108" fill="#2563eb">Beta</text>
+    <text class="small" x="156" y="108" fill="#db2777">Gamma</text>
+  </g>
+</svg>
